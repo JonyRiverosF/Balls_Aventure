@@ -6,11 +6,53 @@
     <ion-title>Niveles</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
+
+  <ion-grid style="background-color: rgba(220, 220, 30, 0.783)">
+    <ion-row>
+    
+    <ion-col size="12" style="margin-top: 50px;">
+    <h1 style="text-align: center;">Niveles</h1>
+    
+    </ion-col>
+    </ion-row>
+    
+    <ion-row>
+      <ion-col size="4" style="background-color: rgba(17, 197, 191, 0.926);border-radius: 15px;">
+    
+        <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/coin.png" style="width: 50px; height: 50px;"/> </p>
+        <ion-button [routerLink]="['/tutorial']" expand="block" >Tutorial</ion-button>
+      </ion-col>
+      
+      <ion-col size="4" style="background-color: rgba(17, 197, 119, 0.926);border-radius: 15px;">
+    
+        <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/coin.png" style="width: 50px; height: 50px;"/> </p>
+        <ion-button [routerLink]="['/tutorial']" expand="block" >Nivel facil</ion-button>
+    
+      </ion-col>
+    
+      <ion-col size="4" style="background-color: rgba(197, 113, 17, 0.926);border-radius: 15px;">
+        
+        <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/coin.png" style="width: 50px; height: 50px;"/> </p>
+        <ion-button [routerLink]="['/tutorial']" expand="block" >Nivel medio</ion-button>
+        
+      </ion-col>
+    </ion-row>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </ion-grid>
+
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Niveles</ion-title>
-    </ion-toolbar>
+    
   </ion-header>
 </ion-content>
