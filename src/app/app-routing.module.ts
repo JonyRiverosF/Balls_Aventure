@@ -56,9 +56,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/olvidaste-c/olvidaste-c.module').then( m => m.OlvidasteCPageModule)
   },
   {
+    path: 'creadores-juego',
+    loadChildren: () => import('./pages/creadores-juego/creadores-juego.module').then( m => m.CreadoresJuegoPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
+  
   
   
 ];

@@ -11,7 +11,7 @@
         <!--perfil-->
         <ion-row style="background-color: rgb(255, 0, 234);">
           <ion-col class="icono">
-            <img class="nombreapp" src="assets/icon/perfil.png" alt="Mi Imagen">
+            <img [routerLink]="['/perfil-usuario']" class="nombreapp" src="assets/icon/perfil.png" alt="Mi Imagen">
             </ion-col>
           
 
@@ -19,14 +19,14 @@
         <!--logros-->
         <ion-row style="background-color: rgb(43, 255, 0);">
           <ion-col class="icono">
-            <img class="nombreapp" src="assets/icon/trofeo.png" alt="Mi Imagen">
+            <img [routerLink]="['/logros']" class="nombreapp" src="assets/icon/trofeo.png" alt="Mi Imagen">
             </ion-col>
           
         </ion-row>
         <!--tienda-->
         <ion-row style="background-color: rgb(110, 105, 35);">
           <ion-col class="icono">
-            <img class="nombreapp" src="assets/icon/carrito.png" alt="Mi Imagen">
+            <img [routerLink]="['/skins']" class="nombreapp" src="assets/icon/carrito.png" alt="Mi Imagen">
             </ion-col>
           
         </ion-row>
@@ -62,7 +62,7 @@ monedas
         <ion-row>
           <!--personaje-->
           <ion-col size="9">personaje</ion-col>
-          <ion-col size="3"> creadores</ion-col>
+          <ion-col [routerLink]="['/creadores-juego']" size="3"> creadores</ion-col>
         </ion-row>
       </ion-col>
     </ion-row>
