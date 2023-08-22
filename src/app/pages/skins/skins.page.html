@@ -8,22 +8,44 @@
 </ion-header>
 <ion-content [fullscreen]="true">
 
-  <ion-grid>
+  <ion-grid style="background-color: rgb(229, 150, 163);">
+
     <ion-row>
-      <ion-col size="9" style="background-color: aqua;">
+      <ion-col size="9" >
         <h1 style="text-align: center;">Tienda</h1>
       </ion-col>
       
-      <ion-col size="3" style="background-color: rgb(66, 17, 95);">
+      <ion-col size="3" >
         <ion-row>
-          <ion-col style="background-color: rgb(130, 130, 16);">
-            <img style="width: 50px;" alt="Sin foto" src="assets/icon/coin.jpg" /><p>55 Monedas</p>
-
+          <ion-col style="background-color: rgba(228, 228, 52, 0.824);border-radius: 10px;">
+            <p style="text-align: center;"><img style="width: 50px; height: 50px;" alt="Sin foto" src="assets/icon/coin.png" /> 55 Monedas</p>
           </ion-col>
         </ion-row>
       </ion-col>
-      
     </ion-row>
+
+    <br>
+    <ion-row>
+      <ion-col size="4"  style="background-color: rgba(53, 157, 72, 0.685);border-radius: 10px;">
+        <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/futball.png" style="width: 150px;height: 150px;"/></p>
+        <ion-button [routerLink]="['/lobby']" expand="block" >Comprar</ion-button>
+        <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/coin.png" style="width: 50px; height: 50px;"/>  10 Monedas</p>
+      </ion-col>
+
+      <ion-col size="4" style="background-color: rgba(165, 49, 41, 0.685);border-radius: 10px;" >
+        <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/TenisBall.png" style="width: 150px;height: 150px;"/></p>
+        <ion-button [routerLink]="['/lobby']"  expand="block" >Comprar</ion-button>
+        <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/coin.png" style="width: 50px; height: 50px;"/>  50 Monedas</p>
+      </ion-col>
+
+      <ion-col size="4" style="background-color: rgba(41, 41, 165, 0.685);border-radius: 10px;" >
+        <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/Basball.png" style="width: 150px;height: 150px;"/></p>
+        <ion-button [routerLink]="['/lobby']"  expand="block" >Comprar</ion-button>
+        <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/coin.png" style="width: 50px; height: 50px;"/>  25 Monedas</p>
+      </ion-col>
+    </ion-row>
+
+
   </ion-grid>
 
   <ion-header collapse="condense">

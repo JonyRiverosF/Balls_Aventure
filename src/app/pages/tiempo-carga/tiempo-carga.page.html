@@ -1,16 +1,60 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Tiempo_carga</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+<ion-grid>
+<ion-row>
+
+<ion-col size="12" style="margin-top: 50px;">
+<h1 style="text-align: center;">Nivel Completado</h1>
+
+</ion-col>
+</ion-row>
+
+<ion-row>
+  <ion-col size="4">
+
+    <img alt="Sin foto" src="assets/icon/estrella.png" style="width: 50px; height: 50px;margin-top: 80px;"/>
+    <img alt="Sin foto" src="assets/icon/estrella.png" style="width: 65px; height: 65px;"/>
+    <img alt="Sin foto" src="assets/icon/estrella.png" style="width: 80px; height: 80px;"/>
+
+  </ion-col>
+  
+  <ion-col size="4">
+
+    <p style="margin-left: 56px;margin-block-end: 10px;"><img alt="Sin foto" src="assets/icon/relojA.gif" style="width: 150px; height: 150px;"/></p>
+
+  </ion-col>
+
+  <ion-col size="4">
+
+    <img alt="Sin foto" src="assets/icon/estrella.png" style="width: 80px; height: 80px;margin-top: 50px;"/>
+    <img alt="Sin foto" src="assets/icon/estrella.png" style="width: 65px; height: 65px;"/>
+    <img alt="Sin foto" src="assets/icon/estrella.png" style="width: 50px; height: 50px;"/>
+  </ion-col>
+</ion-row>
+
+
+<ion-row>
+  <ion-col>
+    <ion-button [routerLink]="['/lobby']" expand="block" >Continuar..</ion-button>
+  </ion-col>
+</ion-row>
+
+
+
+
+
+
+
+
+
+</ion-grid>
+
+
+
+
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tiempo_carga</ion-title>
-    </ion-toolbar>
   </ion-header>
 </ion-content>
