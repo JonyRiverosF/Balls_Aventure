@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registrarse</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col><h1 style="text-align: center;">Registro</h1></ion-col>
+      
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col></ion-col>
+      <ion-col><ion-input label="Usuario" type="text" label-placement="floating"></ion-input><br>
+        <ion-input label="Correo"  type="text" label-placement="floating"></ion-input><br>
+        <ion-input label="Fecha nacimiento" type="date" label-placement="floating"></ion-input><br>
+        <ion-input label="Constraseña"  type="password" label-placement="floating"></ion-input><br>
+        <ion-input label="Confrimar Constraseña" type="password"  label-placement="floating"></ion-input><br><br>
+        <ion-button [routerLink]="['/lobby']" class="boton"  >Loguearse </ion-button></ion-col>
+      <ion-col></ion-col>
+      
+      <ion-col>
+        <img style="width: 100%;height: 100%;" src="assets/icon/Captura de pantalla 2023-08-19 230113.png" alt="no encontrado">
+      </ion-col>
+      <ion-col></ion-col>
+
+    </ion-row>
+  </ion-grid>
+  <ion-header collapse="condense">
+
+    <ion-toolbar>
+      <ion-title size="large">Registrarse</ion-title>
+      
+    </ion-toolbar>
+  </ion-header>
+</ion-content>

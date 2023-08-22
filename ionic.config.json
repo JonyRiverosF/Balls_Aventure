@@ -1,0 +1,7 @@
+{
+  "name": "juegoPrueba",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

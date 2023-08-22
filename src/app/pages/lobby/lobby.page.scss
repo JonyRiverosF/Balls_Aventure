@@ -1,0 +1,52 @@
+
+  
+  @keyframes rubberBand {
+    0%{
+        transform: scaleX(1);
+    }
+    40%{
+        transform: scaleX(1.12) scaleY(0.75);
+    }
+    55%{
+        transform: scaleX(0.85) scaleY(1);
+    }
+    65%{
+        transform: scaleX(1.09) scaleY(0.85);
+    }
+    75%{
+        transform: scaleX(0.9)  scaleY(1);
+    }
+    90%{
+        transform: scaleX(1.05) scaleY(0.95);
+    }
+    100%{
+        transform: scaleX(1) scaleY(1);
+    }
+  }
+  
+  .rubberBand {
+    
+    animation-name: rubberBand;
+  }
+  
+  .animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
+  ion-col{
+    text-align: center;
+  }
+  ion-row{
+    text-align: center;
+  }
+.icono{
+    width: 100px;
+    height: 100px;
+}
+img{
+    width: 80px;
+    height: 80px;
+}
