@@ -1,13 +1,86 @@
 <ion-header [translucent]="true">
+  <!--
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>PerfilUsuario</ion-title>
-  </ion-toolbar>
+    </ion-buttons>         
+    <ion-title>iniciar_Sesion</ion-title>
+  </ion-toolbar>-->
+ 
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+
+  <ion-grid>
+    <ion-row>
+      <!--skin favorita-->
+      <ion-col size="4" style="background-image: url(assets/icon/brillo.gif) ; border-right: 3px solid black;">
+       
+    
+        <ion-row>
+          <ion-col style="text-align: center;padding-top: 160px;padding-bottom: 20px;">
+            <img class="nombreapp" src="assets/icon/pj.png" alt="Mi Imagen">
+            
+          </ion-col>
+          
+        </ion-row>
+        <ion-row>
+          <ion-col>
+             mi skin favorita
+        <ion-button [routerLink]="['/modificar-perfil']" class="boton" expand="block" >Cambiar</ion-button>
+          </ion-col>
+        </ion-row>
+       
+       </ion-col>
+      <!--datos del perfil-->
+      <ion-col size="8" style="background-color: rgb(255, 255, 255);">
+        <ion-row>
+          <ion-col> 
+            <h2>Perfil</h2>  
+          </ion-col>
+          <ion-col> 
+            <ion-button [routerLink]="['/modificar-perfil']" class="boton" expand="block" >editar perfil</ion-button>
+          </ion-col>
+        </ion-row>
+        
+        <ion-row>
+          
+          <!--columna fotoperfil-->
+          <ion-col size="4" style="background-color: rgb(255, 255, 255);"> 
+            <img class="fotoperfil" src="assets/icon/perfil.png" alt="Mi Imagen">
+          </ion-col>
+      <ion-col size="8" style="background-color: rgb(255, 255, 255);">
+        <ion-row>
+          <ion-col class="datos">
+             Kazuelita
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col  class="datos">
+            danitza200357@gmail.com
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col  class="datos">
+            5-junio
+          </ion-col>
+        </ion-row>
+       
+        
+
+      </ion-col>
+        </ion-row>
+        <ion-row>Descripcion
+          <ion-col style="text-align: left;">
+            
+           <textarea name="" id="" cols="70" rows="11"></textarea>
+          </ion-col> 
+        </ion-row>
+      
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">PerfilUsuario</ion-title>
