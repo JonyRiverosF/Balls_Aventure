@@ -3,68 +3,86 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" > 
-  <div class="animated rubberBand"></div>
+  
 
-  <ion-grid>
+  <ion-grid style="background-image: url(assets/icon/FondoInicio.png) ;background-size:cover ;background-attachment: fixed;">
     <ion-row>
-      <ion-col size="2" style="background-color: aqua;">
+      <ion-col size="2" style=" border-left: 10px solid black;">
         <!--perfil-->
-        <ion-row style="background-color: rgb(255, 0, 234);">
+        <ion-row >
           <ion-col class="icono">
-            <img [routerLink]="['/perfil-usuario']" class="nombreapp" src="assets/icon/perfil.png" alt="Mi Imagen">
+            <img [routerLink]="['/perfil-usuario']"  src="assets/icon/perfil.png" alt="Mi Imagen">
             </ion-col>
           
 
         </ion-row >
         <!--logros-->
-        <ion-row style="background-color: rgb(43, 255, 0);">
+        <ion-row >
           <ion-col class="icono">
-            <img [routerLink]="['/logros']" class="nombreapp" src="assets/icon/trofeo.png" alt="Mi Imagen">
+            <img [routerLink]="['/logros']"  src="assets/icon/trofeo.png" alt="Mi Imagen">
             </ion-col>
           
         </ion-row>
         <!--tienda-->
-        <ion-row style="background-color: rgb(110, 105, 35);">
+        <ion-row >
           <ion-col class="icono">
-            <img [routerLink]="['/skins']" class="nombreapp" src="assets/icon/carrito.png" alt="Mi Imagen">
+            <img [routerLink]="['/skins']"  src="assets/icon/carrito.png" alt="Mi Imagen">
             </ion-col>
           
         </ion-row>
         <ion-row >
-          <ion-col class="icono" style="background-color: rgba(212, 29, 29, 0.956);">
-            <img [routerLink]="['/niveles']" class="nombreapp" src="assets/icon/levels.jpg" alt="Mi Imagen"></ion-col>
+          <ion-col class="icono" >
+            <img [routerLink]="['/niveles']"  src="assets/icon/levels.jpg" alt="Mi Imagen">
+          </ion-col>
           
           
         </ion-row>
 
       </ion-col>
       <!--columna principal derecha-->
-      <ion-col size="10" style="background-color: rgb(66, 17, 95);">
+      <ion-col size="10" >
 
          <!--primera fila-->
         <ion-row>
           <!--nombre app-->
-          <ion-col size="9" style="background-color: rgb(138, 83, 170);">
-            <img class="nombreapp" style="width: 300px;height: 100px;" src="assets/icon/nombreapp2.png" alt="Mi Imagen">
+          <ion-col size="9" >
+            <img class="nombreapp" style="width: 300px;height: 110px;" src="assets/icon/nombreapp2.png" alt="Mi Imagen">
 
           </ion-col>
           <!--monedas-->
-          <ion-col size="3" style="background-color: rgb(14, 75, 49);">
-monedas
+          <ion-col size="3" >
+            <div class="monedas">
+              <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/coin.png" style="width: 20px; height: 20px;"/>  25 Monedas</p>
+            </div>
+             
           </ion-col>
         </ion-row>
         <!--segunda fila-->
         <ion-row>
           <!--bienvenido usuario-->
-          <ion-col>
-            bienvenido usuario
+          <ion-col >
+            <div class="bienvenido">
+              bienvenido usuario
+            </div>
+            
           </ion-col>
         </ion-row>
         <!--tercera fila-->
         <ion-row>
           <!--personaje-->
-          <ion-col size="9">personaje</ion-col>
-          <ion-col [routerLink]="['/creadores-juego']" size="3"> creadores</ion-col>
+          <ion-col size="8">
+            <img style="width: 180px; height: 180px; text-align: right;" src="assets/icon/pj.png" alt="Mi Imagen">
+          </ion-col>
+          <ion-col size="4">
+            <div style="width: 100px; height: 150px; " [routerLink]="['/creadores-juego']">
+              creadores
+            </div>
+            
+            <div class="botonjugar">
+              JUGAR
+
+            </div>
+          </ion-col>
         </ion-row>
       </ion-col>
     </ion-row>
