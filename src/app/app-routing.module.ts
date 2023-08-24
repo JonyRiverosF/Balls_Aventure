@@ -60,6 +60,18 @@ const routes: Routes = [
     loadChildren: () => import('./pages/creadores-juego/creadores-juego.module').then( m => m.CreadoresJuegoPageModule)
   },
   {
+    path: 'admin-usuarios',
+    loadChildren: () => import('./pages/admin-usuarios/admin-usuarios.module').then( m => m.AdminUsuariosPageModule)
+  },
+  {
+    path: 'admin-logros',
+    loadChildren: () => import('./pages/admin-logros/admin-logros.module').then( m => m.AdminLogrosPageModule)
+  },
+  {
+    path: 'admin-skins',
+    loadChildren: () => import('./pages/admin-skins/admin-skins.module').then( m => m.AdminSkinsPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
