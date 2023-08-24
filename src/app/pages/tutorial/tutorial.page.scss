@@ -1,0 +1,54 @@
+.nube{
+    width: 140px ;
+    height: 65px;
+    animation: movernube 20s linear infinite;
+    //animation-name: movernube;
+    //animation-duration: 20s;
+    //transition: 1s;
+
+
+}
+.nube1{
+    width: 100px ;
+    height: 65px;
+    animation: movernube 30s linear infinite reverse;
+    //animation-name: movernube;
+    //animation-duration: 20s;
+    //transition: 1s;
+
+
+}
+.pj{
+    width: 70px;
+    height: 70px;
+    margin-top: 5px;
+    animation: girarsol 1s linear infinite;
+
+}
+.sol{
+    width: 100px;
+    height: 100px;
+    animation: girarsol 20s linear infinite;
+}
+
+@keyframes girarsol {
+    0% {
+        transform: rotate(0deg); 
+      }
+      100% {
+        transform: rotate(360deg); 
+      }
+    
+}
+
+
+@keyframes movernube {
+    0%{ transform: translateX(-400px);}
+    
+    
+    100%{transform: translateX(1000px);}
+    
+}
+ion-grid{
+    height: 100%;
+}
