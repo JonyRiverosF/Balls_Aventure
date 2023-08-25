@@ -1,44 +1,194 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Logros</ion-title>
-  </ion-toolbar>
+
 </ion-header>
 
 <ion-content [fullscreen]="true">
   
-<ion-grid>
+<ion-grid style="background-image: url(assets/icon/fondologro1.jpg) ;background-size:cover ; background-repeat: repeat-y;">
+ 
     <ion-row>
-    
-    <ion-col size="12" style="margin-top: 50px;">
-    <h1 style="text-align: center;">Logros</h1>
+      <!--
+     <ion-col size="2">
+      <div class="patra"> 
+        <img [routerLink]="['/lobby']" src="assets/icon/izquierda.png"  style="width: 40px;height: 25px;"/>
+      </div>
+    </ion-col>-->
+    <ion-col size="12" style="margin-top: 20px;">
+      <div class="contenedor">
+        <img src="assets/icon/cinta.png"  style="width: 500px;"/>
+        
+        <div class="titulogro">LOGROS</div><br>
+
+        
+
+
+      </div>
+    <!--<h1 style="text-align: center;">Logros</h1>-->
     
     </ion-col>
     </ion-row>
     
     <ion-row>
-      <ion-col size="4" style="background-color: rgba(120, 189, 29, 0.936);border-radius: 15px;">
+      <ion-col size="3"  >
+           <div class="flip-card"  >
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img alt="Sin foto" src="assets/icon/trofeo.png" />
+              <div class="nombrelogro">  "novato" </div> 
+            </div>
+              <div class="flip-card-back"><br>
+                
+                
+                "completa<br>
+                 el <br>
+                 tutorial"
+                 
+              </div>
+          </div>
+      </div>
     
-        <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/trofeo.png" style="width: 100px; height: 100px;"/> </p>
-        <ion-button [routerLink]="['/lobby']" expand="block" >Completa 2 niveles</ion-button>
       </ion-col>
       
-      <ion-col size="4" style="background-color: rgba(189, 133, 29, 0.936);border-radius: 15px;">
+      <ion-col size="3"  >
+        <div class="flip-card"  >
+       <div class="flip-card-inner">
+         <div class="flip-card-front" style="background-color: rgba(72, 29, 189, 0.936);">
+           <img alt="Sin foto" src="assets/icon/trofeo.png" />
+           <div class="nombrelogro">  "aprendiz" </div> 
+         </div>
+           <div class="flip-card-back"  style="background-color: rgba(72, 29, 189, 0.936);"><br>
+             
+             
+             "completa<br>
+              dos <br>
+              niveles"
+              
+           </div>
+       </div>
+   </div>
+ 
+   </ion-col>
     
-        <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/trofeo.png" style="width: 100px; height: 100px;"/> </p>
-        <ion-button [routerLink]="['/lobby']" expand="block" >Termina el Videojuego</ion-button>
-    
-      </ion-col>
-    
-      <ion-col size="4" style="background-color: rgba(189, 29, 29, 0.936);border-radius: 15px;">
+   <ion-col size="3"  >
+    <div class="flip-card"  >
+   <div class="flip-card-inner">
+     <div class="flip-card-front"  style="background-color: rgba(27, 182, 53, 0.936);">
+       <img alt="Sin foto" src="assets/icon/trofeo.png" />
+       <div class="nombrelogro">  "Brillante" </div> 
+     </div>
+       <div class="flip-card-back" style="background-color: rgba(27, 182, 53, 0.936);"><br>
+         
+         
+         "recolecta<br>
+          todas las <br>
+          estrellas"
+          
+       </div>
+   </div>
+</div>
+
+</ion-col>
+<ion-col size="3"  >
+  <div class="flip-card"  >
+ <div class="flip-card-inner">
+   <div class="flip-card-front"  style="background-color: rgb(200, 59, 228);">
+     <img alt="Sin foto" src="assets/icon/trofeo.png" />
+     <div class="nombrelogro">  "Premio mayor" </div> 
+   </div>
+     <div class="flip-card-back" style="background-color: rgba(200, 59, 228);"><br>
+       
+       
+       "completa<br>
+        el <br>
+        juego"
         
-        <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/trofeo.png" style="width: 100px; height: 100px;"/> </p>
-        <ion-button [routerLink]="['/lobby']" expand="block" >Completa todos los logros</ion-button>
-        
-      </ion-col>
+     </div>
+ </div>
+</div>
+
+</ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col size="3"  >
+           <div class="flip-card"  >
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img alt="Sin foto" src="assets/icon/trofeo.png" />
+              <div class="nombrelogro">  "novato" </div> 
+            </div>
+              <div class="flip-card-back"><br>
+                
+                
+                "completa<br>
+                 el <br>
+                 tutorial"
+                 
+              </div>
+          </div>
+      </div>
+    
+      </ion-col>
+      
+      <ion-col size="3"  >
+        <div class="flip-card"  >
+       <div class="flip-card-inner">
+         <div class="flip-card-front" style="background-color: rgba(72, 29, 189, 0.936);">
+           <img alt="Sin foto" src="assets/icon/trofeo.png" />
+           <div class="nombrelogro">  "aprendiz" </div> 
+         </div>
+           <div class="flip-card-back"  style="background-color: rgba(72, 29, 189, 0.936);"><br>
+             
+             
+             "completa<br>
+              dos <br>
+              niveles"
+              
+           </div>
+       </div>
+   </div>
+ 
+   </ion-col>
+    
+   <ion-col size="3"  >
+    <div class="flip-card"  >
+   <div class="flip-card-inner">
+     <div class="flip-card-front"  style="background-color: rgba(27, 182, 53, 0.936);">
+       <img alt="Sin foto" src="assets/icon/trofeo.png" />
+       <div class="nombrelogro">  "Brillante" </div> 
+     </div>
+       <div class="flip-card-back" style="background-color: rgba(27, 182, 53, 0.936);"><br>
+         
+         
+         "recolecta<br>
+          todas las <br>
+          estrellas"
+          
+       </div>
+   </div>
+</div>
+
+</ion-col>
+<ion-col size="3"  >
+  <div class="flip-card"  >
+ <div class="flip-card-inner">
+   <div class="flip-card-front"  style="background-color: rgb(200, 59, 228);">
+     <img alt="Sin foto" src="assets/icon/trofeo.png" />
+     <div class="nombrelogro">  "Premio mayor" </div> 
+   </div>
+     <div class="flip-card-back" style="background-color: rgba(200, 59, 228);"><br>
+       
+       
+       "completa<br>
+        el <br>
+        juego"
+        
+     </div>
+ </div>
+</div>
+
+</ion-col>
+    </ion-row>
+    
 </ion-grid>
   
   <ion-header collapse="condense">
