@@ -1,11 +1,33 @@
 <ion-app >
 
   <ion-menu contentId="menu-content">
-    <ion-header >
+    <ion-header>
       <ion-toolbar>
-        <ion-title>menu principal</ion-title>
+        <ion-title>Barra del Administrador</ion-title>
       </ion-toolbar>
     </ion-header>
+
+    <ion-content>
+      <ion-item>
+        <ion-label [routerLink]="['/admin-usuarios']">
+          Ver Usuarios
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label [routerLink]="['/admin-logros']">
+          Agregar Logros
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label [routerLink]="['/admin-skins']">
+          Agregar Skins
+        </ion-label>
+      </ion-item>
+
+    </ion-content>
   </ion-menu>
-  <ion-router-outlet id="menu-content"></ion-router-outlet>
+  
+  <ion-router-outlet id = "menu-content" ></ion-router-outlet>
 </ion-app>

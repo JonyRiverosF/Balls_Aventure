@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-grid class="fondo" >
+    <ion-list style="background-color: rgba(148, 68, 222, 0.869);">
+      <ion-list-header style="text-align: center;">
+        <ion-label >Nombre Usuario</ion-label>
+        <ion-label>Correo</ion-label>
+        <ion-label>Fecha Nacimiento</ion-label>
+        <ion-label>Rol</ion-label>
+        <ion-label>Lista</ion-label>
+      </ion-list-header>
+      <ion-item style="text-align: center;">
+        <ion-label >Alfredin864</ion-label>
+        <ion-label>alfred0@mail.com</ion-label>
+        <ion-label>11/11/1999</ion-label>
+        <ion-label>Usuario</ion-label>
+        <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
+          <ion-select-option value="apples">Administrador</ion-select-option>
+          <ion-select-option value="oranges">Usuario</ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+    </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col><p style="text-align: center;" [routerLink]="['/admin-usuarios']"><ion-button>Cambiar</ion-button></p></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-grid>
+
+
+  <ion-header collapse="condense">
+  </ion-header>
+</ion-content>

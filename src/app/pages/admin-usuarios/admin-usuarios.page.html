@@ -1,13 +1,62 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" >
   <ion-toolbar>
-    <ion-title>AdminUsuarios</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Ver Usuarios</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">AdminUsuarios</ion-title>
-    </ion-toolbar>
+<ion-content [fullscreen]="true" >
+  <ion-grid class="fondo">
+  <ion-list style="background-color: rgba(148, 68, 222, 0.869);">
+    <ion-list-header style="text-align: center;">
+      <ion-label >Nombre Usuario</ion-label>
+      <ion-label>Correo</ion-label>
+      <ion-label>Fecha Nacimiento</ion-label>
+      <ion-label>Rol</ion-label>
+      <ion-label>Boton</ion-label>
+    </ion-list-header>
+    <ion-item style="text-align: center;">
+      <ion-label >Alfredin864</ion-label>
+      <ion-label>alfred0@mail.com</ion-label>
+      <ion-label>11/11/1999</ion-label>
+      <ion-label>Usuario</ion-label>
+      <p><ion-button [routerLink]="['/usuario-normal']">Cambiar</ion-button></p>
+    </ion-item>
+    <ion-item style="text-align: center;">
+      <ion-label >Lukas231</ion-label>
+      <ion-label>lukasBoy@mail.com</ion-label>
+      <ion-label>21/01/2002</ion-label>
+      <ion-label>Usuario</ion-label>
+      <p><ion-button>Cambiar</ion-button></p>
+    </ion-item>
+    <ion-item style="text-align: center;">
+      <ion-label >Robertin312</ion-label>
+      <ion-label>Robert@mail.com</ion-label>
+      <ion-label>13/12/2001</ion-label>
+      <ion-label>Usuario</ion-label>
+      <p><ion-button>Cambiar</ion-button></p>
+    </ion-item>
+    
+    <ion-item style="text-align: center;">
+      <ion-label >Danitza431</ion-label>
+      <ion-label>Danitza@gmail.com</ion-label>
+      <ion-label>05/06/2003</ion-label>
+      <ion-label>Admin</ion-label>
+      <p><ion-button [routerLink]="['/usuario-admin']">Cambiar</ion-button></p>
+    </ion-item>
+    <ion-item style="text-align: center;">
+      <ion-label >Jony642</ion-label>
+      <ion-label>Jonito@gmail.com</ion-label>
+      <ion-label>07/04/2003</ion-label>
+      <ion-label>Admin</ion-label>
+      <p><ion-button>Cambiar</ion-button></p>
+    </ion-item>
+  </ion-list>
+</ion-grid>
+
+
+  <ion-header collapse="condense" >
   </ion-header>
 </ion-content>

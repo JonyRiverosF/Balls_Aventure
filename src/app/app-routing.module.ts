@@ -72,6 +72,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/admin-skins/admin-skins.module').then( m => m.AdminSkinsPageModule)
   },
   {
+    path: 'usuario-admin',
+    loadChildren: () => import('./pages/usuario-admin/usuario-admin.module').then( m => m.UsuarioAdminPageModule)
+  },
+  {
+    path: 'usuario-normal',
+    loadChildren: () => import('./pages/usuario-normal/usuario-normal.module').then( m => m.UsuarioNormalPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
