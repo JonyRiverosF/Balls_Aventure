@@ -4,8 +4,8 @@
 
 <ion-content [fullscreen]="true" >
   
- <div style="background-image: url(assets/icon/FondoInicio.png) ;background-size:cover ;background-attachment: fixed;">
-  <ion-grid  >
+ <div style="background-image: url(assets/icon/FondoInicio.png) ;background-size:cover ;background-attachment: fixed;height:100%;">
+  <ion-grid>
     <ion-row>
       <ion-col size="2"><img class="prueba" src="assets/icon/estrella.png" alt="Mi Imagen"></ion-col>
       <ion-col  size="8">
@@ -13,35 +13,17 @@
 
       </ion-col>
       <ion-col size="2"><img class="prueba" src="assets/icon/estrella.png" alt="Mi Imagen"></ion-col>
-    </ion-row>
+    </ion-row><br><br>
     <ion-row>
       <ion-col></ion-col>
-      <ion-col></ion-col>
-      <ion-col>
-        <ion-button style="border-radius: 20px;" [routerLink]="['/iniciar-sesion']" class="boton" expand="block" >iniciar sesion </ion-button>
+      <ion-col><button mat-raised-button color="warn" [routerLink]="['/iniciar-sesion']">Inicio Sesión</button> </ion-col>
+      <ion-col><button mat-raised-button color="warn" [routerLink]="['/registrarse']">Crear Cuenta</button>  
       </ion-col>
       <ion-col></ion-col>
-      <ion-col></ion-col>
-
-    </ion-row>
-    <ion-row>
-      <ion-col></ion-col>
-      <ion-col></ion-col>
-      <ion-col>
-        <ion-button [routerLink]="['/registrarse']" class="boton" expand="block" >crear cuenta </ion-button>
-      </ion-col>
-      <ion-col></ion-col>
-      <ion-col></ion-col>
-
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button [routerLink]="['/lobby']" class="boton" expand="block" >jugar</ion-button>
-      </ion-col>
       
 
     </ion-row>
-   
+    
    
   </ion-grid>
 </div>

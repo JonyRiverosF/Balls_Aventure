@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -13,6 +14,7 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
+    MatButtonModule,
     HomePageRoutingModule
   ],
   declarations: [HomePage]
