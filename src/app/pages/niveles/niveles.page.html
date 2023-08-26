@@ -1,24 +1,70 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Niveles</ion-title>
-  </ion-toolbar>
+ 
 </ion-header>
 <ion-content [fullscreen]="true">
 
-  <ion-grid style="background-color: rgba(220, 220, 30, 0.783)">
-    <ion-row>
+  <ion-grid tab style="background-image: url(assets/icon/fondo1.png) ; background-size: 920px 420px; background-repeat: no-repeat;">
+    <ion-row >
     
-    <ion-col size="12" style="margin-top: 50px;">
-    <h1 style="text-align: center;">Niveles</h1>
-    
-    </ion-col>
+      <ion-col size="12" style="margin-top: 0px; text-align: center;">
+        <div class="contenedor">
+          <img src="assets/icon/cintanivel.png"  style="width: 500px;height: 100px;"/>
+          
+          <div class="titulogro">SELECCIONAR NIVEL</div><br>
+        </div>
+      
+      
+      </ion-col>
     </ion-row>
     
-    <ion-row>
-      <ion-col size="4" style="background-color: rgba(17, 197, 191, 0.926);border-radius: 15px;">
+    <ion-row class="tablon" style="background-image: url(assets/icon/tablon1.png) ; background-size: 800px 280px; background-repeat: no-repeat;margin-left: 50px;">
+
+      <ion-col>
+        
+      </ion-col>
+      <ion-col  >
+        <div style="text-align: center;">
+        <img class="estrella" src="assets/icon/estrella.png"  style=/>
+        <img class="estrella"src="assets/icon/estrella.png"  style=/>
+        <img class="estrella"src="assets/icon/estrellant.png"  style=/>
+      </div>
+
+        <div class="nivel" style="background-color: aqua;">
+          TUTORIAL
+
+        </div>
+
+      </ion-col>
+
+      <ion-col  style="text-align: center;">
+        <div style="text-align: center;">
+        <img class="estrella" src="assets/icon/estrella.png"  style=/>
+        <img class="estrella"src="assets/icon/estrella.png"  style=/>
+        <img class="estrella"src="assets/icon/estrella.png"  style=/></div>
+        
+        <div class="nivel" style="background-color: rgb(68, 0, 255); text-align: center;">
+          nivel 1
+
+        </div>
+        
+      </ion-col>
+
+      <ion-col  >
+        <div style="text-align: center;">
+        <img class="estrella" src="assets/icon/estrella.png"  style=/>
+        <img class="estrella"src="assets/icon/estrellant.png"  style=/>
+        <img class="estrella"src="assets/icon/estrellant.png"  style=/></div>
+        
+        <div class="nivel" style="background-color: rgb(21, 255, 0);">
+          nivel 2
+
+        </div>
+        
+      </ion-col>
+      <ion-col>
+
+      </ion-col>
+     <!-- <ion-col size="4" style="background-color: rgba(17, 197, 191, 0.926);border-radius: 15px;">
     
         <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/coin.png" style="width: 50px; height: 50px;"/> </p>
         <ion-button [routerLink]="['/tutorial']" expand="block" >Tutorial</ion-button>
@@ -36,19 +82,8 @@
         <p style="text-align: center;"><img alt="Sin foto" src="assets/icon/coin.png" style="width: 50px; height: 50px;"/> </p>
         <ion-button [routerLink]="['/tutorial']" expand="block" >Nivel medio</ion-button>
         
-      </ion-col>
+      </ion-col>-->
     </ion-row>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     </ion-grid>
 
