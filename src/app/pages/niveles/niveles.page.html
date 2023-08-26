@@ -5,8 +5,13 @@
 
   <ion-grid tab style="background-image: url(assets/icon/fondo1.png) ; background-size: 920px 420px; background-repeat: no-repeat;">
     <ion-row >
+      <ion-col size="1">
+        <img src="assets/icon/patra.png" [routerLink]="['/lobby']" style="width: 50px;height: 50px;"/>
+
+      </ion-col>
+   
     
-      <ion-col size="12" style="margin-top: 0px; text-align: center;">
+      <ion-col size="11" style="padding-right:90px ;text-align: left; ">
         <div class="contenedor">
           <img src="assets/icon/cintanivel.png"  style="width: 500px;height: 100px;"/>
           
@@ -15,21 +20,22 @@
       
       
       </ion-col>
+    
     </ion-row>
     
     <ion-row class="tablon" style="background-image: url(assets/icon/tablon1.png) ; background-size: 800px 280px; background-repeat: no-repeat;margin-left: 50px;">
 
       <ion-col>
-        
+
       </ion-col>
       <ion-col  >
         <div style="text-align: center;">
         <img class="estrella" src="assets/icon/estrella.png"  style=/>
-        <img class="estrella"src="assets/icon/estrella.png"  style=/>
+        <img class="estrella"src="assets/icon/estrella.png"  style=" width: 45;height: 45px;"/>
         <img class="estrella"src="assets/icon/estrellant.png"  style=/>
       </div>
 
-        <div class="nivel" style="background-color: aqua;">
+        <div [routerLink]="['/tutorial']" class="nivel" style="background-color: aqua;">
           TUTORIAL
 
         </div>
@@ -39,7 +45,7 @@
       <ion-col  style="text-align: center;">
         <div style="text-align: center;">
         <img class="estrella" src="assets/icon/estrella.png"  style=/>
-        <img class="estrella"src="assets/icon/estrella.png"  style=/>
+        <img class="estrella"src="assets/icon/estrella.png"  style=" width: 45;height: 45px;"/>
         <img class="estrella"src="assets/icon/estrella.png"  style=/></div>
         
         <div class="nivel" style="background-color: rgb(68, 0, 255); text-align: center;">
@@ -52,7 +58,7 @@
       <ion-col  >
         <div style="text-align: center;">
         <img class="estrella" src="assets/icon/estrella.png"  style=/>
-        <img class="estrella"src="assets/icon/estrellant.png"  style=/>
+        <img class="estrella"src="assets/icon/estrellant.png"  style=" width: 45;height: 45px;"/>
         <img class="estrella"src="assets/icon/estrellant.png"  style=/></div>
         
         <div class="nivel" style="background-color: rgb(21, 255, 0);">
