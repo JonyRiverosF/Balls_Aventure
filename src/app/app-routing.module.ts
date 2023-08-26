@@ -80,9 +80,14 @@ const routes: Routes = [
     loadChildren: () => import('./pages/usuario-normal/usuario-normal.module').then( m => m.UsuarioNormalPageModule)
   },
   {
+    path: 'modificar-contra',
+    loadChildren: () => import('./pages/modificar-contra/modificar-contra.module').then( m => m.ModificarContraPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
+  
   
   
   

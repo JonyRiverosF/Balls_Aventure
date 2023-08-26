@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ModificarPerfilPageRoutingModule } from './modificar-perfil-routing.module';
+import { ModificarContraPageRoutingModule } from './modificar-contra-routing.module';
 
-import { ModificarPerfilPage } from './modificar-perfil.page';
+import { ModificarContraPage } from './modificar-contra.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { ModificarPerfilPage } from './modificar-perfil.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    ModificarPerfilPageRoutingModule
+    ModificarContraPageRoutingModule
   ],
-  declarations: [ModificarPerfilPage]
+  declarations: [ModificarContraPage]
 })
-export class ModificarPerfilPageModule {}
+export class ModificarContraPageModule {}

@@ -7,28 +7,30 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-<ion-grid style="background-color: rgba(119, 13, 119, 0.881);">
-  <ion-grid style=" margin: 0;padding: 0;">
-    <ion-row>
-      <ion-col></ion-col>
-      <ion-col style=" margin: 0;padding: 0;"><h1 style="text-align: center;  background-color: rgb(105, 218, 218) ;border-radius: 50px 50px 0 0; margin: 0;margin-top: 20px; padding: 0;">Agregar Skins</h1></ion-col>
-      <ion-col></ion-col>
-    </ion-row>
-  </ion-grid>
 
-  <ion-grid style=" margin: 0;padding: 0;">
-    <ion-row>
-      <ion-col></ion-col>
-      <ion-col style="background-color: rgba(174, 22, 22, 0.737) ;background-attachment: fixed;background-size: cover; border-radius: 0 0 10% 10%; box-shadow: 0 0 10px 0 black; padding: 0;">
-        <ion-input type="text" label="Nombre Skin"  label-placement="floating"></ion-input><br>
-        <ion-input  type="number" label="Precio"  label-placement="floating"></ion-input><br>
-        <ion-input type="file" label="Foto Skin" accept="image/png,image/jpeg" ></ion-input><br>
-        <p ><ion-button [routerLink]="['/skins']" class="boton" style="margin-left: 25%;">Agregar</ion-button></p></ion-col>
-        <ion-col></ion-col>
-      </ion-row>
-  </ion-grid>
-</ion-grid>
 
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">Agregar Skin</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formularioSkin">
+        <ion-item>
+          <ion-label position="floating">Nombre Skin</ion-label>
+          <ion-input formControlName="NombreSkin" type="text"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Precio Skin</ion-label>
+          <ion-input formControlName="PrecioSkin" type="Number"></ion-input>
+        </ion-item>
+        <br>
+          <ion-input accept="image/png,image/jpeg" type="file"></ion-input>
+      </form>
+      <br>
+      <p style="text-align: center;"><ion-button (click)="Enviar()" [routerLink]="['/skins']">Enviar</ion-button></p>
+    </ion-card-content>
+  </ion-card>
 
 
   <ion-header collapse="condense">

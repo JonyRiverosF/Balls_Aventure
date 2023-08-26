@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">Modificar Contraseña</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formularioModiContra">
+        <br>
+        <ion-item>
+          <ion-label position="floating">Contraseña Nueva</ion-label>
+          <ion-input formControlName="Contraseña" type="password"></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-label position="floating">Confirmar Contraseña</ion-label>
+          <ion-input formControlName="ContraseñaConfirm" type="password"></ion-input>
+        </ion-item>
+        <br>
+      </form>
+      <br>
+      <p style="text-align: center;"><ion-button (click)="ingresar()" [routerLink]="['/iniciar-sesion']">Cambiar</ion-button></p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-header collapse="condense">
+  </ion-header>
+</ion-content>

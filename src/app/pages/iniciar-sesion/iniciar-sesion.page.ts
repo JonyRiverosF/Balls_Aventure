@@ -14,8 +14,8 @@ export class IniciarSesionPage implements OnInit {
   constructor(public fb:FormBuilder, public alertController:AlertController) {
 
     this.formularioLogin=this.fb.group({
-      'Correo': new FormControl("",Validators.required),
-      'contraseña': new FormControl("",Validators.required)
+      'Correo': new FormControl("",[Validators.required,Validators.minLength(5),Validators.email]),
+      'contraseña': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)])
 
     })
    }
@@ -26,7 +26,7 @@ export class IniciarSesionPage implements OnInit {
   async ingresar(){
     var f = this.formularioLogin.value;
     
-
+    
 
     if(this.formularioLogin.invalid){
       const alert = await this.alertController.create({
