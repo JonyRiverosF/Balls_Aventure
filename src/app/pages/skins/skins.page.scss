@@ -1,0 +1,80 @@
+ion-col{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.nombreskin{
+    background-color: rgb(76, 76, 194);
+    border-radius: 10px 10px 0 0;
+}
+.fotoc{
+    background-color: rgb(109, 109, 202);
+    width: 146px;
+    height: 150px;
+}
+.precio{
+    background-color: rgb(77, 75, 75);
+    border-radius:  0 0 0px 0px;
+    
+    
+}
+.c{
+    width: 150px;
+    height: 200px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px 10px 0 0;
+}
+.titulogro{
+    font-size:20px;
+    font-family: 'Gluten', cursive;
+    color: antiquewhite;
+    background-color: brown;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+    position: absolute;
+    border-bottom:5px solid black ;
+    top:10%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+}
+.contenedor{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.foto{
+    width: 100px;
+    height: 100px;
+    margin-top: 30px;
+    animation: moverfoto 3s linear infinite;
+
+}
+@keyframes moverfoto {
+    0%{ transform: translatey(0px);}
+    25%{transform: translatey(5px);}
+    50%{transform: translatey(0px);}
+    75%{transform: translatey(-5px);}
+    
+    100%{transform: translatey(0px);}
+    
+}
+.monedas{
+    font-size: 20px;
+    background-color: rgb(121, 27, 27);
+    border: 2px solid rgb(218, 158, 49);
+    border-radius: 10px ;
+    margin-bottom: 70px;
+
+}
+.boton{
+    width: 140px;
+    height: 28px;
+}
+
+
+
+

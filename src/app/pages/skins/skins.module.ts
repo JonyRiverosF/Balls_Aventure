@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { SkinsPageRoutingModule } from './skins-routing.module';
+import {MatButtonModule} from '@angular/material/button';
 
 import { SkinsPage } from './skins.page';
 
@@ -13,6 +14,7 @@ import { SkinsPage } from './skins.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    MatButtonModule,
     SkinsPageRoutingModule
   ],
   declarations: [SkinsPage]
