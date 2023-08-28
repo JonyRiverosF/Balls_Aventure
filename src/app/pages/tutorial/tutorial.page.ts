@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras,Router } from '@angular/router';
 
 @Component({
   selector: 'app-tutorial',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TutorialPage implements OnInit {
 
-  constructor() { }
+  constructor(private router:Router,) { }
+
 
   ngOnInit() {
   }
-
+  public alertButtons = [
+    {
+      text: 'REANUDAR',
+      cssClass: 'alert-button-cancel',
+      
+    },
+    {
+      text: 'LOBBY',
+      cssClass: 'alert-button-confirm',
+     
+      
+    },
+    
+    
+    
+  ];
+ 
 }
