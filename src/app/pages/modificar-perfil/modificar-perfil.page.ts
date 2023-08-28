@@ -15,7 +15,7 @@ export class ModificarPerfilPage implements OnInit {
 
     this.formularioModificar=this.fb.group({
       'NombreUsuario': new FormControl("",[Validators.required,Validators.minLength(5)]),
-      'Edad': new FormControl("",[Validators.required,Validators.min(5),Validators.max(15)])
+      'Descripcion': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(300)])
 
 
     })

@@ -18,7 +18,7 @@ export class RegistrarsePage implements OnInit {
       'contraseña': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)]),
       'Confirmar_contraseña': new FormControl("",Validators.required),
       'Correo': new FormControl("",[Validators.required,Validators.minLength(5),Validators.email]),
-      'Edad':new FormControl("",[Validators.required,Validators.min(6),Validators.max(30)])
+      'Respuesta': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(20)])
 
     })
    }
