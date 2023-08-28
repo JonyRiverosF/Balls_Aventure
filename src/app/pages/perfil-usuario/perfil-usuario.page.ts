@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -6,8 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./perfil-usuario.page.scss'],
 })
 export class PerfilUsuarioPage implements OnInit {
+  nombreRecibido:string = "";
+  edadRecibida:number = 0;
+  correorecibido:string="";
+  descripcion:string ="";
 
-  constructor() { }
+  constructor(private router:Router, private activatedRouter:ActivatedRoute) {
+    this.activatedRouter.queryParams.subscribe(param =>{
+      if (this.router.getCurrentNavigation()?.extras.state){
+        this.edadRecibida = this.router.getCurrentNavigation()?.extras?.state?.["edadenviado"];
+        this.nombreRecibido = this.router.getCurrentNavigation()?.extras?.state?.["nombreenviado"];
+        this.correorecibido = this.router.getCurrentNavigation()?.extras?.state?.["correoenviado"];
+        this.descripcion = this.router.getCurrentNavigation()?.extras?.state?.["descripcion"];
+      }
+    })
+   }
 
   ngOnInit() {
   }
