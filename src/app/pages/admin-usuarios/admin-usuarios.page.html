@@ -17,42 +17,14 @@
       <ion-label>Rol</ion-label>
       <ion-label>Boton</ion-label>
     </ion-list-header>
-    <ion-item style="text-align: center;">
-      <ion-label >Alfredin864</ion-label>
-      <ion-label>alfred0@mail.com</ion-label>
-      <ion-label>11/11/1999</ion-label>
-      <ion-label>Usuario</ion-label>
+    <ion-item style="text-align: center;" *ngFor="let x of lista">
+      <ion-label >{{ x.nombreU }}</ion-label>
+      <ion-label>{{ x.correo }}</ion-label>
+      <ion-label>{{ x.fecha_nacimiento | date:"dd MMMM yyyy" }}</ion-label>
+      <ion-label>{{ x.Rol }}</ion-label>
       <p><ion-button [routerLink]="['/usuario-normal']">Cambiar</ion-button></p>
     </ion-item>
-    <ion-item style="text-align: center;">
-      <ion-label >Lukas231</ion-label>
-      <ion-label>lukasBoy@mail.com</ion-label>
-      <ion-label>21/01/2002</ion-label>
-      <ion-label>Usuario</ion-label>
-      <p><ion-button>Cambiar</ion-button></p>
-    </ion-item>
-    <ion-item style="text-align: center;">
-      <ion-label >Robertin312</ion-label>
-      <ion-label>Robert@mail.com</ion-label>
-      <ion-label>13/12/2001</ion-label>
-      <ion-label>Usuario</ion-label>
-      <p><ion-button>Cambiar</ion-button></p>
-    </ion-item>
     
-    <ion-item style="text-align: center;">
-      <ion-label >Danitza431</ion-label>
-      <ion-label>Danitza@gmail.com</ion-label>
-      <ion-label>05/06/2003</ion-label>
-      <ion-label>Admin</ion-label>
-      <p><ion-button [routerLink]="['/usuario-admin']">Cambiar</ion-button></p>
-    </ion-item>
-    <ion-item style="text-align: center;">
-      <ion-label >Jony642</ion-label>
-      <ion-label>Jonito@gmail.com</ion-label>
-      <ion-label>07/04/2003</ion-label>
-      <ion-label>Admin</ion-label>
-      <p><ion-button>Cambiar</ion-button></p>
-    </ion-item>
   </ion-list>
 </ion-grid>
 
