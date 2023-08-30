@@ -18,16 +18,34 @@ export class IniciarSesionPage implements OnInit {
   descripcionusuario:string ="juego mucho valo jiji";
   
 
+  
+  
   formularioLogin:FormGroup;
 
   constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,) {
 
     this.formularioLogin=this.fb.group({
-      'Correo': new FormControl("",[Validators.required,Validators.minLength(5),Validators.email]),
-      'contraseña': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)])
+      'Correo1': ['',Validators.required,Validators.minLength(5),Validators.email],
+      'contraseña1': ['',Validators.required,Validators.minLength(5),Validators.maxLength(15)]
 
     })
+
+    
+
    }
+
+   get correo(){
+    return this.formularioLogin.get('Correo1') as FormControl;
+   }
+
+   get contra(){
+    return this.formularioLogin.get('contraseña1') as FormControl;
+   }
+
+   procesar(){
+    console.log(this.formularioLogin.value);
+   }
+
 
   ngOnInit() {
   }
@@ -44,21 +62,16 @@ export class IniciarSesionPage implements OnInit {
     this.router.navigate(['/perfil-usuario'],navigationextra)
   }
 
-
   async ingresar(){
     var f = this.formularioLogin.value;
-    
-    
+    console.log(this.formularioLogin)
 
-    if(this.formularioLogin.invalid){
-      const alert = await this.alertController.create({
-        header:'Datos incompletos',
-        message: 'Tienes que llenar todos los datos',
-        buttons: ['Aceptar'],
-      });
-  
-      await alert.present();
-      return;
-    }
+
+
+    
   }
 }
+
+
+  
+

@@ -14,24 +14,47 @@
       <ion-card-title style="text-align: center;">Iniciar Sesión</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="formularioLogin">
+      <form   [formGroup]="formularioLogin" >
         <ion-item>
           <ion-label position="floating">Correo</ion-label>
-          <ion-input formControlName="Correo" [(ngModel)]="correousuario" type="text"></ion-input>
-        </ion-item>
+          <ion-input formControlName="Correo1"   type="text"   ></ion-input>
+        </ion-item><br>
+        <div [hidden]="correo?.valid || correo?.pristine ">
+        <span *ngIf="correo?.errors?.['required']">
+          El Email es requerido
+        </span>
+        <span *ngIf="correo?.errors?.['Email']">
+          El Email debe ser valido
+        </span>
+
+        </div>
         <br>
+
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
-          <ion-input   formControlName="contraseña" [(ngModel)]="claveusuario" type="password"></ion-input>
+          <ion-input  formControlName="contraseña1"  type="password"></ion-input>
         </ion-item>
-      </form>
-      <br>
+        <br>
+        <div [hidden]="contra?.valid || contra?.pristine ">
+          <span *ngIf="contra?.errors?.['required']">
+            La Contraseña es requerido
+          </span>
+          <span *ngIf="contra?.errors?.['minlength'] ">
+            La contraseña debe tener al menos 5 caracteres
+          </span>
+          <span *ngIf="contra?.errors?.['maxLength']">
+            El maximo de caracteres de la contraseña es 15
+          </span>
+          </div>
+        <br>
       <p style="text-align: center;color: rgba(255, 255, 255, 0.918);" [routerLink]="['/olvidaste-c']">¿Olvidaste tu contraseña?</p>
       <br>
-      <p style="text-align: center;"><ion-button (click)="ingresar()" (click)="irlobby()" [routerLink]="['/lobby']">Ingresar</ion-button></p>
+      <p style="text-align: center;"><ion-button (click)="ingresar" [disabled]="formularioLogin.invalid" >Ingresar</ion-button></p>
+      </form>
+      
+
     </ion-card-content>
   </ion-card>
-
 
 
   <ion-header collapse="condense">
