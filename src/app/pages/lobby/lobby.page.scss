@@ -80,30 +80,43 @@ img{
   text-align: center;
   animation-name: agrandar;
   animation: agrandar 1s linear infinite;
-  animation-duration: 1s;
+  animation-duration: 3s;
   transition: 5s;
 }
 @keyframes agrandar{
   0% {
     transform: scale(1); 
   }
+  50%{transform: scale(1.05); 
+
+  }
   100% {
-    transform: scale(1.05); 
+    transform: scale(1); 
   }
 }
 .botonjugar{
   background-color: rgb(232, 235, 59);
   border: 5px solid rgb(199, 130, 26);
   border-radius: 10px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-weight: bolder;
+  padding-top: 20px;
   
+  padding-bottom: 20px;
+  font-weight: bolder;
+  animation: jugar 2s linear infinite;
 font-family: 'Gluten', cursive;
   -webkit-text-stroke: 1px black;
   font-size: 30px;
   color:rgba(207, 17, 74, 0.966);
 
+}
+@keyframes jugar {
+  0%{ transform: scale(1);}
+  25%{transform: scale(1.05);}
+  50%{transform: scale(1);}
+  75%{transform: scale(0.95);}
+  
+  100%{transform: scale(1);}
+  
 }
 .monedas{
   background-color: rgb(95, 93, 93);

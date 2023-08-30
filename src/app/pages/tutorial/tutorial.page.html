@@ -7,9 +7,10 @@
   <ion-grid style="background-image: url(assets/icon/fondo1.png) ;  background-size: 920px 420px; background-repeat: no-repeat;">
     <ion-row >
       <ion-col>
-        <img class="menu" id="present-alert" src="assets/icon/menu.png" alt="Mi Imagen">
+       <img class="menu" id="present-alert" (click)="mostrarmenu()" src="assets/icon/menu.png" alt="Mi Imagen">
         
-<ion-alert trigger="present-alert" class="custom-alert" header="¿Volver al lobby?" [buttons]="alertButtons"></ion-alert>
+ 
+
         <img class="sol" src="assets/icon/sol.png" alt="Mi Imagen">
         <img class="nube" src="assets/icon/nube.png" alt="Mi Imagen"><br>
         <img class="nube1" src="assets/icon/nube.png" alt="Mi Imagen"><br><br>

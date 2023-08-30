@@ -31,10 +31,49 @@
 .nombreapp{
   text-align: center;
   animation-name: agrandar;
-  animation: agrandar 1s linear infinite;
+  animation: agrandar 10s linear ;
   animation-duration: 1s;
   transition: 5s;
 }
+
+@keyframes agrandar{
+  0% {
+    
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    
+    transform: scale3d(1.25, 0.75, 1);
+  }
+
+  40% {
+    
+    transform: scale3d(0.75, 1.25, 1);
+  }
+
+  50% {
+    
+    transform: scale3d(1.15, 0.85, 1);
+  }
+
+  65% {
+    
+    transform: scale3d(0.95, 1.05, 1);
+  }
+
+  75% {
+    
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  100% {
+   
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+
 .boton{
   border-radius: 20px;
 }
@@ -45,7 +84,7 @@
   height: 50px;
   animation-name: animation;
   animation-duration: 10s;
-  animation: animation 1s linear infinite;
+  animation: animation 2s linear infinite;
   animation-delay: 0s;
   transition: 5s;
 
@@ -67,14 +106,7 @@ ion-grid{
     transform: rotate(360deg); 
   }
 }
-@keyframes agrandar{
-  0% {
-    transform: scale(1); 
-  }
-  100% {
-    transform: scale(1.05); 
-  }
-}
+
 
 /*Botones Home*/
 

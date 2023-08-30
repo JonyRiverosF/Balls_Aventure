@@ -12,29 +12,49 @@
 <ion-content [fullscreen]="true">
 
 
-  <ion-grid>
+  <ion-grid style="height: 100%;background-image: url(assets/icon/fondopp.jpg) ; ">
     <ion-row>
       <!--skin favorita-->
-      <ion-col size="4" style="background-image: url(assets/icon/brillo.gif) ; border-right: 3px solid black;">
+      <ion-col size="4" style=" border-right: 3px solid black; height: 100%; background-color: rgba(163, 14, 113, 0.452);">
        
     
-        <ion-row>
-          <ion-col style="text-align: center;padding-top: 160px;padding-bottom: 20px;">
-            <img class="nombreapp" src="assets/icon/pj.png" alt="Mi Imagen">
+       
+          <ion-row>
+            <ion-col>
+              <div style="text-align: left;justify-content: left;align-items: left;">
+
+               <img src="assets/icon/patra.png" [routerLink]="['/lobby']" style="width: 50px;height: 50px; ">
+               </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+          <ion-col >
+            <div style="text-align: center; margin-top: 35px;">
+              BLUEBALL
+            </div>
+            <div style="margin-bottom: 0px; height: 221px;">
+
+              <img class="pj" src="assets/icon/pj.png" alt="Mi Imagen">
+            </div>
+           
+            
             
           </ion-col>
-          
-        </ion-row>
+          </ion-row>
+        
         <ion-row>
           <ion-col>
-             mi skin favorita
-        <ion-button [routerLink]="['/modificar-perfil']" class="boton" expand="block" >Cambiar</ion-button>
+            <div style="margin-bottom: 20px;">
+               mi skin favorita
+        <ion-button [routerLink]="['/skins']" class="boton" expand="block" >Cambiar</ion-button>
+            </div>
+            
           </ion-col>
         </ion-row>
        
        </ion-col>
       <!--datos del perfil-->
-      <ion-col size="8" style="background-color: rgb(255, 255, 255);">
+      <ion-col size="8" style="background-color: rgba(178, 196, 13, 0);">
         <ion-row>
           <ion-col> 
             <div style="background-color: black; color: white; text-align: left; font-weight: 700; margin-right: 230px;">
@@ -49,23 +69,32 @@
         <ion-row>
           
           <!--columna fotoperfil-->
-          <ion-col size="4" style="background-color: rgb(255, 255, 255);"> 
+          <ion-col size="4" style=""> 
             <img class="fotoperfil" src="assets/icon/perfil.png" alt="Mi Imagen">
           </ion-col>
-      <ion-col size="8" style="background-color: rgb(255, 255, 255);">
+      <ion-col size="8" style="">
         <ion-row>
-          <ion-col class="datos">
-             {{nombreRecibido}}
+          <ion-col >
+            <div class="datos">
+{{nombreRecibido}}
+            </div>
+             
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col  class="datos">
-            {{correorecibido}}
+          <ion-col >
+            <div  class="datos">
+ {{correorecibido}}
+            </div>
+           
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col  class="datos">
-            {{edadRecibida}}
+          <ion-col >
+            <div  class="datos">
+{{edadRecibida}}
+            </div>
+            
           </ion-col>
         </ion-row>
        
@@ -75,8 +104,14 @@
         </ion-row>
         <ion-row>
           <ion-col style="text-align: left;">
+            <div style="margin-top: 50px; text-align: center;">
+              DESCRIPCION
+            </div>
+            <div style="border: 1px solid rgb(0, 0, 0); width: 570px;height: 100px;margin: 15px;" >
+               {{descripcion}}
+            </div>
             
-           <textarea name="" id="" cols="70" rows="11">{{descripcion}}</textarea>
+         
           </ion-col> 
         </ion-row>
       
