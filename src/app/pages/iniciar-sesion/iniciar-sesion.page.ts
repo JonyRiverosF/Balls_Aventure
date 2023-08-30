@@ -42,9 +42,7 @@ export class IniciarSesionPage implements OnInit {
     return this.formularioLogin.get('contraseña1') as FormControl;
    }
 
-   procesar(){
-    console.log(this.formularioLogin.value);
-   }
+   
 
 
   ngOnInit() {
@@ -62,14 +60,7 @@ export class IniciarSesionPage implements OnInit {
     this.router.navigate(['/perfil-usuario'],navigationextra)
   }
 
-  async ingresar(){
-    var f = this.formularioLogin.value;
-    console.log(this.formularioLogin)
-
-
-
-    
-  }
+  
 }
 
 
