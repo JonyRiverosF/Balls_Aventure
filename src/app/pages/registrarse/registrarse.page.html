@@ -1,20 +1,36 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>Registrarse</ion-title>
-  </ion-toolbar>
+  
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+  <ion-grid style="background-color: rgba(70, 12, 36, 0.836);">
+     <ion-row >
+       
+       
+        <ion-col style=" text-align: center; color: beige;font-size: 30px;padding-bottom: 5px;">
+          
+          REGISTRO
+        
+        </ion-col>
+       
+        
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title style="text-align: center;">Registrarse</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
+      </ion-row>
+    <ion-row style="margin: 0 20px 20px 20px;background-color: rgb(223, 180, 213);">
+     
+    
+     
+      <ion-col size="4" style="background-image: url(assets/icon/registrop.png);background-size: cover;">
+        <div>
+          <img src="assets/icon/patra.png" [routerLink]="['/home']" style="width: 50px;height: 50px;"/>
+        </div>
+        <div>
+          <img class="bienvenido" src="assets/icon/bienvenido.png" alt="Mi Imagen">
+        </div>
+
+      </ion-col>
+      <ion-col size="8">
+
       <form [formGroup]="formularioRegistro">
 
         <ion-item>
@@ -113,8 +129,11 @@
       </form>
       <br>
       <p style="text-align: center;"><ion-button [disabled]="formularioRegistro.invalid" [routerLink]="['/lobby']">Enviar</ion-button></p>
-    </ion-card-content>
-  </ion-card>
+    </ion-col>
+  
+    </ion-row>
+  </ion-grid>
+  
 
 
   <ion-header collapse="condense">
