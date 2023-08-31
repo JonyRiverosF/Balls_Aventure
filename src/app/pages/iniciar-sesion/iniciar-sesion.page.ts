@@ -30,7 +30,7 @@ export class IniciarSesionPage implements OnInit {
 
     this.formularioLogin=this.fb.group({
       'Correo1': new FormControl('',[Validators.required,Validators.minLength(5),Validators.email]),
-      'contraseña1': new FormControl ('',[Validators.required,Validators.minLength(5),Validators.maxLength(15)])
+      'contraseña1': new FormControl ('',[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(new RegExp("(?=.*[0-9])")),Validators.pattern(new RegExp("(?=.*[A-Z])")),Validators.pattern(new RegExp("(?=.*[a-z])")),Validators.pattern(new RegExp("(?=.*[$@^!%*?&])"))])
 
     })
 

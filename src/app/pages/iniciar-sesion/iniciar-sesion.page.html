@@ -17,39 +17,47 @@
       <form   [formGroup]="formularioLogin" >
         <ion-item>
           <ion-label position="floating">Correo</ion-label>
-          <ion-input formControlName="Correo1"  [(ngModel)]="correousuario"   type="text"   ></ion-input>
+          <ion-input formControlName="Correo1"     type="text"  [(ngModel)]="correousuario" ></ion-input>
         </ion-item><br>
         <div [hidden]="correo?.valid || correo?.pristine ">
-        <span *ngIf="correo?.errors?.['required']">
-          El Email es requerido
-        </span>
-        <span *ngIf="correo?.errors?.['Email']">
-          El Email debe ser valido
-        </span>
-
-        </div>
+          <span *ngIf="correo?.errors?.['required']">
+            El correo es requerido.
+          </span>
+          <span *ngIf="correo?.errors?.['email']">
+            El correo debe ser valido.
+          </span>
+          <span *ngIf="correo?.errors?.['minlength']">
+            <br>El correo solo permite un minimo de 5 caracteres.
+          </span>
+          </div>
         <br>
 
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
-          <ion-input  formControlName="contraseña1"  [(ngModel)]="claveusuario" type="password"></ion-input>
+          <ion-input  formControlName="contraseña1"   type="password"></ion-input>
         </ion-item>
         <br>
         <div [hidden]="contra?.valid || contra?.pristine ">
           <span *ngIf="contra?.errors?.['required']">
-            La Contraseña es requerido
+            La contraseña es requerida.
           </span>
-          <span *ngIf="contra?.errors?.['minlength'] ">
-            La contraseña debe tener al menos 5 caracteres
+          <span *ngIf="contra?.errors?.['maxlength']">
+            La contraseña permite un maximo de 15 caracteres.
           </span>
-          <span *ngIf="contra?.errors?.['maxLength']">
-            El maximo de caracteres de la contraseña es 15
+          <span *ngIf="contra?.errors?.['minlength']">
+            La contraseña solo permite un minimo de 5 caracteres.
+          </span>
+          <span *ngIf="contra?.errors?.['pattern']">
+            <br>La contraseña requiere un numero.<br>
+            La contraseña requiere una mayuscula.<br>
+            La contraseña requiere una minuscula.<br>
+            La contraseña requiere un simbolo especial.
           </span>
           </div>
         <br>
       <p style="text-align: center;color: rgba(255, 255, 255, 0.918);" [routerLink]="['/olvidaste-c']">¿Olvidaste tu contraseña?</p>
       <br>
-      <p style="text-align: center;"><ion-button  (click)="admin_o_usuario()" >Ingresar</ion-button></p>
+      <p style="text-align: center;"><ion-button [disabled]="formularioLogin.invalid" (click)="admin_o_usuario()" >Ingresar</ion-button></p>
       </form>
       
 

@@ -14,7 +14,7 @@ export class ModificarContraPage implements OnInit {
   constructor(public fb:FormBuilder, public alertController:AlertController) {
 
     this.formularioModiContra=this.fb.group({
-      'Contraseña': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/)]),
+      'Contraseña': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(new RegExp("(?=.*[0-9])")),Validators.pattern(new RegExp("(?=.*[A-Z])")),Validators.pattern(new RegExp("(?=.*[a-z])")),Validators.pattern(new RegExp("(?=.*[$@^!%*?&])"))]),
       'ContraseñaConfirm': new FormControl("",[Validators.required])
 
 
@@ -22,22 +22,16 @@ export class ModificarContraPage implements OnInit {
 
    }
 
+   get contra(){
+    return this.formularioModiContra.get('Contraseña') as FormControl;
+   }
+   get confirmar_contra(){
+    return this.formularioModiContra.get('ContraseñaConfirm') as FormControl;
+   }
+
   ngOnInit() {
   }
 
-  async ingresar(){
-    var f = this.formularioModiContra.value;
-    
-    if(this.formularioModiContra.invalid){
-      const alert = await this.alertController.create({
-        header:'Datos incompletos',
-        message: 'Tienes que llenar todos los datos',
-        buttons: ['Aceptar'],
-      });
   
-      await alert.present();
-      return;
-    }
-  }
 
 }

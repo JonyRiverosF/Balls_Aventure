@@ -16,16 +16,38 @@
     </ion-card-header>
     <ion-card-content>
       <form [formGroup]="formularioRegistro">
+
         <ion-item>
           <ion-label position="floating">Nombre Usuario</ion-label>
           <ion-input formControlName="nombre" type="text"></ion-input>
         </ion-item>
+        <div [hidden]="nombreU?.valid || nombreU?.pristine ">
+          <span *ngIf="nombreU?.errors?.['required']">
+            El nombre de usuario es requerido.
+          </span>
+          <span *ngIf="nombreU?.errors?.['minlength']">
+            El nombre de usuario solo permite un minimo de 3 caracteres.
+          </span>
+          </div>
         <br>
+
         <ion-item>
           <ion-label position="floating">Correo</ion-label>
           <ion-input formControlName="Correo" type="text"></ion-input>
         </ion-item>
+        <div [hidden]="correo?.valid || correo?.pristine ">
+          <span *ngIf="correo?.errors?.['required']">
+            El correo es requerido.
+          </span>
+          <span *ngIf="correo?.errors?.['email']">
+            El correo debe ser valido.
+          </span>
+          <span *ngIf="correo?.errors?.['minlength']">
+            El correo solo permite un minimo de 5 caracteres.
+          </span>
+          </div>
         <br>
+
         <ion-item>
           <ion-label position="floating">Pregunta de seguridad</ion-label>
           <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
@@ -34,27 +56,63 @@
           </ion-select>
         </ion-item>
         <br>
+
         <ion-item>
           <ion-label position="floating">Respuesta</ion-label>
           <ion-input formControlName="Respuesta" type="text"></ion-input>
         </ion-item>
+        <div [hidden]="respuesta?.valid || respuesta?.pristine ">
+          <span *ngIf="respuesta?.errors?.['required']">
+            La respuesta es requerida.
+          </span>
+          <span *ngIf="respuesta?.errors?.['maxlength']">
+            La respuesta permite un maximo de 30 caracteres.
+          </span>
+          <span *ngIf="respuesta?.errors?.['minlength']">
+            La respuesta solo permite un minimo de 5 caracteres.
+          </span>
+          </div>
         <br>
+
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input   formControlName="contraseña" type="password"></ion-input>
         </ion-item>
+        <div [hidden]="contra?.valid || contra?.pristine ">
+          <span *ngIf="contra?.errors?.['required']">
+            La contraseña es requerida.
+          </span>
+          <span *ngIf="contra?.errors?.['maxlength']">
+            La contraseña permite un maximo de 15 caracteres.
+          </span>
+          <span *ngIf="contra?.errors?.['minlength']">
+            La contraseña solo permite un minimo de 5 caracteres.
+          </span>
+          <span *ngIf="contra?.errors?.['pattern']">
+            <br>La contraseña requiere un numero.<br>
+            La contraseña requiere una mayuscula.<br>
+            La contraseña requiere una minuscula.<br>
+            La contraseña requiere un simbolo especial.
+          </span>
+          </div>
         <br>
+
         <ion-item>
           <ion-label position="floating">Confirmar Contraseña</ion-label>
-          <ion-input   formControlName="Confirmar_contraseña" type="password"></ion-input>
+          <ion-input   formControlName="Confirmar_contraseña" type="password"  ></ion-input>
         </ion-item>
+        <div [hidden]="confirmar_contra?.valid || confirmar_contra?.pristine ">
+          <span *ngIf="confirmar_contra?.errors?.['required']">
+            Confirmar Contraseña es requerida.
+          </span>
+          </div>
         <br>
         
           <ion-input accept="image/png,image/jpeg" type="file"></ion-input>
         
       </form>
       <br>
-      <p style="text-align: center;"><ion-button (click)="Registrar()" [routerLink]="['/lobby']">Enviar</ion-button></p>
+      <p style="text-align: center;"><ion-button [disabled]="formularioRegistro.invalid" [routerLink]="['/lobby']">Enviar</ion-button></p>
     </ion-card-content>
   </ion-card>
 
