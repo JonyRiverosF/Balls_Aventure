@@ -31,7 +31,7 @@
 .nombreapp{
   text-align: center;
   animation-name: agrandar;
-  animation: agrandar 10s linear ;
+  animation: agrandar 10s 3s linear ;
   animation-duration: 1s;
   transition: 5s;
 }
@@ -84,7 +84,9 @@
   height: 50px;
   animation-name: animation;
   animation-duration: 10s;
+  
   animation: animation 2s linear infinite;
+  
   animation-delay: 0s;
   transition: 5s;
 
@@ -99,13 +101,14 @@ ion-grid{
 }
 
 @keyframes animation{
-  0% {
-    transform: rotate(0deg); 
-  }
-  100% {
-    transform: rotate(360deg); 
-  }
+  0% {transform: scale(1); }
+  25% {transform: scale(2);}
+  50% {transform: scale(1); }
+  75% {transform: scale(2); }
+  100% {transform: scale(1); }
+ 
 }
+
 
 
 /*Botones Home*/

@@ -11,6 +11,10 @@ import { AlertController } from '@ionic/angular';
 export class IniciarSesionPage implements OnInit {
 
 
+  usuarioadmin:string="joni@gmail.com";
+  usuarionormal:string="dani@gmail.com";
+
+
   correousuario:string = "";
   claveusuario:string = "";
   edad:number=20;
@@ -25,8 +29,8 @@ export class IniciarSesionPage implements OnInit {
   constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,) {
 
     this.formularioLogin=this.fb.group({
-      'Correo1': ['',Validators.required,Validators.minLength(5),Validators.email],
-      'contraseña1': ['',Validators.required,Validators.minLength(5),Validators.maxLength(15)]
+      'Correo1': new FormControl('',[Validators.required,Validators.minLength(5),Validators.email]),
+      'contraseña1': new FormControl ('',[Validators.required,Validators.minLength(5),Validators.maxLength(15)])
 
     })
 
@@ -58,6 +62,24 @@ export class IniciarSesionPage implements OnInit {
       }
     }
     this.router.navigate(['/perfil-usuario'],navigationextra)
+  }
+
+  admin_o_usuario(){
+    if(this.correousuario==this.usuarioadmin){
+      this.router.navigate(['/admin-usuarios'],)
+
+    }
+    else{
+      let navigationextra:NavigationExtras={
+        state:{
+          correoenviado:this.correousuario,
+         
+        }
+      }
+
+      this.router.navigate(['/lobby'],navigationextra)
+
+    }
   }
 
   

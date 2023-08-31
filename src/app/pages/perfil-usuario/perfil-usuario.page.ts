@@ -15,10 +15,12 @@ export class PerfilUsuarioPage implements OnInit {
   constructor(private router:Router, private activatedRouter:ActivatedRoute) {
     this.activatedRouter.queryParams.subscribe(param =>{
       if (this.router.getCurrentNavigation()?.extras.state){
+        
+        this.correorecibido = this.router.getCurrentNavigation()?.extras?.state?.["correoenviado"];
         this.edadRecibida = this.router.getCurrentNavigation()?.extras?.state?.["edadenviado"];
         this.nombreRecibido = this.router.getCurrentNavigation()?.extras?.state?.["nombreenviado"];
-        this.correorecibido = this.router.getCurrentNavigation()?.extras?.state?.["correoenviado"];
         this.descripcion = this.router.getCurrentNavigation()?.extras?.state?.["descripcion"];
+        
       }
     })
    }

@@ -11,7 +11,7 @@
         <!--perfil-->
         <ion-row >
           <ion-col class="icono">
-            <img [routerLink]="['/perfil-usuario']"  src="assets/icon/perfil.png" alt="Mi Imagen">
+            <img (click)="irperfil()"  src="assets/icon/perfil.png" alt="Mi Imagen">
             </ion-col>
           
 
@@ -62,7 +62,7 @@
           <!--bienvenido usuario-->
           <ion-col >
             <div class="bienvenido">
-              bienvenido usuario
+              bienvenido usuario {{nombre_en_lobby }}
             </div>
             
           </ion-col>
