@@ -15,7 +15,7 @@ export class AdminSkinsPage implements OnInit {
 
     this.formularioSkin=this.fb.group({
       'NombreSkin': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(30)]),
-      'PrecioSkin': new FormControl("",[Validators.required,Validators.min(10),Validators.max(60)])
+      'PrecioSkin': new FormControl("",[Validators.required,Validators.min(100),Validators.max(1000)])
 
     })
    }
@@ -24,21 +24,12 @@ export class AdminSkinsPage implements OnInit {
   ngOnInit() {
   }
 
-  async Enviar(){
-    var f = this.formularioSkin.value;
-    
-    
-
-    if(this.formularioSkin.invalid){
-      const alert = await this.alertController.create({
-        header:'Datos incompletos',
-        message: 'Tienes que llenar todos los datos',
-        buttons: ['Aceptar'],
-      });
+  get NombreS(){
+    return this.formularioSkin.get('NombreSkin') as FormControl;
+   }
   
-      await alert.present();
-      return;
-    }
-  }
+   get PrecioS(){
+    return this.formularioSkin.get('PrecioSkin') as FormControl;
+   } 
 
 }

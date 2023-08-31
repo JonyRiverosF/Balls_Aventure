@@ -19,16 +19,40 @@
           <ion-label position="floating">Nombre Skin</ion-label>
           <ion-input formControlName="NombreSkin" type="text"></ion-input>
         </ion-item>
+        <div [hidden]="NombreS?.valid || NombreS?.pristine ">
+          <span *ngIf="NombreS?.errors?.['required']">
+            El nombre de la skin es requerido.
+          </span>
+          <span *ngIf="NombreS?.errors?.['minlength']">
+            <br>El nombre de la skin solo permite un rango de 5 caracteres.
+          </span>
+          <span *ngIf="NombreS?.errors?.['maxlength']">
+            <br>El nombre de la skin solo permite un rango de 30 caracteres.
+          </span>
+          </div>
         <br>
+
         <ion-item>
           <ion-label position="floating">Precio Skin</ion-label>
           <ion-input formControlName="PrecioSkin" type="Number"></ion-input>
         </ion-item>
+        <div [hidden]="PrecioS?.valid || PrecioS?.pristine ">
+          <span *ngIf="PrecioS?.errors?.['required']">
+            El precio de la skin es requerido.
+          </span>
+          <span *ngIf="PrecioS?.errors?.['min']">
+            <br>El precio minimo de una skin sera de 100 monedas.
+          </span>
+          <span *ngIf="PrecioS?.errors?.['max']">
+            <br>El precio maximo de una skin sera de 1000 monedas.
+          </span>
+          </div>
         <br>
+
           <ion-input accept="image/png,image/jpeg" type="file"></ion-input>
       </form>
       <br>
-      <p style="text-align: center;"><ion-button (click)="Enviar()" [routerLink]="['/skins']">Enviar</ion-button></p>
+      <p style="text-align: center;"><ion-button [disabled]="formularioSkin.invalid" [routerLink]="['/skins']">Enviar</ion-button></p>
     </ion-card-content>
   </ion-card>
 

@@ -15,8 +15,8 @@ export class AdminLogrosPage implements OnInit {
 
     this.formularioLogros=this.fb.group({
       'NombreLogro': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(30)]),
-      'Descripcion': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(300)]),
-      'Recompensa': new FormControl("",[Validators.required,Validators.min(1),Validators.max(60)])
+      'Descripcion': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(150)]),
+      'Recompensa': new FormControl("",[Validators.required,Validators.min(1),Validators.max(500)])
 
     })
    }
@@ -24,21 +24,16 @@ export class AdminLogrosPage implements OnInit {
   ngOnInit() {
   }
 
-  async Enviar(){
-    var f = this.formularioLogros.value;
-    
-    
-
-    if(this.formularioLogros.invalid){
-      const alert = await this.alertController.create({
-        header:'Datos incompletos',
-        message: 'Tienes que llenar todos los datos',
-        buttons: ['Aceptar'],
-      });
+  get NombreL(){
+    return this.formularioLogros.get('NombreLogro') as FormControl;
+   }
   
-      await alert.present();
-      return;
-    }
-  }
+   get Descp(){
+    return this.formularioLogros.get('Descripcion') as FormControl;
+   }
+  
+   get Recompensa(){
+    return this.formularioLogros.get('Recompensa') as FormControl;
+   }
 
 }

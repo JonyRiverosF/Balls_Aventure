@@ -19,16 +19,32 @@
           <ion-label position="floating">Nombre Usuario</ion-label>
           <ion-input formControlName="NombreUsuario" type="text"></ion-input>
         </ion-item>
+        <div [hidden]="nombreU?.valid || nombreU?.pristine ">
+          <span *ngIf="nombreU?.errors?.['required']">
+            El nombre de usuario es requerido.
+          </span>
+          <span *ngIf="nombreU?.errors?.['minlength']">
+            El nombre de usuario solo permite un minimo de 3 caracteres.
+          </span>
+          </div>
         <br>
+
         <ion-item>
           <ion-label position="floating">Descripción</ion-label>
           <ion-input   formControlName="Descripcion" type="text"></ion-input>
         </ion-item>
+        <div [hidden]="Descri?.valid || Descri?.pristine ">
+          
+          <span *ngIf="Descri?.errors?.['maxlength']">
+            La descripción solo permite un maximo de 300 caracteres.
+          </span>
+          </div>
+
         <br>
         <ion-input accept="image/png,image/jpeg" type="file"></ion-input>
       </form>
       <br>
-      <p style="text-align: center;"><ion-button (click)="ingresar()" [routerLink]="['/perfil-usuario']">Modificar</ion-button></p>
+      <p style="text-align: center;"><ion-button [disabled]="formularioModificar.invalid" [routerLink]="['/perfil-usuario']">Modificar</ion-button></p>
     </ion-card-content>
   </ion-card>
 

@@ -15,29 +15,28 @@ export class OlvidasteCPage implements OnInit {
 
     this.formularioOlvidaste=this.fb.group({
       'Correo': new FormControl("",[Validators.required,Validators.minLength(5),Validators.email]),
-      'Respuesta': new FormControl("",[Validators.required,Validators.minLength(3),Validators.maxLength(70)])
+      'Respuesta': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(30)])
 
 
     })
 
    }
 
+   get correo(){
+    return this.formularioOlvidaste.get('Correo') as FormControl;
+   }
+
+   get respuesta(){
+    return this.formularioOlvidaste.get('Respuesta') as FormControl;
+   }
+
+
+
+
+
   ngOnInit() {
   }
 
-  async ingresar(){
-    var f = this.formularioOlvidaste.value;
-    
-    if(this.formularioOlvidaste.invalid){
-      const alert = await this.alertController.create({
-        header:'Datos incompletos',
-        message: 'Tienes que llenar todos los datos',
-        buttons: ['Aceptar'],
-      });
   
-      await alert.present();
-      return;
-    }
-  }
 
 }

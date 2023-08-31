@@ -18,21 +18,57 @@
           <ion-label position="floating">Nombre Logro</ion-label>
           <ion-input formControlName="NombreLogro" type="text"></ion-input>
         </ion-item>
+        <div [hidden]="NombreL?.valid || NombreL?.pristine ">
+          <span *ngIf="NombreL?.errors?.['required']">
+            El nombre del logro es requerido.
+          </span>
+          <span *ngIf="NombreL?.errors?.['minlength']">
+            <br>El nombre del logro solo permite un minimo de 5 caracteres.
+          </span>
+          <span *ngIf="NombreL?.errors?.['maxlength']">
+            El nombre del logro solo permite un maximo de 30 caracteres.
+          </span>
+          </div>
         <br>
+
         <ion-item>
           <ion-label position="floating">Descripción</ion-label>
           <ion-input formControlName="Descripcion" type="text"></ion-input>
         </ion-item>
+        <div [hidden]="Descp?.valid || Descp?.pristine ">
+          <span *ngIf="Descp?.errors?.['required']">
+            La descripcion es requerida.
+          </span>
+          <span *ngIf="Descp?.errors?.['minlength']">
+            <br>La descripcion solo permite un minimo de 5 caracteres.
+          </span>
+          <span *ngIf="Descp?.errors?.['maxlength']">
+            La descripcion solo permite un maximo de 150 caracteres.
+          </span>
+          </div>
         <br>
+
         <ion-item>
           <ion-label position="floating">Recompensa</ion-label>
           <ion-input formControlName="Recompensa" type="Number"></ion-input>
         </ion-item>
+        <div [hidden]="Recompensa?.valid || Recompensa?.pristine ">
+          <span *ngIf="Recompensa?.errors?.['required']">
+            La recompensa es requerido.
+          </span>
+          <span *ngIf="Recompensa?.errors?.['min']">
+            <br>La recompensa solo permite un minimo de 1 monedas.
+          </span>
+          <span *ngIf="Recompensa?.errors?.['max']">
+            <br>La recompensa solo permite un maximo de 500 monedas.
+          </span>
+          </div>
         <br>
+
           <ion-input accept="image/png,image/jpeg" type="file"></ion-input>
       </form>
       <br>
-      <p style="text-align: center;"><ion-button (click)="Enviar()" [routerLink]="['/logros']">Enviar</ion-button></p>
+      <p style="text-align: center;"><ion-button [disabled]="formularioLogros.invalid" [routerLink]="['/logros']">Enviar</ion-button></p>
     </ion-card-content>
   </ion-card>
 

@@ -14,8 +14,8 @@ export class ModificarPerfilPage implements OnInit {
   constructor(public fb:FormBuilder, public alertController:AlertController) { 
 
     this.formularioModificar=this.fb.group({
-      'NombreUsuario': new FormControl("",[Validators.required,Validators.minLength(5)]),
-      'Descripcion': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(300)])
+      'NombreUsuario': new FormControl("",[Validators.required,Validators.minLength(3)]),
+      'Descripcion': new FormControl("",[Validators.maxLength(300)])
 
 
     })
@@ -25,19 +25,12 @@ export class ModificarPerfilPage implements OnInit {
   }
 
 
-  async ingresar(){
-    var f = this.formularioModificar.value;
-    
-    if(this.formularioModificar.invalid){
-      const alert = await this.alertController.create({
-        header:'Datos incompletos',
-        message: 'Tienes que llenar todos los datos',
-        buttons: ['Aceptar'],
-      });
+  get nombreU(){
+    return this.formularioModificar.get('NombreUsuario') as FormControl;
+   }
   
-      await alert.present();
-      return;
-    }
-  }
+  get Descri(){
+    return this.formularioModificar.get('Descripcion') as FormControl;
+   }
 
 }

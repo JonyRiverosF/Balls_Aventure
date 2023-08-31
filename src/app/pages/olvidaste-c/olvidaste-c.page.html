@@ -25,15 +25,37 @@
           <ion-label position="floating">Respuesta</ion-label>
           <ion-input   formControlName="Respuesta" type="text"></ion-input>
         </ion-item>
+        <div [hidden]="respuesta?.valid || respuesta?.pristine ">
+          <span *ngIf="respuesta?.errors?.['required']">
+            La respuesta es requerida.
+          </span>
+          <span *ngIf="respuesta?.errors?.['maxlength']">
+            La respuesta permite un maximo de 30 caracteres.
+          </span>
+          <span *ngIf="respuesta?.errors?.['minlength']">
+            La respuesta solo permite un minimo de 5 caracteres.
+          </span>
+          </div>
         <br>
         <ion-item>
           <ion-label position="floating">Correo</ion-label>
           <ion-input   formControlName="Correo" type="text"></ion-input>
         </ion-item>
+        <div [hidden]="correo?.valid || correo?.pristine ">
+          <span *ngIf="correo?.errors?.['required']">
+            El correo es requerido.
+          </span>
+          <span *ngIf="correo?.errors?.['email']">
+            El correo debe ser valido.
+          </span>
+          <span *ngIf="correo?.errors?.['minlength']">
+            <br>El correo solo permite un minimo de 5 caracteres.
+          </span>
+          </div>
         <br>
       </form>
       <br>
-      <p style="text-align: center;"><ion-button (click)="ingresar()" [routerLink]="['/modificar-contra']">Cambiar</ion-button></p>
+      <p style="text-align: center;"><ion-button [disabled]="formularioOlvidaste.invalid" [routerLink]="['/modificar-contra']">Cambiar</ion-button></p>
     </ion-card-content>
   </ion-card>
 
