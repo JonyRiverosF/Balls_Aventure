@@ -8,7 +8,9 @@
 </ion-header>
 <ion-content [fullscreen]="true">
 
-  <ion-card>
+
+  <ion-grid style="background-color:rgba(153, 8, 153, 0.838);">
+  <ion-card class="form">
     <ion-card-header>
       <ion-card-title style="text-align: center;">Agregar Logro</ion-card-title>
     </ion-card-header>
@@ -71,7 +73,7 @@
       <p style="text-align: center;"><ion-button [disabled]="formularioLogros.invalid" [routerLink]="['/logros']">Enviar</ion-button></p>
     </ion-card-content>
   </ion-card>
-
+</ion-grid>
 
   <ion-header collapse="condense">
   </ion-header>
