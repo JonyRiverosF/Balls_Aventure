@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import { AlertController } from '@ionic/angular';
-
+import { NavigationExtras,Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrarse',
@@ -9,11 +9,14 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./registrarse.page.scss'],
 })
 export class RegistrarsePage implements OnInit {
-
+  contra1:string="";
+  contra2:string="";
+  mensaje:string="Las contraseñas no coinciden";
   formularioRegistro:FormGroup;
   
 
-  constructor(public fb:FormBuilder,public alertController:AlertController) {
+  constructor(public fb:FormBuilder,public alertController:AlertController,private router:Router,) {
+   
     
     this.formularioRegistro=this.fb.group({
       'nombre': new FormControl("",[Validators.required,Validators.minLength(3)]),
@@ -22,6 +25,21 @@ export class RegistrarsePage implements OnInit {
       'Correo': new FormControl("",[Validators.required,Validators.minLength(5),Validators.email]),
       'Respuesta': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(30)])
     })
+   }
+
+   registrar(){
+    if (this.contra1==this.contra2){
+      this.router.navigate(['/lobby'],)
+
+    }else{
+      let navigationextra:NavigationExtras={
+        state:{
+          mensaje:this.mensaje
+        }
+      }
+    }
+    
+
    }
 
    

@@ -14,7 +14,7 @@
         <br>
         <ion-item>
           <ion-label position="floating">Contraseña Nueva</ion-label>
-          <ion-input formControlName="Contraseña" type="password"></ion-input>
+          <ion-input [(ngModel)]="contra1" formControlName="Contraseña" type="password"></ion-input>
         </ion-item>
         <div [hidden]="contra?.valid || contra?.pristine ">
           <span *ngIf="contra?.errors?.['required']">
@@ -37,17 +37,17 @@
 
         <ion-item>
           <ion-label position="floating">Confirmar Contraseña</ion-label>
-          <ion-input formControlName="ContraseñaConfirm" type="password"></ion-input>
+          <ion-input [(ngModel)]="contra2" formControlName="ContraseñaConfirm" type="password"></ion-input>
         </ion-item>
         <div [hidden]="confirmar_contra?.valid || confirmar_contra?.pristine ">
           <span *ngIf="confirmar_contra?.errors?.['required']">
-            Confirmar Contraseña es requerida.
+            Confirmar Contraseña es requerida.<br>{{mensaje}}
           </span>
           </div>
         <br>
       </form>
       <br>
-      <p style="text-align: center;"><ion-button [disabled]="formularioModiContra.invalid" [routerLink]="['/iniciar-sesion']">Cambiar</ion-button></p>
+      <p style="text-align: center;"><ion-button [disabled]="formularioModiContra.invalid" (click)="registrar()">Cambiar</ion-button></p>
     </ion-card-content>
   </ion-card>
 </ion-grid>

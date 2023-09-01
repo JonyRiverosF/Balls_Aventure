@@ -92,7 +92,7 @@
 
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
-          <ion-input   formControlName="contraseña" type="password"></ion-input>
+          <ion-input  [(ngModel)]="contra1" formControlName="contraseña" type="password"></ion-input>
         </ion-item>
         <div [hidden]="contra?.valid || contra?.pristine ">
           <span *ngIf="contra?.errors?.['required']">
@@ -115,20 +115,22 @@
 
         <ion-item>
           <ion-label position="floating">Confirmar Contraseña</ion-label>
-          <ion-input   formControlName="Confirmar_contraseña" type="password"  ></ion-input>
+          <ion-input [(ngModel)]="contra2"  formControlName="Confirmar_contraseña" type="password"  ></ion-input>
         </ion-item>
         <div [hidden]="confirmar_contra?.valid || confirmar_contra?.pristine ">
           <span *ngIf="confirmar_contra?.errors?.['required']">
-            Confirmar Contraseña es requerida.
+            Confirmar Contraseña es requerida.<br>{{mensaje}}
           </span>
+         
           </div>
+           
         <br>
         
           <ion-input accept="image/png,image/jpeg" type="file"></ion-input>
         
       </form>
       <br>
-      <p style="text-align: center;"><ion-button [disabled]="formularioRegistro.invalid" [routerLink]="['/lobby']">Enviar</ion-button></p>
+      <p style="text-align: center;"><ion-button [disabled]="formularioRegistro.invalid" (click)="registrar()" >Enviar</ion-button></p>
     </ion-col>
   
     </ion-row>
