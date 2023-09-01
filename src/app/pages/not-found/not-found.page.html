@@ -1,16 +1,26 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>NotFound</ion-title>
-  </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
+
+
+<ion-grid style="background-color: rgba(92, 4, 89, 0.765);">
+  <ion-row>
+    <ion-col size="3"></ion-col>
+    <ion-col size="6">
+
+      <h1 style="text-align: center;color: rgb(255, 0, 0);">ERROR....</h1>
+
+      <p style="text-align: center;"><img  class="foto" src="assets/icon/tite-notfound.png" alt="Mi Imagen"></p>
+      <ion-card #card>
+        <ion-card-content style="text-align: center;" [routerLink]="['/lobby']">Cliquea aquí para regresar al lobby</ion-card-content>
+      </ion-card>
+      <p style="text-align: center;"><ion-button (click)="play()">Animar el boton</ion-button>
+      <ion-button (click)="stop()">Parar boton</ion-button></p>
+    </ion-col>
+    <ion-col size="3"></ion-col>
+  </ion-row>
+</ion-grid>
+
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">NotFound</ion-title>
-    </ion-toolbar>
   </ion-header>
 </ion-content>
