@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-componente1',
@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Componente1Component  implements OnInit {
 
+
+  @Input() nomb:string ="";
+  @Input() correo:string ="";
+  @Input() fecha:string ="";
+  @Input() usuario:string ="";
   constructor() { }
 
   ngOnInit() {}
