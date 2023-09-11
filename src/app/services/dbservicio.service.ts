@@ -1,31 +1,32 @@
 import { Injectable } from '@angular/core';
-import { SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
+import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
+import { Platform, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DbservicioService {
   
-  constructor() { 
+  constructor(private platform:Platform,private sqlite:SQLite,public toastController: ToastController) { 
 
   }
 
   crearBD(){
     this.platform.ready().then(()=> {
       this.sqlite.create({
-        name: 'noticias.db',
+        name: 'proyecto.db',
         location: 'default'
       }).then((db: SQLiteObject) => {
         this.database = db;
         this.presentToast("BD creada");
         //llamo a crear la(s) tabla(s)
         this.crearTablas();
-      }).catch((e: any) => this.presentToast(e));
+      }).catch((e) => this.presentToast(e));
 
     })
   }
   
-  public database: SQLiteObject | undefined;
+  public database!: SQLiteObject;
 
   tblUsuario:String="CREATE TABLE IF NO EXISTS usuario(idU INTEGER PRIMARY KEY autoincrement,"+
   "respuesta VARCHAR(50), nombreU VARCHAR(30), contrasena VARCHAR(12),"+ 
@@ -41,7 +42,7 @@ export class DbservicioService {
 
   async crearTablas(){
     try{
-      await this.database?.executeSql(this.tblPregunta,[]);
+      await this.database.executeSql(this.tblPregunta,[]);
       this.presentToast("Tabla creada")
       this.cargarPregunta();
       this.isDbReady.next(true);
@@ -52,7 +53,7 @@ export class DbservicioService {
 
   addPregunta(nombreP){
     let data=[nombreP];
-    return this.database?.executeSql('INSERT INTO pregunta(nombreP) VALUES(?)',data)
+    return this.database.executeSql('INSERT INTO pregunta(nombreP) VALUES(?)',data)
     .then(()=>{
       this.cargarPregunta();
     })
@@ -60,21 +61,21 @@ export class DbservicioService {
 
   updatePregunta(idP,nombreP){
     let data=[nombreP,idP];
-    return this.database?.executeSql('UPDATE pregunta SET nombreP=? WHERE idP=?',data)
+    return this.database.executeSql('UPDATE pregunta SET nombreP=? WHERE idP=?',data)
     .then(()=>{
       this.cargarPregunta();
     })
   }
 
   deletePregunta(idP){
-    return this.database?.executeSql('DELETE FROM pregunta WHERE id=?'.[id])
+    return this.database.executeSql('DELETE FROM pregunta WHERE id=?'.[id])
     .then(()=>{
       this.cargarPregunta();
     })
   }
 
   cargarPregunta(){
-    return this.database?.executeSql('SELECT * FROM pregunta',[])
+    return this.database.executeSql('SELECT * FROM pregunta',[])
     .then(res=>{
       let items:Pregunta[]=[];
       if(res.rows.length>0){
@@ -89,5 +90,17 @@ export class DbservicioService {
     });
   }
 
+  async presentToast(position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: "",
+      duration: 1500,
+      position: position,
+    });
+
+    await toast.present();
+  }
 
 }
+
+
+
