@@ -24,7 +24,7 @@
         
         
 
-        <img class="pj" src="assets/icon/pj.png" alt="Mi Imagen">
+        <img class="pj " src="assets/icon/pj.png" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg)'" alt="Mi Imagen">
        
         
         
@@ -41,8 +41,8 @@
     <ion-row>
       <ion-col >
  
-        <img class="flechas" src="assets/icon/izquierda.png" alt="Mi Imagen">
-        <img class="flechas" src="assets/icon/derecha.png" alt="Mi Imagen">
+        <img class="flechas " src="assets/icon/izquierda.png" (touchstart)="startMoving('izquierda')" (touchend)="stopMoving('izquierda')"  alt="Mi Imagen">
+        <img class="flechas" src="assets/icon/derecha.png" (touchstart)="startMoving('derecha')" (touchend)="stopMoving('derecha')"  alt="Mi Imagen">
       </ion-col>
       <ion-col style="text-align: right; justify-content: right;align-items: right;" >
  
