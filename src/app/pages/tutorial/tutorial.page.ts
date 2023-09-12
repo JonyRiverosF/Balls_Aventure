@@ -12,6 +12,7 @@ export class TutorialPage implements OnInit {
 
   // Variable para rastrear la posición del personaje en píxeles
 personajePosX = 0;
+personajePosY = 0;
 private isMovingLeft = false;
 private isMovingRight = false;
 private rotationInterval: any;
@@ -61,7 +62,7 @@ startMoving(direction: string) {
     this.rotationDegrees += 8;
     // Ajusta la cantidad de grados para la rotación
     this.moverPersonaje();
-  }, 23); // Ajusta el intervalo según la velocidad de rotación
+  }, 15); // Ajusta el intervalo según la velocidad de rotación
 }
 
 stopMoving(direction: string) {
@@ -73,6 +74,32 @@ stopMoving(direction: string) {
 
   // Detener rotación y movimiento
   clearInterval(this.rotationInterval);
+}
+
+private isJumping = false; // Agrega una propiedad para rastrear si el personaje está saltando
+
+saltarPersonaje() {
+  if (!this.isJumping) {
+    this.isJumping = true;
+    const jumpHeight = -100; // Ajusta la altura del salto según tu preferencia
+    const jumpDuration = 500; // Ajusta la duración del salto según tu preferencia
+
+    const initialPosY = this.personajePosY+2;
+    const startTime = Date.now();
+
+    const jumpInterval = setInterval(() => {
+      const currentTime = Date.now();
+      const elapsedTime = currentTime - startTime;
+
+      if (elapsedTime >= jumpDuration) {
+        clearInterval(jumpInterval);
+        this.isJumping = false;
+      } else {
+        const progress = elapsedTime / jumpDuration;
+        this.personajePosY = initialPosY + jumpHeight * Math.sin(progress * Math.PI);
+      }
+    }, 16); // Intervalo de actualización (aproximadamente 60 FPS)
+  }
 }
 
 
