@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
+import { DbservicioService } from '../services/dbservicio.service';
+
 
 @Component({
   selector: 'app-home',
@@ -18,7 +20,7 @@ export class HomePage {
   }]
   nom:string="";
 
-  constructor(private router: Router, private alertController: AlertController, private toastController: ToastController ) {}
+  constructor(private router: Router, private alertController: AlertController, private toastController: ToastController, private db : DbservicioService ) {}
 
   sumar(){
     this.nombreusuario;
