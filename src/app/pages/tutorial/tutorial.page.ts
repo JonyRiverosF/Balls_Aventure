@@ -11,69 +11,91 @@ import { AlertController } from '@ionic/angular';
 export class TutorialPage implements OnInit {
 
   // Variable para rastrear la posición del personaje en píxeles
-  personajePosX = 0;
-  private isMovingLeft = false;
-  private isMovingRight = false;
-  private rotationInterval: any;
-  public rotationDegrees = 0;
-  
-  
-  constructor(private router:Router,public alertController :AlertController) { }
+personajePosX = 0;
+private isMovingLeft = false;
+private isMovingRight = false;
+private rotationInterval: any;
+public rotationDegrees = 0;
+maxX: number = 800; // Ancho máximo del contenedor o pantalla
 
-  
-  moverPersonaje() {
-    if (this.isMovingLeft) {
-      this.personajePosX -= 2.5; // Ajusta la cantidad de píxeles según tu preferencia
-    }
-    if (this.isMovingRight) {
-      this.personajePosX += 2.5; // Ajusta la cantidad de píxeles según tu preferencia
-    }
+constructor(private router: Router, public alertController: AlertController) {
+  // Calcula el ancho máximo del contenedor o pantalla una vez que la vista esté cargada
+  this.calcularMaxX();
+}
+
+ngOnInit() {
+  // Escucha el evento de redimensionamiento de la ventana para recalcular maxX si es necesario
+  window.addEventListener('resize', () => {
+    this.calcularMaxX();
+  });
+}
+
+calcularMaxX() {
+  // Obtén el ancho del contenedor o pantalla actualizado
+  const contenedor = document.getElementById('tu-contenedor'); // Reemplaza 'tu-contenedor' con el ID de tu contenedor
+  if (contenedor) {
+    this.maxX = contenedor.clientWidth;
+  }
+}
+
+moverPersonaje() {
+  if (this.isMovingLeft) {
+    this.personajePosX -= 2.5; // Ajusta la cantidad de píxeles según tu preferencia
+    this.personajePosX = Math.max(this.personajePosX, 0); // Límite izquierdo
+  }
+  if (this.isMovingRight) {
+    this.personajePosX += 2.5; // Ajusta la cantidad de píxeles según tu preferencia
+    this.personajePosX = Math.min(this.personajePosX, this.maxX); // Límite derecho
+  }
+}
+
+startMoving(direction: string) {
+  if (direction === 'izquierda') {
+    this.isMovingLeft = true;
+  } else if (direction === 'derecha') {
+    this.isMovingRight = true;
   }
 
-  startMoving(direction: string) {
-    if (direction === 'izquierda') {
-      this.isMovingLeft = true;
-    } else if (direction === 'derecha') {
-      this.isMovingRight = true;
-    }
+  // Iniciar rotación continua
+  this.rotationInterval = setInterval(() => {
+    this.rotationDegrees += 8;
+    // Ajusta la cantidad de grados para la rotación
+    this.moverPersonaje();
+  }, 23); // Ajusta el intervalo según la velocidad de rotación
+}
 
-    // Iniciar rotación continua
-    this.rotationInterval = setInterval(() => {
-      this.rotationDegrees += 7.5;
-       // Ajusta la cantidad de grados para la rotación
-      this.moverPersonaje();
-    }, 20); // Ajusta el intervalo según la velocidad de rotación
-  }
-
-  stopMoving(direction: string) {
+stopMoving(direction: string) {
+  if (direction === 'izquierda') {
     this.isMovingLeft = false;
+  } else if (direction === 'derecha') {
     this.isMovingRight = false;
-
-    // Detener rotación y movimiento
-    clearInterval(this.rotationInterval);
   }
 
-
-
-
-  ngOnInit() {
-  }
+  // Detener rotación y movimiento
+  clearInterval(this.rotationInterval);
+}
 
 
   
 
 
 
-  /*moverPersonaje(direccion: string) {
-    // Función para mover el personaje
-    if (direccion === 'izquierda') {
-      this.personajePosX -= 10; // Mueve 10 píxeles hacia la izquierda
-    } else if (direccion === 'derecha') {
-      this.personajePosX += 10; // Mueve 10 píxeles hacia la derecha
-    }
-  }*/
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
   public alertButtons = [
