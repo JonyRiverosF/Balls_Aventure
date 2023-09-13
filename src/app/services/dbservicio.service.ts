@@ -9,21 +9,12 @@ import { AlertController } from '@ionic/angular';
 })
 export class DbservicioService {
   
-
-  
-  constructor(private platform:Platform,public sqlite:SQLite,public toastController: ToastController, private alertController: AlertController) { 
-    this.crearBD();
-
-  }
-
- 
-  
   //variable de conexion a BD
   public database!: SQLiteObject;
 
   //variables para la creacion de tablas
 
-  tblUsuario:string="CREATE TABLE IF NO EXISTS usuario(idU INTEGER PRIMARY KEY autoincrement,respuesta VARCHAR(50), nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL,correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), niveles NUMBER(2), foto FILES NOT NULL, monedas NUMBER(5) NOT NULL, pregunta FOREIGN KEY NOT NULL,  logros FOREIGN KEY , skins FOREIGN KEY, rol FOREIGN KEY);";
+  tblUsuario:string="CREATE TABLE IF NO EXISTS usuario(idU INTEGER PRIMARY KEY autoincrement,respuesta VARCHAR(50), nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL,correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto FILES NOT NULL, monedas NUMBER(5) NOT NULL, pregunta FOREIGN KEY NOT NULL,  logros FOREIGN KEY , skins FOREIGN KEY, rol FOREIGN KEY);";
 
   tblPregunta:string="CREATE TABLE IF NO EXISTS pregunta(idP INTEGER PRIMARY KEY autoincrement, nombreP VARCHAR(30));";
 
@@ -33,16 +24,41 @@ export class DbservicioService {
 
   tblSkins:string="CREATE TABLE IF NO EXISTS skins(idS INTEGER PRIMARY KEY autoincrement, nombreS VARCHAR(30), foto FILES, precio NUMBER(5));";
 
+  tblNiveles:string="CREATE TABLE IF NO EXISTS niveles(idN INTEGER PRIMARY KEY autoincrement, recompensaN NUMBER(6), tiempo NUMBER(10));";
+
   //variables para los insert iniciales
-  registropregunta:string="INSERT OR IGNORE INTO pregunta(id, nombreP) VALUES(1, '¿cual es tu comida favorita?');";
-  registrorol:string="INSERT OR IGNORE INTO rol(id, nombreR) VALUES(1, 'usuario');";
+  registroUsuario:string="INSERT OR IGNORE INTO usuario(idU, respuesta, nombreU, contrasena, correo, descripcion, foto, monedas) VALUES(1, 'Lasaña', Dani123, J@ny12, dani123@gmail.com, '', 30);";
+
+  registroPregunta:string="INSERT OR IGNORE INTO pregunta(idP, nombreP) VALUES(1, '¿cual es tu comida favorita?');";
+
+  registroRol:string="INSERT OR IGNORE INTO rol(idR, nombreR) VALUES(1, 'usuario');";
+
+  registroLogro:string="INSERT OR IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Tutorial Completado', 'Completaste el tutorial felicidades', 15);";
+
+  registroSkins:string="INSERT OR IGNORE INTO skins(idS, nombreS, foto, precio) VALUES(1, 'Boley', '', 55);";
+
+  registroNiveles:string="INSERT OR IGNORE INTO niveles(idN, recompensaN, tiempo) VALUES(1, 30, 300);";
 
   //observables de las tablas
+  listaUsuario = new BehaviorSubject([]);
+
   listapreguntas = new BehaviorSubject([]);
+
+  listaRol = new BehaviorSubject([]);
+
+  listaLogro = new BehaviorSubject([]);
+
+  listaSkins = new BehaviorSubject([]);
+
+  listaNiveles = new BehaviorSubject([]);
 
   //observable para la BD
   private isBDReady:BehaviorSubject<boolean> = new BehaviorSubject(false);
 
+  constructor(private platform:Platform,public sqlite:SQLite,public toastController: ToastController, private alertController: AlertController) { 
+    this.crearBD();
+
+  }
 
  crearBD(){
     this.platform.ready().then(()=> {
@@ -61,17 +77,77 @@ export class DbservicioService {
   }
 
  async crearTablas(){
+
+    try{
+      //ejecutar la creacion de tablas
+      await this.database.executeSql(this.tblUsuario,[]);
+      //ejecuto los insert
+      await this.database.executeSql(this.registroUsuario,[]);
+      this.presentAlert("Tabla creada")
+      //cambio mi observable de BD
+      this.isBDReady.next(true);
+    }catch (errorU){
+      this.presentAlert("Error en Crear Tabla:"+errorU);
+    }
+
     try{
       //ejecutar la creacion de tablas
       await this.database.executeSql(this.tblPregunta,[]);
       //ejecuto los insert
-
-      await this.database.executeSql(this.registropregunta,[]);
+      await this.database.executeSql(this.registroPregunta,[]);
       this.presentAlert("Tabla creada")
       //cambio mi observable de BD
       this.isBDReady.next(true);
-    }catch (error){
-      this.presentAlert("Error en Crear Tabla:"+error);
+    }catch (errorP){
+      this.presentAlert("Error en Crear Tabla:"+errorP);
+    }
+
+    try{
+      //ejecutar la creacion de tablas
+      await this.database.executeSql(this.tblRol,[]);
+      //ejecuto los insert
+      await this.database.executeSql(this.registroRol,[]);
+      this.presentAlert("Tabla creada")
+      //cambio mi observable de BD
+      this.isBDReady.next(true);
+    }catch (errorR){
+      this.presentAlert("Error en Crear Tabla:"+errorR);
+    }
+
+    try{
+      //ejecutar la creacion de tablas
+      await this.database.executeSql(this.tblLogro,[]);
+      //ejecuto los insert
+      await this.database.executeSql(this.registroLogro,[]);
+      this.presentAlert("Tabla creada")
+      //cambio mi observable de BD
+      this.isBDReady.next(true);
+    }catch (errorL){
+      this.presentAlert("Error en Crear Tabla:"+errorL);
+    }
+
+    try{
+      //ejecutar la creacion de tablas
+      await this.database.executeSql(this.tblSkins,[]);
+      //ejecuto los insert
+      await this.database.executeSql(this.registroSkins,[]);
+      this.presentAlert("Tabla creada")
+      //cambio mi observable de BD
+      this.isBDReady.next(true);
+    }catch (errorS){
+      this.presentAlert("Error en Crear Tabla:"+errorS);
+    }
+
+    try{
+      //ejecutar la creacion de tablas
+      await this.database.executeSql(this.tblNiveles,[]);
+      //ejecuto los insert
+      await this.database.executeSql(this.registroNiveles,[]);
+      this.presentAlert("Tabla creada")
+      //cambio mi observable de BD
+      this.isBDReady.next(true);
+    }catch (errorN){
+      this.presentAlert("Error en Crear Tabla:"+errorN);
     }
   }
 
@@ -85,6 +161,7 @@ async presentAlert( msj:string) {
 
     await alert.present();
   }
+
   /*
   addPregunta(nombreP){
     let data=[nombreP];
