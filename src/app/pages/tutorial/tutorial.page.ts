@@ -6,7 +6,7 @@ import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-tutorial',
   templateUrl: './tutorial.page.html',
-  styleUrls: ['./tutorial.page.scss'],
+  styleUrls: ['./tutorial.page.scss', ],
 })
 export class TutorialPage implements OnInit {
 
@@ -19,18 +19,53 @@ private rotationInterval: any;
 public rotationDegrees = 0;
 maxX: number = 800; // Ancho máximo del contenedor o pantalla
 
+//Timeout Con alerta
+tiempoExpirado: boolean = false;
+tiempoLimite: number = 300000;
+tiempoRestante!: number;
+mostrarAlerta: boolean = false;
+
 constructor(private router: Router, public alertController: AlertController) {
   // Calcula el ancho máximo del contenedor o pantalla una vez que la vista esté cargada
   this.calcularMaxX();
 }
 
+//Timeout Alerta
 ngOnInit() {
-  // Escucha el evento de redimensionamiento de la ventana para recalcular maxX si es necesario
-  window.addEventListener('resize', () => {
-    this.calcularMaxX();
-  });
+  setTimeout(() => {
+    this.tiempoExpirado = true;
+    this.mostrarAlerta = true; // Mostrar la alerta cuando se acabe el tiempo
+  }, this.tiempoLimite);
+
+  let tiempoInicial = this.tiempoLimite / 1000; // Convertir a segundos
+  this.tiempoRestante = tiempoInicial;
+
+  const interval = setInterval(() => {
+    if (!this.tiempoExpirado) {
+      this.tiempoRestante -= 1;
+      
+      if (this.tiempoRestante <= 0) {
+        this.tiempoExpirado = true;
+        clearInterval(interval);
+      }
+    }
+  }, 1000);
 }
 
+volverAlInicio(){
+  window.location.href = '/lobby';
+}
+
+volverAIntentarlo(){
+  window.location.href = '/tutorial';
+}
+
+
+//Movimiento Pj
+  ventana(){// Escucha el evento de redimensionamiento de la ventana para recalcular maxX si es necesario
+  window.addEventListener('resize', () => {
+    this.calcularMaxX();
+  });}
 calcularMaxX() {
   // Obtén el ancho del contenedor o pantalla actualizado
   const contenedor = document.getElementById('tu-contenedor'); // Reemplaza 'tu-contenedor' con el ID de tu contenedor
@@ -76,6 +111,9 @@ stopMoving(direction: string) {
   clearInterval(this.rotationInterval);
 }
 
+
+
+//Saltar Pj
 private isJumping = false; // Agrega una propiedad para rastrear si el personaje está saltando
 
 saltarPersonaje() {
@@ -103,28 +141,7 @@ saltarPersonaje() {
 }
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
+//Volver Al inicio
   public alertButtons = [
      
     {header:"¿Volver al lobby?",
@@ -135,13 +152,7 @@ saltarPersonaje() {
     {
       text: 'LOBBY',
       cssClass: 'alert-button-confirm',
-      
-     
-      
     },
-    
-    
-    
   ];
 
   async mostrarmenu() {
@@ -156,7 +167,7 @@ saltarPersonaje() {
           text: 'LOBBY',
           cssClass: 'alert-button-confirm',
           handler: () => {
-            this.router.navigate(['/lobby']);  
+            this.router.navigate(['/lobby']); 
           },
         },
       ],
@@ -169,7 +180,12 @@ saltarPersonaje() {
 
 
 
- 
+
+
+
+
+
+  
 }
 
  

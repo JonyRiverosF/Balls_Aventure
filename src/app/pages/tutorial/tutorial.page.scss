@@ -30,6 +30,54 @@
   transform: scale(1.1);
 }
 
+.contador {
+  position: absolute;
+  top: 5px; /* Ajusta la posición vertical según tus preferencias */
+  right: 10px; /* Ajusta la posición horizontal según tus preferencias */
+  background-color: rgba(94, 27, 156, 0.885); /* Color de fondo del contador */
+  color: #ffffff; /* Color del texto del contador */
+  padding: 5px; /* Espacio alrededor del texto del contador */
+  border-radius: 5px; /* Bordes redondeados */
+  height: 33px;
+}
+
+/* Estilos para la alerta */
+.alerta-container {
+  background-color: #6a00ff; /* Color de fondo */
+  border: 1px solid #bb00ffe6; /* Borde */
+  padding: 20px; /* Espacio interno */
+  border-radius: 10px; /* Bordes redondeados */
+  text-align: center;
+}
+
+.alerta-titulo {
+  font-size: 24px; /* Tamaño del texto del título */
+  color: #fff; /* Color del texto del título */
+}
+
+.alerta-mensaje {
+  font-size: 18px; /* Tamaño del texto del mensaje */
+  color: #ffffff; /* Color del texto del mensaje */
+}
+
+.alerta-botones {
+  margin-top: 20px; /* Espacio superior entre botones */
+}
+
+.alerta-boton {
+  margin: 0 10px; /* Espacio entre botones */
+  padding: 10px 20px; /* Espacio interno de botones */
+  background-color: #ff00fb62; /* Color de fondo de los botones */
+  color: #fff; /* Color del texto de los botones */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de puntero al pasar el ratón */
+  font-size: 16px; /* Tamaño del texto de los botones */
+}
+
+.alerta-boton:hover {
+  background-color: #ff3300a1; /* Color de fondo al pasar el ratón */
+}
 
 .puerta{
     width: 80px;
