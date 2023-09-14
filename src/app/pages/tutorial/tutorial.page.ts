@@ -52,7 +52,7 @@ ngOnInit() {
     if (!this.tiempoExpirado) {
       this.tiempoRestante -= 1;
       
-      if (this.tiempoRestante <= 0) {
+      if (this.tiempoRestante < 0) {
         this.tiempoExpirado = true;
         clearInterval(interval);
       }
