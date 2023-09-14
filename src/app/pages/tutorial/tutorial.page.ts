@@ -35,6 +35,14 @@ ngOnInit() {
   setTimeout(() => {
     this.tiempoExpirado = true;
     this.mostrarAlerta = true; // Mostrar la alerta cuando se acabe el tiempo
+
+    // Agrega la clase de animación de muerte a los elementos que deseas animar
+    if (this.tiempoExpirado) {
+      const personaje = document.getElementById('tu-personaje'); // Reemplaza 'tu-personaje' con el ID de tu personaje
+      if (personaje) {
+        personaje.classList.add('death-animation');
+      }
+    }
   }, this.tiempoLimite);
 
   let tiempoInicial = this.tiempoLimite / 1000; // Convertir a segundos

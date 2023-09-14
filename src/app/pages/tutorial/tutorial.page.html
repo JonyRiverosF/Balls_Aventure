@@ -25,7 +25,7 @@
       <ion-col size="4">
        
         <div [style.transform]="'translatey(' + personajePosY + 'px)'">
-          <img class="pj" src="assets/icon/pj.png" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '" alt="Mi Imagen">
+          <img class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '" alt="Mi Imagen">
         </div>
         
   

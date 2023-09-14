@@ -160,3 +160,26 @@ ion-grid{
 .reanudar{
   background-color: aqua;
 }
+
+/* Estilo para la animación de desintegración */
+.disintegration-animation {
+  animation-name: disintegration;
+  animation-duration: 2s; /* Duración de la animación en segundos */
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1; /* Repetir la animación una vez */
+  animation-fill-mode: forwards; /* Mantener el estado final de la animación */
+}
+
+/* Define la animación de desintegración */
+@keyframes disintegration {
+  0% {
+    opacity: 1;
+    transform: translateY(0); /* Sin desplazamiento vertical */
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%); /* Desplazamiento hacia arriba */
+  }
+}
+
+
