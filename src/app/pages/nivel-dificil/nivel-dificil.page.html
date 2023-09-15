@@ -1,13 +1,75 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>NivelDificil</ion-title>
-  </ion-toolbar>
+ 
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+  <ion-grid style="background-image: url(assets/icon/fondo_nivel3.png) ;  background-size: 920px 420px; background-repeat: no-repeat;">
+    <ion-row style="margin-bottom: 90px;">
+      <ion-col>
+       <img class="menu" id="present-alert" (click)="mostrarmenu()" src="assets/icon/menu.png" alt="Mi Imagen">
+        
+ 
+
+        <img class="sol" src="" alt="Mi Imagen">
+        <img class="nube" src="" alt="Mi Imagen">
+        <img class="nube1" src="" alt="Mi Imagen"><br><br>
+        <div class="contador">
+          <p>{{ tiempoRestante }}</p>
+        </div>
+        
+      </ion-col>
+    </ion-row >
+
+    <ion-row >
+      <ion-col size="4">
+       
+        <div [style.transform]="'translatey(' + personajePosY + 'px)'">
+          <img class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '" alt="Mi Imagen">
+       
+        </div>
+        
+  
+      </ion-col>
+      <ion-col size="4" style="margin-top: -150px;">
+        <div *ngIf="!mostrarAlerta">
+        </div>
+        <div *ngIf="mostrarAlerta" class="alerta-container">
+          <h2 class="alerta-titulo">¡Tiempo agotado!</h2>
+          
+          <div class="alerta-botones">
+            <button class="alerta-boton" (click)="volverAlInicio()">Volver al inicio</button>
+            
+          </div>
+          <div class="alerta-botones"><button class="alerta-boton" (click)="volverAIntentarlo()">Volver a intentarlo</button></div>
+        </div>
+        
+      </ion-col>
+      <ion-col size="4" style="text-align: center; justify-content: right;align-items: right;">
+        
+        <img class="puerta" src="assets/icon/pnivel3_c.png" alt="Mi Imagen">
+        
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col  style="padding: 0 0 0 0;">
+ 
+        <img class="flechas " src="assets/icon/izquierda.png" (touchstart)="startMoving('izquierda')" (touchend)="stopMoving('izquierda')"  alt="Mi Imagen">
+        <img class="flechas" src="assets/icon/derecha.png" (touchstart)="startMoving('derecha')" (touchend)="stopMoving('derecha')"  alt="Mi Imagen">
+      </ion-col>
+      <ion-col style="text-align: right; justify-content: right;align-items: right;padding: 0 0 0 0;" >
+ 
+        <img class="salto" (touchstart)="saltarPersonaje()" src="assets/icon/saltar.png" alt="Mi Imagen">
+        
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+
+
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">NivelDificil</ion-title>
+      <ion-title size="large">NivelMedio</ion-title>
     </ion-toolbar>
   </ion-header>
 </ion-content>

@@ -1,0 +1,194 @@
+.nube{
+    width: 140px ;
+    height: 65px;
+    animation: movernube 5s linear infinite;
+    margin-right: 300px;
+    margin-left: 100px;
+    //animation-name: movernube;
+    //animation-duration: 20s;
+    //transition: 1s;
+
+
+}
+.nube1{
+    width: 100px ;
+    height: 65px;
+    animation: movernube 7s linear infinite reverse;
+    //animation-name: movernube;
+    //animation-duration: 20s;
+    //transition: 1s;
+
+
+}
+.flechas{
+    padding-left: 10px;
+    width:150px ;
+    height:65px ;
+    margin-top: 10px;
+    transition: 0.3s;
+
+}
+.flechas:hover{
+  transform: scale(1.1);
+}
+
+.contador {
+  position: absolute;
+  top: 5px; /* Ajusta la posición vertical según tus preferencias */
+  right: 10px; /* Ajusta la posición horizontal según tus preferencias */
+  background-color: rgba(94, 27, 156, 0.885); /* Color de fondo del contador */
+  color: #ffffff; /* Color del texto del contador */
+  padding: 5px; /* Espacio alrededor del texto del contador */
+  border-radius: 5px; /* Bordes redondeados */
+  height: 33px;
+}
+
+/* Estilos para la alerta */
+.alerta-container {
+  background-color: #6a00ff; /* Color de fondo */
+  border: 1px solid #bb00ffe6; /* Borde */
+  padding: 20px; /* Espacio interno */
+  border-radius: 10px; /* Bordes redondeados */
+  text-align: center;
+}
+
+.alerta-titulo {
+  font-size: 24px; /* Tamaño del texto del título */
+  color: #fff; /* Color del texto del título */
+}
+
+.alerta-mensaje {
+  font-size: 18px; /* Tamaño del texto del mensaje */
+  color: #ffffff; /* Color del texto del mensaje */
+}
+
+.alerta-botones {
+  margin-top: 20px; /* Espacio superior entre botones */
+}
+
+.alerta-boton {
+  margin: 0 10px; /* Espacio entre botones */
+  padding: 10px 20px; /* Espacio interno de botones */
+  background-color: #ff00fb62; /* Color de fondo de los botones */
+  color: #fff; /* Color del texto de los botones */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de puntero al pasar el ratón */
+  font-size: 16px; /* Tamaño del texto de los botones */
+}
+
+.alerta-boton:hover {
+  background-color: #ff3300a1; /* Color de fondo al pasar el ratón */
+}
+
+.puerta{
+    width: 80px;
+    height: 100px;
+    text-align: right;
+    margin-top: -42px;
+
+    margin-left: 180px;
+}
+.salto{
+    width: 120px;
+    height: 95px;
+    transition: 0.3s;
+    margin-right: 50px;
+    margin-top: -10px;
+}
+
+.salto:hover{
+  transform: scale(1.1);
+}
+.pj{
+    width: 70px;
+    height: 70px;
+    margin-top: -5px;
+    animation: girarsol 1s ;
+
+}
+
+.rotate-animation {
+  animation: rotate 0.5s ease-in-out infinite; // Ajusta la duración y el efecto de animación según tus preferencias
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); // Ángulo de inicio
+  }
+  100% {
+    transform: rotate(360deg); // Ángulo de finalización (una rotación completa)
+  }
+}
+
+.sol{
+    width: 80px;
+    height: 80px;
+    animation: girarluna 4s linear infinite;
+    justify-content: right;
+    align-items: right;
+    text-align: right;
+}
+
+@keyframes girarluna {
+    0% {transform: rotate(0deg);}
+
+      25%{transform: rotate(20deg);}
+
+      50%{transform: rotate(0deg);}
+
+      75%{transform: rotate(-20deg);}
+
+      100% {transform: rotate(0deg);}
+    
+    
+}
+.menu{
+    width: 50px;
+    height: 45px;
+    margin-bottom: 60px;
+    transition: 0.5s;
+}
+.menu:hover{
+  transform: scale(1.1);
+}
+
+
+@keyframes movernube {
+    0%{ transform: translatey(0);}
+    25%{ transform: translatey(6px);}
+    50%{ transform: translatey(0);}
+    75%{ transform: translatey(-6px);}
+    100%{transform: translatey(0);}
+    
+}
+ion-grid{
+    height: 100%;
+}
+
+.reanudar{
+  background-color: aqua;
+}
+
+/* Estilo para la animación de desintegración */
+.disintegration-animation {
+  animation-name: disintegration;
+  animation-duration: 2s; /* Duración de la animación en segundos */
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: 1; /* Repetir la animación una vez */
+  animation-fill-mode: forwards; /* Mantener el estado final de la animación */
+}
+
+/* Define la animación de desintegración */
+@keyframes disintegration {
+  0% {
+    opacity: 1;
+    transform: translateY(0); /* Sin desplazamiento vertical */
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%); /* Desplazamiento hacia arriba */
+  }
+}
+
+
