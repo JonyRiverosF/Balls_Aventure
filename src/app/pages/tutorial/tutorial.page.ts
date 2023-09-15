@@ -19,6 +19,8 @@ private rotationInterval: any;
 public rotationDegrees = 0;
 maxX: number = 800; // Ancho máximo del contenedor o pantalla
 
+puertaAbierta = false;
+
 //Timeout Con alerta
 tiempoExpirado: boolean = false;
 tiempoLimite: number = 300000;
@@ -58,6 +60,9 @@ ngOnInit() {
       }
     }
   }, 1000);
+}
+abrirPuerta() {
+  this.puertaAbierta = true;
 }
 
 volverAlInicio(){
