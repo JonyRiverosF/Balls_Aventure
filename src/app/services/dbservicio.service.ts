@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Platform, ToastController } from '@ionic/angular';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AlertController } from '@ionic/angular';
+import { Rol } from './rol';
+import { Pregunta } from './pregunta';
 
 @Injectable({
   providedIn: 'root'
@@ -110,6 +112,7 @@ export class DbservicioService {
       this.presentAlert("Tabla creada")
       //cambio mi observable de BD
       this.isBDReady.next(true);
+      this.buscarRol();
     }catch (errorR){
       this.presentAlert("Error en Crear Tabla:"+errorR);
     }
@@ -162,11 +165,101 @@ async presentAlert( msj:string) {
     await alert.present();
   }
 
+  bdstate(){
+    return this.isBDReady.asObservable();
+  }
+//rol
+  fetchrol():Observable<Rol[]>{
+    return this.listaRol.asObservable();
+  }
+  buscarRol(){
+    return this.database.executeSql('SELECT * FROM rol',[]).then(res=>{
+      //variable para lmacenar el resultado
+      let items:Rol[]=[];
+      //verifico la cantidad de registros
+      if(res.rows.length > 0 ){
+        //agrego registro a registro em mi variable
+        for(var i = 0; i< res.rows.length; i++){
+          items.push({
+            idR:res.rows.item(i).idR,
+            nombreR:res.rows.item(i).nombreR
+
+          })
+        }
+      }
+      this.listaRol.next(items as any);
+
+    })
+  }
+
+  insertarRol(nombreR:any){
+    return this.database.executeSql('INSERT INTO rol(nombreR) VALUES(?)',[nombreR]).then(res=>{
+      this.buscarRol();
+    })
+  }
+  actualizarRol(idR:any, nombreR:any){
+    return this.database.executeSql('UPDATE rol SET nombreR=? WHERE idR=?',[nombreR, idR]).then(res=>{
+      this.buscarRol();
+    })
+  }
+  eliminarRol(idR:any){
+    return this.database.executeSql('DELETE FROM rol WHERE idR = ?',[idR]).then(res=>{
+      this.buscarRol();
+    })
+  }
+  //fin rol
+
+  //pregunta
+  fetchPregunta():Observable<Pregunta[]>{
+    return this.listapreguntas.asObservable();
+  }
+  buscarPregunta(){
+    return this.database.executeSql('SELECT * FROM rol',[]).then(res=>{
+      //variable para lmacenar el resultado
+      let items:Pregunta[]=[];
+      //verifico la cantidad de registros
+      if(res.rows.length > 0 ){
+        //agrego registro a registro em mi variable
+        for(var i = 0; i< res.rows.length; i++){
+          items.push({
+            idP:res.rows.item(i).idP,
+            nombreP:res.rows.item(i).nombreP
+
+          })
+        }
+      }
+      this.listapreguntas.next(items as any);
+
+    })
+  }
+
+  insertarPregunta(nombreP:any){
+    return this.database.executeSql('INSERT INTO pregunta(nombreP) VALUES(?)',[nombreP]).then(res=>{
+      this.buscarPregunta();
+    })
+  }
+  actualizarPregunta(idP:any, nombreP:any){
+    return this.database.executeSql('UPDATE pregunta SET nombreP=? WHERE idP=?',[nombreP, idP]).then(res=>{
+      this.buscarPregunta();
+    })
+  }
+  eliminarPregunta(idP:any){
+    return this.database.executeSql('DELETE FROM pregunta WHERE idP = ?',[idP]).then(res=>{
+      this.buscarPregunta();
+    })
+  }
+  //fin pregunta
+
+
+
+
+
+
   /*
-  addPregunta(nombreP){
+  insertarPregunta(nombreP){
     let data=[nombreP];
     return this.database.executeSql('INSERT INTO pregunta(nombreP) VALUES(?)',data)
-    .then(()=>{
+    .then(res=>{
       this.cargarPregunta();
     })
   }

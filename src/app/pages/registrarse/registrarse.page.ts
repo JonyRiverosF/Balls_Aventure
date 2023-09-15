@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { NavigationExtras,Router } from '@angular/router';
+import { ModificarContraPage } from '../modificar-contra/modificar-contra.page';
 
 @Component({
   selector: 'app-registrarse',
@@ -9,13 +10,21 @@ import { NavigationExtras,Router } from '@angular/router';
   styleUrls: ['./registrarse.page.scss'],
 })
 export class RegistrarsePage implements OnInit {
+
+  arregloPreguntas:any =[{
+    idP: '',
+    nombreP: '' 
+  }]
+
   contra1:string="";
   contra2:string="";
   mensaje:string="Las contraseñas no coinciden";
   formularioRegistro:FormGroup;
   
 
-  constructor(public fb:FormBuilder,public alertController:AlertController,private router:Router,) {
+  constructor(public fb:FormBuilder,public alertController:AlertController,private router:Router, private bd:BdserviceService) {
+
+    
    
     
     this.formularioRegistro=this.fb.group({
@@ -26,6 +35,12 @@ export class RegistrarsePage implements OnInit {
       'Respuesta': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(30)])
     })
    }
+  
+   eliminar(x:any){
+    this
+   }
+
+
 
    registrar(){
     if (this.contra1==this.contra2){
@@ -67,6 +82,13 @@ export class RegistrarsePage implements OnInit {
    }
 
   ngOnInit() {
+    this.bd.bdstate().subscribe(res=>{
+      if(res){
+        this.bd.fetchPregunta().subscribe(datos=>{
+          this.arregloPreguntas=datos;
+        })
+      }
+    })
   }
 
 
