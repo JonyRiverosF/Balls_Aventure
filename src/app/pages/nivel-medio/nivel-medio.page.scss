@@ -10,10 +10,37 @@
 
 
 }
+
+.llave{
+  width: 80px ;
+  height: 50px;
+  margin-left: 100px;
+  animation: llave 5s linear infinite reverse;
+}
+
+.plataforma{
+  width: 200px ;
+  height: 30px;
+}
+
+
+
+.pinchos{
+  width: 80px ;
+  height: 50px;
+}
+
+.caja{
+  width: 75px ;
+  height: 70px;
+}
+
+
 .nube1{
     width: 100px ;
     height: 65px;
     animation: movernube 7s linear infinite reverse;
+    
     //animation-name: movernube;
     //animation-duration: 20s;
     //transition: 1s;
@@ -43,50 +70,11 @@
   height: 33px;
 }
 
-/* Estilos para la alerta */
-.alerta-container {
-  background-color: #6a00ff; /* Color de fondo */
-  border: 1px solid #bb00ffe6; /* Borde */
-  padding: 20px; /* Espacio interno */
-  border-radius: 10px; /* Bordes redondeados */
-  text-align: center;
-}
-
-.alerta-titulo {
-  font-size: 24px; /* Tamaño del texto del título */
-  color: #fff; /* Color del texto del título */
-}
-
-.alerta-mensaje {
-  font-size: 18px; /* Tamaño del texto del mensaje */
-  color: #ffffff; /* Color del texto del mensaje */
-}
-
-.alerta-botones {
-  margin-top: 20px; /* Espacio superior entre botones */
-}
-
-.alerta-boton {
-  margin: 0 10px; /* Espacio entre botones */
-  padding: 10px 20px; /* Espacio interno de botones */
-  background-color: #ff00fb62; /* Color de fondo de los botones */
-  color: #fff; /* Color del texto de los botones */
-  border: none; /* Sin borde */
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cursor de puntero al pasar el ratón */
-  font-size: 16px; /* Tamaño del texto de los botones */
-}
-
-.alerta-boton:hover {
-  background-color: #ff3300a1; /* Color de fondo al pasar el ratón */
-}
-
 .puerta{
     width: 80px;
     height: 100px;
     text-align: right;
-    margin-top: -42px;
-
+    margin-top: 95px;
     margin-left: 180px;
 }
 .salto{
@@ -128,6 +116,7 @@
     justify-content: right;
     align-items: right;
     text-align: right;
+    
 }
 
 @keyframes girarluna {
@@ -162,6 +151,16 @@
     100%{transform: translatey(0);}
     
 }
+
+@keyframes llave {
+  0%{ transform: translatey(0);}
+  25%{ transform: translatey(4px);}
+  50%{ transform: translatey(0);}
+  75%{ transform: translatey(-4px);}
+  100%{transform: translatey(0);}
+  
+}
+
 ion-grid{
     height: 100%;
 }
@@ -188,7 +187,53 @@ ion-grid{
   100% {
     opacity: 0;
     transform: translateY(-100%); /* Desplazamiento hacia arriba */
+  }}
+
+  .container {
+    position: relative; /* Asegura que los elementos dentro del contenedor tengan un posicionamiento relativo */
   }
+  
+  /* Estilos para la alerta */
+.alerta-container {
+  background-color: #6a00ff; /* Color de fondo */
+  border: 1px solid #bb00ffe6; /* Borde */
+  padding: 20px; /* Espacio interno */
+  border-radius: 10px; /* Bordes redondeados */
+  text-align: center;
+  position: absolute; /* o position: fixed; */
+  visibility: hidden; /* Inicialmente, la alerta está oculta */
 }
+
+.alerta-titulo {
+  font-size: 24px; /* Tamaño del texto del título */
+  color: #fff; /* Color del texto del título */
+}
+
+.alerta-mensaje {
+  font-size: 18px; /* Tamaño del texto del mensaje */
+  color: #ffffff; /* Color del texto del mensaje */
+}
+
+.alerta-botones {
+  margin-top: 20px; /* Espacio superior entre botones */
+}
+
+.alerta-boton {
+  margin: 0 10px; /* Espacio entre botones */
+  padding: 10px 20px; /* Espacio interno de botones */
+  background-color: #ff00fb62; /* Color de fondo de los botones */
+  color: #fff; /* Color del texto de los botones */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de puntero al pasar el ratón */
+  font-size: 16px; /* Tamaño del texto de los botones */
+}
+
+.alerta-boton:hover {
+  background-color: #ff3300a1; /* Color de fondo al pasar el ratón */
+}
+  
+
+
 
 

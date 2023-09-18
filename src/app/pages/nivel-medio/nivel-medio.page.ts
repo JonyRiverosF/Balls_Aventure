@@ -17,17 +17,23 @@ export class NivelMedioPage implements OnInit {
   private rotationInterval: any;
   public rotationDegrees = 0;
   maxX: number = 800; // Ancho máximo del contenedor o pantalla
+
+  private isJumping = false; // Agrega una propiedad para rastrear si el personaje está saltando
+  private isFalling = false;
   
   //Timeout Con alerta
   tiempoExpirado: boolean = false;
   tiempoLimite: number = 180000;
   tiempoRestante!: number;
-  mostrarAlerta: boolean = false;
+  // Propiedad para controlar la visibilidad de la alerta
+  public mostrarAlerta: boolean = false;
+
   
   constructor(private router: Router, public alertController: AlertController) {
     // Calcula el ancho máximo del contenedor o pantalla una vez que la vista esté cargada
     this.calcularMaxX();
   }
+  
   
   //Timeout Alerta
   ngOnInit() {
@@ -57,6 +63,7 @@ export class NivelMedioPage implements OnInit {
         }
       }
     }, 1000);
+
   }
   
   volverAlInicio(){
@@ -90,8 +97,38 @@ export class NivelMedioPage implements OnInit {
       this.personajePosX += 2.5; // Ajusta la cantidad de píxeles según tu preferencia
       this.personajePosX = Math.min(this.personajePosX, this.maxX); // Límite derecho
     }
+    // Verificar la colisión con la plataforma
+  const personaje = document.querySelector('.pj') as HTMLElement | null;
+  // Verificar la colisión con los pinchos
+  const pinchos = document.querySelector('.pinchos') as HTMLElement | null;
+
+  if (personaje && pinchos) {
+    if (this.colisiona(personaje, pinchos)) {
+      // Realiza acciones cuando el personaje colisiona con los pinchos (por ejemplo, muerte)
+      personaje.classList.add('disintegration-animation'); // Agrega la clase de animación
+
+      setTimeout(() => {
+        // Elimina la clase de animación después de un tiempo (ajusta el tiempo según lo necesario)
+        personaje.classList.add('disintegration-animation');
+
+        // Muestra la alerta después de que termine la animación
+        this.mostrarAlerta = true;
+
+        // Limpia la alerta después de cierto tiempo (ajusta el tiempo según lo necesario)
+        setTimeout(() => {
+          this.mostrarAlerta = true;
+          this.personajePosX = 0; // Reinicia la posición del personaje u otras acciones de "muerte"
+        }, 5000); // Cambia el tiempo de espera según tus necesidades
+      }, 1000); // Cambia el tiempo de espera según la duración de tu animación
+    }
   }
-  
+}
+
+
+
+
+
+
   startMoving(direction: string) {
     if (direction === 'izquierda') {
       this.isMovingLeft = true;
@@ -121,15 +158,15 @@ export class NivelMedioPage implements OnInit {
   
   
   //Saltar Pj
-  private isJumping = false; // Agrega una propiedad para rastrear si el personaje está saltando
+  
   
   saltarPersonaje() {
-    if (!this.isJumping) {
+    if (!this.isJumping && !this.isFalling) {
       this.isJumping = true;
       const jumpHeight = -100; // Ajusta la altura del salto según tu preferencia
       const jumpDuration = 500; // Ajusta la duración del salto según tu preferencia
   
-      const initialPosY = this.personajePosY+2;
+      const initialPosY = this.personajePosY;
       const startTime = Date.now();
   
       const jumpInterval = setInterval(() => {
@@ -139,6 +176,7 @@ export class NivelMedioPage implements OnInit {
         if (elapsedTime >= jumpDuration) {
           clearInterval(jumpInterval);
           this.isJumping = false;
+          this.isFalling = true; // El personaje comienza a caer
         } else {
           const progress = elapsedTime / jumpDuration;
           this.personajePosY = initialPosY + jumpHeight * Math.sin(progress * Math.PI);
@@ -182,4 +220,25 @@ export class NivelMedioPage implements OnInit {
   
       await alert.present();
     }
+
+// Función para verificar colisiones entre dos elementos
+colisiona(element1: HTMLElement, element2: HTMLElement): boolean {
+  const rect1 = element1.getBoundingClientRect();
+  const rect2 = element2.getBoundingClientRect();
+
+  return (
+    rect1.left < rect2.right &&
+    rect1.right > rect2.left &&
+    rect1.top < rect2.bottom &&
+    rect1.bottom > rect2.top
+  );
+}
+
+// Lógica para mostrar la alerta (ajusta esta lógica según tus necesidades)
+mostrarAlertaFuncion() {
+  this.mostrarAlerta = true;
+}
+
+
+
 }

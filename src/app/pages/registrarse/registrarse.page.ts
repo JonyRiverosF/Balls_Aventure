@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors,
 import { AlertController } from '@ionic/angular';
 import { NavigationExtras,Router } from '@angular/router';
 import { ModificarContraPage } from '../modificar-contra/modificar-contra.page';
+import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
   selector: 'app-registrarse',
@@ -22,7 +23,7 @@ export class RegistrarsePage implements OnInit {
   formularioRegistro:FormGroup;
   
 
-  constructor(public fb:FormBuilder,public alertController:AlertController,private router:Router, private bd:BdserviceService) {
+  constructor(public fb:FormBuilder,public alertController:AlertController,private router:Router, private bd:DbservicioService) {
 
     
    

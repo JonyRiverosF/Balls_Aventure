@@ -18,6 +18,36 @@
 
 
 }
+
+.llave{
+  width: 80px ;
+  height: 50px;
+  margin-left: 100px;
+  animation: llave 5s linear infinite reverse;
+}
+
+.plataforma{
+  width: 200px ;
+  height: 30px;
+}
+
+
+
+.pinchos{
+  width: 80px ;
+  height: 50px;
+}
+
+@keyframes llave {
+  0%{ transform: translatey(0);}
+  25%{ transform: translatey(4px);}
+  50%{ transform: translatey(0);}
+  75%{ transform: translatey(-4px);}
+  100%{transform: translatey(0);}
+  
+}
+
+
 .flechas{
     padding-left: 10px;
     width:150px ;

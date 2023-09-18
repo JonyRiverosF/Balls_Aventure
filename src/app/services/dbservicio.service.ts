@@ -255,47 +255,7 @@ async presentAlert( msj:string) {
 
 
 
-  /*
-  insertarPregunta(nombreP){
-    let data=[nombreP];
-    return this.database.executeSql('INSERT INTO pregunta(nombreP) VALUES(?)',data)
-    .then(res=>{
-      this.cargarPregunta();
-    })
-  }
-
-  updatePregunta(idP,nombreP){
-    let data=[nombreP,idP];
-    return this.database.executeSql('UPDATE pregunta SET nombreP=? WHERE idP=?',data)
-    .then(()=>{
-      this.cargarPregunta();
-    })
-  }
-
-  deletePregunta(idP){
-    return this.database.executeSql('DELETE FROM pregunta WHERE id=?'.[id])
-    .then(()=>{
-      this.cargarPregunta();
-    })
-  }
-
-  cargarPregunta(){
-    return this.database.executeSql('SELECT * FROM pregunta',[])
-    .then(res=>{
-      let items:Pregunta[]=[];
-      if(res.rows.length>0){
-        for (var i = 0; i< res.rows.length; i++){
-          items.push({
-            idP:res.rows.item(i).idP,
-            nombreP:res.rows.item(i).nombreP
-          });
-        }
-      }
-      this.listaPregunta.next(items);
-    });
-  }
-
- */
+ 
 
 }
 

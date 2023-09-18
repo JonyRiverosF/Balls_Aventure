@@ -5,6 +5,7 @@
 <ion-content [fullscreen]="true">
 
   <ion-grid style="background-image: url(assets/icon/fondo_nivel2.png) ;  background-size: 920px 420px; background-repeat: no-repeat;">
+    
     <ion-row style="margin-bottom: 90px;">
       <ion-col>
        <img class="menu" id="present-alert" (click)="mostrarmenu()" src="assets/icon/menu.png" alt="Mi Imagen">
@@ -13,7 +14,7 @@
 
         <img class="sol" src="assets/icon/luna.png" alt="Mi Imagen">
         <img class="nube" src="assets/icon/nublada (1).png" alt="Mi Imagen">
-        <img class="nube1" src="assets/icon/nublada (1).png" alt="Mi Imagen"><br><br>
+        <img  class="nube1" src="assets/icon/nublada (1).png" alt="Mi Imagen"><br><br>
         <div class="contador">
           <p>{{ tiempoRestante }}</p>
         </div>
@@ -23,18 +24,23 @@
 
     <ion-row >
       <ion-col size="4">
-       
         <div [style.transform]="'translatey(' + personajePosY + 'px)'">
-          <img class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '" alt="Mi Imagen">
-       
+          <img class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '"  alt="Mi Imagen">
         </div>
-        
-  
+
+        <div style="margin-left: 120px;margin-top: -75px;">
+          <img class="caja" src="assets/icon/caja.png"   alt="Mi Imagen">
+        </div>
+
       </ion-col>
+
+      
+
       <ion-col size="4" style="margin-top: -150px;">
-        <div *ngIf="!mostrarAlerta">
+        
+        <div  *ngIf="!mostrarAlerta">
         </div>
-        <div *ngIf="mostrarAlerta" class="alerta-container">
+        <div  [style.visibility]="mostrarAlerta ? 'visible' : 'hidden'" *ngIf="mostrarAlerta" class="alerta-container">
           <h2 class="alerta-titulo">¡Tiempo agotado!</h2>
           
           <div class="alerta-botones">
@@ -43,10 +49,36 @@
           </div>
           <div class="alerta-botones"><button class="alerta-boton" (click)="volverAIntentarlo()">Volver a intentarlo</button></div>
         </div>
+
         
+
+        <div style="margin-top: 32px;margin-left: 150px;">
+          <img class="plataforma" src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        </div>
+
+        <div style="margin-top: 60px;margin-left:10px">
+          <img class="plataforma" src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        </div>
+
+
+        <div style="margin-top: 5px;margin-left:100px">
+          <img class="pinchos" src="assets/icon/pinchos.png" alt="Mi Imagen">
+        </div>
+        <div style="margin-top: -58px;margin-left:20px">
+          <img class="pinchos" src="assets/icon/pinchos.png" alt="Mi Imagen">
+        </div>
       </ion-col>
+
+      
       <ion-col size="4" style="text-align: center; justify-content: right;align-items: right;">
         
+        
+
+        <div style="margin-top: -230px;margin-right: 125px;">
+          <img class="llave" src="assets/icon/LLave.png" alt="Mi Imagen">
+          <img class="plataforma"  src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        </div>
+
         <img class="puerta" src="assets/icon/pnivel2_c.png" alt="Mi Imagen">
         
       </ion-col>
