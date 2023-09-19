@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
@@ -19,7 +19,9 @@ export class NivelMedioPage implements OnInit {
   maxX: number = 800; // Ancho máximo del contenedor o pantalla
 
   private isJumping = false; // Agrega una propiedad para rastrear si el personaje está saltando
-  private isFalling = false;
+  
+  
+   
   
   //Timeout Con alerta
   tiempoExpirado: boolean = false;
@@ -64,7 +66,13 @@ export class NivelMedioPage implements OnInit {
       }
     }, 1000);
 
+    
+
   }
+
+ 
+
+  
   
   volverAlInicio(){
     window.location.href = '/lobby';
@@ -75,6 +83,10 @@ export class NivelMedioPage implements OnInit {
   }
   
   
+  
+
+
+
   //Movimiento Pj
     ventana(){// Escucha el evento de redimensionamiento de la ventana para recalcular maxX si es necesario
     window.addEventListener('resize', () => {
@@ -97,9 +109,9 @@ export class NivelMedioPage implements OnInit {
       this.personajePosX += 2.5; // Ajusta la cantidad de píxeles según tu preferencia
       this.personajePosX = Math.min(this.personajePosX, this.maxX); // Límite derecho
     }
-    // Verificar la colisión con la plataforma
+    
+  
   const personaje = document.querySelector('.pj') as HTMLElement | null;
-  // Verificar la colisión con los pinchos
   const pinchos = document.querySelector('.pinchos') as HTMLElement | null;
 
   if (personaje && pinchos) {
@@ -161,7 +173,7 @@ export class NivelMedioPage implements OnInit {
   
   
   saltarPersonaje() {
-    if (!this.isJumping && !this.isFalling) {
+    if (!this.isJumping) {
       this.isJumping = true;
       const jumpHeight = -100; // Ajusta la altura del salto según tu preferencia
       const jumpDuration = 500; // Ajusta la duración del salto según tu preferencia
@@ -176,7 +188,7 @@ export class NivelMedioPage implements OnInit {
         if (elapsedTime >= jumpDuration) {
           clearInterval(jumpInterval);
           this.isJumping = false;
-          this.isFalling = true; // El personaje comienza a caer
+          
         } else {
           const progress = elapsedTime / jumpDuration;
           this.personajePosY = initialPosY + jumpHeight * Math.sin(progress * Math.PI);
@@ -238,6 +250,9 @@ colisiona(element1: HTMLElement, element2: HTMLElement): boolean {
 mostrarAlertaFuncion() {
   this.mostrarAlerta = true;
 }
+
+
+
 
 
 

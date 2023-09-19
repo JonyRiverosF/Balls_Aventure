@@ -30,10 +30,7 @@
   height: 50px;
 }
 
-.caja{
-  width: 75px ;
-  height: 70px;
-}
+
 
 
 .nube1{
@@ -88,12 +85,23 @@
 .salto:hover{
   transform: scale(1.1);
 }
+
+
 .pj{
     width: 70px;
     height: 70px;
     margin-top: -5px;
     animation: girarsol 1s ;
+    
+  
+    
 
+}
+
+.caja{
+  width: 75px ;
+  height: 70px;
+  
 }
 
 .rotate-animation {
