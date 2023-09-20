@@ -97,21 +97,16 @@
 .pj{
     width: 70px;
     height: 70px;
-    margin-top: -5px;
-    animation: girarsol 1s ;
-    border-radius: 10´p0px;
-    
-    
-  
-    
-
+    margin-top: -5px;   
 }
 
 .caja{
   width: 75px ;
-  height: 70px;
-  
+  height: 60px; 
 }
+
+
+
 
 .rotate-animation {
   animation: rotate 0.5s ease-in-out infinite; // Ajusta la duración y el efecto de animación según tus preferencias
