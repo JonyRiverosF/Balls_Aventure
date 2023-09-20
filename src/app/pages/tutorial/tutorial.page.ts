@@ -88,6 +88,8 @@ calcularMaxX() {
 moverPersonaje() {
   const llave = document.querySelector('.llave') as HTMLElement | null;
   const estrella = document.querySelector('.estrella') as HTMLElement | null;
+  const estrella1 = document.querySelector('.estrella1') as HTMLElement | null;
+  const estrella2 = document.querySelector('.estrella2') as HTMLElement | null;
   const caja = document.querySelector('.caja') as HTMLElement | null;
   const personaje = document.querySelector('.pj') as HTMLElement | null;
   const pinchos = document.querySelector('.pinchos') as HTMLElement | null;
@@ -97,9 +99,35 @@ moverPersonaje() {
       this.puertaAbierta = true;
       llave.classList.add('disintegration-animation');
       
-      
+       
     }
+    
   }
+  if (personaje && estrella) {
+    if (this.colisiona(personaje, estrella)) {
+      estrella.classList.add('disintegration-animation');
+      
+       
+    }
+    
+  }
+  if (personaje && estrella1) {
+    if (this.colisiona(personaje, estrella1)) {
+      estrella1.classList.add('disintegration-animation');
+      
+       
+    }
+    
+  }
+  if (personaje && estrella2) {
+    if (this.colisiona(personaje, estrella2)) {
+      estrella2.classList.add('disintegration-animation');
+      
+       
+    }
+    
+  }
+
   if (this.isMovingLeft) {
     this.personajePosX -= 2.5; // Ajusta la cantidad de píxeles según tu preferencia
     this.personajePosX = Math.max(this.personajePosX, 0); // Límite izquierdo

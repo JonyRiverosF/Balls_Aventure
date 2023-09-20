@@ -28,7 +28,7 @@ export class NivelMedioPage implements OnInit {
   
   //Timeout Con alerta
   tiempoExpirado: boolean = false;
-  tiempoLimite: number = 180000;
+  tiempoLimite: number = 18000;
   tiempoRestante!: number;
   // Propiedad para controlar la visibilidad de la alerta
   public mostrarAlerta: boolean = false;
