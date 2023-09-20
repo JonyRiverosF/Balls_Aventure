@@ -10,6 +10,8 @@ import { AlertController } from '@ionic/angular';
 export class NivelMedioPage implements OnInit {
 
   // Variable para rastrear la posición del personaje en píxeles
+  puertaAbierta = false;
+  cajaPosX =0;
   personajePosX = 0;
   personajePosY = 0;
   private isMovingLeft = false;
@@ -17,6 +19,7 @@ export class NivelMedioPage implements OnInit {
   private rotationInterval: any;
   public rotationDegrees = 0;
   maxX: number = 800; // Ancho máximo del contenedor o pantalla
+  maxcaja: number = 75;
 
   private isJumping = false; // Agrega una propiedad para rastrear si el personaje está saltando
   
@@ -34,6 +37,7 @@ export class NivelMedioPage implements OnInit {
   constructor(private router: Router, public alertController: AlertController) {
     // Calcula el ancho máximo del contenedor o pantalla una vez que la vista esté cargada
     this.calcularMaxX();
+    this.calcularMaxcaja();
   }
   
   
@@ -91,12 +95,20 @@ export class NivelMedioPage implements OnInit {
     ventana(){// Escucha el evento de redimensionamiento de la ventana para recalcular maxX si es necesario
     window.addEventListener('resize', () => {
       this.calcularMaxX();
+      this.calcularMaxcaja();
     });}
   calcularMaxX() {
     // Obtén el ancho del contenedor o pantalla actualizado
     const contenedor = document.getElementById('tu-contenedor'); // Reemplaza 'tu-contenedor' con el ID de tu contenedor
     if (contenedor) {
       this.maxX = contenedor.clientWidth;
+    }
+  }
+  calcularMaxcaja() {
+    // Obtén el ancho del contenedor o pantalla actualizado
+    const contenedorcaja = document.querySelector('.caja') as HTMLElement | null; // Reemplaza 'tu-contenedor' con el ID de tu contenedor
+    if (contenedorcaja) {
+      this.maxcaja = contenedorcaja.clientWidth;
     }
   }
   
@@ -110,9 +122,26 @@ export class NivelMedioPage implements OnInit {
       this.personajePosX = Math.min(this.personajePosX, this.maxX); // Límite derecho
     }
     
+    const llave = document.querySelector('.llave') as HTMLElement | null;
+    const caja = document.querySelector('.caja') as HTMLElement | null;
+    const personaje = document.querySelector('.pj') as HTMLElement | null;
+    const pinchos = document.querySelector('.pinchos') as HTMLElement | null;
   
-  const personaje = document.querySelector('.pj') as HTMLElement | null;
-  const pinchos = document.querySelector('.pinchos') as HTMLElement | null;
+    if (personaje && llave) {
+      if (this.colisiona(personaje, llave)) {
+        this.puertaAbierta = true;
+        llave.classList.add('disintegration-animation');
+        
+        
+      }
+    }
+
+if (personaje && caja) {
+  if (this.colisiona(personaje, caja)) {
+    
+    this.cajaPosX -= -1; // Ajusta la posición hacia atrás (puedes ajustar el valor según tus necesidades)
+  }
+}
 
   if (personaje && pinchos) {
     if (this.colisiona(personaje, pinchos)) {
@@ -232,6 +261,7 @@ export class NivelMedioPage implements OnInit {
   
       await alert.present();
     }
+    
 
 // Función para verificar colisiones entre dos elementos
 colisiona(element1: HTMLElement, element2: HTMLElement): boolean {
@@ -245,6 +275,7 @@ colisiona(element1: HTMLElement, element2: HTMLElement): boolean {
     rect1.bottom > rect2.top
   );
 }
+
 
 // Lógica para mostrar la alerta (ajusta esta lógica según tus necesidades)
 mostrarAlertaFuncion() {

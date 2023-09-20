@@ -61,9 +61,7 @@ ngOnInit() {
     }
   }, 1000);
 }
-abrirPuerta() {
-  this.puertaAbierta = true;
-}
+
 
 volverAlInicio(){
   window.location.href = '/lobby';
@@ -88,6 +86,20 @@ calcularMaxX() {
 }
 
 moverPersonaje() {
+  const llave = document.querySelector('.llave') as HTMLElement | null;
+  const estrella = document.querySelector('.estrella') as HTMLElement | null;
+  const caja = document.querySelector('.caja') as HTMLElement | null;
+  const personaje = document.querySelector('.pj') as HTMLElement | null;
+  const pinchos = document.querySelector('.pinchos') as HTMLElement | null;
+
+  if (personaje && llave) {
+    if (this.colisiona(personaje, llave)) {
+      this.puertaAbierta = true;
+      llave.classList.add('disintegration-animation');
+      
+      
+    }
+  }
   if (this.isMovingLeft) {
     this.personajePosX -= 2.5; // Ajusta la cantidad de píxeles según tu preferencia
     this.personajePosX = Math.max(this.personajePosX, 0); // Límite izquierdo
@@ -152,6 +164,18 @@ saltarPersonaje() {
     }, 16); // Intervalo de actualización (aproximadamente 60 FPS)
   }
 }
+colisiona(element1: HTMLElement, element2: HTMLElement): boolean {
+  const rect1 = element1.getBoundingClientRect();
+  const rect2 = element2.getBoundingClientRect();
+
+  return (
+    rect1.left < rect2.right &&
+    rect1.right > rect2.left &&
+    rect1.top < rect2.bottom &&
+    rect1.bottom > rect2.top
+  );
+}
+
 
 
 //Volver Al inicio

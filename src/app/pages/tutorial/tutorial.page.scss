@@ -8,6 +8,16 @@
 
 
 }
+.estrella{
+  width:15% ;
+  height: 15%;
+  margin-left: 25%;
+  animation: estrella 3s linear infinite ;
+}
+.plataforma{
+  width: 200px ;
+  height: 30px;
+}
 .nube1{
     width: 100px ;
     height: 65px;
@@ -22,12 +32,12 @@
 .llave{
   width: 80px ;
   height: 50px;
-  margin-left: 100px;
-  animation: llave 5s linear infinite reverse;
+  margin-left: 5%;
+  animation: llave 5s linear infinite ;
 }
 
 .plataforma{
-  width: 200px ;
+  width: 180px ;
   height: 30px;
 }
 
@@ -37,7 +47,14 @@
   width: 80px ;
   height: 50px;
 }
-
+@keyframes estrella {
+  0%{ transform: rotatey(0deg);}
+  25%{ transform: rotatey(180deg);}
+  50%{ transform: rotatey(0deg);}
+  75%{ transform: rotatey(360deg);}
+  100%{transform: rotatey(0deg);}
+  
+}
 @keyframes llave {
   0%{ transform: translatey(0);}
   25%{ transform: translatey(4px);}
@@ -113,15 +130,15 @@
     width: 80px;
     height: 100px;
     text-align: right;
-    margin-top: -35px;
+    margin-top: 0px;
     margin-left: 180px;
 }
 .puerta1{
   width: 140px;
   height: 100px;
   text-align: right;
-  margin-top: -35px;
-  margin-left: 160px;
+  margin-top: 0px;
+  margin-left: 180px;
 }
 .salto{
     width: 120px;
@@ -136,10 +153,11 @@
 .pj{
     width: 70px;
     height: 70px;
-    margin-top: -5px;
+    margin-top: 15px;
     animation: girarsol 1s ;
 
 }
+
 
 .rotate-animation {
   animation: rotate 0.5s ease-in-out infinite; // Ajusta la duración y el efecto de animación según tus preferencias

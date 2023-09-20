@@ -23,9 +23,15 @@
 
     <ion-row >
       <ion-col size="4">
+        <div style="margin-top: -120px;margin-right: 125px;">
+          
+          <img class="llave" [ngClass]="{'disintegration-animation': tiempoExpirado}" src="assets/icon/LLave.png" alt="Mi Imagen">
+          <img  class="estrella" src="assets/icon/estrella.png" alt="Mi Imagen">
+          <img class="plataforma"  src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        </div>
        
         <div [style.transform]="'translatey(' + personajePosY + 'px)'">
-          <img class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '" alt="Mi Imagen" (mouseover)="abrirPuerta()">
+          <img class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '" alt="Mi Imagen" >
         </div>
         
   
@@ -42,12 +48,26 @@
           </div>
           <div class="alerta-botones"><button class="alerta-boton" (click)="volverAIntentarlo()">Volver a intentarlo</button></div>
         </div>
+        <div style="margin-top: -25px;margin-right: 125px;">
+          <img class="estrella" src="assets/icon/estrella.png" alt="Mi Imagen">
+          <img class="plataforma"  src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        </div>
+        <div style="margin-top: 100px;margin-right: -50px;">
+          
+          <img style="margin-left: 50px;" class="plataforma"  src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        </div>
+
+        
         
       </ion-col>
 
 
       
-      <ion-col size="4" style="text-align: center; justify-content: right;align-items: right;">
+      <ion-col size="4" >
+        <div style="margin-top: -100px;margin-right: 125px;">
+          <img class="estrella" src="assets/icon/estrella.png" alt="Mi Imagen">
+          <img class="plataforma" src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        </div>
         
         <img class="puerta" *ngIf="!puertaAbierta" src="assets/icon/ptuto_c.png" alt="Puerta Cerrada">
 <img class="puerta1" *ngIf="puertaAbierta" src="assets/icon/ptuto_a.png" alt="Puerta Abierta">

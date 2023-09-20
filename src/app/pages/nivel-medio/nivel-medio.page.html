@@ -26,11 +26,11 @@
       <ion-col size="4">
         
         <div [style.transform]="'translatey(' + personajePosY + 'px)'">
-          <img class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '"  alt="Mi Imagen">
+          <img class="pj" id="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '"  alt="Mi Imagen">
         </div>
 
         <div style="margin-left: 120px;margin-top: -75px;">
-          <img class="caja"   src="assets/icon/caja.png"  alt="Mi Imagen" >    
+          <img class="caja"  id="caja" src="assets/icon/caja.png"  alt="Mi Imagen" [style.transform]="'translateX(' + cajaPosX + 'px)'">    
         </div>
 
       </ion-col>
@@ -80,7 +80,8 @@
           <img class="plataforma"  src="assets/icon/Plataforma.png" alt="Mi Imagen">
         </div>
 
-        <img class="puerta" src="assets/icon/pnivel2_c.png" alt="Mi Imagen">
+        <img class="puerta" *ngIf="!puertaAbierta" src="assets/icon/pnivel2_c.png" alt="Puerta Cerrada">
+<img class="puerta1" *ngIf="puertaAbierta" src="assets/icon/pnivel2_a.png" alt="Puerta Abierta">
         
       </ion-col>
     </ion-row>
