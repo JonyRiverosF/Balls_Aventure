@@ -11,7 +11,7 @@
         
  
 
-        <img class="sol" src="assets/icon/sol.png" alt="Mi Imagen">
+        <img class="sol" src="assets/icon/sol.png" alt="Mi Imagen">{{estrellasrecojidas}}
         <img class="nube" src="assets/icon/nube.png" alt="Mi Imagen"><br>
         <img class="nube1" src="assets/icon/nube.png" alt="Mi Imagen"><br><br>
         <div class="contador">
@@ -39,6 +39,24 @@
       <ion-col size="4" style="margin-top: -150px;">
         <div  *ngIf="!mostrarAlerta">
         </div>
+        <div  *ngIf="!nivelcompletado">
+        </div>
+        <!--nivel completado-->
+        <div  [style.visibility]="nivelcompletado ? 'visible' : 'hidden'" *ngIf="nivelcompletado" class="container-completado">
+          <h2 class="alerta-titulo">¡Nivel completado!</h2>
+          
+          <img *ngIf="estrellasrecojidas>0" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
+          <img *ngIf="estrellasrecojidas>1" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
+          <img *ngIf="estrellasrecojidas>2" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
+
+          
+          <div class="alerta-botones">
+            <button class="alerta-boton" (click)="volverAlInicio()">Volver al lobby</button>
+            
+          </div>
+          <div class="alerta-botones"><button class="alerta-boton" (click)="volverAIntentarlo()">reintentar</button></div>
+        </div>
+        <!--tiempo agotado-->
         <div  [style.visibility]="mostrarAlerta ? 'visible' : 'hidden'" *ngIf="mostrarAlerta" class="alerta-container">
           <h2 class="alerta-titulo">¡Tiempo agotado!</h2>
           

@@ -1,24 +1,48 @@
-.nube{
-    width: 140px ;
-    height: 65px;
-    animation: movernube 5s linear infinite;
-    margin-right: 300px;
-    margin-left: 100px;
-    //animation-name: movernube;
-    //animation-duration: 20s;
-    //transition: 1s;
-
-
+.tumba{
+  width:22% ;
+  height:100% ;
+  margin-left: 50%;
+  margin-top: -150px;
 }
-.nube1{
-    width: 100px ;
-    height: 65px;
-    animation: movernube 7s linear infinite reverse;
-    //animation-name: movernube;
-    //animation-duration: 20s;
-    //transition: 1s;
-
-
+.estrella{
+  width:15% ;
+  height: 15%;
+  margin-left: 25%;
+  animation: estrella 3s linear infinite ;
+}
+.estrella1{
+  width:15% ;
+  height: 15%;
+  margin-left: 25%;
+  animation: estrella 3s linear infinite ;
+}
+.estrella2{
+  width:15% ;
+  height: 15%;
+  margin-left: 25%;
+  animation: estrella 3s linear infinite ;
+}
+.plataforma{
+  position: absolute;
+  width: 150px ;
+  height: 30px;
+  margin-top: 40px;
+  margin-left: 25%;
+  rotate: 90deg;
+}
+.arbol{
+  position: absolute;
+  width:50% ;
+  height:120% ;
+  margin-left: -50px;
+  margin-top: -50px;
+}
+.arbol1{
+  position: absolute;
+  width:50% ;
+  height:120% ;
+  margin-left: 70%;
+  margin-top: -50px;
 }
 .flechas{
     padding-left: 10px;
@@ -50,6 +74,8 @@
   padding: 20px; /* Espacio interno */
   border-radius: 10px; /* Bordes redondeados */
   text-align: center;
+  position: absolute; /* o position: fixed; */
+  visibility: hidden; /* Inicialmente, la alerta está oculta */
 }
 
 .alerta-titulo {

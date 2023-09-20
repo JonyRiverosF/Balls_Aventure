@@ -13,19 +13,24 @@ export class TutorialPage implements OnInit {
   // Variable para rastrear la posición del personaje en píxeles
 personajePosX = 0;
 personajePosY = 0;
+estrellasrecojidas:number = 0;
 private isMovingLeft = false;
 private isMovingRight = false;
 private rotationInterval: any;
 public rotationDegrees = 0;
 maxX: number = 800; // Ancho máximo del contenedor o pantalla
 
-puertaAbierta = false;
+puertaAbierta:boolean = false;
 
 //Timeout Con alerta
 tiempoExpirado: boolean = false;
 tiempoLimite: number = 300000;
 tiempoRestante!: number;
+haTocadoEstrella1 = false;
+haTocadoEstrella2 = false;
+haTocadoEstrella3 = false;
 mostrarAlerta: boolean = false;
+nivelcompletado: boolean = false;
 
 constructor(private router: Router, public alertController: AlertController) {
   // Calcula el ancho máximo del contenedor o pantalla una vez que la vista esté cargada
@@ -87,6 +92,7 @@ calcularMaxX() {
 
 moverPersonaje() {
   const llave = document.querySelector('.llave') as HTMLElement | null;
+  const puerta1 = document.querySelector('.puerta1') as HTMLElement | null;
   const estrella = document.querySelector('.estrella') as HTMLElement | null;
   const estrella1 = document.querySelector('.estrella1') as HTMLElement | null;
   const estrella2 = document.querySelector('.estrella2') as HTMLElement | null;
@@ -103,30 +109,42 @@ moverPersonaje() {
     }
     
   }
-  if (personaje && estrella) {
+  if (personaje && puerta1) {
+    if (this.colisiona(personaje, puerta1)) {
+      this.nivelcompletado = true;
+
+    }
+  }
+  if (personaje && estrella && !this.haTocadoEstrella1) {
     if (this.colisiona(personaje, estrella)) {
       estrella.classList.add('disintegration-animation');
-      
-       
+      this.estrellasrecojidas++; // Incrementa el contador en uno
+      this.haTocadoEstrella1 = true; // Marca que el personaje ha tocado una estrella
     }
-    
   }
-  if (personaje && estrella1) {
+  
+  if (personaje && estrella1 && !this.haTocadoEstrella2) {
     if (this.colisiona(personaje, estrella1)) {
       estrella1.classList.add('disintegration-animation');
-      
-       
+      this.estrellasrecojidas++; // Incrementa el contador en uno
+      this.haTocadoEstrella2 = true; // Marca que el personaje ha tocado una estrella
     }
-    
   }
-  if (personaje && estrella2) {
+  
+  if (personaje && estrella2 && !this.haTocadoEstrella3) {
     if (this.colisiona(personaje, estrella2)) {
       estrella2.classList.add('disintegration-animation');
-      
-       
+      this.estrellasrecojidas++; // Incrementa el contador en uno
+      this.haTocadoEstrella3 = true; // Marca que el personaje ha tocado una estrella
     }
-    
   }
+
+  
+  
+  
+  
+  
+  
 
   if (this.isMovingLeft) {
     this.personajePosX -= 2.5; // Ajusta la cantidad de píxeles según tu preferencia
@@ -175,7 +193,7 @@ saltarPersonaje() {
     const jumpHeight = -100; // Ajusta la altura del salto según tu preferencia
     const jumpDuration = 500; // Ajusta la duración del salto según tu preferencia
 
-    const initialPosY = this.personajePosY+2;
+    const initialPosY = this.personajePosY-20;
     const startTime = Date.now();
 
     const jumpInterval = setInterval(() => {
