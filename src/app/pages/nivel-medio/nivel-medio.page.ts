@@ -28,16 +28,16 @@ export class NivelMedioPage implements OnInit {
   
   //Timeout Con alerta
   tiempoExpirado: boolean = false;
-  tiempoLimite: number = 18000;
+  tiempoLimite: number = 180000;
   tiempoRestante!: number;
   // Propiedad para controlar la visibilidad de la alerta
   public mostrarAlerta: boolean = false;
 
-  
+  @ViewChild('pj', { static: false }) personaje!: ElementRef;
   constructor(private router: Router, public alertController: AlertController) {
-    // Calcula el ancho máximo del contenedor o pantalla una vez que la vista esté cargada
     this.calcularMaxX();
     this.calcularMaxcaja();
+    
   }
   
   
@@ -121,6 +121,7 @@ export class NivelMedioPage implements OnInit {
       this.personajePosX += 2.5; // Ajusta la cantidad de píxeles según tu preferencia
       this.personajePosX = Math.min(this.personajePosX, this.maxX); // Límite derecho
     }
+    this.colisionarConCaja();
     
     const llave = document.querySelector('.llave') as HTMLElement | null;
     const caja = document.querySelector('.caja') as HTMLElement | null;
@@ -198,8 +199,6 @@ if (personaje && caja) {
   
   
   
-  //Saltar Pj
-  
   
   saltarPersonaje() {
     if (!this.isJumping) {
@@ -207,7 +206,7 @@ if (personaje && caja) {
       const jumpHeight = -100; // Ajusta la altura del salto según tu preferencia
       const jumpDuration = 500; // Ajusta la duración del salto según tu preferencia
   
-      const initialPosY = this.personajePosY;
+      const initialPosY = this.personajePosY+2;
       const startTime = Date.now();
   
       const jumpInterval = setInterval(() => {
@@ -217,7 +216,6 @@ if (personaje && caja) {
         if (elapsedTime >= jumpDuration) {
           clearInterval(jumpInterval);
           this.isJumping = false;
-          
         } else {
           const progress = elapsedTime / jumpDuration;
           this.personajePosY = initialPosY + jumpHeight * Math.sin(progress * Math.PI);
@@ -225,6 +223,7 @@ if (personaje && caja) {
       }, 16); // Intervalo de actualización (aproximadamente 60 FPS)
     }
   }
+
   
   
   //Volver Al inicio
@@ -262,6 +261,46 @@ if (personaje && caja) {
       await alert.present();
     }
     
+    colisionarConCaja() {
+      const personaje = document.querySelector('.pj') as HTMLElement;
+      const caja = document.querySelector('.caja') as HTMLElement;
+    
+      if (personaje && caja) {
+        const personajeRect = personaje.getBoundingClientRect();
+        const cajaRect = caja.getBoundingClientRect();
+    
+        // Detecta la colisión en el eje X
+        if (personajeRect.right > cajaRect.left && personajeRect.left < cajaRect.right) {
+          // Ajusta la posición horizontal del personaje
+          if (personajeRect.right < cajaRect.right) {
+            // Personaje colisiona desde la izquierda, ajusta a la izquierda de la caja
+            this.personajePosX = cajaRect.left - personajeRect.width;
+          } else {
+            // Personaje colisiona desde la derecha, ajusta a la derecha de la caja
+            this.personajePosX = cajaRect.right;
+          }
+        }
+    
+        
+        if (personajeRect.bottom < cajaRect.top && personajeRect.top > cajaRect.bottom && personajeRect.top <= cajaRect.top) {
+          this.personajePosY = cajaRect.top - personajeRect.height;
+        }
+        if (this.personajePosY >= cajaRect.top) {
+          this.personajePosY <= cajaRect.top;
+        }
+      }
+    }
+   
+    
+
+
+    
+    
+    
+    
+  
+    
+
 
 // Función para verificar colisiones entre dos elementos
 colisiona(element1: HTMLElement, element2: HTMLElement): boolean {
