@@ -65,6 +65,7 @@
   width: 80px ;
   height: 50px;
 }
+
 @keyframes estrella {
   0%{ transform: rotatey(0deg);}
   25%{ transform: rotatey(180deg);}
@@ -73,6 +74,7 @@
   100%{transform: rotatey(0deg);}
   
 }
+
 @keyframes llave {
   0%{ transform: translatey(0);}
   25%{ transform: translatey(4px);}
@@ -82,7 +84,6 @@
   
 }
 
-
 .flechas{
     padding-left: 10px;
     width:150px ;
@@ -91,71 +92,71 @@
     transition: 0.3s;
 
 }
+
 .flechas:hover{
   transform: scale(1.1);
 }
 
 .contador {
   position: absolute;
-  top: 5px; /* Ajusta la posición vertical según tus preferencias */
-  right: 10px; /* Ajusta la posición horizontal según tus preferencias */
-  background-color: rgba(94, 27, 156, 0.885); /* Color de fondo del contador */
-  color: #ffffff; /* Color del texto del contador */
-  padding: 5px; /* Espacio alrededor del texto del contador */
-  border-radius: 5px; /* Bordes redondeados */
+  top: 5px; 
+  right: 10px; 
+  background-color: rgba(94, 27, 156, 0.885); 
+  color: #ffffff; 
+  padding: 5px; 
+  border-radius: 5px;
   height: 33px;
 }
+
 .container-completado {
-  background-color: #a57edd; /* Color de fondo */
-  border: 2px solid #bb00ffe6; /* Borde */
-  padding: 40px; /* Espacio interno */
-  border-radius: 10px; /* Bordes redondeados */
+  background-color: #a57edd; 
+  border: 2px solid #bb00ffe6; 
+  padding: 40px;
+  border-radius: 10px; 
   text-align: center;
-  position: absolute; /* o position: fixed; */
-  visibility: hidden; /* Inicialmente, la alerta está oculta */
+  position: absolute;
+  visibility: hidden; 
 }
 
-
-
-/* Estilos para la alerta */
 .alerta-container {
-  background-color: #6a00ff; /* Color de fondo */
-  border: 1px solid #bb00ffe6; /* Borde */
-  padding: 20px; /* Espacio interno */
-  border-radius: 10px; /* Bordes redondeados */
+  background-color: #6a00ff; 
+  border: 1px solid #bb00ffe6; 
+  padding: 20px; 
+  border-radius: 10px; 
   text-align: center;
-  position: absolute; /* o position: fixed; */
-  visibility: hidden; /* Inicialmente, la alerta está oculta */
+  position: absolute; 
+  visibility: hidden; 
 }
 
 .alerta-titulo {
-  font-size: 24px; /* Tamaño del texto del título */
-  color: #fff; /* Color del texto del título */
+  font-size: 24px; 
+  color: #fff; 
 }
 
 .alerta-mensaje {
-  font-size: 18px; /* Tamaño del texto del mensaje */
-  color: #ffffff; /* Color del texto del mensaje */
+  font-size: 18px; 
+  color: #ffffff; 
 }
 
 .alerta-botones {
-  margin-top: 20px; /* Espacio superior entre botones */
+  margin-top: 20px; 
 }
 
 .alerta-boton {
-  margin: 0 10px; /* Espacio entre botones */
-  padding: 10px 20px; /* Espacio interno de botones */
-  background-color: #ff00fb62; /* Color de fondo de los botones */
-  color: #fff; /* Color del texto de los botones */
-  border: none; /* Sin borde */
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cursor de puntero al pasar el ratón */
-  font-size: 16px; /* Tamaño del texto de los botones */
+  margin: 0 10px; 
+  padding: 10px 20px; 
+  background-color: #ff00fb62; 
+  color: #fff; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer;
+  font-size: 16px; 
 }
 
 .alerta-boton:hover {
-  background-color: #ff3300a1; /* Color de fondo al pasar el ratón */
+  background-color: #ff3300a1; 
 }
+
 .puerta{
     width: 80px;
     height: 100px;
@@ -163,6 +164,7 @@
     margin-top: 0px;
     margin-left: 180px;
 }
+
 .puerta1{
   width: 140px;
   height: 100px;
@@ -170,6 +172,7 @@
   margin-top: 0px;
   margin-left: 180px;
 }
+
 .salto{
     width: 120px;
     height: 95px;
@@ -180,6 +183,7 @@
 .salto:hover{
   transform: scale(1.1);
 }
+
 .pj{
     width: 70px;
     height: 70px;
@@ -188,17 +192,16 @@
 
 }
 
-
 .rotate-animation {
-  animation: rotate 0.5s ease-in-out infinite; // Ajusta la duración y el efecto de animación según tus preferencias
+  animation: rotate 0.5s ease-in-out infinite; 
 }
 
 @keyframes rotate {
   0% {
-    transform: rotate(0deg); // Ángulo de inicio
+    transform: rotate(0deg); 
   }
   100% {
-    transform: rotate(360deg); // Ángulo de finalización (una rotación completa)
+    transform: rotate(360deg); 
   }
 }
 
@@ -218,26 +221,26 @@
       100% {
         transform: rotate(360deg); 
       }
-    
 }
+
 .menu{
     width: 50px;
     height: 45px;
     margin-bottom: 60px;
     transition: 0.5s;
 }
+
 .menu:hover{
   transform: scale(1.1);
 }
-
 
 @keyframes movernube {
     0%{ transform: translateX(-400px);}
     
     
     100%{transform: translateX(1000px);}
-    
 }
+
 ion-grid{
     height: 100%;
 }
@@ -246,24 +249,22 @@ ion-grid{
   background-color: aqua;
 }
 
-/* Estilo para la animación de desintegración */
 .disintegration-animation {
   animation-name: disintegration;
-  animation-duration: 2s; /* Duración de la animación en segundos */
+  animation-duration: 2s; 
   animation-timing-function: ease-in-out;
-  animation-iteration-count: 1; /* Repetir la animación una vez */
-  animation-fill-mode: forwards; /* Mantener el estado final de la animación */
+  animation-iteration-count: 1; 
+  animation-fill-mode: forwards; 
 }
 
-/* Define la animación de desintegración */
 @keyframes disintegration {
   0% {
     opacity: 1;
-    transform: translateY(0); /* Sin desplazamiento vertical */
+    transform: translateY(0); 
   }
   100% {
     opacity: 0;
-    transform: translateY(-100%); /* Desplazamiento hacia arriba */
+    transform: translateY(-100%); 
   }
 }
 
