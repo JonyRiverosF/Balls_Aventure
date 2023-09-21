@@ -31,6 +31,7 @@ export class NivelMedioPage implements OnInit {
   haTocadoEstrella1 = false;
   haTocadoEstrella2 = false;
   haTocadoEstrella3 = false;
+  menus: boolean = false;
   nivelcompletado: boolean = false;
   puertaAbierta = false;
    
@@ -94,6 +95,12 @@ export class NivelMedioPage implements OnInit {
     if (contenedor) {
       this.maxX = contenedor.clientWidth;
     }
+  }
+  menu(){
+    this.menus=true;
+  }
+  reanudar(){
+    this.menus=false;
   }
 
   moverPersonaje() {
@@ -236,26 +243,7 @@ export class NivelMedioPage implements OnInit {
       },
     ];
   
-    async mostrarmenu() {
-      const alert = await this.alertController.create({
-        header: '¿Volver al lobby?',
-        buttons: [
-          {
-            text: 'REANUDAR',
-            cssClass: 'reanudar',
-          },
-          {
-            text: 'LOBBY',
-            cssClass: 'alert-button-confirm',
-            handler: () => {
-              this.router.navigate(['/lobby']); 
-            },
-          },
-        ],
-      });
-  
-      await alert.present();
-    }
+   
     
     //Colision con caja
     /*colisionarConCaja() {

@@ -23,6 +23,7 @@ const routes: Routes = [
     path: 'lobby',
     loadChildren: () => import('./pages/lobby/lobby.module').then( m => m.LobbyPageModule)
   },
+  
   {
     path: 'logros',
     loadChildren: () => import('./pages/logros/logros.module').then( m => m.LogrosPageModule)
@@ -87,7 +88,12 @@ const routes: Routes = [
     path: 'nivel-dificil',
     loadChildren: () => import('./pages/nivel-dificil/nivel-dificil.module').then( m => m.NivelDificilPageModule)
   },
+  
   {
+    path: 'historial',
+    loadChildren: () => import('./pages/historial/historial.module').then( m => m.HistorialPageModule)
+  },
+ {
     path: '**',
     loadChildren: () => import('./pages/not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
