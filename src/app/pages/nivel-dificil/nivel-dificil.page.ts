@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
@@ -9,21 +9,38 @@ import { AlertController } from '@ionic/angular';
 })
 export class NivelDificilPage implements OnInit {
 
-  // Variable para rastrear la posición del personaje en píxeles
+  //Caja
+  cajaPosX =0;
+  maxcaja: number = 75;
+
+
+  //PJ y movimientos
+  private isJumping = false;
   personajePosX = 0;
   personajePosY = 0;
   private isMovingLeft = false;
   private isMovingRight = false;
   private rotationInterval: any;
   public rotationDegrees = 0;
-  maxX: number = 800; // Ancho máximo del contenedor o pantalla
+  maxX: number = 800; 
+  
+
+  //Puerta y estrellas
+  estrellasrecojidas:number = 0;
+  haTocadoEstrella1 = false;
+  haTocadoEstrella2 = false;
+  haTocadoEstrella3 = false;
+  nivelcompletado: boolean = false;
+  puertaAbierta = false;
+   
   
   //Timeout Con alerta
   tiempoExpirado: boolean = false;
-  tiempoLimite: number = 90000;
+  tiempoLimite: number = 180000;
   tiempoRestante!: number;
-  mostrarAlerta: boolean = false;
-  
+  public mostrarAlerta: boolean = false;
+
+  @ViewChild('pj', { static: false }) personaje!: ElementRef;
   constructor(private router: Router, public alertController: AlertController) {
     // Calcula el ancho máximo del contenedor o pantalla una vez que la vista esté cargada
     this.calcularMaxX();
@@ -69,26 +86,68 @@ export class NivelDificilPage implements OnInit {
   
   
   //Movimiento Pj
-    ventana(){// Escucha el evento de redimensionamiento de la ventana para recalcular maxX si es necesario
+    ventana(){
     window.addEventListener('resize', () => {
       this.calcularMaxX();
     });}
   calcularMaxX() {
-    // Obtén el ancho del contenedor o pantalla actualizado
-    const contenedor = document.getElementById('tu-contenedor'); // Reemplaza 'tu-contenedor' con el ID de tu contenedor
+    const contenedor = document.getElementById('tu-contenedor'); 
     if (contenedor) {
       this.maxX = contenedor.clientWidth;
     }
   }
   
   moverPersonaje() {
+    const llave = document.querySelector('.llave') as HTMLElement | null;
+    const puerta1 = document.querySelector('.puerta1') as HTMLElement | null;
+    const estrella = document.querySelector('.estrella') as HTMLElement | null;
+    const estrella1 = document.querySelector('.estrella1') as HTMLElement | null;
+    const estrella2 = document.querySelector('.estrella2') as HTMLElement | null;
+    const personaje = document.querySelector('.pj') as HTMLElement | null;
+    if (personaje && llave) {
+      if (this.colisiona(personaje, llave)) {
+        this.puertaAbierta = true;
+        llave.classList.add('disintegration-animation');  
+      }
+    }
+
+    if (personaje && puerta1) {
+      if (this.colisiona(personaje, puerta1)) {
+      this.nivelcompletado = true;
+      }
+    }
+
+    if (personaje && estrella && !this.haTocadoEstrella1) {
+      if (this.colisiona(personaje, estrella)) {
+        estrella.classList.add('disintegration-animation');
+        this.estrellasrecojidas++;
+        this.haTocadoEstrella1 = true;
+      }
+    }
+  
+    if (personaje && estrella1 && !this.haTocadoEstrella2) {
+      if (this.colisiona(personaje, estrella1)) {
+        estrella1.classList.add('disintegration-animation');
+        this.estrellasrecojidas++; 
+        this.haTocadoEstrella2 = true; 
+        }
+     }
+  
+    if (personaje && estrella2 && !this.haTocadoEstrella3) {
+      if (this.colisiona(personaje, estrella2)) {
+        estrella2.classList.add('disintegration-animation');
+        this.estrellasrecojidas++; 
+        this.haTocadoEstrella3 = true; 
+        }
+    }
+    
     if (this.isMovingLeft) {
-      this.personajePosX -= 2.5; // Ajusta la cantidad de píxeles según tu preferencia
-      this.personajePosX = Math.max(this.personajePosX, 0); // Límite izquierdo
+      this.personajePosX -= 2.5; 
+      this.personajePosX = Math.max(this.personajePosX, 0); 
     }
     if (this.isMovingRight) {
-      this.personajePosX += 2.5; // Ajusta la cantidad de píxeles según tu preferencia
-      this.personajePosX = Math.min(this.personajePosX, this.maxX); // Límite derecho
+      this.personajePosX += 2.5; 
+      this.personajePosX = Math.min(this.personajePosX, this.maxX); 
     }
   }
   
@@ -98,13 +157,11 @@ export class NivelDificilPage implements OnInit {
     } else if (direction === 'derecha') {
       this.isMovingRight = true;
     }
-  
-    // Iniciar rotación continua
-    this.rotationInterval = setInterval(() => {
+    this.rotationInterval = 
+    setInterval(() => {
       this.rotationDegrees += 8;
-      // Ajusta la cantidad de grados para la rotación
       this.moverPersonaje();
-    }, 15); // Ajusta el intervalo según la velocidad de rotación
+    }, 15); 
   }
   
   stopMoving(direction: string) {
@@ -113,21 +170,17 @@ export class NivelDificilPage implements OnInit {
     } else if (direction === 'derecha') {
       this.isMovingRight = false;
     }
-  
-    // Detener rotación y movimiento
     clearInterval(this.rotationInterval);
   }
   
   
   
   //Saltar Pj
-  private isJumping = false; // Agrega una propiedad para rastrear si el personaje está saltando
-  
   saltarPersonaje() {
     if (!this.isJumping) {
       this.isJumping = true;
-      const jumpHeight = -100; // Ajusta la altura del salto según tu preferencia
-      const jumpDuration = 500; // Ajusta la duración del salto según tu preferencia
+      const jumpHeight = -100;
+      const jumpDuration = 500; 
   
       const initialPosY = this.personajePosY+2;
       const startTime = Date.now();
@@ -143,7 +196,7 @@ export class NivelDificilPage implements OnInit {
           const progress = elapsedTime / jumpDuration;
           this.personajePosY = initialPosY + jumpHeight * Math.sin(progress * Math.PI);
         }
-      }, 16); // Intervalo de actualización (aproximadamente 60 FPS)
+      }, 16); 
     }
   }
   
@@ -179,8 +232,52 @@ export class NivelDificilPage implements OnInit {
           },
         ],
       });
-  
       await alert.present();
     }
+
+    //Colision con caja
+    /*colisionarConCaja() {
+      const personaje = document.querySelector('.pj') as HTMLElement;
+      const caja = document.querySelector('.caja') as HTMLElement;
+    
+      if (personaje && caja) {
+        const personajeRect = personaje.getBoundingClientRect();
+        const cajaRect = caja.getBoundingClientRect();
+    
+        // Detecta la colisión en el eje X
+        if (personajeRect.right > cajaRect.left && personajeRect.left < cajaRect.right) {
+          // Ajusta la posición horizontal del personaje
+          if (personajeRect.right < cajaRect.right) {
+            // Personaje colisiona desde la izquierda, ajusta a la izquierda de la caja
+            this.personajePosX = cajaRect.left - personajeRect.width;
+          } else {
+            // Personaje colisiona desde la derecha, ajusta a la derecha de la caja
+            this.personajePosX = cajaRect.right;
+          }
+        }
+    
+        
+        if (personajeRect.bottom < cajaRect.top && personajeRect.top > cajaRect.bottom && personajeRect.top <= cajaRect.top) {
+          this.personajePosY = cajaRect.top - personajeRect.height;
+        }
+        if (this.personajePosY >= cajaRect.top) {
+          this.personajePosY <= cajaRect.top;
+        }
+      }
+    }*/
+
+
+    //Funcion para colisiones
+  colisiona(element1: HTMLElement, element2: HTMLElement): boolean {
+    const rect1 = element1.getBoundingClientRect();
+    const rect2 = element2.getBoundingClientRect();
+    return (
+      rect1.left < rect2.right &&
+      rect1.right > rect2.left &&
+      rect1.top < rect2.bottom &&
+      rect1.bottom > rect2.top
+    );
+  }
+
   }
 

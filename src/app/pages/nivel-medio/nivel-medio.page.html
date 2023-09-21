@@ -39,6 +39,23 @@
 
       <ion-col size="4" style="margin-top: -150px;">
         
+        <!--nivel completado-->
+        <div  [style.visibility]="nivelcompletado ? 'visible' : 'hidden'" *ngIf="nivelcompletado" class="container-completado">
+          <h2 class="alerta-titulo">¡Nivel completado!</h2>
+          
+          <img *ngIf="estrellasrecojidas>0" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
+          <img *ngIf="estrellasrecojidas>1" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
+          <img *ngIf="estrellasrecojidas>2" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
+
+          
+          <div class="alerta-botones">
+            <button class="alerta-boton" (click)="volverAlInicio()">Volver al lobby</button>
+            
+          </div>
+          <div class="alerta-botones"><button class="alerta-boton" (click)="volverAIntentarlo()">Reintentar</button></div>
+        </div>
+
+        <!--Tiempo agotado-->
         <div  *ngIf="!mostrarAlerta">
         </div>
         <div  [style.visibility]="mostrarAlerta ? 'visible' : 'hidden'" *ngIf="mostrarAlerta" class="alerta-container">
@@ -81,7 +98,7 @@
         </div>
 
         <img class="puerta" *ngIf="!puertaAbierta" src="assets/icon/pnivel2_c.png" alt="Puerta Cerrada">
-<img class="puerta1" *ngIf="puertaAbierta" src="assets/icon/pnivel2_a.png" alt="Puerta Abierta">
+        <img class="puerta1" *ngIf="puertaAbierta" src="assets/icon/pnivel2_a.png" alt="Puerta Abierta">
         
       </ion-col>
     </ion-row>
