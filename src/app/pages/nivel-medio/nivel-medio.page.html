@@ -15,10 +15,19 @@
         <img class="sol" src="assets/icon/luna.png" alt="Mi Imagen">
         <img class="nube" src="assets/icon/nublada (1).png" alt="Mi Imagen">
         <img  class="nube1" src="assets/icon/nublada (1).png" alt="Mi Imagen"><br><br>
-        <div class="contador">
-          <p>{{ tiempoRestante }}</p>
-        </div>
+        <div class="contador"><p>{{ tiempoRestante }}</p></div>
         
+        <div style="margin-left:100px;margin-top: -70px;">
+          <img class="estrella1" style="width:4% ;
+          height: 4%;" src="assets/icon/estrella.png" alt="Mi Imagen">
+          <img class="pinchos" style="width: 60px ;
+          height: 32px;margin-left: 40px;" src="assets/icon/pinchos.png" alt="Mi Imagen">
+          </div>
+          <img class="plataforma1" style="margin-left:85px;margin-top:-5px" src="assets/icon/Plataforma.png" alt="Mi Imagen">
+          
+          
+          
+          
       </ion-col>
     </ion-row >
 
@@ -35,10 +44,14 @@
 
       </ion-col>
 
-      
 
       <ion-col size="4" style="margin-top: -150px;">
-        
+
+        <div style="margin-top: -48px;margin-right:120px">
+          <img class="estrella" src="assets/icon/estrella.png" alt="Mi Imagen">
+          <img class="plataforma" src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        </div>
+
         <!--nivel completado-->
         <div  [style.visibility]="nivelcompletado ? 'visible' : 'hidden'" *ngIf="nivelcompletado" class="container-completado">
           <h2 class="alerta-titulo">¡Nivel completado!</h2>
@@ -78,12 +91,11 @@
         </div>
 
         
-
-        <div style="margin-top: 32px;margin-left: 150px;">
+        <div style="margin-top: 42px;margin-left: 150px;">
           <img class="plataforma" src="assets/icon/Plataforma.png" alt="Mi Imagen">
         </div>
 
-        <div style="margin-top: 60px;margin-left:10px">
+        <div style="margin-top: 29px;margin-left:10px">
           <img class="plataforma" src="assets/icon/Plataforma.png" alt="Mi Imagen">
         </div>
 
@@ -101,7 +113,8 @@
         
         
 
-        <div style="margin-top: -230px;margin-right: 125px;">
+        <div style="margin-top: -190px;margin-right: 125px;">
+          <img class="estrella2" src="assets/icon/estrella.png" alt="Mi Imagen">
           <img class="llave" src="assets/icon/LLave.png" alt="Mi Imagen">
           <img class="plataforma"  src="assets/icon/Plataforma.png" alt="Mi Imagen">
         </div>

@@ -11,6 +11,15 @@
 
 }
 
+@keyframes estrella {
+  0%{ transform: rotatey(0deg);}
+  25%{ transform: rotatey(180deg);}
+  50%{ transform: rotatey(0deg);}
+  75%{ transform: rotatey(360deg);}
+  100%{transform: rotatey(0deg);}
+  
+}
+
 .estrellaz{
   width:20% ;
   height: 20%;
@@ -21,26 +30,25 @@
 .estrella{
   width:15% ;
   height: 15%;
-  margin-left: 25%;
+  margin-left:20%;
   animation: estrella 3s linear infinite ;
 }
 .estrella1{
-  width:15% ;
-  height: 15%;
-  margin-left: 25%;
+  width:5% ;
+  height: 5%;
   animation: estrella 3s linear infinite ;
 }
 .estrella2{
   width:15% ;
   height: 15%;
-  margin-left: 25%;
+  margin-left:15%;
   animation: estrella 3s linear infinite ;
 }
 
 .llave{
   width: 35% ;
   height: 5%;
-  margin-left: 5%;
+  margin-left: 35%;
   animation: llave 5s linear infinite ;
 }
 
@@ -49,10 +57,17 @@
   height: 30px;
 }
 
+.plataforma1{
+  width: 150px ;
+  height: 30px;
+}
+
 .pinchos{
   width: 80px ;
   height: 50px;
 }
+
+
 
 .nube1{
     width: 100px ;
@@ -92,7 +107,7 @@
     width: 80px;
     height: 100px;
     text-align: right;
-    margin-top: 95px;
+    margin-top: 75px;
     margin-left: 180px;
 }
 
@@ -100,7 +115,7 @@
   width: 140px;
   height: 100px;
   text-align: right;
-  margin-top: 0px;
+  margin-top: 75px;
   margin-left: 180px;
 }
 
