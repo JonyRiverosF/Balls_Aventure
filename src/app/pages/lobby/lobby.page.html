@@ -5,9 +5,9 @@
 <ion-content [fullscreen]="true" > 
   
 
-  <ion-grid style="background-image: url(assets/icon/FondoInicio.png) ;background-size: cover ;background-attachment: fixed;">
+  <ion-grid style="background-image: url(assets/icon/FondoInicio.png) ;height: 100%; background-size: cover ;background-attachment: fixed;">
     <ion-row>
-      <ion-col size="2" style=" border-left: 10px solid black;">
+      <ion-col size="2" >
         <!--perfil-->
         <ion-row >
           <ion-col class="icono">
@@ -30,13 +30,7 @@
             </ion-col>
           
         </ion-row>
-        <ion-row >
-          <ion-col class="icono" >
-            <img [routerLink]="['/niveles']"  src="assets/icon/levels.png" alt="Mi Imagen">
-          </ion-col>
-          
-          
-        </ion-row>
+       
 
       </ion-col>
       <!--columna principal derecha-->
@@ -74,11 +68,11 @@
             <img style="width: 180px; height: 180px; text-align: right;" src="assets/icon/pj.png" class="pj" alt="Mi Imagen">
           </ion-col>
           <ion-col size="4">
-            <div class="icono" style="width: 100px; height: 50px;margin-left: 140px; " [routerLink]="['/creadores-juego']">
+            <div class="" style="margin-left: 140px; width: 95px;height: 50px;transition: 0.4s;border-radius:  0 10px 10px 0;border: 10px solid rgba(207, 17, 74, 0.966) ;background-color: rgba(223, 172, 30, 0.966); " [routerLink]="['/creadores-juego']">
               <h3 style="color: rgb(233, 233, 233);">creadores</h3>
             </div>
             
-            <div class="botonjugar">
+            <div [routerLink]="['/niveles']" class="botonjugar">
               JUGAR
 
             </div>

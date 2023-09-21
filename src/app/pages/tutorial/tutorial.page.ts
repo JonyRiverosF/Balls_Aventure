@@ -12,7 +12,10 @@ export class TutorialPage implements OnInit {
 
   // Variable para rastrear la posición del personaje en píxeles
 personajePosX = 0;
-personajePosY = 0;
+personajePosY = 0; 
+haTocadoEstrella1 = false;
+haTocadoEstrella2 = false;
+haTocadoEstrella3 = false;
 estrellasrecojidas:number = 0;
 private isMovingLeft = false;
 private isMovingRight = false;
@@ -24,13 +27,12 @@ puertaAbierta:boolean = false;
 
 //Timeout Con alerta
 tiempoExpirado: boolean = false;
-tiempoLimite: number = 300000;
+tiempoLimite: number = 30000;
 tiempoRestante!: number;
-haTocadoEstrella1 = false;
-haTocadoEstrella2 = false;
-haTocadoEstrella3 = false;
+menus: boolean = false;
 mostrarAlerta: boolean = false;
 nivelcompletado: boolean = false;
+
 
 constructor(private router: Router, public alertController: AlertController) {
   // Calcula el ancho máximo del contenedor o pantalla una vez que la vista esté cargada
@@ -88,6 +90,12 @@ calcularMaxX() {
   if (contenedor) {
     this.maxX = contenedor.clientWidth;
   }
+}
+menu(){
+  this.menus=true;
+}
+reanudar(){
+  this.menus=false;
 }
 
 moverPersonaje() {
@@ -237,38 +245,6 @@ colisiona(element1: HTMLElement, element2: HTMLElement): boolean {
       cssClass: 'alert-button-confirm',
     },
   ];
-
-  async mostrarmenu() {
-    const alert = await this.alertController.create({
-      header: '¿Volver al lobby?',
-      buttons: [
-        {
-          text: 'REANUDAR',
-          cssClass: 'reanudar',
-        },
-        {
-          text: 'LOBBY',
-          cssClass: 'alert-button-confirm',
-          handler: () => {
-            this.router.navigate(['/lobby']); 
-          },
-        },
-      ],
-    });
-
-    await alert.present();
-  }
-
-
-
-
-
-
-
-
-
-
-  
 }
 
  

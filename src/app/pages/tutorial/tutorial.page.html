@@ -7,7 +7,7 @@
   <ion-grid style="background-image: url(assets/icon/fondoCartel.png) ;  background-size: 920px 420px; background-repeat: no-repeat;">
     <ion-row >
       <ion-col>
-       <img class="menu" id="present-alert" (click)="mostrarmenu()" src="assets/icon/menu.png" alt="Mi Imagen">
+       <img class="menu" id="present-alert" (click)="menu()" src="assets/icon/menu.png" alt="Mi Imagen">
         
  
 
@@ -40,6 +40,15 @@
         <div  *ngIf="!mostrarAlerta">
         </div>
         <div  *ngIf="!nivelcompletado">
+        </div>
+        <div  *ngIf="!menus">
+        </div>
+        <div  [style.visibility]="menus ? 'visible' : 'hidden'" *ngIf="menus" class="container-completado">
+          <h2 class="alerta-titulo">¿Volver al lobby?</h2><div class="alerta-botones">
+            <button class="alerta-boton" (click)="volverAlInicio()">Volver al lobby</button>
+            
+          </div>
+          <div class="alerta-botones"><button (click)="reanudar()" class="alerta-boton" >reanudar</button></div>
         </div>
         <!--nivel completado-->
         <div  [style.visibility]="nivelcompletado ? 'visible' : 'hidden'" *ngIf="nivelcompletado" class="container-completado">
