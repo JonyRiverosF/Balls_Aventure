@@ -21,18 +21,54 @@
 
     <ion-row >
       <ion-col size="4">
-       
-        <div [style.transform]="'translatey(' + personajePosY + 'px)'">
-          <img class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '" alt="Mi Imagen">
-          
-        </div>
-       <img class="tumba" src="assets/icon/Tumba.png" alt="Mi Imagen">
-       
-  
-      </ion-col>
-      <ion-col size="4" style="margin-top: -150px;">
+
         
 
+        <div style="margin-top:-195px;margin-left: 70px;">
+          <img class="llave" src="assets/icon/LLave.png" alt="Mi Imagen">
+          <img style="margin-left: 10px;" class="estrella" src="assets/icon/estrella.png" alt="Mi Imagen">
+        <img  class="plataforma1"src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        </div>
+
+        
+
+        <div [style.transform]="'translatey(' + personajePosY + 'px)'">
+          <img style="margin-top: 83px;" class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '" alt="Mi Imagen">
+        </div>
+
+        
+        <div style="margin-left: 70px;margin-top:-15px;">
+       <img class="tumba" src="assets/icon/Tumba.png" alt="Mi Imagen">
+       </div>
+       
+       
+       <div style="margin-top: -70px;margin-left:120px">
+        <img  class="caja" src="assets/icon/caja.png" alt="Mi Imagen" [style.transform]="'translateX(' + cajaPosX + 'px)'">
+        </div>
+      </ion-col>
+
+
+      <ion-col size="4" style="margin-top: -150px;">
+
+        <div style="margin-top:25px;margin-right: 200px;">
+          <img  class="plataforma1"src="assets/icon/Plataforma.png" alt="Mi Imagen">
+          </div>
+        
+        <div style="margin-top: -30px;">
+          <img class="arbol" src="assets/icon/arbol.png" alt="Mi Imagen">
+        </div>
+
+        <div style="margin-top: -260px">
+          <img  class="estrella1" src="assets/icon/estrella.png" alt="Mi Imagen" >
+          <img  class="plataforma" src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        </div>
+
+        
+        
+        <div style="margin-top: -28px;"><img class="arbol1" src="assets/icon/arbol.png" alt="Mi Imagen">
+        </div>
+          
+        
         <div  *ngIf="!mostrarAlerta">
         </div>
         <div  *ngIf="!menus">
@@ -44,6 +80,8 @@
           </div>
           <div class="alerta-botones"><button (click)="reanudar()" class="alerta-boton" >Reanudar</button></div>
         </div>
+
+        
         
         <!--nivel completado-->
         <div  [style.visibility]="nivelcompletado ? 'visible' : 'hidden'" *ngIf="nivelcompletado" class="container-completado">
@@ -71,22 +109,41 @@
           </div>
           <div class="alerta-botones"><button class="alerta-boton" (click)="volverAIntentarlo()">Volver a intentarlo</button></div>
         </div>
-         
-        <img class="arbol" src="assets/icon/arbol.png" alt="Mi Imagen">
-        <img class="plataforma" src="assets/icon/Plataforma.png" alt="Mi Imagen">
-        <img class="arbol1" src="assets/icon/arbol.png" alt="Mi Imagen">
-        
-      </ion-col>
-      <ion-col size="4" style="text-align: center; justify-content: right;align-items: right;">
-        <div style="margin-top: -100px;margin-right: 125px;">
-          <img class="estrella2" src="assets/icon/estrella.png" alt="Mi Imagen" >
-          <img  src="assets/icon/Plataforma.png" alt="Mi Imagen">
-        </div>
-        <img class="llave" src="assets/icon/LLave.png" alt="Mi Imagen">
-        <img class="puerta" *ngIf="!puertaAbierta" src="assets/icon/pnivel3_c.png" alt="Mi Imagen">
-        <img class="puerta1" *ngIf="puertaAbierta"  src="assets/icon/pnivel3_a.png" alt="Mi Imagen">
 
         
+
+        <div style="margin-top: -84px;">
+        <img  class="caja" src="assets/icon/caja.png" alt="Mi Imagen" [style.transform]="'translateX(' + cajaPosX + 'px)'">
+        </div>
+
+        <div class="contenedor" style="margin-top: -20px;margin-left: 120px;">
+          <img style="width: 75px ;height: 30px;position: absolute;margin-top: 35px;" class="pinchos" src="assets/icon/pinchos.png" alt="Mi Imagen">
+          <img  class="hoyo" src="assets/icon/tierra.png" alt="Mi Imagen">
+          </div>
+        
+          
+      </ion-col>
+      <ion-col size="4" style="text-align: center; justify-content: right;align-items: right;">
+        
+        <div>
+          <img class="puerta" *ngIf="!puertaAbierta" src="assets/icon/pnivel3_c.png" alt="Mi Imagen">
+          <img class="puerta1" *ngIf="puertaAbierta"  src="assets/icon/pnivel3_a.png" alt="Mi Imagen">
+          </div>
+          
+          <div style="margin-right:150px;">
+            <img style="height: 70px;width: 70px;" class="tumba" src="assets/icon/Tumba.png" alt="Mi Imagen">
+            </div>
+            
+
+        <div style="margin-top: -245px;margin-right: 200px;">
+          <img style="width: 55px ;height: 35px;" class="pinchos" src="assets/icon/pinchos.png" alt="Mi Imagen">
+          <img style="width:15%;height: 15%;" class="estrella2" src="assets/icon/estrella.png" alt="Mi Imagen" >
+        </div>
+        <img style="margin-left:-220px;margin-top: -10px;" class="plataforma1"src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        
+        <div>
+        <img style="margin-top:50px;margin-right: 250px;" class="plataforma1"src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        </div>
       </ion-col>
     </ion-row>
     <ion-row >

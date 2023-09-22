@@ -43,7 +43,6 @@ export class NivelDificilPage implements OnInit {
 
   @ViewChild('pj', { static: false }) personaje!: ElementRef;
   constructor(private router: Router, public alertController: AlertController) {
-    // Calcula el ancho máximo del contenedor o pantalla una vez que la vista esté cargada
     this.calcularMaxX();
   }
   
@@ -51,18 +50,16 @@ export class NivelDificilPage implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.tiempoExpirado = true;
-      this.mostrarAlerta = true; // Mostrar la alerta cuando se acabe el tiempo
-  
-      // Agrega la clase de animación de muerte a los elementos que deseas animar
+      this.mostrarAlerta = true; 
       if (this.tiempoExpirado) {
-        const personaje = document.getElementById('tu-personaje'); // Reemplaza 'tu-personaje' con el ID de tu personaje
+        const personaje = document.getElementById('tu-personaje'); 
         if (personaje) {
           personaje.classList.add('death-animation');
         }
       }
     }, this.tiempoLimite);
   
-    let tiempoInicial = this.tiempoLimite / 1000; // Convertir a segundos
+    let tiempoInicial = this.tiempoLimite / 1000; 
     this.tiempoRestante = tiempoInicial;
   
     const interval = setInterval(() => {
@@ -111,6 +108,8 @@ export class NivelDificilPage implements OnInit {
     const estrella1 = document.querySelector('.estrella1') as HTMLElement | null;
     const estrella2 = document.querySelector('.estrella2') as HTMLElement | null;
     const personaje = document.querySelector('.pj') as HTMLElement | null;
+    const pinchos = document.querySelector('.pinchos') as HTMLElement | null;
+    const caja = document.querySelector('.caja') as HTMLElement | null;
     if (personaje && llave) {
       if (this.colisiona(personaje, llave)) {
         this.puertaAbierta = true;
@@ -148,15 +147,37 @@ export class NivelDificilPage implements OnInit {
         }
     }
     
+    if (personaje && caja) {
+      if (this.colisiona(personaje, caja)) {  
+        this.cajaPosX -= -1; 
+      }
+    
     if (this.isMovingLeft) {
       this.personajePosX -= 2.5; 
       this.personajePosX = Math.max(this.personajePosX, 0); 
     }
+
     if (this.isMovingRight) {
       this.personajePosX += 2.5; 
       this.personajePosX = Math.min(this.personajePosX, this.maxX); 
+      }
+    
     }
-  }
+
+    if (personaje && pinchos) {
+      if (this.colisiona(personaje, pinchos)) {
+          personaje.classList.add('disintegration-animation'); 
+          setTimeout(() => {
+            personaje.classList.add('disintegration-animation');
+            this.mostrarAlerta = true;
+            setTimeout(() => {
+              this.mostrarAlerta = true;
+              this.personajePosX = 0; 
+            }, 5000); 
+          }, 1000); 
+        }
+      }
+    }
   
   startMoving(direction: string) {
     if (direction === 'izquierda') {
