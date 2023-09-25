@@ -268,46 +268,6 @@ eliminarRol(idR:any){
   //Fin logro
 
 
-  //Intento
-  buscarIntento(){
-    return this.database.executeSql('SELECT * FROM intento',[]).then(res=>{
-      //variable para lmacenar el resultado
-      let items:Intento[]=[];
-      //verifico la cantidad de registros
-      if(res.rows.length > 0 ){
-        //agrego registro a registro em mi variable
-        for(var i = 0; i< res.rows.length; i++){
-          items.push({
-            idI:res.rows.item(i).idI,
-            estrellas:res.rows.item(i).estrellas,
-            tiempo:res.rows.item(i).tiempo,
-            completado:res.rows.item(i).completado
-          })
-        }
-      }
-      this.listaIntento.next(items as any);
-    })
-  }
-
-  insertarIntento(estrellas:any, tiempo:any, completado:any){
-    return this.database.executeSql('INSERT INTO intento(estrellas, tiempo, completado) VALUES(?,?,?)',[estrellas, tiempo, completado]).then(res=>{
-      this.buscarIntento();
-    })
-  }
-
-  actualizarIntento(idI:any, estrellas:any, descripcion:any, recompensa:any,idNiveles:any){
-    return this.database.executeSql('UPDATE intento SET estrellas= ?, descripcion= ?, recompensa= ?, idNiveles= ?  WHERE idI= ?',[estrellas,descripcion,recompensa,idNiveles,idI]).then(res=>{
-      this.buscarIntento();
-    })
-  }
-
-  eliminarIntento(idI:any){
-    return this.database.executeSql('DELETE FROM intento WHERE idI = ?',[idI]).then(res=>{
-      this.buscarIntento();
-    })
-  }
-  //Fin Intento
-
   //Niveles
   buscarNiveles(){
     return this.database.executeSql('SELECT * FROM niveles',[]).then(res=>{
@@ -320,7 +280,7 @@ eliminarRol(idR:any){
           items.push({
             idN:res.rows.item(i).idN,
             NombreN:res.rows.item(i).NombreN,
-            RecompensaN:res.rows.item(i).RecompensaN
+            recompensaN:res.rows.item(i).recompensaN
           })
         }
       }
@@ -328,14 +288,14 @@ eliminarRol(idR:any){
     })
   }
 
-  insertarNiveles(NombreN:any, RecompensaN:any){
-    return this.database.executeSql('INSERT INTO niveles(NombreN, RecompensaN) VALUES(?,?)',[NombreN, RecompensaN]).then(res=>{
+  insertarNiveles(NombreN:any, recompensaN:any){
+    return this.database.executeSql('INSERT INTO niveles(NombreN, recompensaN) VALUES(?,?)',[NombreN, recompensaN]).then(res=>{
       this.buscarNiveles();
     })
   }
 
-  actualizarNiveles(idN:any, NombreN:any, RecompensaN:any){
-    return this.database.executeSql('UPDATE niveles SET NombreN= ?, RecompensaN= ? WHERE idN= ?',[NombreN,RecompensaN,idN]).then(res=>{
+  actualizarNiveles(idN:any, NombreN:any, recompensaN:any){
+    return this.database.executeSql('UPDATE niveles SET NombreN= ?, recompensaN= ? WHERE idN= ?',[NombreN,recompensaN,idN]).then(res=>{
       this.buscarNiveles();
     })
   }
@@ -346,6 +306,48 @@ eliminarRol(idR:any){
     })
   }
   //Fin Niveles
+
+
+//Intento
+buscarIntento(){
+  return this.database.executeSql('SELECT * FROM intento',[]).then(res=>{
+    //variable para lmacenar el resultado
+    let items:Intento[]=[];
+    //verifico la cantidad de registros
+    if(res.rows.length > 0 ){
+      //agrego registro a registro em mi variable
+      for(var i = 0; i< res.rows.length; i++){
+        items.push({
+          idI:res.rows.item(i).idI,
+          estrellas:res.rows.item(i).estrellas,
+          tiempo:res.rows.item(i).tiempo,
+          completado:res.rows.item(i).completado
+        })
+      }
+    }
+    this.listaIntento.next(items as any);
+  })
+}
+
+insertarIntento(estrellas:any, tiempo:any, completado:any){
+  return this.database.executeSql('INSERT INTO intento(estrellas, tiempo, completado) VALUES(?,?,?)',[estrellas, tiempo, completado]).then(res=>{
+    this.buscarIntento();
+  })
+}
+
+actualizarIntento(idI:any, estrellas:any, descripcion:any, recompensa:any,idNiveles:any){
+  return this.database.executeSql('UPDATE intento SET estrellas= ?, descripcion= ?, recompensa= ?, idNiveles= ?  WHERE idI= ?',[estrellas,descripcion,recompensa,idNiveles,idI]).then(res=>{
+    this.buscarIntento();
+  })
+}
+
+eliminarIntento(idI:any){
+  return this.database.executeSql('DELETE FROM intento WHERE idI = ?',[idI]).then(res=>{
+    this.buscarIntento();
+  })
+}
+//Fin Intento
+
 
   //Usuario
 buscarUsuario(){
