@@ -21,43 +21,43 @@ export class DbservicioService {
 
 
   //variables para la creacion de tablas
-  tblUsuario:string="CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY autoincrement,respuesta VARCHAR(50) NOT NULL, nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL,correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto FILES NOT NULL, monedas NUMBER(5) NOT NULL, FOREIGN KEY (idRol) REFERENCES tblRol(idR)  , FOREIGN KEY(idPregunta) REFERENCES tblPregunta(idP),FOREIGN KEY(idLogros) REFERENCES tblLogro(idR) , FOREIGN KEY(idIntento) REFERENCES tblIntento(idI));";
+  tblRol:string="CREATE TABLE IF NOT EXISTS rol(idR INTEGER PRIMARY KEY autoincrement, nombreR VARCHAR(15) NOT NULL);";
 
   tblPregunta:string="CREATE TABLE IF NOT EXISTS pregunta(idP INTEGER PRIMARY KEY autoincrement, nombreP VARCHAR(30) NOT NULL);";
-
-  tblRol:string="CREATE TABLE IF NOT EXISTS rol(idR INTEGER PRIMARY KEY autoincrement, nombreR VARCHAR(15) NOT NULL);";
 
   tblLogro:string="CREATE TABLE IF NOT EXISTS logro(idL INTEGER PRIMARY KEY autoincrement, nombreL VARCHAR(30) NOT NULL, descripcion VARCHAR(100) NOT NULL, recompensa NUMBER(5) NOT NULL);";
 
   tblIntento:string="CREATE TABLE IF NOT EXISTS intento(idI INTEGER PRIMARY KEY autoincrement, estrellas NUMBER(6) NOT NULL, tiempo NUMBER(10) NOT NULL, completado BOOLEAN NOT NULL,FOREIGN KEY(idNiveles) REFERENCES tblNiveles(idN));";
 
+  tblUsuario:string="CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY autoincrement,respuesta VARCHAR(50) NOT NULL, nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL,correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto FILES NOT NULL, monedas NUMBER(5) NOT NULL, FOREIGN KEY (idRol) REFERENCES tblRol(idR)  , FOREIGN KEY(idPregunta) REFERENCES tblPregunta(idP),FOREIGN KEY(idLogros) REFERENCES tblLogro(idR) , FOREIGN KEY(idIntento) REFERENCES tblIntento(idI));";
+
   tblNiveles:string="CREATE TABLE IF NOT EXISTS niveles(idN INTEGER PRIMARY KEY autoincrement, recompensaN NUMBER(6) NOT NULL, tiempo NUMBER(10) NOT NULL);";
 
 
   //variables para los insert iniciales
-  registroUsuario:string="INSERT or IGNORE INTO usuario(idU, respuesta, nombreU, contrasena, correo, descripcion, foto, monedas) VALUES(1, 'Lasaña', Dani123, J@ny12, dani123@gmail.com, '', 30);";
+  registroRol:string="INSERT or IGNORE INTO rol(idR, nombreR) VALUES(1, 'usuario');";
 
   registroPregunta:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(1, '¿cual es tu comida favorita?');";
-
-  registroRol:string="INSERT or IGNORE INTO rol(idR, nombreR) VALUES(1, 'usuario');";
 
   registroLogro:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Tutorial Completado', 'Completaste el tutorial felicidades', 15);";
 
   registroIntento:string="INSERT or IGNORE INTO niveles(idI, estrellas, tiempo, completado) VALUES(1, 30, 300);";
 
+  registroUsuario:string="INSERT or IGNORE INTO usuario(idU, respuesta, nombreU, contrasena, correo, descripcion, foto, monedas) VALUES(1, 'Lasaña', Dani123, J@ny12, dani123@gmail.com, '', 30);";
+
   registroNiveles:string="INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(1, 30, 300);";
 
 
   //observables de las tablas
-  listaUsuario = new BehaviorSubject([]);
+  listaRol = new BehaviorSubject([]);
 
   listapreguntas = new BehaviorSubject([]);
-
-  listaRol = new BehaviorSubject([]);
 
   listaLogro = new BehaviorSubject([]);
 
   listaIntento = new BehaviorSubject([]);
+
+  listaUsuario = new BehaviorSubject([]);
 
   listaNiveles = new BehaviorSubject([]);
 
@@ -119,16 +119,12 @@ export class DbservicioService {
 
 
   //Fetchs
-  fetchUsuario():Observable<Usuario[]>{
-    return this.listaUsuario.asObservable();
+  fetchrol():Observable<Rol[]>{
+    return this.listaRol.asObservable();
   }
 
   fetchPregunta():Observable<Pregunta[]>{
     return this.listapreguntas.asObservable();
-  }
-
-  fetchrol():Observable<Rol[]>{
-    return this.listaRol.asObservable();
   }
 
   fetchLogro():Observable<Logro[]>{
@@ -137,6 +133,10 @@ export class DbservicioService {
 
   fetchIntento():Observable<Intento[]>{
     return this.listaIntento.asObservable();
+  }
+
+  fetchUsuario():Observable<Usuario[]>{
+    return this.listaUsuario.asObservable();
   }
 
   fetchNiveles():Observable<Niveles[]>{
