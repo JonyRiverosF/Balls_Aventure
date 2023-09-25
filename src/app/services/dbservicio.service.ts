@@ -90,77 +90,31 @@ export class DbservicioService {
 
 
   //Tablas
- async crearTablas(){
-    try{
-    //ejecutar la creacion de tablas
-    await this.database.executeSql(this.tblRol,[]);
-    //ejecuto los insert
-    await this.database.executeSql(this.registroRol,[]);
-    this.presentAlert("Tabla creada")
-    //cambio mi observable de BD
-      this.isBDReady.next(true);
-      this.buscarRol();
-    }catch (errorR){
-      this.presentAlert("Error en Crear Tabla:"+errorR);
-    }
+ async crearTablas() {
+  const tablas = [
+    { tabla: this.tblRol, registro: this.registroRol },
+    { tabla: this.tblPregunta, registro: this.registroPregunta },
+    { tabla: this.tblLogro, registro: this.registroLogro },
+    { tabla: this.tblIntento, registro: this.registroIntento },
+    { tabla: this.tblUsuario, registro: this.registroUsuario },
+    { tabla: this.tblNiveles, registro: this.registroNiveles },
+  ];
 
-    try{
-      //ejecutar la creacion de tablas
-      await this.database.executeSql(this.tblPregunta,[]);
-      //ejecuto los insert
-      await this.database.executeSql(this.registroPregunta,[]);
-      this.presentAlert("Tabla creada")
-      //cambio mi observable de BD
+  for (const { tabla, registro } of tablas) {
+    try {
+      // Ejecutar la creación de la tabla
+      await this.database.executeSql(tabla, []);
+      this.presentAlert("Tabla creada");
+      // Cambiar el observable de BD
       this.isBDReady.next(true);
-    }catch (errorP){
-      this.presentAlert("Error en Crear Tabla:"+errorP);
-    }
-    try{
-      //ejecutar la creacion de tablas
-      await this.database.executeSql(this.tblLogro,[]);
-      //ejecuto los insert
-      await this.database.executeSql(this.registroLogro,[]);
-      this.presentAlert("Tabla creada")
-      //cambio mi observable de BD
-      this.isBDReady.next(true);
-    }catch (errorL){
-      this.presentAlert("Error en Crear Tabla:"+errorL);
-    }
-    try{
-      //ejecutar la creacion de tablas
-      await this.database.executeSql(this.tblIntento,[]);
-      //ejecuto los insert
-      await this.database.executeSql(this.registroIntento,[]);
-      this.presentAlert("Tabla creada")
-      //cambio mi observable de BD
-      this.isBDReady.next(true);
-    }catch (errorN){
-      this.presentAlert("Error en Crear Tabla:"+errorN);
-    }
-    try{
-      //ejecutar la creacion de tablas
-      await this.database.executeSql(this.tblUsuario,[]);
-      //ejecuto los insert
-      await this.database.executeSql(this.registroUsuario,[]);
-      this.presentAlert("Tabla creada")
-      //cambio mi observable de BD
-      this.isBDReady.next(true);
-    }catch (errorU){
-      this.presentAlert("Error en Crear Tabla:"+errorU);
-    }
 
-    try{
-      //ejecutar la creacion de tablas
-      await this.database.executeSql(this.tblNiveles,[]);
-      //ejecuto los insert
-      await this.database.executeSql(this.registroNiveles,[]);
-      this.presentAlert("Tabla creada")
-      //cambio mi observable de BD
-      this.isBDReady.next(true);
-    }catch (errorN){
-      this.presentAlert("Error en Crear Tabla:"+errorN);
+      // Ejecutar el insert correspondiente
+      await this.database.executeSql(registro, []);
+    } catch (error) {
+      this.presentAlert("Error en Crear Tabla: " + error);
     }
- }
+  }
+}
   //Fin Tablas
 
 
