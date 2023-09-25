@@ -21,17 +21,17 @@ export class DbservicioService {
 
 
   //variables para la creacion de tablas
-  tblRol:string="CREATE TABLE IF NOT EXISTS rol(idR INTEGER PRIMARY KEY autoincrement, nombreR VARCHAR(15) NOT NULL);";
+  tblRol: string = "CREATE TABLE IF NOT EXISTS rol(idR INTEGER PRIMARY KEY AUTOINCREMENT, nombreR VARCHAR(15) NOT NULL);";
 
-  tblPregunta:string="CREATE TABLE IF NOT EXISTS pregunta(idP INTEGER PRIMARY KEY autoincrement, nombreP VARCHAR(30) NOT NULL);";
+  tblPregunta: string = "CREATE TABLE IF NOT EXISTS pregunta(idP INTEGER PRIMARY KEY AUTOINCREMENT, nombreP VARCHAR(30) NOT NULL);";
 
   tblLogro:string="CREATE TABLE IF NOT EXISTS logro(idL INTEGER PRIMARY KEY autoincrement, nombreL VARCHAR(30) NOT NULL, descripcion VARCHAR(100) NOT NULL, recompensa NUMBER(5) NOT NULL);";
 
-  tblIntento:string="CREATE TABLE IF NOT EXISTS intento(idI INTEGER PRIMARY KEY autoincrement, estrellas NUMBER(6) NOT NULL, tiempo NUMBER(10) NOT NULL, completado BOOLEAN NOT NULL,FOREIGN KEY(idNiveles) REFERENCES tblNiveles(idN));";
+  tblNiveles: string = "CREATE TABLE IF NOT EXISTS niveles(idN INTEGER PRIMARY KEY AUTOINCREMENT, NombreN VARCHAR(30) NOT NULL, recompensaN NUMBER(6) NOT NULL);";
 
-  tblUsuario:string="CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY autoincrement,respuesta VARCHAR(50) NOT NULL, nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL,correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto FILES NOT NULL, monedas NUMBER(5) NOT NULL, FOREIGN KEY (idRol) REFERENCES tblRol(idR)  , FOREIGN KEY(idPregunta) REFERENCES tblPregunta(idP),FOREIGN KEY(idLogros) REFERENCES tblLogro(idR) , FOREIGN KEY(idIntento) REFERENCES tblIntento(idI));";
+  tblIntento: string = "CREATE TABLE IF NOT EXISTS intento(idI INTEGER PRIMARY KEY AUTOINCREMENT, estrellas NUMBER(6) NOT NULL, tiempo NUMBER(10) NOT NULL, completado BOOLEAN NOT NULL, idNiveles INTEGER, FOREIGN KEY(idNiveles) REFERENCES niveles(idN));";
 
-  tblNiveles:string="CREATE TABLE IF NOT EXISTS niveles(idN INTEGER PRIMARY KEY autoincrement, recompensaN NUMBER(6) NOT NULL, tiempo NUMBER(10) NOT NULL);";
+  tblUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY AUTOINCREMENT, respuesta VARCHAR(50) NOT NULL, nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL, correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto FILES, monedas NUMBER(5) NOT NULL, idRol INTEGER, idPregunta INTEGER, idLogros INTEGER, idIntento INTEGER, FOREIGN KEY(idRol) REFERENCES rol(idR), FOREIGN KEY(idPregunta) REFERENCES pregunta(idP), FOREIGN KEY(idLogros) REFERENCES logro(idL), FOREIGN KEY(idIntento) REFERENCES intento(idI));";
 
 
   //variables para los insert iniciales
@@ -41,12 +41,11 @@ export class DbservicioService {
 
   registroLogro:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Tutorial Completado', 'Completaste el tutorial felicidades', 15);";
 
-  registroIntento:string="INSERT or IGNORE INTO niveles(idI, estrellas, tiempo, completado) VALUES(1, 30, 300);";
+  registroNiveles: string = "INSERT or IGNORE INTO niveles(idN, NombreN, recompensaN) VALUES(1, 'Nivel4', 300);";
 
-  registroUsuario:string="INSERT or IGNORE INTO usuario(idU, respuesta, nombreU, contrasena, correo, descripcion, foto, monedas) VALUES(1, 'Lasaña', Dani123, J@ny12, dani123@gmail.com, '', 30);";
+  registroIntento: string = "INSERT or IGNORE INTO intento(estrellas, tiempo, completado) VALUES(30, 300, 0);";
 
-  registroNiveles:string="INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(1, 30, 300);";
-
+  registroUsuario: string = "INSERT or IGNORE INTO usuario(idU, respuesta, nombreU, contrasena, correo, descripcion, foto, monedas) VALUES(1, 'Lasaña', 'Dani123', 'J@ny12', 'dani123@gmail.com', 'Me gusta jugar videojuegos','',30);";
 
   //observables de las tablas
   listaRol = new BehaviorSubject([]);
@@ -55,11 +54,12 @@ export class DbservicioService {
 
   listaLogro = new BehaviorSubject([]);
 
+  listaNiveles = new BehaviorSubject([]);
+
   listaIntento = new BehaviorSubject([]);
 
   listaUsuario = new BehaviorSubject([]);
 
-  listaNiveles = new BehaviorSubject([]);
 
 
   //observable para la BD
@@ -90,31 +90,34 @@ export class DbservicioService {
 
 
   //Tablas
- async crearTablas() {
-  const tablas = [
-    { tabla: this.tblRol, registro: this.registroRol },
-    { tabla: this.tblPregunta, registro: this.registroPregunta },
-    { tabla: this.tblLogro, registro: this.registroLogro },
-    { tabla: this.tblIntento, registro: this.registroIntento },
-    { tabla: this.tblUsuario, registro: this.registroUsuario },
-    { tabla: this.tblNiveles, registro: this.registroNiveles },
-  ];
-
-  for (const { tabla, registro } of tablas) {
-    try {
-      // Ejecutar la creación de la tabla
-      await this.database.executeSql(tabla, []);
-      this.presentAlert("Tabla creada");
-      // Cambiar el observable de BD
-      this.isBDReady.next(true);
-
-      // Ejecutar el insert correspondiente
-      await this.database.executeSql(registro, []);
-    } catch (error) {
-      this.presentAlert("Error en Crear Tabla: " + error);
+  async crearTablas() {
+    const tablas = [
+      { tabla: this.tblRol, registro: this.registroRol },
+      { tabla: this.tblPregunta, registro: this.registroPregunta },
+      { tabla: this.tblLogro, registro: this.registroLogro },
+      { tabla: this.tblNiveles, registro: this.registroNiveles },
+      { tabla: this.tblIntento, registro: this.registroIntento },
+      { tabla: this.tblUsuario, registro: this.registroUsuario },
+    ];
+  
+    for (const { tabla, registro } of tablas) {
+      try {
+        console.log('Creando tabla: ' + tabla);
+        await this.database.executeSql(tabla, []);
+        console.log('Tabla creada: ' + tabla); 
+        this.presentAlert('Tabla creada: ' + tabla); 
+        this.isBDReady.next(true);
+  
+        console.log('Insertando registros en tabla: ' + tabla);
+        await this.database.executeSql(registro, []);
+        console.log('Registros insertados en tabla: ' + tabla); 
+        this.presentAlert('Registros insertados en tabla: ' + tabla); // 
+      } catch (error) {
+        console.error('Error al crear tabla ' + tabla + ': ' + error); // 
+        this.presentAlert('Error al crear tabla ' + tabla + ': ' + error); 
+      }
     }
   }
-}
   //Fin Tablas
 
 
@@ -131,16 +134,16 @@ export class DbservicioService {
     return this.listaLogro.asObservable();
   }
 
+  fetchNiveles():Observable<Niveles[]>{
+    return this.listaNiveles.asObservable();
+  }
+
   fetchIntento():Observable<Intento[]>{
     return this.listaIntento.asObservable();
   }
 
   fetchUsuario():Observable<Usuario[]>{
     return this.listaUsuario.asObservable();
-  }
-
-  fetchNiveles():Observable<Niveles[]>{
-    return this.listaNiveles.asObservable();
   }
 //Fin Fetchs
 
@@ -200,7 +203,7 @@ eliminarRol(idR:any){
         })
       }
     }
-    this.listaUsuario.next(items as any);
+    this.listapreguntas.next(items as any);
     })
   }
 
@@ -299,14 +302,52 @@ eliminarRol(idR:any){
   }
 
   eliminarIntento(idI:any){
-    return this.database.executeSql('DELETE FROM intento WHERE idL = ?',[idI]).then(res=>{
+    return this.database.executeSql('DELETE FROM intento WHERE idI = ?',[idI]).then(res=>{
       this.buscarIntento();
     })
   }
   //Fin Intento
 
+  //Niveles
+  buscarNiveles(){
+    return this.database.executeSql('SELECT * FROM niveles',[]).then(res=>{
+      //variable para lmacenar el resultado
+      let items:Niveles[]=[];
+      //verifico la cantidad de registros
+      if(res.rows.length > 0 ){
+        //agrego registro a registro em mi variable
+        for(var i = 0; i< res.rows.length; i++){
+          items.push({
+            idN:res.rows.item(i).idN,
+            NombreN:res.rows.item(i).NombreN,
+            RecompensaN:res.rows.item(i).RecompensaN
+          })
+        }
+      }
+      this.listaNiveles.next(items as any);
+    })
+  }
 
-   //Usuario
+  insertarNiveles(NombreN:any, RecompensaN:any){
+    return this.database.executeSql('INSERT INTO niveles(NombreN, RecompensaN) VALUES(?,?)',[NombreN, RecompensaN]).then(res=>{
+      this.buscarNiveles();
+    })
+  }
+
+  actualizarNiveles(idN:any, NombreN:any, RecompensaN:any){
+    return this.database.executeSql('UPDATE niveles SET NombreN= ?, RecompensaN= ? WHERE idN= ?',[NombreN,RecompensaN,idN]).then(res=>{
+      this.buscarNiveles();
+    })
+  }
+
+  eliminarNiveles(idN:any){
+    return this.database.executeSql('DELETE FROM niveles WHERE idN = ?',[idN]).then(res=>{
+      this.buscarNiveles();
+    })
+  }
+  //Fin Niveles
+
+  //Usuario
 buscarUsuario(){
   return this.database.executeSql('SELECT * FROM usuario',[]).then(res=>{
     //variable para lmacenar el resultado
@@ -349,48 +390,6 @@ buscarUsuario(){
     })
   }
 //Fin Usuario
-
-
-  //Niveles
-  buscarNiveles(){
-    return this.database.executeSql('SELECT * FROM niveles',[]).then(res=>{
-      //variable para lmacenar el resultado
-      let items:Niveles[]=[];
-      //verifico la cantidad de registros
-      if(res.rows.length > 0 ){
-        //agrego registro a registro em mi variable
-        for(var i = 0; i< res.rows.length; i++){
-          items.push({
-            idN:res.rows.item(i).idN,
-            NombreN:res.rows.item(i).NombreN,
-            RecompensaN:res.rows.item(i).RecompensaN
-          })
-        }
-      }
-      this.listaNiveles.next(items as any);
-    })
-  }
-
-  insertarNiveles(NombreN:any, RecompensaN:any){
-    return this.database.executeSql('INSERT INTO niveles(NombreN, RecompensaN) VALUES(?,?)',[NombreN, RecompensaN]).then(res=>{
-      this.buscarNiveles();
-    })
-  }
-
-  actualizarNiveles(idN:any, NombreN:any, RecompensaN:any){
-    return this.database.executeSql('UPDATE niveles SET NombreN= ?, RecompensaN= ? WHERE idN= ?',[NombreN,RecompensaN,idN]).then(res=>{
-      this.buscarNiveles();
-    })
-  }
-
-  eliminarNiveles(idN:any){
-    return this.database.executeSql('DELETE FROM niveles WHERE idL = ?',[idN]).then(res=>{
-      this.buscarNiveles();
-    })
-  }
-  //Fin Niveles
-
-
  
 
   
