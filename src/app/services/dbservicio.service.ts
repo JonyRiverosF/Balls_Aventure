@@ -15,22 +15,24 @@ import { Niveles } from './niveles';
 })
 export class DbservicioService {
   
+
   //variable de conexion a BD
   public database!: SQLiteObject;
 
+
   //variables para la creacion de tablas
+  tblUsuario:string="CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY autoincrement,respuesta VARCHAR(50) NOT NULL, nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL,correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto FILES NOT NULL, monedas NUMBER(5) NOT NULL, FOREIGN KEY (idRol) REFERENCES tblRol(idR)  , FOREIGN KEY(idPregunta) REFERENCES tblPregunta(idP),FOREIGN KEY(idLogros) REFERENCES tblLogro(idR) , FOREIGN KEY(idIntento) REFERENCES tblIntento(idI));";
 
-  tblUsuario:string="CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY autoincrement,respuesta VARCHAR(50), nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL,correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto FILES NOT NULL, monedas NUMBER(5) NOT NULL, pregunta FOREIGN KEY NOT NULL,  logros FOREIGN KEY , rol FOREIGN KEY);";
+  tblPregunta:string="CREATE TABLE IF NOT EXISTS pregunta(idP INTEGER PRIMARY KEY autoincrement, nombreP VARCHAR(30) NOT NULL);";
 
-  tblPregunta:string="CREATE TABLE IF NOT EXISTS pregunta(idP INTEGER PRIMARY KEY autoincrement, nombreP VARCHAR(30));";
+  tblRol:string="CREATE TABLE IF NOT EXISTS rol(idR INTEGER PRIMARY KEY autoincrement, nombreR VARCHAR(15) NOT NULL);";
 
-  tblRol:string="CREATE TABLE IF NOT EXISTS rol(idR INTEGER PRIMARY KEY autoincrement, nombreR VARCHAR(15));";
+  tblLogro:string="CREATE TABLE IF NOT EXISTS logro(idL INTEGER PRIMARY KEY autoincrement, nombreL VARCHAR(30) NOT NULL, descripcion VARCHAR(100) NOT NULL, recompensa NUMBER(5) NOT NULL);";
 
-  tblLogro:string="CREATE TABLE IF NOT EXISTS logro(idL INTEGER PRIMARY KEY autoincrement, nombreL VARCHAR(30), descripcion VARCHAR(100), recompensa NUMBER(5));";
+  tblIntento:string="CREATE TABLE IF NOT EXISTS intento(idI INTEGER PRIMARY KEY autoincrement, estrellas NUMBER(6) NOT NULL, tiempo NUMBER(10) NOT NULL, completado BOOLEAN NOT NULL,FOREIGN KEY(idNiveles) REFERENCES tblNiveles(idN));";
 
-  tblIntento:string="CREATE TABLE IF NOT EXISTS intento(idI INTEGER PRIMARY KEY autoincrement, estrellas NUMBER(6), tiempo NUMBER(10), completado BOOLEAN);";
+  tblNiveles:string="CREATE TABLE IF NOT EXISTS niveles(idN INTEGER PRIMARY KEY autoincrement, recompensaN NUMBER(6) NOT NULL, tiempo NUMBER(10) NOT NULL);";
 
-  tblNiveles:string="CREATE TABLE IF NOT EXISTS niveles(idN INTEGER PRIMARY KEY autoincrement, recompensaN NUMBER(6), tiempo NUMBER(10));";
 
   //variables para los insert iniciales
   registroUsuario:string="INSERT or IGNORE INTO usuario(idU, respuesta, nombreU, contrasena, correo, descripcion, foto, monedas) VALUES(1, 'Lasaña', Dani123, J@ny12, dani123@gmail.com, '', 30);";
@@ -45,6 +47,7 @@ export class DbservicioService {
 
   registroNiveles:string="INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(1, 30, 300);";
 
+
   //observables de las tablas
   listaUsuario = new BehaviorSubject([]);
 
@@ -58,12 +61,14 @@ export class DbservicioService {
 
   listaNiveles = new BehaviorSubject([]);
 
+
   //observable para la BD
   private isBDReady:BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(private platform:Platform,public sqlite:SQLite,public toastController: ToastController, private alertController: AlertController) { 
     this.crearBD();
   }
+
 
 //Crear Base de datos
  crearBD(){
@@ -84,9 +89,54 @@ export class DbservicioService {
 //Fin Base de datos
 
 
-
   //Tablas
  async crearTablas(){
+    try{
+    //ejecutar la creacion de tablas
+    await this.database.executeSql(this.tblRol,[]);
+    //ejecuto los insert
+    await this.database.executeSql(this.registroRol,[]);
+    this.presentAlert("Tabla creada")
+    //cambio mi observable de BD
+      this.isBDReady.next(true);
+      this.buscarRol();
+    }catch (errorR){
+      this.presentAlert("Error en Crear Tabla:"+errorR);
+    }
+
+    try{
+      //ejecutar la creacion de tablas
+      await this.database.executeSql(this.tblPregunta,[]);
+      //ejecuto los insert
+      await this.database.executeSql(this.registroPregunta,[]);
+      this.presentAlert("Tabla creada")
+      //cambio mi observable de BD
+      this.isBDReady.next(true);
+    }catch (errorP){
+      this.presentAlert("Error en Crear Tabla:"+errorP);
+    }
+    try{
+      //ejecutar la creacion de tablas
+      await this.database.executeSql(this.tblLogro,[]);
+      //ejecuto los insert
+      await this.database.executeSql(this.registroLogro,[]);
+      this.presentAlert("Tabla creada")
+      //cambio mi observable de BD
+      this.isBDReady.next(true);
+    }catch (errorL){
+      this.presentAlert("Error en Crear Tabla:"+errorL);
+    }
+    try{
+      //ejecutar la creacion de tablas
+      await this.database.executeSql(this.tblIntento,[]);
+      //ejecuto los insert
+      await this.database.executeSql(this.registroIntento,[]);
+      this.presentAlert("Tabla creada")
+      //cambio mi observable de BD
+      this.isBDReady.next(true);
+    }catch (errorN){
+      this.presentAlert("Error en Crear Tabla:"+errorN);
+    }
     try{
       //ejecutar la creacion de tablas
       await this.database.executeSql(this.tblUsuario,[]);
@@ -101,43 +151,6 @@ export class DbservicioService {
 
     try{
       //ejecutar la creacion de tablas
-      await this.database.executeSql(this.tblPregunta,[]);
-      //ejecuto los insert
-      await this.database.executeSql(this.registroPregunta,[]);
-      this.presentAlert("Tabla creada")
-      //cambio mi observable de BD
-      this.isBDReady.next(true);
-    }catch (errorP){
-      this.presentAlert("Error en Crear Tabla:"+errorP);
-    }
-
-    try{
-      //ejecutar la creacion de tablas
-      await this.database.executeSql(this.tblRol,[]);
-      //ejecuto los insert
-      await this.database.executeSql(this.registroRol,[]);
-      this.presentAlert("Tabla creada")
-      //cambio mi observable de BD
-      this.isBDReady.next(true);
-      this.buscarRol();
-    }catch (errorR){
-      this.presentAlert("Error en Crear Tabla:"+errorR);
-    }
-
-    try{
-      //ejecutar la creacion de tablas
-      await this.database.executeSql(this.tblLogro,[]);
-      //ejecuto los insert
-      await this.database.executeSql(this.registroLogro,[]);
-      this.presentAlert("Tabla creada")
-      //cambio mi observable de BD
-      this.isBDReady.next(true);
-    }catch (errorL){
-      this.presentAlert("Error en Crear Tabla:"+errorL);
-    }
-
-    try{
-      //ejecutar la creacion de tablas
       await this.database.executeSql(this.tblNiveles,[]);
       //ejecuto los insert
       await this.database.executeSql(this.registroNiveles,[]);
@@ -147,22 +160,8 @@ export class DbservicioService {
     }catch (errorN){
       this.presentAlert("Error en Crear Tabla:"+errorN);
     }
-
-    try{
-      //ejecutar la creacion de tablas
-      await this.database.executeSql(this.tblIntento,[]);
-      //ejecuto los insert
-      await this.database.executeSql(this.registroIntento,[]);
-      this.presentAlert("Tabla creada")
-      //cambio mi observable de BD
-      this.isBDReady.next(true);
-    }catch (errorN){
-      this.presentAlert("Error en Crear Tabla:"+errorN);
-    }
-  }
+ }
   //Fin Tablas
-
-
 
 
   //Fetchs
@@ -191,51 +190,45 @@ export class DbservicioService {
   }
 //Fin Fetchs
 
-
-//Usuario
-buscarUsuario(){
-  return this.database.executeSql('SELECT * FROM usuario',[]).then(res=>{
+//Rol
+buscarRol(){
+  return this.database.executeSql('SELECT * FROM rol',[]).then(res=>{
     //variable para lmacenar el resultado
-    let items:Usuario[]=[];
+    let items:Rol[]=[];
     //verifico la cantidad de registros
     if(res.rows.length > 0 ){
       //agrego registro a registro em mi variable
       for(var i = 0; i< res.rows.length; i++){
         items.push({
-          idU:res.rows.item(i).idU,
-          respuesta:res.rows.item(i).respuesta,
-          nombreU:res.rows.item(i).nombreU,
-          contrasena:res.rows.item(i).contrasena,
-          correo:res.rows.item(i).correo,
-          descripcion:res.rows.item(i).descripcion,
-          foto:res.rows.item(i).foto,
-          monedas:res.rows.item(i).monedas
+          idR:res.rows.item(i).idR,
+          nombreR:res.rows.item(i).nombreR
+
         })
       }
     }
-    this.listaUsuario.next(items as any);
-    })
-  }
+    this.listaRol.next(items as any);
 
-  insertarUsuario(respuesta:any, nombreU:any, contrasena:any, correo:any, descripcion:any, foto:any, monedas:any){
-    return this.database.executeSql('INSERT INTO usuario(respuesta, nombreU, contrasena, correo, descripcion, foto, monedas) VALUES(?,?,?,?,?,?,?)',[respuesta, nombreU, contrasena, correo, descripcion, foto, monedas]).then(res=>{
-      this.buscarUsuario();
-    })
-  }
+  })
+}
 
-  actualizarUsuario(idU:any, respuesta:any, nombreU:any, contrasena:any, correo:any, descripcion:any, foto:any, monedas:any ){
-    return this.database.executeSql('UPDATE usuario SET respuesta= ?, nombreU= ?, contrasena= ?, correo= ?, descripcion= ?, foto= ?, monedas= ? WHERE idU= ?',[respuesta, nombreU,contrasena,correo,descripcion,foto,monedas,idU]).then(res=>{
-      this.buscarUsuario();
-    })
-  }
+insertarRol(nombreR:any){
+  return this.database.executeSql('INSERT INTO rol(nombreR) VALUES(?)',[nombreR]).then(res=>{
+    this.buscarRol();
+  })
+}
 
-  eliminarUsuario(idU:any){
-    return this.database.executeSql('DELETE FROM usuario WHERE idU = ?',[idU]).then(res=>{
-      this.buscarUsuario();
-    })
-  }
-//Fin Usuario
+actualizarRol(idR:any, nombreR:any){
+  return this.database.executeSql('UPDATE rol SET nombreR=? WHERE idR=?',[nombreR, idR]).then(res=>{
+    this.buscarRol();
+  })
+}
 
+eliminarRol(idR:any){
+  return this.database.executeSql('DELETE FROM rol WHERE idR = ?',[idR]).then(res=>{
+    this.buscarRol();
+  })
+}
+//Fin rol
 
 
 //Pregunta
@@ -275,49 +268,6 @@ buscarUsuario(){
     })
   }
   //Fin pregunta
-
-
-
-//Rol
-  buscarRol(){
-    return this.database.executeSql('SELECT * FROM rol',[]).then(res=>{
-      //variable para lmacenar el resultado
-      let items:Rol[]=[];
-      //verifico la cantidad de registros
-      if(res.rows.length > 0 ){
-        //agrego registro a registro em mi variable
-        for(var i = 0; i< res.rows.length; i++){
-          items.push({
-            idR:res.rows.item(i).idR,
-            nombreR:res.rows.item(i).nombreR
-
-          })
-        }
-      }
-      this.listaRol.next(items as any);
-
-    })
-  }
-
-  insertarRol(nombreR:any){
-    return this.database.executeSql('INSERT INTO rol(nombreR) VALUES(?)',[nombreR]).then(res=>{
-      this.buscarRol();
-    })
-  }
-
-  actualizarRol(idR:any, nombreR:any){
-    return this.database.executeSql('UPDATE rol SET nombreR=? WHERE idR=?',[nombreR, idR]).then(res=>{
-      this.buscarRol();
-    })
-  }
-
-  eliminarRol(idR:any){
-    return this.database.executeSql('DELETE FROM rol WHERE idR = ?',[idR]).then(res=>{
-      this.buscarRol();
-    })
-  }
-  //Fin rol
-
 
 
   //Logro
@@ -388,8 +338,8 @@ buscarUsuario(){
     })
   }
 
-  actualizarIntento(idI:any, estrellas:any, descripcion:any, recompensa:any){
-    return this.database.executeSql('UPDATE intento SET estrellas= ?, descripcion= ?, recompensa= ? WHERE idI= ?',[estrellas,descripcion,recompensa,idI]).then(res=>{
+  actualizarIntento(idI:any, estrellas:any, descripcion:any, recompensa:any,idNiveles:any){
+    return this.database.executeSql('UPDATE intento SET estrellas= ?, descripcion= ?, recompensa= ?, idNiveles= ?  WHERE idI= ?',[estrellas,descripcion,recompensa,idNiveles,idI]).then(res=>{
       this.buscarIntento();
     })
   }
@@ -402,7 +352,52 @@ buscarUsuario(){
   //Fin Intento
 
 
-  //Intento
+   //Usuario
+buscarUsuario(){
+  return this.database.executeSql('SELECT * FROM usuario',[]).then(res=>{
+    //variable para lmacenar el resultado
+    let items:Usuario[]=[];
+    //verifico la cantidad de registros
+    if(res.rows.length > 0 ){
+      //agrego registro a registro em mi variable
+      for(var i = 0; i< res.rows.length; i++){
+        items.push({
+          idU:res.rows.item(i).idU,
+          respuesta:res.rows.item(i).respuesta,
+          nombreU:res.rows.item(i).nombreU,
+          contrasena:res.rows.item(i).contrasena,
+          correo:res.rows.item(i).correo,
+          descripcion:res.rows.item(i).descripcion,
+          foto:res.rows.item(i).foto,
+          monedas:res.rows.item(i).monedas
+        })
+      }
+    }
+    this.listaUsuario.next(items as any);
+    })
+  }
+
+  insertarUsuario(respuesta:any, nombreU:any, contrasena:any, correo:any, descripcion:any, foto:any, monedas:any){
+    return this.database.executeSql('INSERT INTO usuario(respuesta, nombreU, contrasena, correo, descripcion, foto, monedas) VALUES(?,?,?,?,?,?,?)',[respuesta, nombreU, contrasena, correo, descripcion, foto, monedas]).then(res=>{
+      this.buscarUsuario();
+    })
+  }
+
+  actualizarUsuario(idU:any, respuesta:any, nombreU:any, contrasena:any, correo:any, descripcion:any, foto:any, monedas:any, idRol:any, idPregunta:any,idLogros:any,idIntento:any){
+    return this.database.executeSql('UPDATE usuario SET respuesta= ?, nombreU= ?, contrasena= ?, correo= ?, descripcion= ?, foto= ?, monedas= ?, idRol= ?, idPregunta= ?,  idLogros= ?,idIntento= ? WHERE idU= ?',[respuesta, nombreU,contrasena,correo,descripcion,foto,monedas,idRol,idPregunta,idLogros,idIntento,idU]).then(res=>{
+      this.buscarUsuario();
+    })
+  }
+
+  eliminarUsuario(idU:any){
+    return this.database.executeSql('DELETE FROM usuario WHERE idU = ?',[idU]).then(res=>{
+      this.buscarUsuario();
+    })
+  }
+//Fin Usuario
+
+
+  //Niveles
   buscarNiveles(){
     return this.database.executeSql('SELECT * FROM niveles',[]).then(res=>{
       //variable para lmacenar el resultado
@@ -439,9 +434,10 @@ buscarUsuario(){
       this.buscarNiveles();
     })
   }
-  //Fin Intento
+  //Fin Niveles
 
 
+ 
 
   
 
@@ -467,6 +463,7 @@ buscarUsuario(){
   bdstate(){
     return this.isBDReady.asObservable();
   }
+
 }
 
 
