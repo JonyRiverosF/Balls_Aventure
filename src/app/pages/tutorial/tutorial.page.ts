@@ -19,6 +19,7 @@ export class TutorialPage implements OnInit {
  private isJumping = false;
  personajePosX = 0;
  personajePosY = 0;
+ private verticalVelocity = 0;
  private isMovingLeft = false;
  private isMovingRight = false;
  private rotationInterval: any;

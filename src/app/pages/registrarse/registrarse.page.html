@@ -64,11 +64,11 @@
           </div>
         <br>
 
-        <ion-item>
+        <ion-item *ngFor="let x of arregloPreguntas">
           <ion-label position="floating">Pregunta de seguridad</ion-label>
           <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
-            <ion-select-option value="apples">¿Cual es tu mascota favorita?</ion-select-option>
-            <ion-select-option value="oranges">¿Cual es tu pelicula favorita?</ion-select-option>
+            <ion-select-option value="apples">{{x.nombreP}}</ion-select-option>
+           
           </ion-select>
         </ion-item>
         <br>
