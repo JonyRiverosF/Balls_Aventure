@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras,Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -17,6 +17,7 @@ export class TutorialPage implements OnInit {
 
  //PJ y movimientos
  private isJumping = false;
+ private enSuperficieDePlataforma = false;
  personajePosX = 0;
  personajePosY = 0;
  private verticalVelocity = 0;
@@ -25,6 +26,7 @@ export class TutorialPage implements OnInit {
  private rotationInterval: any;
  public rotationDegrees = 0;
  maxX: number = 800; 
+ maxY: number = 0; 
  
 
  //Puerta y estrellas
@@ -44,8 +46,9 @@ export class TutorialPage implements OnInit {
  public mostrarAlerta: boolean = false;
 
  @ViewChild('pj', { static: false }) personaje!: ElementRef;
-constructor(private router: Router, public alertController: AlertController) {
+constructor(private router: Router, public alertController: AlertController, private toastController: ToastController) {
   this.calcularMaxX();
+  
 }
 
 //Timeout Alerta
@@ -93,6 +96,7 @@ calcularMaxX() {
   const contenedor = document.getElementById('tu-contenedor'); 
   if (contenedor) {
     this.maxX = contenedor.clientWidth;
+    this.maxY = contenedor.clientHeight;
   }
 }
 
@@ -106,12 +110,59 @@ reanudar(){
 moverPersonaje() {
   const llave = document.querySelector('.llave') as HTMLElement | null;
   const puerta1 = document.querySelector('.puerta1') as HTMLElement | null;
+  const puerta = document.querySelector('.puerta') as HTMLElement | null;
   const estrella = document.querySelector('.estrella') as HTMLElement | null;
   const estrella1 = document.querySelector('.estrella1') as HTMLElement | null;
   const estrella2 = document.querySelector('.estrella2') as HTMLElement | null;
   const caja = document.querySelector('.caja') as HTMLElement | null;
   const personaje = document.querySelector('.pj') as HTMLElement | null;
+  const personajeup = document.querySelector('.pjup') as HTMLElement | null;
   const pinchos = document.querySelector('.pinchos') as HTMLElement | null;
+  const plataforma1 = document.getElementById('plataforma1');
+  const plataforma2 = document.getElementById('plataforma2');
+  const plataforma3 = document.getElementById('plataforma3');
+  const plataforma4 = document.getElementById('plataforma4');
+  const gravedad = 1.2; // Ajusta la fuerza de la gravedad según tus necesidades
+  this.verticalVelocity += gravedad;
+
+  // Mover el personaje verticalmente
+  
+ //arriba de plataformas
+    if (personaje && plataforma1) {
+    if (this.colisiona(personaje, plataforma1)) {
+      this.verticalVelocity = 0; // Detener la gravedad
+      
+      this.enSuperficieDePlataforma = true;
+    }
+  }
+  if (personaje && plataforma2) {
+    if (this.colisiona(personaje, plataforma2)) {
+      this.verticalVelocity = 0; // Detener la gravedad
+      
+      this.enSuperficieDePlataforma = true;
+    }
+  }
+  if (personaje && plataforma3) {
+    if (this.colisiona(personaje, plataforma3)) {
+      this.verticalVelocity = 0; // Detener la gravedad
+      
+      this.enSuperficieDePlataforma = true;
+    }
+  }
+  if (personaje && plataforma4) {
+    if (this.colisiona(personaje, plataforma4)) {
+      this.verticalVelocity = 0; // Detener la gravedad
+      
+      this.enSuperficieDePlataforma = true;
+    }
+  }
+  this.personajePosY += this.verticalVelocity;
+ //que la gravedad no haga que traspase el suelo
+  if (this.personajePosY > this.maxY) {
+    this.personajePosY = this.maxY; // Ajusta la posición para que no supere el límite inferior
+    this.verticalVelocity = 0; // Detén la velocidad vertical (puede cambiar según tus necesidades)
+    this.isJumping = false; 
+  }
 
   if (personaje && llave) {
     if (this.colisiona(personaje, llave)) {
@@ -125,6 +176,12 @@ moverPersonaje() {
   if (personaje && puerta1) {
     if (this.colisiona(personaje, puerta1)) {
       this.nivelcompletado = true;
+
+    }
+  }
+  if (personaje && puerta) {
+    if (this.colisiona(personaje, puerta)) {
+      this.presentToast('top');
 
     }
   }
@@ -193,10 +250,12 @@ saltarPersonaje() {
     this.isJumping = true;
     const jumpHeight = -100;
     const jumpDuration = 500; 
+    this.verticalVelocity = -15;
     const initialPosY = this.personajePosY-20;
     const startTime = Date.now();
     const jumpInterval = setInterval(() => {
     const currentTime = Date.now();
+    
     const elapsedTime = currentTime - startTime;
       if (elapsedTime >= jumpDuration) {
         clearInterval(jumpInterval);
@@ -216,28 +275,36 @@ colisiona(element1: HTMLElement, element2: HTMLElement): boolean {
     rect1.left < rect2.right &&
     rect1.right > rect2.left &&
     rect1.top < rect2.bottom &&
-    rect1.bottom > rect2.top
+    rect1.bottom > rect2.top 
+    
   );
 }
+colisionaarriba(element1: HTMLElement, element2: HTMLElement): boolean {
+  const rect1 = element1.getBoundingClientRect();
+  const rect2 = element2.getBoundingClientRect();
+  return (
+    
+    rect1.bottom > rect2.top &&
+    rect1.left > rect2.top &&
+    rect1.right > rect2.top &&
+    rect1.top > rect2.top 
 
-//Volver Al inicio
-  public alertButtons = [
-     
-    {header:"¿Volver al lobby?",
-      text: 'REANUDAR',
-      cssClass: 'alert-button-cancel',
-      
-    },
-    {
-      text: 'LOBBY',
-      cssClass: 'alert-button-confirm',
-    },
-  ];
+    
+  );
+}
+async presentToast(position: 'top' | 'middle' | 'bottom') {
+  const toast = await this.toastController.create({
+    message: 'Primero necesitas la llave ',
+    duration: 100,
+    
+    position: position,
+  });
 
-
-  
+  await toast.present();
+}
 }
 
- 
+
+
  
 
