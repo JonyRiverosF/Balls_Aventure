@@ -27,7 +27,7 @@ export class DbservicioService {
 
   tblLogro:string="CREATE TABLE IF NOT EXISTS logro(idL INTEGER PRIMARY KEY autoincrement, nombreL VARCHAR(30) NOT NULL, descripcion VARCHAR(100) NOT NULL, recompensa NUMBER(5) NOT NULL);";
 
-  tblNiveles: string = "CREATE TABLE IF NOT EXISTS niveles(idN INTEGER PRIMARY KEY AUTOINCREMENT, NombreN VARCHAR(30) NOT NULL, recompensaN NUMBER(6) NOT NULL);";
+  tblNiveles: string = "CREATE TABLE IF NOT EXISTS niveles(idN INTEGER PRIMARY KEY AUTOINCREMENT, NombreN VARCHAR(30) NOT NULL, RecompensaN NUMBER(6) NOT NULL);";
 
   tblIntento: string = "CREATE TABLE IF NOT EXISTS intento(idI INTEGER PRIMARY KEY AUTOINCREMENT, estrellas NUMBER(6) NOT NULL, tiempo NUMBER(10) NOT NULL, completado BOOLEAN NOT NULL, idNiveles INTEGER, FOREIGN KEY(idNiveles) REFERENCES niveles(idN));";
 
@@ -41,7 +41,7 @@ export class DbservicioService {
 
   registroLogro:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Tutorial Completado', 'Completaste el tutorial felicidades', 15);";
 
-  registroNiveles: string = "INSERT or IGNORE INTO niveles(idN, NombreN, recompensaN) VALUES(1, 'Nivel4', 300);";
+  registroNiveles: string = "INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(1, 'Nivel4', 300);";
 
   registroIntento: string = "INSERT or IGNORE INTO intento(estrellas, tiempo, completado) VALUES(30, 300, 0);";
 
@@ -68,58 +68,6 @@ export class DbservicioService {
   constructor(private platform:Platform,public sqlite:SQLite,public toastController: ToastController, private alertController: AlertController) { 
     this.crearBD();
   }
-
-
-//Crear Base de datos
- crearBD(){
-    this.platform.ready().then(()=> {
-      this.sqlite.create({
-        name: 'proyecto.db',
-        location: 'default'
-      }).then((db: SQLiteObject) => {
-        //capturar la coneccion a la BD
-        this.database = db;
-        this.presentAlert("BD creada");
-        //llamo a crear la(s) tabla(s)
-        this.crearTablas();
-      }).catch((e) => this.presentAlert("error en crear BD: "+e));
-
-    })
-  }
-//Fin Base de datos
-
-
-  //Tablas
-  async crearTablas() {
-    const tablas = [
-      { tabla: this.tblRol, registro: this.registroRol },
-      { tabla: this.tblPregunta, registro: this.registroPregunta },
-      { tabla: this.tblLogro, registro: this.registroLogro },
-      { tabla: this.tblNiveles, registro: this.registroNiveles },
-      { tabla: this.tblIntento, registro: this.registroIntento },
-      { tabla: this.tblUsuario, registro: this.registroUsuario },
-    ];
-  
-    for (const { tabla, registro } of tablas) {
-      try {
-        console.log('Creando tabla: ' + tabla);
-        await this.database.executeSql(tabla, []);
-        console.log('Tabla creada: ' + tabla); 
-        this.presentAlert('Tabla creada: ' + tabla); 
-        this.isBDReady.next(true);
-  
-        console.log('Insertando registros en tabla: ' + tabla);
-        await this.database.executeSql(registro, []);
-        console.log('Registros insertados en tabla: ' + tabla); 
-        this.presentAlert('Registros insertados en tabla: ' + tabla); // 
-      } catch (error) {
-        console.error('Error al crear tabla ' + tabla + ': ' + error); // 
-        this.presentAlert('Error al crear tabla ' + tabla + ': ' + error); 
-      }
-    }
-  }
-  //Fin Tablas
-
 
   //Fetchs
   fetchrol():Observable<Rol[]>{
@@ -280,7 +228,7 @@ eliminarRol(idR:any){
           items.push({
             idN:res.rows.item(i).idN,
             NombreN:res.rows.item(i).NombreN,
-            recompensaN:res.rows.item(i).recompensaN
+            RecompensaN:res.rows.item(i).RecompensaN
           })
         }
       }
@@ -288,14 +236,14 @@ eliminarRol(idR:any){
     })
   }
 
-  insertarNiveles(NombreN:any, recompensaN:any){
-    return this.database.executeSql('INSERT INTO niveles(NombreN, recompensaN) VALUES(?,?)',[NombreN, recompensaN]).then(res=>{
+  insertarNiveles(NombreN:any, RecompensaN:any){
+    return this.database.executeSql('INSERT INTO niveles(NombreN, RecompensaN) VALUES(?,?)',[NombreN, RecompensaN]).then(res=>{
       this.buscarNiveles();
     })
   }
 
-  actualizarNiveles(idN:any, NombreN:any, recompensaN:any){
-    return this.database.executeSql('UPDATE niveles SET NombreN= ?, recompensaN= ? WHERE idN= ?',[NombreN,recompensaN,idN]).then(res=>{
+  actualizarNiveles(idN:any, NombreN:any, RecompensaN:any){
+    return this.database.executeSql('UPDATE niveles SET NombreN= ?, RecompensaN= ? WHERE idN= ?',[NombreN,RecompensaN,idN]).then(res=>{
       this.buscarNiveles();
     })
   }
@@ -393,9 +341,189 @@ buscarUsuario(){
   }
 //Fin Usuario
  
+//Crear Base de datos
+crearBD(){
+  this.platform.ready().then(()=> {
+    this.sqlite.create({
+      name: 'proyecto.db',
+      location: 'default'
+    }).then((db: SQLiteObject) => {
+      //capturar la coneccion a la BD
+      this.database = db;
+      this.presentAlert("BD creada");
+      //llamo a crear la(s) tabla(s)
+      this.crearTablaRol();
+      this.crearTablaPregunta();
+      this.crearTablaLogro();
+      this.crearTablaNiveles();
+      this.crearTablaIntento();
+      this.crearTablaUsuario();
+    }).catch((e) => this.presentAlert("error en crear BD: "+e));
 
+  })
+}
+
+/*crearBD(){
+  this.platform.ready().then(()=> {
+    this.sqlite.create({
+      name: 'proyecto.db',
+      location: 'default'
+    }).then((db: SQLiteObject) => {
+      //capturar la coneccion a la BD
+      this.database = db;
+      this.presentAlert("BD creada");
+      //llamo a crear la(s) tabla(s)
+      this.crearTablas();
+    }).catch((e) => this.presentAlert("error en crear BD: "+e));
+
+  })
+}*/
+//Fin Base de datos
+
+//Tablas
+  /*async crearTablas() {
+    const tablas = [
+      { tabla: this.tblRol, registro: this.registroRol },
+      { tabla: this.tblPregunta, registro: this.registroPregunta },
+      { tabla: this.tblLogro, registro: this.registroLogro },
+      { tabla: this.tblNiveles, registro: this.registroNiveles },
+      { tabla: this.tblIntento, registro: this.registroIntento },
+      { tabla: this.tblUsuario, registro: this.registroUsuario },
+    ];
   
+    for (const { tabla, registro } of tablas) {
+      try {
+        console.log('Creando tabla: ' + tabla);
+        await this.database.executeSql(tabla, []);
+        console.log('Tabla creada: ' + tabla); 
+        this.presentAlert('Tabla creada: ' + tabla); 
+        this.isBDReady.next(true);
+  
+        console.log('Insertando registros en tabla: ' + tabla);
+        await this.database.executeSql(registro, []);
+        console.log('Registros insertados en tabla: ' + tabla); 
+        this.presentAlert('Registros insertados en tabla: ' + tabla); // 
+      } catch (error) {
+        console.error('Error al crear tabla ' + tabla + ': ' + error); // 
+        this.presentAlert('Error al crear tabla ' + tabla + ': ' + error); 
+      }
+    }
+  }*/
+  
+async crearTablaRol(){
+  try{
+    //ejecutar la creación de tablas
+    await this.database.executeSql(this.tblRol,[]);
 
+
+    //ejecuto los insert
+    await this.database.executeSql(this.registroRol,[]);
+
+    //cambio mi observable de BD
+    this.isBDReady.next(true);
+    this.buscarRol();
+
+  }catch(e){
+    this.presentAlert("Error en crearTablaRol: " + e);
+  }
+
+}
+
+async crearTablaPregunta(){
+  try{
+    //ejecutar la creación de tablas
+    await this.database.executeSql(this.tblPregunta,[]);
+
+
+    //ejecuto los insert
+    await this.database.executeSql(this.registroPregunta,[]);
+
+    //cambio mi observable de BD
+    this.isBDReady.next(true);
+    this.buscarPregunta();
+
+  }catch(e){
+    this.presentAlert("Error en crearTablaPregunta: " + e);
+  }
+
+}
+
+async crearTablaLogro(){
+  try{
+    //ejecutar la creación de tablas
+    await this.database.executeSql(this.tblLogro,[]);
+
+
+    //ejecuto los insert
+    await this.database.executeSql(this.registroLogro,[]);
+
+    //cambio mi observable de BD
+    this.isBDReady.next(true);
+    this.buscarLogro();
+
+  }catch(e){
+    this.presentAlert("Error en crearTablaLogro: " + e);
+  }
+
+}
+
+async crearTablaNiveles(){
+  try{
+    //ejecutar la creación de tablas
+    await this.database.executeSql(this.tblNiveles,[]);
+
+
+    //ejecuto los insert
+    await this.database.executeSql(this.registroNiveles,[]);
+
+    //cambio mi observable de BD
+    this.isBDReady.next(true);
+    this.buscarNiveles();
+
+  }catch(e){
+    this.presentAlert("Error en crearTablaNiveles: " + e);
+  }
+
+}
+
+async crearTablaIntento(){
+  try{
+    //ejecutar la creación de tablas
+    await this.database.executeSql(this.tblIntento,[]);
+
+
+    //ejecuto los insert
+    await this.database.executeSql(this.registroIntento,[]);
+
+    //cambio mi observable de BD
+    this.isBDReady.next(true);
+    this.buscarIntento();
+
+  }catch(e){
+    this.presentAlert("Error en crearTablaIntento: " + e);
+  }
+
+}
+
+async crearTablaUsuario(){
+  try{
+    //ejecutar la creación de tablas
+    await this.database.executeSql(this.tblUsuario,[]);
+
+
+    //ejecuto los insert
+    await this.database.executeSql(this.registroUsuario,[]);
+
+    //cambio mi observable de BD
+    this.isBDReady.next(true);
+    this.buscarUsuario();
+
+  }catch(e){
+    this.presentAlert("Error en crearTablaUsuario: " + e);
+  }
+
+}
+//Fin Tablas
   
 
 
