@@ -1,51 +1,154 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Usuario</ion-title>
-  </ion-toolbar>
-</ion-header><ion-card style="margin-top: 66px;">
-  <img class="icono" alt="Sin foto" src="assets/icon/hamster.jpeg" />
-  <ion-card-content>
-    <ion-card-title style="text-align: center;">Jonathan Riveros</ion-card-title>
-    <ion-card-subtitle style="text-align: center;">Stanford University<br>Analista Programador Computacional<br>
-      Creador y fundador de Balls Aventure.</ion-card-subtitle>
-  </ion-card-content>
   
-</ion-card>
+</ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content  [fullscreen]="true" style="background-color: rgb(255, 255, 255);">
+  <ion-grid style="background-color: beige;background-size: cover;background-repeat: repeat-x;">
+    <ion-row>
+      <ion-col size="2">
+         <img src="assets/icon/patraFormal.png" [routerLink]="['/admin-usuarios']" style="width: 50px;height: 50px;margin-right: 180px;"/>
+      </ion-col>
+      <ion-col size="10" >
+        <div style="color: black;font-size: 30px;margin: 5%  0 0 15%;">Informacion de usuario</div>
+      </ion-col>
+    </ion-row>
+   
+  <ion-card style="margin: 10px 30px 0px 30px;background-color: rgb(255, 255, 255);box-shadow: 10px 50px 50px 50px rgba(61, 6, 43, 0.253);background-size: 100% 100%;background-repeat: repeat-x;">
+    
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col style="background-color: rgb(255, 255, 255);text-align: center;" size="3">
+            <div style="color: black;font-size: 15px;">
+              Kazuelita
+            </div>
+            <img src="assets/icon/dani.jpeg" style="width: 120px;height: 120px;"/>
 
-  <ion-grid class="fondo" >
-    <ion-list style="background-color: rgba(148, 68, 222, 0.869);">
-      <ion-list-header style="text-align: center;">
-        <ion-label >Nombre Usuario</ion-label>
-        <ion-label>Correo</ion-label>
-        <ion-label>Fecha Nacimiento</ion-label>
-        <ion-label>Rol</ion-label>
-        <ion-label>Lista</ion-label>
-      </ion-list-header>
-      <ion-item style="text-align: center;">
-        <ion-label><app-componente1 nomb="Alfredin864"  ></app-componente1></ion-label>
-        <ion-label><app-componente1  correo="alfred0@mail.com"  ></app-componente1></ion-label>
-        <ion-label><app-componente1  fecha="11/11/1999" ></app-componente1></ion-label>
-        <ion-label><app-componente1  usuario="Usuario"></app-componente1></ion-label>
-        <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
-          <ion-select-option value="apples">Administrador</ion-select-option>
-          <ion-select-option value="oranges">Usuario</ion-select-option>
-        </ion-select>
-      </ion-item>
+          </ion-col>
+          <ion-col style="background-color: rgb(255, 255, 255);color: black;" size="5">
+          <div style="font-size: 18px;">
+            Correo: dani@gmail.com
+
+          </div>
+          <div style="color: black;font-size: 18px;">
+            Rol: 
+            <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
+              <ion-select-option value="apples">Administrador</ion-select-option>
+              <ion-select-option value="oranges">Usuario</ion-select-option>
+            </ion-select>
+            
+          </div>
+          <div>
+            <ion-button>Cambiar tipo de usuario</ion-button>
+          </div>
+            
+          </ion-col>
+          <ion-col size="4">
+            <div class="datos">total de intentos: 15</div>
+            <div class="datos">muertes totales: 10</div>
+            <div class="datos">intentos exitosos: 5</div>
+          </ion-col>
+          
+        </ion-row>
+        <ion-row style="background-color: black;height: 1px;"></ion-row>
+        <div style="color: black;font-size: 20px;text-align: center;margin: 2% 0 0 0;">
+          Logros obtenidos
+        </div>
+        <ion-row>
+          
+          <ion-col size="3"  >
+            <div class="flip-card"  >
+           <div class="flip-card-inner">
+             <div class="flip-card-front">
+               <img alt="Sin foto" src="assets/icon/trofeo.png" />
+               <div class="nombrelogro">  "novato" </div> 
+             </div>
+               <div class="flip-card-back">
+                 
+                 
+                 "completa<br>
+                  el <br>
+                  tutorial"<br>
+                  +<img alt="Sin foto" src="assets/icon/coin.png" style="width: 20px; height: 20px;"/>55 coins
+ 
+ 
+                  
+               </div>
+           </div>
+       </div>
+     
+       </ion-col>
+       
+       <ion-col size="3"  >
+         <div class="flip-card"  >
+        <div class="flip-card-inner">
+          <div class="flip-card-front" style="background-color: rgba(72, 29, 189, 0.936);">
+            <img alt="Sin foto" src="assets/icon/trofeo.png" />
+            <div class="nombrelogro">  "aprendiz" </div> 
+          </div>
+            <div class="flip-card-back"  style="background-color: rgba(72, 29, 189, 0.936);">
+              
+              
+              "completa<br>
+               dos <br>
+               niveles"<br>
+               +<img alt="Sin foto" src="assets/icon/coin.png" style="width: 20px; height: 20px;"/>100 coins
+               
+            </div>
+        </div>
+    </div>
+  
+    </ion-col>
+     
+    <ion-col size="3"  >
+     <div class="flip-card"  >
+    <div class="flip-card-inner">
+      <div class="flip-card-front"  style="background-color: rgba(27, 182, 53, 0.936);">
+        <img alt="Sin foto" src="assets/icon/trofeo.png" />
+        <div class="nombrelogro">  "Brillante" </div> 
+      </div>
+        <div class="flip-card-back" style="background-color: rgba(27, 182, 53, 0.936);">
+          
+          
+          "recolecta<br>
+           todas las <br>
+           estrellas"<br>
+           +<img alt="Sin foto" src="assets/icon/coin.png" style="width: 20px; height: 20px;"/>250 coins
+           
+        </div>
+    </div>
+ </div>
+ 
+ </ion-col>
+ <ion-col size="3"  >
+   <div class="flip-card"  >
+  <div class="flip-card-inner">
+    <div class="flip-card-front"  style="background-color: rgb(200, 59, 228);">
+      <img alt="Sin foto" src="assets/icon/trofeo.png" />
+      <div class="nombrelogro">  "Premio mayor" </div> 
+    </div>
+      <div class="flip-card-back" style="background-color: rgba(200, 59, 228);">
+        
+        
+        "completa<br>
+         el <br>
+         juego"<br>
+         +<img alt="Sin foto" src="assets/icon/coin.png" style="width: 20px; height: 20px;"/>500 coins
+         
+      </div>
+  </div>
+ </div>
+ 
+ </ion-col>
+        </ion-row>
+      </ion-grid>
+     
       
-    </ion-list>
-    <ion-grid>
-      <ion-row>
-        <ion-col><p style="text-align: center;" [routerLink]="['/admin-usuarios']"><ion-button>Cambiar</ion-button></p></ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-grid>
 
+    </ion-card-content>
+  </ion-card>
+</ion-grid>
 
   <ion-header collapse="condense">
-  </ion-header>
+</ion-header>
 </ion-content>
