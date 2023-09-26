@@ -1,63 +1,48 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Agregar Skins</ion-title>
-  </ion-toolbar>
+<ion-header [translucent]="true" >
 </ion-header>
-<ion-content [fullscreen]="true">
 
-  <ion-grid style="background-color:rgba(153, 8, 153, 0.838);">
-  <ion-card class="form">
-    <ion-card-header>
-      <ion-card-title style="text-align: center;" >Agregar Skin</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <form [formGroup]="formularioSkin">
-        <ion-item>
-          <ion-label position="floating">Nombre Skin</ion-label>
-          <ion-input formControlName="NombreSkin" type="text"></ion-input>
-        </ion-item>
-        <div [hidden]="NombreS?.valid || NombreS?.pristine ">
-          <span style="color: rgb(255, 0, 0);" *ngIf="NombreS?.errors?.['required']">
-            El nombre de la skin es requerido.
-          </span>
-          <span style="color: rgb(255, 0, 0);" *ngIf="NombreS?.errors?.['minlength']">
-            El nombre de la skin solo permite un rango de 5 caracteres.
-          </span>
-          <span style="color: rgb(255, 0, 0);" *ngIf="NombreS?.errors?.['maxlength']">
-            El nombre de la skin solo permite un rango de 30 caracteres.
-          </span>
-          </div>
-        <br>
+<ion-content [fullscreen]="true" >
 
-        <ion-item>
-          <ion-label position="floating">Precio Skin</ion-label>
-          <ion-input formControlName="PrecioSkin" type="Number"></ion-input>
-        </ion-item>
-        <div [hidden]="PrecioS?.valid || PrecioS?.pristine ">
-          <span style="color: rgb(255, 0, 0);" *ngIf="PrecioS?.errors?.['required']">
-            El precio de la skin es requerido.
-          </span>
-          <span style="color: rgb(255, 0, 0);" *ngIf="PrecioS?.errors?.['min']">
-            El precio minimo de una skin sera de 100 monedas.
-          </span>
-          <span style="color: rgb(255, 0, 0);" *ngIf="PrecioS?.errors?.['max']">
-            El precio maximo de una skin sera de 1000 monedas.
-          </span>
-          </div>
+
+  <ion-grid style="background-color: rgb(165, 162, 162);height: 100%;">
+    <ion-row >
+      <ion-col size="12">
+        <h1 style="text-align: center;">ADMINISTRADOR LOGROS</h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">
+        <div class="botones">
+        <ion-button [routerLink]="['/admin-usuarios']" style="width: 100%;" >Usuario</ion-button>
+        <ion-button [routerLink]="['/admin-skins']" style="width: 100%;" >Logros</ion-button>
+        <ion-button [routerLink]="['/Lobby']" style="width: 100%;" >Lobby</ion-button>
+        <ion-button [routerLink]="['/home']" style="width: 100%;" >Cerrar Sesión</ion-button>
+      </div>
+      </ion-col>
+
+      <ion-col size="9" style="background-color: rgb(238, 220, 188);">
         
-
-          <ion-input accept="image/png,image/jpeg"  type="file"></ion-input>
-          <p style="text-align: center;"><ion-button [disabled]="formularioSkin.invalid" [routerLink]="['/skins']">Enviar</ion-button></p>
-      </form>
-      
-      
-    </ion-card-content>
-  </ion-card>
-</ion-grid>
-
-  <ion-header collapse="condense">
+          <ion-list style="background-color: rgb(215, 194, 157);">
+            <ion-list-header style="text-align: center;">
+              <ion-label >Nombre Logro</ion-label>
+              <ion-label>Descripción</ion-label>
+              <ion-label>Recompensa</ion-label>
+              <ion-label>Boton</ion-label>
+            </ion-list-header>
+            <ion-item style="text-align: center;margin-bottom:1%;" >
+              <ion-label >Novato</ion-label>
+              <ion-label>Completa el tutorial</ion-label>
+              <ion-label>55</ion-label>
+              <ion-button [routerLink]="['/admin-logros']">Eliminar Logro</ion-button>
+            </ion-item>
+          </ion-list>
+          
+        
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-header collapse="condense" >
   </ion-header>
 </ion-content>

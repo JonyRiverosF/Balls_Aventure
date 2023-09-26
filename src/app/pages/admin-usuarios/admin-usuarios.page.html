@@ -1,34 +1,48 @@
 <ion-header [translucent]="true" >
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Ver Usuarios</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" >
-  <ion-grid class="fondo">
-  <ion-list style="background-color: rgba(148, 68, 222, 0.869);">
-    <ion-list-header style="text-align: center;">
-      <ion-label >Nombre Usuario</ion-label>
-      <ion-label>Correo</ion-label>
-      <ion-label>Fecha Nacimiento</ion-label>
-      <ion-label>Rol</ion-label>
-      <ion-label>Boton</ion-label>
-    </ion-list-header>
-    <ion-item style="text-align: center;" *ngFor="let x of lista">
-      <ion-label >{{ x.nombreU }}</ion-label>
-      <ion-label>{{ x.correo }}</ion-label>
-      <ion-label>{{ x.fecha_nacimiento | date:"dd MMMM yyyy" }}</ion-label>
-      <ion-label>{{ x.Rol }}</ion-label>
-      <p><ion-button [routerLink]="['/usuario-normal']">Cambiar</ion-button></p>
-    </ion-item>
-    
-  </ion-list>
-</ion-grid>
 
 
+  <ion-grid style="background-color: rgb(165, 162, 162);height: 100%;">
+    <ion-row >
+      <ion-col size="12">
+        <h1 style="text-align: center;">ADMINSTRADOR USUARIOS</h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="3">
+        <div class="botones">
+        <ion-button [routerLink]="['/admin-skins']" style="width: 100%;" >Logros</ion-button>
+        <ion-button [routerLink]="['/admin-usuarios']" style="width: 100%;" >Usuario</ion-button>
+        <ion-button [routerLink]="['/Lobby']" style="width: 100%;" >Lobby</ion-button>
+        <ion-button [routerLink]="['/home']" style="width: 100%;" >Cerrar Sesión</ion-button>
+      </div>
+      </ion-col>
+
+      <ion-col size="9" style="background-color: rgb(238, 220, 188);">
+        
+          <ion-list style="background-color: rgb(215, 194, 157);">
+            <ion-list-header style="text-align: center;">
+              <ion-label >Nombre Usuario</ion-label>
+              <ion-label>Correo</ion-label>
+              <ion-label>Rol</ion-label>
+              <ion-label>Boton</ion-label>
+            </ion-list-header>
+            <ion-item style="text-align: center;margin-bottom:1%;" >
+              <ion-label >jonitoBonito</ion-label>
+              <ion-label>jony@gmail.com</ion-label>
+              <ion-label>Usuario</ion-label>
+              <ion-button [routerLink]="['/usuario-normal']">Ver Usuario</ion-button>
+            </ion-item>
+          </ion-list>
+          
+        
+        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <ion-header collapse="condense" >
   </ion-header>
 </ion-content>
