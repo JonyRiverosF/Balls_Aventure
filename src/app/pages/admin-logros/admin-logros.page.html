@@ -1,20 +1,21 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Agregar Logros</ion-title>
-  </ion-toolbar>
+  
 </ion-header>
 <ion-content [fullscreen]="true">
 
 
-  <ion-grid style="background-color:rgba(153, 8, 153, 0.838);">
-  <ion-card class="form">
-    <ion-card-header>
-      <ion-card-title style="text-align: center;">Agregar Logro</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
+  <ion-grid style="background-color:rgba(255, 255, 255, 0.838);">
+    <ion-row>
+      <ion-col size="2">
+         <img src="assets/icon/patraFormal.png" [routerLink]="['/admin-skins']" style="width: 50px;height: 50px;margin-right: 180px;"/>
+      </ion-col>
+      <ion-col size="10" >
+        <div style="color: black;font-size: 30px;margin: 5%  0 0 15%;">Agregar nuevo logro</div>
+      </ion-col>
+    </ion-row>
+  <ion-card class="form"style="background-color: rgb(238, 226, 201);margin: 10px 50px 0px 50px;">
+    
+    <ion-card-content >
       <form [formGroup]="formularioLogros">
         <ion-item>
           <ion-label position="floating">Nombre Logro</ion-label>
