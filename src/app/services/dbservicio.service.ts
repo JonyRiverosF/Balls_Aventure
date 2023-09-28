@@ -326,8 +326,8 @@ buscarUsuario(){
     })
   }
 
-  insertarUsuario(respuesta:any, nombreU:any, contrasena:any, correo:any, descripcion:any, foto:any, monedas:any){
-    return this.database.executeSql('INSERT INTO usuario(respuesta, nombreU, contrasena, correo, descripcion, foto, monedas) VALUES(?,?,?,?,?,?,?)',[respuesta, nombreU, contrasena, correo, descripcion, foto, monedas]).then(res=>{
+  insertarUsuario(respuesta:any, nombreU:any, contrasena:any, correo:any, descripcion:any, foto:any, monedas:any, idRol:any, idPregunta:any){
+    return this.database.executeSql('INSERT INTO usuario(respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol,idPregunta ) VALUES(?,?,?,?,?,?,?,?,?)',[respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idPregunta]).then(res=>{
       this.buscarUsuario();
     })
   }

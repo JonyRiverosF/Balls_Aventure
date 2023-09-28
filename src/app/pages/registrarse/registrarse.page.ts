@@ -18,7 +18,10 @@ export class RegistrarsePage implements OnInit {
   }]
   arreglousuario:any =[{
     idU: '',
-    nombreU: '' 
+    nombreU: '' ,
+    correo:'',
+    idPregunta:'',
+    idRol:''
   }]
 
   pedirUsuario="";
@@ -26,6 +29,7 @@ export class RegistrarsePage implements OnInit {
   pedirPregunta="";
   pedirRespuesta="";
   pedirContrasena="";
+  pedirRol=1;
   des="";
   monedas=0;
   foto="";
@@ -72,7 +76,7 @@ export class RegistrarsePage implements OnInit {
 
    }
    insertar(){
-    this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.des,this.foto, this.monedas);
+    this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.des,this.foto, this.monedas,this.pedirRol, this.pedirPregunta);
     this.bd.presentAlert("Usuario Agregada");
     this.router.navigate(['/lobby']);
   }

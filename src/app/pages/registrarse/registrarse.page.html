@@ -67,11 +67,11 @@
         <ion-item >
           <ion-label position="floating">Pregunta de seguridad</ion-label>
           <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
-            <ion-select-option [(ngModel)]="pedirPregunta"  *ngFor="let x of arregloPreguntas">{{x.nombreP}}</ion-select-option>
+            <ion-select-option [(ngModel)]="pedirPregunta" [value]="x.idP" *ngFor="let x of arregloPreguntas">{{x.nombreP}}</ion-select-option>
            
           </ion-select>
           <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
-            <ion-select-option   *ngFor="let x of arreglousuario">{{x.nombreU}}</ion-select-option>
+            <ion-select-option   *ngFor="let x of arreglousuario">{{x.nombreU}} - {{correo}}- {{idPregunta}}- {{idRol}}</ion-select-option>
            
           </ion-select>
         </ion-item>
