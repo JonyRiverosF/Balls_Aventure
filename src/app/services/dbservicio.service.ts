@@ -318,7 +318,10 @@ buscarUsuario(){
           correo:res.rows.item(i).correo,
           descripcion:res.rows.item(i).descripcion,
           foto:res.rows.item(i).foto,
-          monedas:res.rows.item(i).monedas
+          monedas:res.rows.item(i).monedas,
+          idRol:res.rows.item(i).idRol,
+          idPregunta:res.rows.item(i).idPregunta
+          
         })
       }
     }

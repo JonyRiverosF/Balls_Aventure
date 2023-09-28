@@ -7,4 +7,6 @@ export class Usuario {
     descripcion="";
     foto="";
     monedas="";
+    idRol="";
+    idPregunta="";
 }
