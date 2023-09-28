@@ -36,16 +36,20 @@ export class DbservicioService {
 
   //variables para los insert iniciales
   registroRol:string="INSERT or IGNORE INTO rol(idR, nombreR) VALUES(1, 'usuario');";
+  registroRol2:string="INSERT or IGNORE INTO rol(idR, nombreR) VALUES(2, 'administrador');";
 
   registroPregunta:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(1, '¿cual es tu comida favorita?');";
+  registroPregunta2:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(2, '¿caricatura favorita?');";
+  registroPregunta3:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(3, '¿nombre de tu primera mascota?');";
 
   registroLogro:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Tutorial Completado', 'Completaste el tutorial felicidades', 15);";
 
-  registroNiveles: string = "INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(1, 'Nivel4', 300);";
+  registroNiveles: string = "INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(1, 'Tutorial', 150);";
+  registroNiveles2: string = "INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(2, 'Nivel-Medio', 300);";
+  registroNiveles3: string = "INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(3, 'Nivel-Dificil', 450);";
 
-  registroIntento: string = "INSERT or IGNORE INTO intento(estrellas, tiempo, completado) VALUES(30, 300, 0);";
 
-  registroUsuario: string = "INSERT or IGNORE INTO usuario(idU, respuesta, nombreU, contrasena, correo, descripcion, foto, monedas) VALUES(1, 'Lasaña', 'Dani123', 'J@ny12', 'dani123@gmail.com', 'Me gusta jugar videojuegos','',30);";
+  registroUsuario: string = "INSERT or IGNORE INTO usuario(idU,idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros, idIntento) VALUES(1, 1, 'Pasta', 'Dani123', 'J@ny12', 'dani123@gmail.com', 'Me gusta jugar videojuegos','',0, 2, '' ,'');";
 
   //observables de las tablas
   listaRol = new BehaviorSubject([]);
@@ -418,6 +422,7 @@ async crearTablaRol(){
 
     //ejecuto los insert
     await this.database.executeSql(this.registroRol,[]);
+    await this.database.executeSql(this.registroRol2,[]);
 
     //cambio mi observable de BD
     this.isBDReady.next(true);
@@ -437,6 +442,8 @@ async crearTablaPregunta(){
 
     //ejecuto los insert
     await this.database.executeSql(this.registroPregunta,[]);
+    await this.database.executeSql(this.registroPregunta2,[]);
+    await this.database.executeSql(this.registroPregunta3,[]);
 
     //cambio mi observable de BD
     this.isBDReady.next(true);
@@ -475,6 +482,8 @@ async crearTablaNiveles(){
 
     //ejecuto los insert
     await this.database.executeSql(this.registroNiveles,[]);
+    await this.database.executeSql(this.registroNiveles2,[]);
+    await this.database.executeSql(this.registroNiveles3,[]);
 
     //cambio mi observable de BD
     this.isBDReady.next(true);
@@ -493,7 +502,7 @@ async crearTablaIntento(){
 
 
     //ejecuto los insert
-    await this.database.executeSql(this.registroIntento,[]);
+   
 
     //cambio mi observable de BD
     this.isBDReady.next(true);
