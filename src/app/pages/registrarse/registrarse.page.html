@@ -35,7 +35,7 @@
 
         <ion-item>
           <ion-label position="floating">Nombre Usuario</ion-label>
-          <ion-input formControlName="nombre" type="text"></ion-input>
+          <ion-input formControlName="nombre" [(ngModel)]="pedirUsuario" type="text"></ion-input>
         </ion-item>
         <div [hidden]="nombreU?.valid || nombreU?.pristine ">
           <span *ngIf="nombreU?.errors?.['required']">
@@ -49,7 +49,7 @@
 
         <ion-item>
           <ion-label position="floating">Correo</ion-label>
-          <ion-input formControlName="Correo" type="text"></ion-input>
+          <ion-input formControlName="Correo" [(ngModel)]="pedirCorreo" type="text"></ion-input>
         </ion-item>
         <div [hidden]="correo?.valid || correo?.pristine ">
           <span *ngIf="correo?.errors?.['required']">
@@ -66,8 +66,12 @@
 
         <ion-item >
           <ion-label position="floating">Pregunta de seguridad</ion-label>
-          <ion-select aria-label="Fruit" *ngFor="let x of arregloPreguntas" interface="popover" placeholder="Seleccione">
-            <ion-select-option [value]="x.idP">{{x.nombreP}}</ion-select-option>
+          <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
+            <ion-select-option [(ngModel)]="pedirPregunta"  *ngFor="let x of arregloPreguntas">{{x.nombreP}}</ion-select-option>
+           
+          </ion-select>
+          <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
+            <ion-select-option   *ngFor="let x of arreglousuario">{{x.nombreU}}</ion-select-option>
            
           </ion-select>
         </ion-item>
@@ -75,7 +79,7 @@
 
         <ion-item>
           <ion-label position="floating">Respuesta</ion-label>
-          <ion-input formControlName="Respuesta" type="text"></ion-input>
+          <ion-input formControlName="Respuesta" [(ngModel)]="pedirRespuesta" type="text"></ion-input>
         </ion-item>
         <div [hidden]="respuesta?.valid || respuesta?.pristine ">
           <span *ngIf="respuesta?.errors?.['required']">
@@ -92,7 +96,7 @@
 
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
-          <ion-input  [(ngModel)]="contra1" formControlName="contraseña" type="password"></ion-input>
+          <ion-input  [(ngModel)]="contra1" formControlName="contraseña" [(ngModel)]="pedirContrasena" type="password"></ion-input>
         </ion-item>
         <div [hidden]="contra?.valid || contra?.pristine ">
           <span *ngIf="contra?.errors?.['required']">
@@ -130,7 +134,7 @@
         
       </form>
       <br>
-      <p style="text-align: center;"><ion-button [disabled]="formularioRegistro.invalid"  (click)="registrar()" >Enviar</ion-button></p>
+      <p style="text-align: center;"><ion-button [disabled]="formularioRegistro.invalid"  (click)="registrar()" (click)="insertar()" >Enviar</ion-button></p>
     </ion-col>
   
     </ion-row>

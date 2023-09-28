@@ -16,6 +16,20 @@ export class RegistrarsePage implements OnInit {
     idP: '',
     nombreP: '' 
   }]
+  arreglousuario:any =[{
+    idU: '',
+    nombreU: '' 
+  }]
+
+  pedirUsuario="";
+  pedirCorreo="";
+  pedirPregunta="";
+  pedirRespuesta="";
+  pedirContrasena="";
+  des="";
+  monedas=0;
+  foto="";
+  
 
   contra1:string="";
   contra2:string="";
@@ -57,6 +71,11 @@ export class RegistrarsePage implements OnInit {
     
 
    }
+   insertar(){
+    this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.des,this.foto, this.monedas);
+    this.bd.presentAlert("Usuario Agregada");
+    this.router.navigate(['/lobby']);
+  }
 
    
    
@@ -87,6 +106,13 @@ export class RegistrarsePage implements OnInit {
       if(res){
         this.bd.fetchPregunta().subscribe(datos=>{
           this.arregloPreguntas=datos;
+        })
+      }
+    })
+    this.bd.bdstate().subscribe(res=>{
+      if(res){
+        this.bd.fetchUsuario().subscribe(datos=>{
+          this.arreglousuario=datos;
         })
       }
     })
