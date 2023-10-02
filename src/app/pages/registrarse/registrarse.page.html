@@ -56,7 +56,7 @@
             El correo es requerido.
           </span>
           <span *ngIf="correo?.errors?.['email']">
-            El correo debe ser valido.
+          El correo debe ser valido.
           </span>
           <span *ngIf="correo?.errors?.['minlength']">
             El correo solo permite un minimo de 5 caracteres.
@@ -64,33 +64,10 @@
           </div>
         <br>
           
-        <ion-item >
-          <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione" [(ngModel)]="pedirPregunta">
-            <ion-select-option *ngFor="let x of arregloPreguntas1" [value]="x.idP" >{{x.nombreP}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-
+        
         <p *ngFor="let x of arreglousuario">{{x.nombreU}} - {{x.correo}} - {{x.idPregunta}} - {{x.idRol}}</p>
         
         <br>
-
-        <ion-item>
-          <ion-label position="floating">Respuesta</ion-label>
-          <ion-input formControlName="Respuesta" [(ngModel)]="pedirRespuesta" type="text"></ion-input>
-        </ion-item>
-        <div [hidden]="respuesta?.valid || respuesta?.pristine ">
-          <span *ngIf="respuesta?.errors?.['required']">
-            La respuesta es requerida.
-          </span>
-          <span *ngIf="respuesta?.errors?.['maxlength']">
-            La respuesta permite un maximo de 30 caracteres.
-          </span>
-          <span *ngIf="respuesta?.errors?.['minlength']">
-            La respuesta solo permite un minimo de 5 caracteres.
-          </span>
-          </div>
-        <br>
-
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input  [(ngModel)]="contra1" formControlName="contraseña" [(ngModel)]="pedirContrasena" type="password"></ion-input>
@@ -130,12 +107,24 @@
           <ion-input accept="image/png,image/jpeg" type="file"></ion-input>
         
       </form>
+      <ion-item>
+        <ion-select [(ngModel)]="pedirPregunta" interface="popover" placeholder="Seleccione"  >
+          <ion-select-option *ngFor="let x of arregloPreguntas" [value]="x.idP" >{{x.nombreP}}</ion-select-option>
+        </ion-select>
+        </ion-item>
       <br>
-      <p style="text-align: center;"><ion-button [disabled]="formularioRegistro.invalid"  (click)="registrar()" >Enviar</ion-button></p>
+      <ion-item>
+        <ion-label position="floating">Respuesta</ion-label>
+        <ion-input formControlName="Respuesta" [(ngModel)]="pedirRespuesta" type="text"></ion-input>
+      </ion-item>
+      <br>
+      <p style="text-align: center;"><ion-button   (click)="registrar()" >Enviar</ion-button></p>
     </ion-col>
   
     </ion-row>
   </ion-grid>
+
+  
   
 
 

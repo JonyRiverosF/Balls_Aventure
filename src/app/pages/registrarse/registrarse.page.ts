@@ -56,7 +56,6 @@ export class RegistrarsePage implements OnInit {
       'contraseña': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(new RegExp("(?=.*[0-9])")),Validators.pattern(new RegExp("(?=.*[A-Z])")),Validators.pattern(new RegExp("(?=.*[a-z])")),Validators.pattern(new RegExp("(?=.*[$@^!%*?&])"))]),
       'Confirmar_contraseña': new FormControl("",[Validators.required]),
       'Correo': new FormControl("",[Validators.required,Validators.minLength(5),Validators.email]),
-      'Respuesta': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(30)])
     })
    }
   
@@ -77,11 +76,11 @@ export class RegistrarsePage implements OnInit {
 
    registrar(){
     if (this.contra1==this.contra2){
-      this.presentAlert("tipoID--"+String(typeof this.pedirPregunta));
-      this.presentAlert("idPregunta-- "+String(this.pedirPregunta));  
-      //this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.des,this.foto, this.monedas,this.pedirRol, this.pedirPregunta);
+      //this.presentAlert("tipoID--"+String(typeof this.pedirPregunta));
+      //this.presentAlert("idPregunta-- "+String(this.pedirPregunta));  
+      this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.des,this.foto, this.monedas,this.pedirRol, this.pedirPregunta);
       this.bd.presentAlert("Usuario Agregado");
-      //this.router.navigate(['/lobby'],)
+      this.router.navigate(['/iniciar-sesion'])
     }else{
       this.presentAlert("No hay coincidencias en las claves");
     }
@@ -108,9 +107,6 @@ export class RegistrarsePage implements OnInit {
     return this.formularioRegistro.get('Correo') as FormControl;
    }
 
-   get respuesta(){
-    return this.formularioRegistro.get('Respuesta') as FormControl;
-   }
 
   ngOnInit() {
     this.bd.bdstate().subscribe(res=>{

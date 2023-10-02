@@ -31,7 +31,7 @@
 
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
-          <ion-input  formControlName="contraseña1"   type="password"></ion-input>
+          <ion-input  formControlName="contraseña1"   type="password" [(ngModel)]="claveusuario" ></ion-input>
         </ion-item>
         <br>
         <div [hidden]="contra?.valid || contra?.pristine ">
