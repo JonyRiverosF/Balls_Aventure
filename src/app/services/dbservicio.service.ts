@@ -31,7 +31,7 @@ export class DbservicioService {
 
   tblIntento: string = "CREATE TABLE IF NOT EXISTS intento(idI INTEGER PRIMARY KEY AUTOINCREMENT, estrellas NUMBER(6) NOT NULL, tiempo NUMBER(10) NOT NULL, completado BOOLEAN NOT NULL, idNiveles INTEGER, FOREIGN KEY(idNiveles) REFERENCES niveles(idN));";
 
-  tblUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY AUTOINCREMENT, respuesta VARCHAR(50) NOT NULL, nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL, correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto FILES, monedas NUMBER(5) NOT NULL, idRol INTEGER, idPregunta INTEGER, idLogros INTEGER, idIntento INTEGER, FOREIGN KEY(idRol) REFERENCES rol(idR), FOREIGN KEY(idPregunta) REFERENCES pregunta(idP), FOREIGN KEY(idLogros) REFERENCES logro(idL), FOREIGN KEY(idIntento) REFERENCES intento(idI));";
+  tblUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY AUTOINCREMENT, respuesta VARCHAR(50) NOT NULL, nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL, correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto BLOB, monedas NUMBER(5) NOT NULL, idRol INTEGER, idPregunta INTEGER, idLogros INTEGER, idIntento INTEGER, FOREIGN KEY(idRol) REFERENCES rol(idR), FOREIGN KEY(idPregunta) REFERENCES pregunta(idP), FOREIGN KEY(idLogros) REFERENCES logro(idL), FOREIGN KEY(idIntento) REFERENCES intento(idI));";
 
 
   //variables para los insert iniciales
@@ -50,6 +50,7 @@ export class DbservicioService {
 
 
   registroUsuario: string = "INSERT or IGNORE INTO usuario(idU,idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros, idIntento) VALUES(1, 1, 'Pasta', 'Dani123', 'J@ny12', 'dani123@gmail.com', 'Me gusta jugar videojuegos','',0, 2, '' ,'');";
+  registroUsuario2: string = "INSERT or IGNORE INTO usuario(idU,idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros, idIntento) VALUES(2, 2, 'Ben10', 'jony121', 'J@ny12', 'jony123@gmail.com', 'Me gusta jugar videojuegos','',0, 2, '' ,'');";
 
   //observables de las tablas
   listaRol = new BehaviorSubject([]);
@@ -332,6 +333,8 @@ buscarUsuario(){
   insertarUsuario(respuesta:any, nombreU:any, contrasena:any, correo:any, descripcion:any, foto:any, monedas:any, idRol:any, idPregunta:any){
     return this.database.executeSql('INSERT INTO usuario(respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol,idPregunta ) VALUES(?,?,?,?,?,?,?,?,?)',[respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idPregunta]).then(res=>{
       this.buscarUsuario();
+    }).catch(e=>{
+      this.presentAlert("Error en insertar usuario");
     })
   }
 
@@ -346,6 +349,7 @@ buscarUsuario(){
       this.buscarUsuario();
     })
   }
+
 //Fin Usuario
  
 //Crear Base de datos
@@ -519,12 +523,15 @@ async crearTablaIntento(){
 
 async crearTablaUsuario(){
   try{
+    this.database.executeSql("DROP TABLE usuario",[]);
     //ejecutar la creación de tablas
     await this.database.executeSql(this.tblUsuario,[]);
+    
 
 
     //ejecuto los insert
     await this.database.executeSql(this.registroUsuario,[]);
+    await this.database.executeSql(this.registroUsuario2,[]);
 
     //cambio mi observable de BD
     this.isBDReady.next(true);

@@ -63,18 +63,15 @@
           </span>
           </div>
         <br>
-
+          
         <ion-item >
-          <ion-label position="floating">Pregunta de seguridad</ion-label>
-          <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
-            <ion-select-option [(ngModel)]="pedirPregunta" [value]="x.idP" *ngFor="let x of arregloPreguntas">{{x.nombreP}}</ion-select-option>
-           
-          </ion-select>
-          <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
-            <ion-select-option   *ngFor="let x of arreglousuario">{{x.nombreU}} - {{x.correo}}- {{x.idPregunta}}- {{x.idRol}}</ion-select-option>
-           
+          <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione" [(ngModel)]="pedirPregunta" >
+            <ion-select-option *ngFor="let x of arregloPreguntas" [value]="x">{{x.nombreP}}</ion-select-option>
           </ion-select>
         </ion-item>
+
+        <p *ngFor="let x of arreglousuario">{{x.nombreU}} - {{x.correo}} - {{x.idPregunta}} - {{x.idRol}}</p>
+        
         <br>
 
         <ion-item>
@@ -134,7 +131,7 @@
         
       </form>
       <br>
-      <p style="text-align: center;"><ion-button [disabled]="formularioRegistro.invalid"  (click)="registrar()" (click)="insertar()" >Enviar</ion-button></p>
+      <p style="text-align: center;"><ion-button [disabled]="formularioRegistro.invalid"  (click)="registrar()" >Enviar</ion-button></p>
     </ion-col>
   
     </ion-row>

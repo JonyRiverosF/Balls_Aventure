@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { NavigationExtras,Router } from '@angular/router';
 import { ModificarContraPage } from '../modificar-contra/modificar-contra.page';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
+import { Pregunta } from 'src/app/services/pregunta';
 
 @Component({
   selector: 'app-registrarse',
@@ -13,20 +14,21 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 export class RegistrarsePage implements OnInit {
 
   arregloPreguntas:any =[{
-    idP: '',
+    idP: 0,
     nombreP: '' 
   }]
+
   arreglousuario:any =[{
-    idU: '',
+    idU: 0,
     nombreU: '' ,
     correo:'',
-    idPregunta:'',
-    idRol:''
+    idPregunta:0,
+    idRol:0
   }]
 
   pedirUsuario="";
   pedirCorreo="";
-  pedirPregunta="";
+  pedirPregunta:any;
   pedirRespuesta="";
   pedirContrasena="";
   pedirRol=1;
@@ -42,10 +44,6 @@ export class RegistrarsePage implements OnInit {
   
 
   constructor(public fb:FormBuilder,public alertController:AlertController,private router:Router, private bd:DbservicioService) {
-
-    
-   
-    
     this.formularioRegistro=this.fb.group({
       'nombre': new FormControl("",[Validators.required,Validators.minLength(3)]),
       'contraseña': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(new RegExp("(?=.*[0-9])")),Validators.pattern(new RegExp("(?=.*[A-Z])")),Validators.pattern(new RegExp("(?=.*[a-z])")),Validators.pattern(new RegExp("(?=.*[$@^!%*?&])"))]),
@@ -55,31 +53,33 @@ export class RegistrarsePage implements OnInit {
     })
    }
   
-   eliminar(x:any){
+   /*eliminar(x:any){
     this
-   }
+   }*/
 
-
+   
+   async presentAlert( msj:string) {
+    const alert = await this.alertController.create({
+      header: 'Alert',
+      subHeader: 'Important message',
+      message: msj,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
 
    registrar(){
     if (this.contra1==this.contra2){
-      this.router.navigate(['/lobby'],)
-
+      this.presentAlert("tipoID--"+String(typeof this.pedirPregunta.idP));
+      this.presentAlert("idPregunta-- "+String(this.pedirPregunta.idP));  
+    //this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.des,this.foto, this.monedas,this.pedirRol, this.pedirPregunta);
+      this.bd.presentAlert("Usuario Agregado");
+    //this.router.navigate(['/lobby'],)
     }else{
-      let navigationextra:NavigationExtras={
-        state:{
-          mensaje:this.mensaje
-        }
-      }
+      this.presentAlert("No hay coincidencias en las claves");
     }
-    
-
    }
-   insertar(){
-    this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.des,this.foto, this.monedas,this.pedirRol, this.pedirPregunta);
-    this.bd.presentAlert("Usuario Agregada");
-    this.router.navigate(['/lobby']);
-  }
+   
 
    
    
@@ -113,6 +113,7 @@ export class RegistrarsePage implements OnInit {
         })
       }
     })
+
     this.bd.bdstate().subscribe(res=>{
       if(res){
         this.bd.fetchUsuario().subscribe(datos=>{
@@ -120,6 +121,7 @@ export class RegistrarsePage implements OnInit {
         })
       }
     })
+
   }
 
 
