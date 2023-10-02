@@ -23,6 +23,7 @@ export class IniciarSesionPage implements OnInit {
 
   correousuario:string = "";
   claveusuario:string = "";
+  
 
   arreglousuario:any =[{
     idU: 0,
@@ -83,7 +84,12 @@ export class IniciarSesionPage implements OnInit {
         if(this.arreglousuario[i].idRol==1){
           let infoUsuario ={
             idU:this.arreglousuario[i].idU,
-            correo:this.arreglousuario[i].correo           
+            correo:this.arreglousuario[i].correo,
+            nombre:this.arreglousuario[i].nombreU,
+            rol:this.arreglousuario[i].idRol,
+            intento:this.arreglousuario[i].idIntento
+
+
           }
           let navigationextra:NavigationExtras={
             state:{

@@ -7,7 +7,8 @@ import { ActivatedRoute, Router ,NavigationExtras } from '@angular/router';
   styleUrls: ['./lobby.page.scss'],
 })
 export class LobbyPage implements OnInit {
-  nombre_en_lobby:string="";
+  usuarioiniciado:number=0;
+  nombre_en_lobby:any;
   edad:number=20;
   nombreusuario:string ="TigerShadoWX8";
   descripcionusuario:string ="juego mucho valo jiji";
@@ -15,7 +16,8 @@ export class LobbyPage implements OnInit {
   constructor(private router:Router, private activatedRouter:ActivatedRoute) {
     this.activatedRouter.queryParams.subscribe(param =>{
       if (this.router.getCurrentNavigation()?.extras.state){
-        this.nombre_en_lobby = this.router.getCurrentNavigation()?.extras?.state?.["correoenviado"];
+        this.nombre_en_lobby = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
+        
        
       }
     })
