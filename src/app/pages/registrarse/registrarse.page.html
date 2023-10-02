@@ -65,8 +65,8 @@
         <br>
           
         <ion-item >
-          <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione" [(ngModel)]="pedirPregunta" >
-            <ion-select-option *ngFor="let x of arregloPreguntas" [value]="x">{{x.nombreP}}</ion-select-option>
+          <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione" [(ngModel)]="pedirPregunta">
+            <ion-select-option *ngFor="let x of arregloPreguntas1" [value]="x.idP" >{{x.nombreP}}</ion-select-option>
           </ion-select>
         </ion-item>
 

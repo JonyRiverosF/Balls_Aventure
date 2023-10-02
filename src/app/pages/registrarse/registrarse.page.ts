@@ -18,6 +18,12 @@ export class RegistrarsePage implements OnInit {
     nombreP: '' 
   }]
 
+  arregloPreguntas1:any =[{
+    idP: 3,
+    nombreP: 'asdmkoasdc'
+  },{idP:4,
+  nombreP:'adawd'}]
+
   arreglousuario:any =[{
     idU: 0,
     nombreU: '' ,
@@ -40,6 +46,7 @@ export class RegistrarsePage implements OnInit {
   contra1:string="";
   contra2:string="";
   mensaje:string="Las contraseñas no coinciden";
+
   formularioRegistro:FormGroup;
   
 
@@ -70,11 +77,11 @@ export class RegistrarsePage implements OnInit {
 
    registrar(){
     if (this.contra1==this.contra2){
-      this.presentAlert("tipoID--"+String(typeof this.pedirPregunta.idP));
-      this.presentAlert("idPregunta-- "+String(this.pedirPregunta.idP));  
-    //this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.des,this.foto, this.monedas,this.pedirRol, this.pedirPregunta);
+      this.presentAlert("tipoID--"+String(typeof this.pedirPregunta));
+      this.presentAlert("idPregunta-- "+String(this.pedirPregunta));  
+      //this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.des,this.foto, this.monedas,this.pedirRol, this.pedirPregunta);
       this.bd.presentAlert("Usuario Agregado");
-    //this.router.navigate(['/lobby'],)
+      //this.router.navigate(['/lobby'],)
     }else{
       this.presentAlert("No hay coincidencias en las claves");
     }
