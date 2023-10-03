@@ -37,7 +37,7 @@
         <img class="estrella"src="assets/icon/estrellant.png"  style=/>
       </div>
 
-        <div [routerLink]="['/tutorial']" class="nivel" style="background-color: aqua;">
+        <div (click)="tutorial()" class="nivel" style="background-color: aqua;">
           TUTORIAL
 
         </div>
@@ -50,7 +50,7 @@
         <img class="estrella"src="assets/icon/estrella.png"  style=" width: 45;height: 45px;"/>
         <img class="estrella"src="assets/icon/estrella.png"  style=/></div>
         
-        <div [routerLink]="['/nivel-medio']" class="nivel" style="background-color: rgb(68, 0, 255); text-align: center;">
+        <div (click)="nivel_medio()" class="nivel" style="background-color: rgb(68, 0, 255); text-align: center;">
           MEDIO
 
         </div>
@@ -63,7 +63,7 @@
         <img class="estrella"src="assets/icon/estrellant.png"  style=" width: 45;height: 45px;"/>
         <img class="estrella"src="assets/icon/estrellant.png"  style=/></div>
         
-        <div [routerLink]="['/nivel-dificil']" class="nivel" style="background-color: rgb(21, 255, 0);">
+        <div (click)="nivel_dificil()" class="nivel" style="background-color: rgb(21, 255, 0);">
           DIFICIL
 
         </div>

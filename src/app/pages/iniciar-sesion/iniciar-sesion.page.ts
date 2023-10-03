@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras,Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
@@ -38,8 +39,13 @@ export class IniciarSesionPage implements OnInit {
   
   formularioLogin:FormGroup;
 
-  constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,private bd:DbservicioService) {
-
+  constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,private bd:DbservicioService,private storage: Storage) {
+    for(var i = 0; i<this.arreglousuario.length; i++){
+      if(this.correousuario==this.arreglousuario[i].correo){
+        storage.set('usuario1d',this.arreglousuario[i]);
+      }
+    }
+    
     this.formularioLogin=this.fb.group({
       'Correo1': new FormControl('',[Validators.required]),
       'contraseña1': new FormControl ('',[Validators.required])
@@ -78,6 +84,7 @@ export class IniciarSesionPage implements OnInit {
     if(this.correousuario==this.arreglousuario[i].correo){
       if(this.claveusuario==this.arreglousuario[i].contrasena){
         if(this.arreglousuario[i].idRol==1){
+          
           let infoUsuario ={
             idU:this.arreglousuario[i].idU,
             correo:this.arreglousuario[i].correo,

@@ -8,7 +8,7 @@ import { ActivatedRoute, Router ,NavigationExtras } from '@angular/router';
 })
 export class LobbyPage implements OnInit {
   usuarioiniciado:number=0;
-  nombre_en_lobby:any;
+  infoUsuario:any;
   edad:number=20;
   nombreusuario:string ="TigerShadoWX8";
   descripcionusuario:string ="juego mucho valo jiji";
@@ -16,7 +16,7 @@ export class LobbyPage implements OnInit {
   constructor(private router:Router, private activatedRouter:ActivatedRoute) {
     this.activatedRouter.queryParams.subscribe(param =>{
       if (this.router.getCurrentNavigation()?.extras.state){
-        this.nombre_en_lobby = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
+        this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
         
        
       }
@@ -29,7 +29,7 @@ export class LobbyPage implements OnInit {
   irperfil(){
     let navigationextra:NavigationExtras={
       state:{
-        correoenviado:this.nombre_en_lobby,
+        infoUsuario:this.infoUsuario,
         edadenviado:this.edad,
         nombreenviado:this.nombreusuario,
         descripcion:this.descripcionusuario
@@ -38,6 +38,29 @@ export class LobbyPage implements OnInit {
       
     }
     this.router.navigate(['/perfil-usuario'],navigationextra)
+  }
+  jugar(){
+    let navigationextra:NavigationExtras={
+      state:{
+        infoUsuario:this.infoUsuario,
+        
+       
+      }
+      
+    }
+    this.router.navigate(['/niveles'],navigationextra)
+  }
+  historial(){
+    let navigationextra:NavigationExtras={
+      state:{
+        infoUsuario:this.infoUsuario,
+        
+       
+      }
+      
+    }
+    this.router.navigate(['/historial'],navigationextra)
+
   }
 
 }

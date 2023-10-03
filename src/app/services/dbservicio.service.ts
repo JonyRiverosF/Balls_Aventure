@@ -29,9 +29,9 @@ export class DbservicioService {
 
   tblNiveles: string = "CREATE TABLE IF NOT EXISTS niveles(idN INTEGER PRIMARY KEY AUTOINCREMENT, NombreN VARCHAR(30) NOT NULL, RecompensaN NUMBER(6) NOT NULL);";
 
-  tblIntento: string = "CREATE TABLE IF NOT EXISTS intento(idI INTEGER PRIMARY KEY AUTOINCREMENT, estrellas NUMBER(6) NOT NULL, tiempo NUMBER(10) NOT NULL, completado BOOLEAN NOT NULL, idNiveles INTEGER, FOREIGN KEY(idNiveles) REFERENCES niveles(idN));";
+  tblIntento: string = "CREATE TABLE IF NOT EXISTS intento(idI INTEGER PRIMARY KEY AUTOINCREMENT, estrellas NUMBER(6) NOT NULL, tiempo NUMBER(10) NOT NULL, completado BOOLEAN NOT NULL, idNiveles INTEGER,idUsuario INTERGER, FOREIGN KEY(idNiveles) REFERENCES niveles(idN),FOREIGN KEY(idUsuario) REFERENCES usuario(idU));";
 
-  tblUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY AUTOINCREMENT, respuesta VARCHAR(50) NOT NULL, nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL, correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto BLOB, monedas NUMBER(5) NOT NULL, idRol INTEGER, idPregunta INTEGER, idLogros INTEGER, idIntento INTEGER, FOREIGN KEY(idRol) REFERENCES rol(idR), FOREIGN KEY(idPregunta) REFERENCES pregunta(idP), FOREIGN KEY(idLogros) REFERENCES logro(idL), FOREIGN KEY(idIntento) REFERENCES intento(idI));";
+  tblUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY AUTOINCREMENT, respuesta VARCHAR(50) NOT NULL, nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL, correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto BLOB, monedas NUMBER(5) NOT NULL, idRol INTEGER, idPregunta INTEGER, idLogros INTEGER, FOREIGN KEY(idRol) REFERENCES rol(idR), FOREIGN KEY(idPregunta) REFERENCES pregunta(idP), FOREIGN KEY(idLogros) REFERENCES logro(idL));";
 
 
   //variables para los insert iniciales
@@ -49,8 +49,13 @@ export class DbservicioService {
   registroNiveles3: string = "INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(3, 'Nivel-Dificil', 450);";
 
 
+<<<<<<< Updated upstream
   registroUsuario: string = "INSERT or IGNORE INTO usuario(idU,idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros, idIntento) VALUES(1, 1, 'Pasta', 'Dani123', 'J@ny12', 'dani123@gmail.com', 'Me gusta jugar videojuegos','',0, 1, '' ,'');";
   registroUsuario2: string = "INSERT or IGNORE INTO usuario(idU,idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros, idIntento) VALUES(2, 2, 'Ben10', 'jony121', 'J@ny12', 'jony123@gmail.com', 'Me gusta jugar videojuegos','',0, 2, '' ,'');";
+=======
+  registroUsuario: string = "INSERT or IGNORE INTO usuario(idU,idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros) VALUES(1, 1, 'Pasta', 'Dani123', 'J@ny12', 'dani123@gmail.com', 'Me gusta jugar videojuegos','',0, 2, '' );";
+  registroUsuario2: string = "INSERT or IGNORE INTO usuario(idU,idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros) VALUES(2, 2, 'Ben10', 'jony121', 'J@ny12', 'jony123@gmail.com', 'Me gusta jugar videojuegos','',0, 2, '' );";
+>>>>>>> Stashed changes
 
   //observables de las tablas
   listaRol = new BehaviorSubject([]);
@@ -274,7 +279,9 @@ buscarIntento(){
           idI:res.rows.item(i).idI,
           estrellas:res.rows.item(i).estrellas,
           tiempo:res.rows.item(i).tiempo,
-          completado:res.rows.item(i).completado
+          completado:res.rows.item(i).completado,
+          idNiveles:res.rows.item(i).idNiveles,
+          idUsuario:res.rows.item(i).idUsuario
         })
       }
     }
@@ -282,8 +289,8 @@ buscarIntento(){
   })
 }
 
-insertarIntento(estrellas:any, tiempo:any, completado:any){
-  return this.database.executeSql('INSERT INTO intento(estrellas, tiempo, completado) VALUES(?,?,?)',[estrellas, tiempo, completado]).then(res=>{
+insertarIntento(estrellas:any, tiempo:any, completado:any,idNiveles:any, idUsuario:any){
+  return this.database.executeSql('INSERT INTO intento(estrellas, tiempo, completado) VALUES(?,?,?,?,?)',[estrellas, tiempo, completado,idNiveles, idUsuario]).then(res=>{
     this.buscarIntento();
   })
 }
@@ -338,8 +345,8 @@ buscarUsuario(){
     })
   }
 
-  actualizarUsuario(idU:any, respuesta:any, nombreU:any, contrasena:any, correo:any, descripcion:any, foto:any, monedas:any, idRol:any, idPregunta:any,idLogros:any,idIntento:any){
-    return this.database.executeSql('UPDATE usuario SET respuesta= ?, nombreU= ?, contrasena= ?, correo= ?, descripcion= ?, foto= ?, monedas= ?, idRol= ?, idPregunta= ?,  idLogros= ?,idIntento= ? WHERE idU= ?',[respuesta, nombreU,contrasena,correo,descripcion,foto,monedas,idRol,idPregunta,idLogros,idIntento,idU]).then(res=>{
+  actualizarUsuario(idU:any, respuesta:any, nombreU:any, contrasena:any, correo:any, descripcion:any, foto:any, monedas:any, idRol:any, idPregunta:any,idLogros:any){
+    return this.database.executeSql('UPDATE usuario SET respuesta= ?, nombreU= ?, contrasena= ?, correo= ?, descripcion= ?, foto= ?, monedas= ?, idRol= ?, idPregunta= ?,  idLogros= ? WHERE idU= ?',[respuesta, nombreU,contrasena,correo,descripcion,foto,monedas,idRol,idPregunta,idLogros,idU]).then(res=>{
       this.buscarUsuario();
     })
   }

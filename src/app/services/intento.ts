@@ -3,4 +3,6 @@ export class Intento {
     estrellas="";
     tiempo="";
     completado="";
+    idNiveles="";
+    idUsuario="";
 }

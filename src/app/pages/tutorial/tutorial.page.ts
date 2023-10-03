@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { NavigationExtras,Router } from '@angular/router';
+import { NavigationExtras,Router, ActivatedRoute } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
+import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class TutorialPage implements OnInit {
  haTocadoEstrella1 = false;
  haTocadoEstrella2 = false;
  haTocadoEstrella3 = false;
+ haTocadoPuerta = false;
  menus: boolean = false;
  nivelcompletado: boolean = false;
  puertaAbierta = false;
@@ -45,8 +47,17 @@ export class TutorialPage implements OnInit {
  tiempoRestante!: number;
  public mostrarAlerta: boolean = false;
 
+ infoUsuario:any;
+
  @ViewChild('pj', { static: false }) personaje!: ElementRef;
-constructor(private router: Router, public alertController: AlertController, private toastController: ToastController) {
+constructor(private activatedRouter:ActivatedRoute,private router: Router, public alertController: AlertController, private toastController: ToastController,private bd:DbservicioService) {
+  this.activatedRouter.queryParams.subscribe(param =>{
+    if (this.router.getCurrentNavigation()?.extras.state){
+      this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
+      
+     
+    }
+  })
   this.calcularMaxX();
   
 }
@@ -58,6 +69,8 @@ ngOnInit() {
     this.mostrarAlerta = true; 
     if (this.tiempoExpirado) {
       const personaje = document.getElementById('tu-personaje'); 
+      this.bd.insertarIntento(this.estrellasrecojidas, 0, false, 1, this.infoUsuario.idU);
+      this.bd.presentAlert("intento fallido Agregado");
       if (personaje) {
         personaje.classList.add('death-animation');
       }
@@ -173,9 +186,12 @@ moverPersonaje() {
     }
     
   }
-  if (personaje && puerta1) {
+  if (personaje && puerta1 && !this.haTocadoPuerta) {
     if (this.colisiona(personaje, puerta1)) {
       this.nivelcompletado = true;
+      this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.infoUsuario.idU);
+      this.bd.presentAlert("intento Agregado");
+      this.haTocadoPuerta = true; 
 
     }
   }
