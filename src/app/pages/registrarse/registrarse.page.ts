@@ -5,6 +5,9 @@ import { NavigationExtras,Router } from '@angular/router';
 import { ModificarContraPage } from '../modificar-contra/modificar-contra.page';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 import { Pregunta } from 'src/app/services/pregunta';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+//import { FingerprintAIO } from '@awesome-cordova-plugins/fingerprint-aio/ngx';
+
 
 @Component({
   selector: 'app-registrarse',
@@ -17,12 +20,6 @@ export class RegistrarsePage implements OnInit {
     idP: 0,
     nombreP: '' 
   }]
-
-  arregloPreguntas1:any =[{
-    idP: 3,
-    nombreP: 'asdmkoasdc'
-  },{idP:4,
-  nombreP:'adawd'}]
 
   arreglousuario:any =[{
     idU: 0,
@@ -49,7 +46,7 @@ export class RegistrarsePage implements OnInit {
 
   formularioRegistro:FormGroup;
   
-
+  //private faio: FingerprintAIO
   constructor(public fb:FormBuilder,public alertController:AlertController,private router:Router, private bd:DbservicioService) {
     this.formularioRegistro=this.fb.group({
       'nombre': new FormControl("",[Validators.required,Validators.minLength(3)]),
@@ -127,7 +124,56 @@ export class RegistrarsePage implements OnInit {
 
   }
 
+  imagenNueva: any ="";
 
- 
+  takePicture = async () => {
+    const image2 = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source:CameraSource.Photos
+    });
+  
+    // image.webPath will contain a path that can be set as an image src.
+    // You can access the original file using image.path, which can be
+    // passed to the Filesystem API to read the raw data of the image,
+    // if desired (or pass resultType: CameraResultType.Base64 to getPhoto)
+    //var imageUrl = image.webPath;
+    this.imagenNueva= image2.dataUrl;
+    // Can be set to the src of an image now
+    //imageElement.src = imageUrl;
+  };
+
+  /*huella(){
+  this.faio.isAvailable().then((result: any) => {
+    this.faio.show({
+      cancelButtonTitle: 'Cancelar',
+      description: "Ingrese su huella para continuar",
+      disableBackup: true,
+      title: 'Balls aventure biometrics security',
+      fallbackButtonTitle: 'FB Back Button',
+      subtitle: ''
+    })
+      .then((result: any) => {
+        //Esto ocurrirá cuando hayan coincidencias de las huellas digitales
+        //this.bd.modificarUsuaro(this.id,this.nombre,this.correoIngresado,this.imagenNueva,this.telefono);
+        //this.volverPerfil.emit(["false",this.nombre,this.correoIngresado,this.imagenNueva])
+        //this.presentToast("bottom","Datos modificados !!",2500);
+        //alert("Successfully Authenticated!")
+      })
+      .catch((error: any) => {
+      });
+    
+  })
+    .catch((error: any) => {
+    
+    });
+  }*/
+
+
+
 }
+ 
+
+
 

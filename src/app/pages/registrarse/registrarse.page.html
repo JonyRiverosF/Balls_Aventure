@@ -65,7 +65,7 @@
         <br>
           
         
-        <p *ngFor="let x of arreglousuario">{{x.nombreU}} - {{x.correo}} - {{x.idPregunta}} - {{x.idRol}}</p>
+        
         
         <br>
         <ion-item>
@@ -105,7 +105,7 @@
         <br>
         
           <ion-input accept="image/png,image/jpeg" type="file"></ion-input>
-        
+          
       </form>
       <ion-item>
         <ion-select [(ngModel)]="pedirPregunta" interface="popover" placeholder="Seleccione"  >
@@ -118,7 +118,10 @@
         <ion-input formControlName="Respuesta" [(ngModel)]="pedirRespuesta" type="text"></ion-input>
       </ion-item>
       <br>
-      <p style="text-align: center;"><ion-button   (click)="registrar()" >Enviar</ion-button></p>
+      
+      <p style="text-align: center;"><ion-button [disabled]="formularioRegistro.invalid"  (click)="registrar()" >Enviar</ion-button></p>
+      <ion-button   (click)="takePicture()" >foto</ion-button>
+      
     </ion-col>
   
     </ion-row>
