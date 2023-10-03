@@ -20,18 +20,18 @@
         <ion-row>
           <ion-col style="background-color: rgb(255, 255, 255);text-align: center;" size="3">
             <div style="color: black;font-size: 15px;">
-              Kazuelita
+              {{ usuario.nombreU }}
             </div>
             <img src="assets/icon/dani.jpeg" style="width: 120px;height: 120px;"/>
 
           </ion-col>
           <ion-col style="background-color: rgb(255, 255, 255);color: black;" size="5">
           <div style="font-size: 18px;">
-            Correo: dani@gmail.com
+            Correo: {{ usuario.correo }}
 
           </div>
           <div style="color: black;font-size: 18px;">
-            Rol: 
+            Rol: {{ usuario.idRol }}
             <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
               <ion-select-option value="apples">Administrador</ion-select-option>
               <ion-select-option value="oranges">Usuario</ion-select-option>

@@ -35,7 +35,7 @@
               <ion-label style="text-align: center;">{{ x.nombreU }}</ion-label>
               <ion-label style="text-align: center;">{{ x.correo }}</ion-label>
               <ion-label style="text-align: center;">{{ x.idRol }}</ion-label>
-              <ion-button [routerLink]="['/usuario-normal', x.idU]">Ver</ion-button>
+              <ion-button (click)="verDetallesUsuario(x)">Ver</ion-button>
             </ion-item>
           </ion-list>
           

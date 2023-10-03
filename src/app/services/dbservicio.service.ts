@@ -9,12 +9,12 @@ import { Usuario } from './usuario';
 import { Logro } from './logro';
 import { Intento } from './intento';
 import { Niveles } from './niveles';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DbservicioService {
-  
 
   //variable de conexion a BD
   public database!: SQLiteObject;
@@ -70,7 +70,7 @@ export class DbservicioService {
   //observable para la BD
   private isBDReady:BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  constructor(private platform:Platform,public sqlite:SQLite,public toastController: ToastController, private alertController: AlertController) { 
+  constructor(private activatedRoute: ActivatedRoute,private platform:Platform,public sqlite:SQLite,public toastController: ToastController, private alertController: AlertController) { 
     this.crearBD();
   }
 

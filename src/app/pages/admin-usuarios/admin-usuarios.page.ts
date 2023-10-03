@@ -9,7 +9,7 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 })
 export class AdminUsuariosPage implements OnInit {
 
-  //nombreUsuario:any;
+  
 
   lista:any = [
     {
@@ -21,16 +21,14 @@ export class AdminUsuariosPage implements OnInit {
     } 
   ];
 
-  constructor(private router:Router, private activatedRouter:ActivatedRoute,private bd:DbservicioService) { 
-    /*this.activatedRouter.queryParams.subscribe(param =>{
-      if (this.router.getCurrentNavigation()?.extras.state){
-        this.nombreUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
-       
-      }
-    })*/
+  
+  constructor(private activatedRoute: ActivatedRoute,private router:Router, private activatedRouter:ActivatedRoute,private bd:DbservicioService) { 
+  
   }
 
   ngOnInit() {
+    
+
     this.bd.bdstate().subscribe(res=>{
       if(res){
         this.bd.fetchUsuario().subscribe(datos=>{
@@ -39,5 +37,11 @@ export class AdminUsuariosPage implements OnInit {
       }
     })
   }
-
+  // Función para ver los detalles del usuario y navegar a la página de destino
+  verDetallesUsuario(usuario: any) {
+    // Navega a la página de destino y pasa los datos del usuario como parámetros
+    this.router.navigate(['/usuario-normal', { datosUsuario: JSON.stringify(usuario) }]);
+  }
 }
+
+
