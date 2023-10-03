@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
   selector: 'app-admin-usuarios',
@@ -7,37 +9,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminUsuariosPage implements OnInit {
 
+  //nombreUsuario:any;
+
   lista:any = [
     {
-      nombreU:"Alfredin864",
-      correo:"alfred0@gmail.com",
-      fecha_nacimiento:"11/11/1999",
-      Rol:"Usuario"
-    },
-    {
-      nombreU:"Rod0192",
-      correo:"rodin12@gmail.com",
-      fecha_nacimiento:"9/28/2008",
-      Rol:"Usuario"
-    },
-    {
-      nombreU:"Danitza",
-      correo:"Dani2003@gmail.com",
-      fecha_nacimiento:"6/5/2003",
-      Rol:"Admin"
-    },
-    {
-      nombreU:"Jony",
-      correo:"jonito@gmail.com",
-      fecha_nacimiento:"4/07/2003",
-      Rol:"Admin"
-    },
-    
+      idU:0,
+      correo:"",
+      nombre:"",
+      rol:0,
+      intento:0,
+    } 
   ];
 
-  constructor() { }
+  constructor(private router:Router, private activatedRouter:ActivatedRoute,private bd:DbservicioService) { 
+    /*this.activatedRouter.queryParams.subscribe(param =>{
+      if (this.router.getCurrentNavigation()?.extras.state){
+        this.nombreUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
+       
+      }
+    })*/
+  }
 
   ngOnInit() {
+    this.bd.bdstate().subscribe(res=>{
+      if(res){
+        this.bd.fetchUsuario().subscribe(datos=>{
+          this.lista=datos;
+        })
+      }
+    })
   }
 
 }

@@ -41,13 +41,9 @@ export class IniciarSesionPage implements OnInit {
   constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,private bd:DbservicioService) {
 
     this.formularioLogin=this.fb.group({
-      'Correo1': new FormControl('',[Validators.required,Validators.minLength(5),Validators.email]),
-      'contraseña1': new FormControl ('',[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(new RegExp("(?=.*[0-9])")),Validators.pattern(new RegExp("(?=.*[A-Z])")),Validators.pattern(new RegExp("(?=.*[a-z])")),Validators.pattern(new RegExp("(?=.*[$@^!%*?&])"))])
-
+      'Correo1': new FormControl('',[Validators.required]),
+      'contraseña1': new FormControl ('',[Validators.required])
     })
-
-    
-
    }
 
    get correo(){

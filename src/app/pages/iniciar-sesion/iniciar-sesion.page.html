@@ -20,15 +20,8 @@
           <span *ngIf="correo?.errors?.['required']">
             El correo es requerido.
           </span>
-          <span *ngIf="correo?.errors?.['email']">
-            El correo debe ser valido.
-          </span>
-          <span *ngIf="correo?.errors?.['minlength']">
-            <br>El correo solo permite un minimo de 5 caracteres.
-          </span>
-          </div>
-        <br>
-
+        </div>
+          <br>   
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input  formControlName="contraseña1"   type="password" [(ngModel)]="claveusuario" ></ion-input>
@@ -37,18 +30,6 @@
         <div [hidden]="contra?.valid || contra?.pristine ">
           <span *ngIf="contra?.errors?.['required']">
             La contraseña es requerida.
-          </span>
-          <span *ngIf="contra?.errors?.['maxlength']">
-            La contraseña permite un maximo de 15 caracteres.
-          </span>
-          <span *ngIf="contra?.errors?.['minlength']">
-            La contraseña solo permite un minimo de 5 caracteres.
-          </span>
-          <span *ngIf="contra?.errors?.['pattern']">
-            <br>La contraseña requiere un numero.<br>
-            La contraseña requiere una mayuscula.<br>
-            La contraseña requiere una minuscula.<br>
-            La contraseña requiere un simbolo especial.
           </span>
           </div>
         <br>

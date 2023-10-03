@@ -15,26 +15,27 @@
       <ion-col size="3">
         <div class="botones">
         <ion-button [routerLink]="['/admin-skins']" style="width: 100%;" >Logros</ion-button>
+        <ion-button [routerLink]="['/admin-logros']" style="width: 100%;" >Agregar Logros</ion-button>
         <ion-button [routerLink]="['/admin-usuarios']" style="width: 100%;" >Usuario</ion-button>
         <ion-button [routerLink]="['/lobby']" style="width: 100%;" >Lobby</ion-button>
         <ion-button [routerLink]="['/home']" style="width: 100%;" >Cerrar Sesión</ion-button>
       </div>
       </ion-col>
 
-      <ion-col size="9" style="background-color: rgb(238, 220, 188);">
+      <ion-col size="9" style="background-color: rgb(238, 220, 188);height: 100%;" >
         
-          <ion-list style="background-color: rgb(215, 194, 157);">
+          <ion-list style="background-color: rgb(215, 194, 157);" >
             <ion-list-header style="text-align: center;">
-              <ion-label >Nombre Usuario</ion-label>
-              <ion-label>Correo</ion-label>
-              <ion-label>Rol</ion-label>
-              <ion-label>Boton</ion-label>
+              <ion-label style="text-align: center;" >Nombre Usuario</ion-label>
+              <ion-label style="text-align: center;">Correo</ion-label>
+              <ion-label style="text-align: center;">Rol</ion-label>
+              <ion-label style="text-align: center;">Boton</ion-label>
             </ion-list-header>
-            <ion-item style="text-align: center;margin-bottom:1%;" >
-              <ion-label >jonitoBonito</ion-label>
-              <ion-label>jony@gmail.com</ion-label>
-              <ion-label>Usuario</ion-label>
-              <ion-button [routerLink]="['/usuario-normal']">Ver Usuario</ion-button>
+            <ion-item *ngFor="let x of lista" style="text-align: center;margin-bottom:1%;" >
+              <ion-label style="text-align: center;">{{ x.nombreU }}</ion-label>
+              <ion-label style="text-align: center;">{{ x.correo }}</ion-label>
+              <ion-label style="text-align: center;">{{ x.idRol }}</ion-label>
+              <ion-button [routerLink]="['/usuario-normal', x.idU]">Ver</ion-button>
             </ion-item>
           </ion-list>
           
