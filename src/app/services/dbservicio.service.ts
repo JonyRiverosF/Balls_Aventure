@@ -42,9 +42,9 @@ export class DbservicioService {
   registroPregunta2:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(2, '¿caricatura favorita?');";
   registroPregunta3:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(3, '¿nombre de tu primera mascota?');";
 
-  registroLogro1:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Novato', 'completaste el tutorial ¡felicidades!', 50);";
-  registroLogro2:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(2, 'Aprendiz', 'completaste dos niveles bien ¡hecho!', 75);";
-  registroLogro3:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(3, 'Brillante', 'recolectaste todas las estrellas ¡asombroso!', 100);";
+  registroLogro1:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Novato', 'completaste el tutorial ¡felicidades!', 15);";
+  registroLogro2:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(2, 'Aprendiz', 'completaste dos niveles bien ¡hecho!', 30);";
+  registroLogro3:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(3, 'Brillante', 'recolectaste todas las estrellas ¡asombroso!', 45);";
   
 
   registroNiveles: string = "INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(1, 'Tutorial', 150);";
@@ -530,7 +530,7 @@ async crearTablaIntento(){
 
 async crearTablaUsuario(){
   try{
-    this.database.executeSql("DROP TABLE usuario",[]);
+    //this.database.executeSql("DROP TABLE usuario",[]);
     //ejecutar la creación de tablas
     await this.database.executeSql(this.tblUsuario,[]);
     
