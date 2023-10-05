@@ -26,7 +26,7 @@
         <!--tienda-->
         <ion-row >
           <ion-col class="icono">
-            <img [routerLink]="['/skins']"  src="assets/icon/carrito.png" alt="Mi Imagen">
+            <img (click)="historial()"  src="assets/icon/carrito.png" alt="Mi Imagen">
             </ion-col>
           
         </ion-row>
@@ -56,7 +56,7 @@
           <!--bienvenido usuario-->
           <ion-col >
             <div class="bienvenido">
-             
+             {{infoUsuario.nombre}}
             </div>
             
           </ion-col>

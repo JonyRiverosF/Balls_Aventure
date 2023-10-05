@@ -288,10 +288,16 @@ buscarIntento(){
 }
 
 insertarIntento(estrellas:any, tiempo:any, completado:any,idNiveles:any, idUsuario:any){
-  return this.database.executeSql('INSERT INTO intento(estrellas, tiempo, completado) VALUES(?,?,?,?,?)',[estrellas, tiempo, completado,idNiveles, idUsuario]).then(res=>{
+  return this.database.executeSql('INSERT INTO intento(estrellas, tiempo, completado, idNiveles, idUsuario) VALUES(?,?,?,?,?)',[estrellas, tiempo, completado,idNiveles, idUsuario]).then(res=>{
     this.buscarIntento();
+  }).catch(e=>{
+    this.presentAlert("Error en insertar intento"+e);
   })
+ 
 }
+
+
+
 
 actualizarIntento(idI:any, estrellas:any, descripcion:any, recompensa:any,idNiveles:any){
   return this.database.executeSql('UPDATE intento SET estrellas= ?, descripcion= ?, recompensa= ?, idNiveles= ?  WHERE idI= ?',[estrellas,descripcion,recompensa,idNiveles,idI]).then(res=>{
@@ -302,6 +308,7 @@ actualizarIntento(idI:any, estrellas:any, descripcion:any, recompensa:any,idNive
 eliminarIntento(idI:any){
   return this.database.executeSql('DELETE FROM intento WHERE idI = ?',[idI]).then(res=>{
     this.buscarIntento();
+    
   })
 }
 //Fin Intento

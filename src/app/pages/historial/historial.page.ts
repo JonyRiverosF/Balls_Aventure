@@ -11,9 +11,9 @@ import { AlertController, ToastController } from '@ionic/angular';
 export class HistorialPage implements OnInit {
   arregloIntentos:any =[{
     idI: 0,
-    estrellas: '' ,
+    estrellas: 0 ,
     tiempo:0,
-    completado:'',
+    completado:false,
     idNiveles:0,
     idUsuario:0
 
@@ -34,7 +34,7 @@ export class HistorialPage implements OnInit {
   ngOnInit() {
     this.bd.bdstate().subscribe(res=>{
       if(res){
-        this.bd.fetchPregunta().subscribe(datos=>{
+        this.bd.fetchIntento().subscribe(datos=>{
           this.arregloIntentos=datos;
         })
       }

@@ -43,14 +43,15 @@ export class TutorialPage implements OnInit {
  
  //Timeout Con alerta
  tiempoExpirado: boolean = false;
- tiempoLimite: number = 180000;
+ tiempoLimite: number = 30000;
  tiempoRestante!: number;
  public mostrarAlerta: boolean = false;
 
  infoUsuario:any;
 
  @ViewChild('pj', { static: false }) personaje!: ElementRef;
-constructor(private activatedRouter:ActivatedRoute,private router: Router, public alertController: AlertController, private toastController: ToastController,private bd:DbservicioService) {
+constructor(private activatedRouter:ActivatedRoute,private router: Router, public alertController: AlertController,private bd:DbservicioService) {
+ 
   this.activatedRouter.queryParams.subscribe(param =>{
     if (this.router.getCurrentNavigation()?.extras.state){
       this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
@@ -65,12 +66,13 @@ constructor(private activatedRouter:ActivatedRoute,private router: Router, publi
 //Timeout Alerta
 ngOnInit() {
   setTimeout(() => {
+    //this.bd.insertarIntento(this.estrellasrecojidas, 0, false, 1, this.infoUsuario.idU);
+    //  this.bd.presentAlert('intento fallido agregado');
     this.tiempoExpirado = true;
     this.mostrarAlerta = true; 
     if (this.tiempoExpirado) {
+      
       const personaje = document.getElementById('tu-personaje'); 
-      this.bd.insertarIntento(this.estrellasrecojidas, 0, false, 1, this.infoUsuario.idU);
-      this.bd.presentAlert("intento fallido Agregado");
       if (personaje) {
         personaje.classList.add('death-animation');
       }
@@ -91,11 +93,13 @@ ngOnInit() {
 
 //Redireccion
 volverAlInicio(){
-  window.location.href = '/lobby';
+  //window.location.href = '/lobby';
+  this.router.navigate(['/lobby'])
 }
 
 volverAIntentarlo(){
-  window.location.href = '/tutorial';
+  //window.location.href = '/tutorial';
+  this.router.navigate(['/tutorial'])
 }
 
 
@@ -115,6 +119,10 @@ calcularMaxX() {
 
 menu(){
   this.menus=true;
+  this.bd.presentAlert('intento holi agregado');
+  
+  
+  
 }
 reanudar(){
   this.menus=false;
@@ -188,16 +196,16 @@ moverPersonaje() {
   }
   if (personaje && puerta1 && !this.haTocadoPuerta) {
     if (this.colisiona(personaje, puerta1)) {
+      
       this.nivelcompletado = true;
-      this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.infoUsuario.idU);
-      this.bd.presentAlert("intento Agregado");
+      
       this.haTocadoPuerta = true; 
 
     }
   }
   if (personaje && puerta) {
     if (this.colisiona(personaje, puerta)) {
-      this.presentToast('top');
+     
 
     }
   }
@@ -308,16 +316,7 @@ colisionaarriba(element1: HTMLElement, element2: HTMLElement): boolean {
     
   );
 }
-async presentToast(position: 'top' | 'middle' | 'bottom') {
-  const toast = await this.toastController.create({
-    message: 'Primero necesitas la llave ',
-    duration: 100,
-    
-    position: position,
-  });
 
-  await toast.present();
-}
 }
 
 

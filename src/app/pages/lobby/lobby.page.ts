@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router ,NavigationExtras } from '@angular/router';
+import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
   selector: 'app-lobby',
@@ -7,13 +8,13 @@ import { ActivatedRoute, Router ,NavigationExtras } from '@angular/router';
   styleUrls: ['./lobby.page.scss'],
 })
 export class LobbyPage implements OnInit {
-  usuarioiniciado:number=0;
+  
   infoUsuario:any;
   edad:number=20;
   nombreusuario:string ="TigerShadoWX8";
   descripcionusuario:string ="juego mucho valo jiji";
 
-  constructor(private router:Router, private activatedRouter:ActivatedRoute) {
+  constructor(private router:Router, private activatedRouter:ActivatedRoute, private bd:DbservicioService) {
     this.activatedRouter.queryParams.subscribe(param =>{
       if (this.router.getCurrentNavigation()?.extras.state){
         this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
@@ -59,6 +60,8 @@ export class LobbyPage implements OnInit {
       }
       
     }
+    this.bd.insertarIntento(2,50, false,3, this.infoUsuario.idU);
+    this.bd.presentAlert('insertar intento prueba');
     this.router.navigate(['/historial'],navigationextra)
 
   }
