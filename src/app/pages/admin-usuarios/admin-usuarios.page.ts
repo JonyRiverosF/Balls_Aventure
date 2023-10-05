@@ -37,11 +37,11 @@ export class AdminUsuariosPage implements OnInit {
       }
     })
   }
-  // Función para ver los detalles del usuario y navegar a la página de destino
+  
   verDetallesUsuario(usuario: any) {
-    // Navega a la página de destino y pasa los datos del usuario como parámetros
     this.router.navigate(['/usuario-normal', { datosUsuario: JSON.stringify(usuario) }]);
   }
+
 }
 
 

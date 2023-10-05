@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
   selector: 'app-admin-skins',
@@ -9,27 +11,55 @@ import { AlertController } from '@ionic/angular';
 })
 export class AdminSkinsPage implements OnInit {
 
-  formularioSkin:FormGroup;
+  idLo:number=0;
 
-  constructor(public fb:FormBuilder, public alertController:AlertController) { 
+  listaL:any = [
+    {
+      idL:0,
+      nombreL:"",
+      descripcion:"",
+      recompensa:"",
+    } 
+  ];
 
-    this.formularioSkin=this.fb.group({
-      'NombreSkin': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(30)]),
-      'PrecioSkin': new FormControl("",[Validators.required,Validators.min(100),Validators.max(1000)])
-
-    })
+  constructor(public fb:FormBuilder, public alertController:AlertController,private activatedRoute: ActivatedRoute,private router:Router, private activatedRouter:ActivatedRoute,private bd:DbservicioService) { 
    }
+
+
+   EliminarLogro(id:number){
+    this.idLo=id;
+}
+
+public alertButtons = [
+  {
+    text: 'Cancelar',
+    role: 'cancel'
+  },
+  {
+    text: 'Aceptar',
+    
+    role: 'confirm',
+    handler: () => {
+      for(let i=0;i<this.listaL.length;i++){
+           if(this.idLo == this.listaL[i].idL){
+                this.bd.eliminarLogro(this.idLo);
+           }
+      }
+    },
+  },
+];
 
 
   ngOnInit() {
+    this.bd.bdstate().subscribe(res=>{
+      if(res){
+        this.bd.fetchLogro().subscribe(datos=>{
+          this.listaL=datos;
+        })
+      }
+    })
   }
 
-  get NombreS(){
-    return this.formularioSkin.get('NombreSkin') as FormControl;
-   }
   
-   get PrecioS(){
-    return this.formularioSkin.get('PrecioSkin') as FormControl;
-   } 
 
 }

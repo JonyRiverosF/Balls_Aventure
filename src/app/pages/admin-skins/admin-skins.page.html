@@ -31,12 +31,19 @@
               <ion-label>Recompensa</ion-label>
               <ion-label>Boton</ion-label>
             </ion-list-header>
-            <ion-item style="text-align: center;margin-bottom:1%;" >
-              <ion-label >Novato</ion-label>
-              <ion-label>Completa el tutorial</ion-label>
-              <ion-label>55</ion-label>
-              <ion-button>Eliminar Logro</ion-button>
+            <div *ngFor="let x of listaL">
+            <ion-item id="{{x.idL}}" style="text-align: center;margin-bottom:1%;" >
+              <ion-label >{{ x.nombreL }}</ion-label>
+              <ion-label>{{ x.descripcion | uppercase}}</ion-label>
+              <ion-label>{{ x.recompensa }}</ion-label>
+              <ion-button (click)="EliminarLogro(x.idL)">Eliminar</ion-button>
+              <ion-alert
+              trigger="{{x.idL}}"
+              header="¿Estas seguro de eliminar?"
+              [buttons]="alertButtons">
+              </ion-alert>
             </ion-item>
+          </div>
           </ion-list>
           
         

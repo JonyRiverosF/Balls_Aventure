@@ -19,7 +19,7 @@
       <form [formGroup]="formularioLogros">
         <ion-item>
           <ion-label position="floating">Nombre Logro</ion-label>
-          <ion-input formControlName="NombreLogro" type="text"></ion-input>
+          <ion-input [(ngModel)]="pedirNL" formControlName="NombreLogro" type="text"></ion-input>
         </ion-item>
         <div [hidden]="NombreL?.valid || NombreL?.pristine ">
           <span *ngIf="NombreL?.errors?.['required']">
@@ -36,7 +36,7 @@
 
         <ion-item>
           <ion-label position="floating">Descripción</ion-label>
-          <ion-input formControlName="Descripcion" type="text"></ion-input>
+          <ion-input [(ngModel)]="pedirDL" formControlName="Descripcion" type="text"></ion-input>
         </ion-item>
         <div [hidden]="Descp?.valid || Descp?.pristine ">
           <span *ngIf="Descp?.errors?.['required']">
@@ -53,7 +53,7 @@
 
         <ion-item>
           <ion-label position="floating">Recompensa</ion-label>
-          <ion-input formControlName="Recompensa" type="Number"></ion-input>
+          <ion-input [(ngModel)]="pedirRL" formControlName="Recompensa" type="Number"></ion-input>
         </ion-item>
         <div [hidden]="Recompensa?.valid || Recompensa?.pristine ">
           <span *ngIf="Recompensa?.errors?.['required']">
@@ -67,11 +67,9 @@
           </span>
           </div>
         <br>
-
-          <ion-input accept="image/png,image/jpeg" type="file"></ion-input>
       </form>
       <br>
-      <p style="text-align: center;"><ion-button [disabled]="formularioLogros.invalid" [routerLink]="['/logros']">Enviar</ion-button></p>
+      <p style="text-align: center;"><ion-button [disabled]="formularioLogros.invalid" (click)="AgregarLogro()">Enviar</ion-button></p>
     </ion-card-content>
   </ion-card>
 </ion-grid>

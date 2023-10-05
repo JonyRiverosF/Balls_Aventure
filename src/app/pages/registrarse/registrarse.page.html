@@ -101,11 +101,7 @@
           </span>
          
           </div>
-           
-        <br>
-        
-          <ion-input accept="image/png,image/jpeg" type="file"></ion-input>
-          
+        <ion-button   (click)="takePicture()" >Seleccione una foto</ion-button>  
       </form>
       <ion-item>
         <ion-select [(ngModel)]="pedirPregunta" interface="popover" placeholder="Seleccione"  >
@@ -120,8 +116,6 @@
       <br>
       
       <p style="text-align: center;"><ion-button [disabled]="formularioRegistro.invalid"  (click)="registrar()" >Enviar</ion-button></p>
-      <ion-button   (click)="takePicture()" >foto</ion-button>
-      
     </ion-col>
   
     </ion-row>
