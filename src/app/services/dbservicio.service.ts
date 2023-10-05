@@ -42,7 +42,7 @@ export class DbservicioService {
   registroPregunta2:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(2, '¿caricatura favorita?');";
   registroPregunta3:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(3, '¿nombre de tu primera mascota?');";
 
-  registroLogro:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Novato', 'completaste el tutorial ¡felicidades!', 50);";
+  registroLogro1:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Novato', 'completaste el tutorial ¡felicidades!', 50);";
   registroLogro2:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(2, 'Aprendiz', 'completaste dos niveles bien ¡hecho!', 75);";
   registroLogro3:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(3, 'Brillante', 'recolectaste todas las estrellas ¡asombroso!', 100);";
   
@@ -474,7 +474,7 @@ async crearTablaLogro(){
 
 
     //ejecuto los insert
-    await this.database.executeSql(this.registroLogro,[]);
+    await this.database.executeSql(this.registroLogro1,[]);
     await this.database.executeSql(this.registroLogro2,[]);
     await this.database.executeSql(this.registroLogro3,[]);
 
