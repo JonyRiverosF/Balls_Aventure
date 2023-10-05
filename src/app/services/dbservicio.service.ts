@@ -52,8 +52,8 @@ export class DbservicioService {
   registroNiveles3: string = "INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(3, 'Nivel-Dificil', 450);";
 
 
-  registroUsuario: string = "INSERT or IGNORE INTO usuario(idU,idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros) VALUES(1, 1, 'Pasta', 'Dani123', 'J@ny12', 'dani123@gmail.com', 'Me gusta jugar videojuegos','',0, 1, '');";
-  registroUsuario2: string = "INSERT or IGNORE INTO usuario(idU, idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros) VALUES(2, 2, 'Ben10', 'jony121', 'J@ny12', 'jony123@gmail.com', 'Me gusta jugar videojuegos','',0, 2, '');";
+  registroUsuario: string = "INSERT or IGNORE INTO usuario(idU,idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros) VALUES(1, 1, 'pasta', 'Dani123', 'J@ny12', 'dani123@gmail.com', 'Me gusta jugar videojuegos','',0, 1, '');";
+  registroUsuario2: string = "INSERT or IGNORE INTO usuario(idU, idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros) VALUES(2, 2, 'ben10', 'jony121', 'J@ny12', 'jony123@gmail.com', 'Me gusta jugar videojuegos','',0, 2, '');";
 
   //observables de las tablas
   listaRol = new BehaviorSubject([]);
@@ -347,6 +347,15 @@ buscarUsuario(){
     return this.database.executeSql('UPDATE usuario SET respuesta= ?, nombreU= ?, contrasena= ?, correo= ?, descripcion= ?, foto= ?, monedas= ?, idRol= ?, idPregunta= ?,  idLogros= ? WHERE idU= ?',[respuesta, nombreU,contrasena,correo,descripcion,foto,monedas,idRol,idPregunta,idLogros,idU]).then(res=>{
       this.buscarUsuario();
     })
+  }
+
+  actualizarclaveUsuario(idU:any, contrasena:any){
+    return this.database.executeSql('UPDATE usuario SET contrasena= ? WHERE idU= ?',[contrasena, idU])
+    .then(res=>{
+        this.buscarUsuario();
+      }).catch(e=>{
+        this.presentAlert("Error ModificarClave: "+e)
+      })
   }
 
   eliminarUsuario(idU:any){

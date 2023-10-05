@@ -13,32 +13,8 @@
     <ion-card-content>
       <form [formGroup]="formularioOlvidaste">
         <ion-item>
-          <ion-label position="floating">Pregunta de seguridad</ion-label>
-          <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
-            <ion-select-option value="apples">¿Cual es tu mascota favorita?</ion-select-option>
-            <ion-select-option value="oranges">¿Cual es tu pelicula favorita?</ion-select-option>
-          </ion-select>
-        </ion-item>
-        <br>
-        <ion-item>
-          <ion-label position="floating">Respuesta</ion-label>
-          <ion-input   formControlName="Respuesta" type="text"></ion-input>
-        </ion-item>
-        <div [hidden]="respuesta?.valid || respuesta?.pristine ">
-          <span style="color: rgb(255, 0, 0);" *ngIf="respuesta?.errors?.['required']">
-            La respuesta es requerida.
-          </span>
-          <span style="color: rgb(255, 0, 0);" *ngIf="respuesta?.errors?.['maxlength']">
-            La respuesta permite un maximo de 30 caracteres.
-          </span>
-          <span style="color: rgb(255, 0, 0);" *ngIf="respuesta?.errors?.['minlength']">
-            La respuesta solo permite un minimo de 5 caracteres.
-          </span>
-          </div>
-        <br>
-        <ion-item>
           <ion-label position="floating">Correo</ion-label>
-          <ion-input   formControlName="Correo" type="text"></ion-input>
+          <ion-input [(ngModel)]="pedirCorreo"  formControlName="Correo" type="text"></ion-input>
         </ion-item>
         <div [hidden]="correo?.valid || correo?.pristine ">
           <span style="color: rgb(255, 0, 0);" *ngIf="correo?.errors?.['required']">
@@ -53,7 +29,18 @@
           </div>
         <br>
       </form>
-      <p style="text-align: center;"><ion-button  >Nuevo contraseña</ion-button></p>
+      <ion-item>
+        <ion-label position="floating">Pregunta de seguridad</ion-label>
+        <ion-select [(ngModel)]="pedirPregunta" interface="popover" placeholder="Seleccione">
+          <ion-select-option *ngFor="let x of arregloPreguntas" [value]="x">{{x.idP}}{{x.nombreP}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <br>
+      <ion-item>
+        <ion-label position="floating">Respuesta</ion-label>
+        <ion-input type="text" [(ngModel)]="pedirRespuesta" ></ion-input>
+      </ion-item>
+      <p style="text-align: center;"><ion-button  (click)="CambiarContra()" [disabled]="formularioOlvidaste.invalid">Cambiar Contraseña</ion-button></p>
       
 
     </ion-card-content>

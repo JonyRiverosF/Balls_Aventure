@@ -90,7 +90,7 @@ export class IniciarSesionPage implements OnInit {
             correo:this.arreglousuario[i].correo,
             nombre:this.arreglousuario[i].nombreU,
             rol:this.arreglousuario[i].idRol,
-            intento:this.arreglousuario[i].idIntento
+            
 
 
           }

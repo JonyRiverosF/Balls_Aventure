@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController,  } from '@ionic/angular';
 import { NavigationExtras,Router } from '@angular/router';
+import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
   selector: 'app-modificar-contra',
@@ -9,13 +10,23 @@ import { NavigationExtras,Router } from '@angular/router';
   styleUrls: ['./modificar-contra.page.scss'],
 })
 export class ModificarContraPage implements OnInit {
+  formularioModiContra:FormGroup;
+
+  arreglousuario:any =[{
+    idU: 0,
+    nombreU: '' ,
+    correo:'',
+    contrasena:'',
+    idPregunta:0,
+    respuesta:''
+  }]
+
   contra1:string="";
   contra2:string="";
   mensaje:string="Las contraseñas no coinciden";
-
-  formularioModiContra:FormGroup;
-
-  constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,) {
+  idUsuario:number=0;
+  
+  constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,private bd:DbservicioService) {
 
     this.formularioModiContra=this.fb.group({
       'Contraseña': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(new RegExp("(?=.*[0-9])")),Validators.pattern(new RegExp("(?=.*[A-Z])")),Validators.pattern(new RegExp("(?=.*[a-z])")),Validators.pattern(new RegExp("(?=.*[$@^!%*?&])"))]),
@@ -25,19 +36,15 @@ export class ModificarContraPage implements OnInit {
     })
 
    }
+
    registrar(){
     if (this.contra1==this.contra2){
-      this.router.navigate(['/iniciar-sesion'],)
-
+      this.bd.actualizarclaveUsuario(this.idUsuario,this.contra1);
+      this.presentAlert("Usuario Modificado");
+      this.router.navigate(['/iniciar-sesion'])
     }else{
-      let navigationextra:NavigationExtras={
-        state:{
-          mensaje:this.mensaje
-        }
-      }
+      this.presentAlert("No hay coincidencias en las claves");
     }
-    
-
    }
 
    get contra(){
@@ -47,7 +54,24 @@ export class ModificarContraPage implements OnInit {
     return this.formularioModiContra.get('ContraseñaConfirm') as FormControl;
    }
 
+   async presentAlert( msj:string) {
+    const alert = await this.alertController.create({
+      header: 'Alert',
+      subHeader: 'Important message',
+      message: msj,
+      buttons: ['OK'],
+    });
+    await alert.present();
+  }
+
   ngOnInit() {
+    this.bd.bdstate().subscribe(res=>{
+      if(res){
+        this.bd.fetchUsuario().subscribe(datos=>{
+          this.arreglousuario=datos;
+        })
+      }
+    })
   }
 
   
