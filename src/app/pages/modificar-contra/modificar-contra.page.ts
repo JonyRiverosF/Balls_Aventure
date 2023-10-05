@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertController,  } from '@ionic/angular';
-import { NavigationExtras,Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras,Router } from '@angular/router';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
@@ -25,16 +25,20 @@ export class ModificarContraPage implements OnInit {
   contra2:string="";
   mensaje:string="Las contraseñas no coinciden";
   idUsuario:number=0;
+  RespuestaG:any;
   
-  constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,private bd:DbservicioService) {
+  constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,private bd:DbservicioService,private activatedRouter:ActivatedRoute) {
 
+    this.activatedRouter.queryParams.subscribe(param =>{
+      if (this.router.getCurrentNavigation()?.extras.state){
+        this.RespuestaG = this.router.getCurrentNavigation()?.extras?.state?.["RespuestaG"];
+        this.idUsuario=this.RespuestaG.idUsuario;
+      }
+    })
     this.formularioModiContra=this.fb.group({
       'Contraseña': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(new RegExp("(?=.*[0-9])")),Validators.pattern(new RegExp("(?=.*[A-Z])")),Validators.pattern(new RegExp("(?=.*[a-z])")),Validators.pattern(new RegExp("(?=.*[$@^!%*?&])"))]),
       'ContraseñaConfirm': new FormControl("",[Validators.required])
-
-
     })
-
    }
 
    registrar(){

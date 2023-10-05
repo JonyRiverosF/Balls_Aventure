@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
@@ -34,7 +34,7 @@ export class OlvidasteCPage implements OnInit {
   pedirPregunta:any={idP:0};
   pedirRespuesta:string="";
 
-  constructor(public fb:FormBuilder, public alertController:AlertController,private bd:DbservicioService,private router:Router) {
+  constructor(public fb:FormBuilder, public alertController:AlertController,private bd:DbservicioService,private router:Router,private activatedRouter:ActivatedRoute) {
 
     this.formularioOlvidaste=this.fb.group({
       'Correo': new FormControl("",[Validators.required,Validators.minLength(5),Validators.email]),
@@ -87,8 +87,13 @@ export class OlvidasteCPage implements OnInit {
         if(this.pedirRespuesta.toLocaleLowerCase() == this.RespuestaG[0].respuesta.toLocaleLowerCase()){
           this.idUsuario = this.RespuestaG[0].idUsuario;
           this.x = 'true';
+          let navigationextra:NavigationExtras={
+            state:{
+              RespuestaG:this.RespuestaG[0]
+            }
+          }
           this.presentAlert("Usuario Correcto");
-          this.router.navigate(['/modificar-contra'])
+          this.router.navigate(['/modificar-contra'],navigationextra)
           
         }else{
           this.presentAlert("Respuesta incorrecta");

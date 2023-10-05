@@ -39,13 +39,7 @@ export class IniciarSesionPage implements OnInit {
   
   formularioLogin:FormGroup;
 
-  constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,private bd:DbservicioService,private storage: Storage) {
-    //for(var i = 0; i<this.arreglousuario.length; i++){
-      //if(this.correousuario==this.arreglousuario[i].correo){
-        //storage.set('usuario1d',this.arreglousuario[i]);
-      //}
-    
-    
+  constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,private bd:DbservicioService) { 
     this.formularioLogin=this.fb.group({
       'Correo1': new FormControl('',[Validators.required]),
       'contraseña1': new FormControl ('',[Validators.required])
