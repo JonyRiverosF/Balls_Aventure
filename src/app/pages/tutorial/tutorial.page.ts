@@ -66,12 +66,12 @@ constructor(private activatedRouter:ActivatedRoute,private router: Router, publi
 //Timeout Alerta
 ngOnInit() {
   setTimeout(() => {
-    //this.bd.insertarIntento(this.estrellasrecojidas, 0, false, 1, this.infoUsuario.idU);
-    //  this.bd.presentAlert('intento fallido agregado');
+    
     this.tiempoExpirado = true;
     this.mostrarAlerta = true; 
     if (this.tiempoExpirado) {
-      
+     // this.bd.insertarIntento(this.estrellasrecojidas, 0, false, 1, this.infoUsuario.idU);
+      //this.bd.presentAlert('intento fallido agregado');
       const personaje = document.getElementById('tu-personaje'); 
       if (personaje) {
         personaje.classList.add('death-animation');

@@ -4,6 +4,7 @@ import { Platform, ToastController } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AlertController } from '@ionic/angular';
 import { Rol } from './rol';
+import { Inter } from './inter';
 import { Pregunta } from './pregunta';
 import { Usuario } from './usuario';
 import { Logro } from './logro';
@@ -31,8 +32,9 @@ export class DbservicioService {
 
   tblIntento: string = "CREATE TABLE IF NOT EXISTS intento(idI INTEGER PRIMARY KEY AUTOINCREMENT, estrellas NUMBER(6) NOT NULL, tiempo NUMBER(10) NOT NULL, completado BOOLEAN NOT NULL, idNiveles INTEGER,idUsuario INTERGER, FOREIGN KEY(idNiveles) REFERENCES niveles(idN),FOREIGN KEY(idUsuario) REFERENCES usuario(idU));";
 
-  tblUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY AUTOINCREMENT, respuesta VARCHAR(50) NOT NULL, nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL, correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto BLOB, monedas NUMBER(5) NOT NULL, idRol INTEGER, idPregunta INTEGER, idLogros INTEGER, FOREIGN KEY(idRol) REFERENCES rol(idR), FOREIGN KEY(idPregunta) REFERENCES pregunta(idP), FOREIGN KEY(idLogros) REFERENCES logro(idL));";
-
+  tblUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY AUTOINCREMENT, respuesta VARCHAR(50) NOT NULL, nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL, correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto BLOB, monedas NUMBER(5) NOT NULL, idRol INTEGER, idPregunta INTEGER, FOREIGN KEY(idRol) REFERENCES rol(idR), FOREIGN KEY(idPregunta) REFERENCES pregunta(idP));";
+  
+  tblInter: string ="CREATE TABLE IF NOT EXISTS inter(idUsuario INTERGER, idLogro INTERGER, PRIMARY KEY (idUsuario, idLogro),FOREIGN KEY (idUsuario) REFERENCES usuario(idU),FOREIGN KEY (idLogro) REFERENCES logro(idL));";
 
   //variables para los insert iniciales
   registroRol:string="INSERT or IGNORE INTO rol(idR, nombreR) VALUES(1, 'usuario');";
@@ -42,9 +44,14 @@ export class DbservicioService {
   registroPregunta2:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(2, '¿caricatura favorita?');";
   registroPregunta3:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(3, '¿nombre de tu primera mascota?');";
 
-  registroLogro1:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Novato', 'completaste el tutorial ¡felicidades!', 15);";
-  registroLogro2:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(2, 'Aprendiz', 'completaste dos niveles bien ¡hecho!', 30);";
-  registroLogro3:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(3, 'Brillante', 'recolectaste todas las estrellas ¡asombroso!', 45);";
+  registroLogro1:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Novato', 'completa el tutorial', 15);";
+  registroLogro2:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(2, 'Aprendiz', 'completa dos niveles bien', 30);";
+  registroLogro3:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(3, 'Brillante', 'recolecta todas las estrellas', 45);";
+  registroLogro4:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(4, 'Premio Mayor', 'completa el juego', 60);";
+
+  registrointer:string="INSERT or IGNORE INTO inter(idUsuario, idLogro) VALUES(1,1);";
+  registrointer1:string="INSERT or IGNORE INTO inter(idUsuario, idLogro) VALUES(1,4);";
+  registrointer2:string="INSERT or IGNORE INTO inter(idUsuario, idLogro) VALUES(2,3);";
   
 
   registroNiveles: string = "INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(1, 'Tutorial', 150);";
@@ -52,8 +59,8 @@ export class DbservicioService {
   registroNiveles3: string = "INSERT or IGNORE INTO niveles(idN, NombreN, RecompensaN) VALUES(3, 'Nivel-Dificil', 450);";
 
 
-  registroUsuario: string = "INSERT or IGNORE INTO usuario(idU,idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros) VALUES(1, 1, 'pasta', 'Dani123', 'J@ny12', 'dani123@gmail.com', 'Me gusta jugar videojuegos','',0, 1, '');";
-  registroUsuario2: string = "INSERT or IGNORE INTO usuario(idU, idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol, idLogros) VALUES(2, 2, 'ben10', 'jony121', 'J@ny12', 'jony123@gmail.com', 'Me gusta jugar videojuegos','',0, 2, '');";
+  registroUsuario: string = "INSERT or IGNORE INTO usuario(idU,idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol) VALUES(1, 1, 'pasta', 'Dani123', 'J@ny12', 'dani123@gmail.com', 'Me gusta jugar videojuegos','',0, 1);";
+  registroUsuario2: string = "INSERT or IGNORE INTO usuario(idU, idPregunta,  respuesta, nombreU, contrasena, correo, descripcion, foto, monedas, idRol) VALUES(2, 2, 'ben10', 'jony121', 'J@ny12', 'jony123@gmail.com', 'Me gusta jugar videojuegos','',0, 2);";
 
   //observables de las tablas
   listaRol = new BehaviorSubject([]);
@@ -67,6 +74,8 @@ export class DbservicioService {
   listaIntento = new BehaviorSubject([]);
 
   listaUsuario = new BehaviorSubject([]);
+
+  listaInter = new BehaviorSubject([]);
 
 
 
@@ -101,7 +110,11 @@ export class DbservicioService {
   fetchUsuario():Observable<Usuario[]>{
     return this.listaUsuario.asObservable();
   }
+  fetchinter():Observable<Inter[]>{
+    return this.listaInter.asObservable();
+  }
 //Fin Fetchs
+
 
 //Rol
 buscarRol(){
@@ -350,8 +363,8 @@ buscarUsuario(){
     })
   }
 
-  actualizarUsuario(idU:any, respuesta:any, nombreU:any, contrasena:any, correo:any, descripcion:any, foto:any, monedas:any, idRol:any, idPregunta:any,idLogros:any){
-    return this.database.executeSql('UPDATE usuario SET respuesta= ?, nombreU= ?, contrasena= ?, correo= ?, descripcion= ?, foto= ?, monedas= ?, idRol= ?, idPregunta= ?,  idLogros= ? WHERE idU= ?',[respuesta, nombreU,contrasena,correo,descripcion,foto,monedas,idRol,idPregunta,idLogros,idU]).then(res=>{
+  actualizarUsuario(idU:any, respuesta:any, nombreU:any, contrasena:any, correo:any, descripcion:any, foto:any, monedas:any, idRol:any, idPregunta:any){
+    return this.database.executeSql('UPDATE usuario SET respuesta= ?, nombreU= ?, contrasena= ?, correo= ?, descripcion= ?, foto= ?, monedas= ?, idRol= ?, idPregunta= ? WHERE idU= ?',[respuesta, nombreU,contrasena,correo,descripcion,foto,monedas,idRol,idPregunta,idU]).then(res=>{
       this.buscarUsuario();
     })
   }
@@ -372,6 +385,36 @@ buscarUsuario(){
   }
 
 //Fin Usuario
+
+//Inter
+buscarInter(){
+  return this.database.executeSql('SELECT * FROM inter',[]).then(res=>{
+    //variable para lmacenar el resultado
+    let items:Inter[]=[];
+    //verifico la cantidad de registros
+    if(res.rows.length > 0 ){
+      //agrego registro a registro em mi variable
+      for(var i = 0; i< res.rows.length; i++){
+        items.push({
+          
+          idUsuario:res.rows.item(i).idUsuario,
+          idLogro:res.rows.item(i).idLogro
+          
+        })
+      }
+    }
+    this.listaInter.next(items as any);
+    })
+  }
+
+  insertarInter(idUsuario:any, idLogro:any){
+    return this.database.executeSql('INSERT INTO inter(idUsuario, idLogro ) VALUES(?,?)',[idUsuario, idLogro]).then(res=>{
+      this.buscarInter();
+    }).catch(e=>{
+      this.presentAlert("Error en insertar inter");
+    })
+  }
+//Fin Inter
  
 //Crear Base de datos
 crearBD(){
@@ -390,6 +433,7 @@ crearBD(){
       this.crearTablaNiveles();
       this.crearTablaIntento();
       this.crearTablaUsuario();
+      this.crearTablaInter();
     }).catch((e) => this.presentAlert("error en crear BD: "+e));
 
   })
@@ -493,6 +537,7 @@ async crearTablaLogro(){
     await this.database.executeSql(this.registroLogro1,[]);
     await this.database.executeSql(this.registroLogro2,[]);
     await this.database.executeSql(this.registroLogro3,[]);
+    await this.database.executeSql(this.registroLogro4,[]);
 
     //cambio mi observable de BD
     this.isBDReady.next(true);
@@ -562,6 +607,31 @@ async crearTablaUsuario(){
 
   }catch(e){
     this.presentAlert("Error en crearTablaUsuario: " + e);
+  }
+
+}
+
+async crearTablaInter(){
+  try{
+    //this.database.executeSql("DROP TABLE usuario",[]);
+    //ejecutar la creación de tablas
+    await this.database.executeSql(this.tblInter,[]);
+    
+    
+    
+
+
+    //ejecuto los insert
+    await this.database.executeSql(this.registrointer,[]);
+    await this.database.executeSql(this.registrointer1,[]);
+    await this.database.executeSql(this.registrointer2,[]);
+    this.presentAlert("registro inter creada");
+    //cambio mi observable de BD
+    this.isBDReady.next(true);
+    this.buscarInter();
+
+  }catch(e){
+    this.presentAlert("Error en crearTablaInter: " + e);
   }
 
 }
