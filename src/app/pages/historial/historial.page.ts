@@ -35,7 +35,7 @@ export class HistorialPage implements OnInit {
     this.bd.bdstate().subscribe(res=>{
       if(res){
         this.bd.fetchIntento().subscribe(datos=>{
-          this.arregloIntentos=datos;
+          this.arregloIntentos=datos.filter(item=> item.idUsuario == this.infoUsuario.idU);
         })
       }
     })

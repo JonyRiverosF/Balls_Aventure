@@ -34,7 +34,7 @@ export class DbservicioService {
 
   tblUsuario: string = "CREATE TABLE IF NOT EXISTS usuario(idU INTEGER PRIMARY KEY AUTOINCREMENT, respuesta VARCHAR(50) NOT NULL, nombreU VARCHAR(30) NOT NULL, contrasena VARCHAR(12) NOT NULL, correo VARCHAR(50) NOT NULL, descripcion VARCHAR(100), foto BLOB, monedas NUMBER(5) NOT NULL, idRol INTEGER, idPregunta INTEGER, FOREIGN KEY(idRol) REFERENCES rol(idR), FOREIGN KEY(idPregunta) REFERENCES pregunta(idP));";
   
-  tblInter: string ="CREATE TABLE IF NOT EXISTS inter(idUsuario INTERGER, idLogro INTERGER, PRIMARY KEY (idUsuario, idLogro),FOREIGN KEY (idUsuario) REFERENCES usuario(idU),FOREIGN KEY (idLogro) REFERENCES logro(idL));";
+  tblInter: string ="CREATE TABLE IF NOT EXISTS inter(idUsuario INTEGER, idLogro INTEGER, PRIMARY KEY (idUsuario, idLogro),FOREIGN KEY (idUsuario) REFERENCES usuario(idU),FOREIGN KEY (idLogro) REFERENCES logro(idL));";
 
   //variables para los insert iniciales
   registroRol:string="INSERT or IGNORE INTO rol(idR, nombreR) VALUES(1, 'usuario');";
@@ -625,7 +625,7 @@ async crearTablaInter(){
     await this.database.executeSql(this.registrointer,[]);
     await this.database.executeSql(this.registrointer1,[]);
     await this.database.executeSql(this.registrointer2,[]);
-    this.presentAlert("registro inter creada");
+   
     //cambio mi observable de BD
     this.isBDReady.next(true);
     this.buscarInter();

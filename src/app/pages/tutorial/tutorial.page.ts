@@ -119,7 +119,7 @@ calcularMaxX() {
 
 menu(){
   this.menus=true;
-  this.bd.presentAlert('intento holi agregado');
+  
   
   
   
@@ -196,6 +196,8 @@ moverPersonaje() {
   }
   if (personaje && puerta1 && !this.haTocadoPuerta) {
     if (this.colisiona(personaje, puerta1)) {
+        this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.infoUsuario.idU);
+       this.bd.presentAlert('intento  agregado');
       
       this.nivelcompletado = true;
       

@@ -19,7 +19,7 @@
         <!--logros-->
         <ion-row >
           <ion-col class="icono">
-            <img [routerLink]="['/logros']"  src="assets/icon/trofeo.png" alt="Mi Imagen">
+            <img (click)="Logros()"  src="assets/icon/trofeo.png" alt="Mi Imagen">
             </ion-col>
           
         </ion-row>
@@ -58,6 +58,7 @@
             <div class="bienvenido">
              {{infoUsuario.nombre}}
             </div>
+           
             
           </ion-col>
         </ion-row>

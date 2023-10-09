@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -34,6 +34,7 @@ export class NivelMedioPage implements OnInit {
   menus: boolean = false;
   nivelcompletado: boolean = false;
   puertaAbierta = false;
+  infoUsuario: any;
    
   
   //Timeout Con alerta
@@ -43,8 +44,13 @@ export class NivelMedioPage implements OnInit {
   public mostrarAlerta: boolean = false;
 
   @ViewChild('pj', { static: false }) personaje!: ElementRef;
-  constructor(private router: Router, public alertController: AlertController) {
+  constructor(private router: Router, public alertController: AlertController, private activatedRouter: ActivatedRoute) {
     this.calcularMaxX();
+    this.activatedRouter.queryParams.subscribe(param => {
+      if (this.router.getCurrentNavigation()?.extras.state) {
+        this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
+      }
+    });
   }
   
   
