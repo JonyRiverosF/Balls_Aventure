@@ -80,12 +80,6 @@ export class IniciarSesionPage implements OnInit {
       if(this.claveusuario==this.arreglousuario[i].contrasena){
         if(this.arreglousuario[i].idRol==1){
 
-          localStorage.setItem('userId', this.arreglousuario[i].idU.toString());
-          const navigationExtras: NavigationExtras = {
-            queryParams: {
-              idUsuario:this.arreglousuario[i].idU,
-            }
-          };
           let infoUsuario ={
             idU:this.arreglousuario[i].idU,
             correo:this.arreglousuario[i].correo,

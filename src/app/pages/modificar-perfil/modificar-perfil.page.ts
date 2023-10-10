@@ -30,7 +30,7 @@ export class ModificarPerfilPage implements OnInit {
   pedirUsuario="";
   pedirDesc="";
   Validar=true;
-  idUsuario:number=0;
+  idUsuario:any;
   
 
   constructor(public fb:FormBuilder,private router:Router, private activatedRouter:ActivatedRoute, public alertController:AlertController,private bd:DbservicioService) {

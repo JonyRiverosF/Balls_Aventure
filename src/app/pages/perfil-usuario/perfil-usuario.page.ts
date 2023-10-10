@@ -10,13 +10,10 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 })
 export class PerfilUsuarioPage implements OnInit {
 
-  nombreRecibido:string = "";
-  edadRecibida:number = 0;
-  correorecibido:string="";
   descripcion:string ="";
   infoUsuario:any;
   imagenNueva: any ="";
-  correousuario:any;
+  correousuario:string ="";
 
   arreglousuario:any =[{
     idU: 0,
@@ -32,6 +29,7 @@ export class PerfilUsuarioPage implements OnInit {
     this.activatedRouter.queryParams.subscribe(param =>{
       if (this.router.getCurrentNavigation()?.extras.state){
         this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
+        this.correousuario=this.infoUsuario.correo;
         
        
       }
@@ -40,14 +38,20 @@ export class PerfilUsuarioPage implements OnInit {
 
    irModificar() {
     for(var i = 0; i<this.arreglousuario.length; i++){
+      this.presentAlert("correo "+this.correousuario);
       if(this.correousuario==this.arreglousuario[i].correo){
-    let navigationExtras: NavigationExtras = {
-      state: {
-        idUsuario: this.arreglousuario[i].idU,
-      }
+        let idUsuario = this.arreglousuario[i].idU
+        
+        let navigationextra:NavigationExtras={
+          state:{
+            idUsuario:idUsuario
+          }
+        
     };
-    this.router.navigate(['/modificar-perfil'], navigationExtras);
-  }}}
+    this.router.navigate(['/modificar-perfil'], navigationextra);
+    }
+  }
+}
    
   ngOnInit() {
     this.bd.bdstate().subscribe(res=>{
