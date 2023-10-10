@@ -369,6 +369,15 @@ buscarUsuario(){
     })
   }
 
+  actualizaPerfilUsuario(idU:any,correo:any,nombreU:any, descripcion:any, foto:any){
+    return this.database.executeSql('UPDATE usuario SET correo=?, nombreU= ?, descripcion= ?, foto= ? WHERE idU= ?',[correo, nombreU, descripcion, foto, idU])
+    .then(res=>{
+      this.buscarUsuario();
+    }).catch(e=>{
+      this.presentAlert("Error Modificar Usuario "+e)
+    })
+  }
+
   actualizarclaveUsuario(idU:any, contrasena:any){
     return this.database.executeSql('UPDATE usuario SET contrasena= ? WHERE idU= ?',[contrasena, idU])
     .then(res=>{

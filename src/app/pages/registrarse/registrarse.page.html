@@ -63,11 +63,7 @@
           </span>
           </div>
         <br>
-          
-        
-        
-        
-        <br>
+
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input  [(ngModel)]="contra1" formControlName="contraseña" [(ngModel)]="pedirContrasena" type="password"></ion-input>
@@ -99,16 +95,28 @@
           <span *ngIf="confirmar_contra?.errors?.['required']">
             Confirmar Contraseña es requerida.<br>{{mensaje}}
           </span>
-         
           </div>
-        <ion-button   (click)="takePicture()" >Seleccione una foto</ion-button>  
+          <br>
+
       </form>
+
+      <ion-item>
+        <ion-button   (click)="takePicture()" >Seleccione una foto</ion-button>  
+      </ion-item>
+      <div *ngIf="imagenNueva != '' ">
+        <ion-item color="dark">
+          <img [src]="imagenNueva" alt="image" style="width: 60%;height: 60%;">
+        </ion-item>
+      </div>
+      <br>
+
       <ion-item>
         <ion-select [(ngModel)]="pedirPregunta" interface="popover" placeholder="Seleccione"  >
           <ion-select-option *ngFor="let x of arregloPreguntas" [value]="x.idP" >{{x.nombreP}}</ion-select-option>
         </ion-select>
         </ion-item>
       <br>
+      
       <ion-item>
         <ion-label position="floating">Respuesta</ion-label>
         <ion-input formControlName="Respuesta" [(ngModel)]="pedirRespuesta" type="text"></ion-input>

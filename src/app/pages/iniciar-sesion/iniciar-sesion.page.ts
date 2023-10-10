@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras,Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
@@ -31,12 +30,13 @@ export class IniciarSesionPage implements OnInit {
     nombreU: '' ,
     correo:'',
     contrasena:'',
+    foto:'',
     idPregunta:0,
     idRol:0
   }]
 
   
-  
+  usuarioconectado:boolean=false;
   formularioLogin:FormGroup;
 
   constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,private bd:DbservicioService) { 
@@ -74,36 +74,44 @@ export class IniciarSesionPage implements OnInit {
   }*/
 
   admin_o_usuario(){
+    this.usuarioconectado=false;
    for(var i = 0; i<this.arreglousuario.length; i++){
     if(this.correousuario==this.arreglousuario[i].correo){
       if(this.claveusuario==this.arreglousuario[i].contrasena){
         if(this.arreglousuario[i].idRol==1){
-          
+
+          localStorage.setItem('userId', this.arreglousuario[i].idU.toString());
+          const navigationExtras: NavigationExtras = {
+            queryParams: {
+              idUsuario:this.arreglousuario[i].idU,
+            }
+          };
           let infoUsuario ={
             idU:this.arreglousuario[i].idU,
             correo:this.arreglousuario[i].correo,
             nombre:this.arreglousuario[i].nombreU,
             rol:this.arreglousuario[i].idRol,
-            
-
-
+            foto:this.arreglousuario[i].foto,
           }
           let navigationextra:NavigationExtras={
             state:{
               infoUsuario:infoUsuario
             }
           }
+          
           this.router.navigate(['/lobby'],navigationextra)
+          this.usuarioconectado=true;
         }
         if(this.arreglousuario[i].idRol==2){
           this.router.navigate(['/admin-usuarios'])
+          this.usuarioconectado=true;
         }
       }else{
         this.presentAlert("Contraseña incorrecta");
       }
-    }//else{
-      //this.presentAlert("Correo no existe");
-    //}
+    }
+   }if(this.usuarioconectado == false){
+    this.presentAlert("Correo no registrado");
    }
   }
 

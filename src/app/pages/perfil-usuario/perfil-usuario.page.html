@@ -62,7 +62,7 @@
             </div> 
           </ion-col>
           <ion-col> 
-            <ion-button [routerLink]="['/modificar-perfil']" class="boton" expand="block" >editar perfil</ion-button>
+            <ion-button (click)="irModificar()" class="boton" expand="block" >editar perfil</ion-button>
             <ion-button [routerLink]="['/home']" class="boton" expand="block" >cerrar sesion</ion-button>
           </ion-col>
         </ion-row>
@@ -71,13 +71,13 @@
           
           <!--columna fotoperfil-->
           <ion-col size="4" > 
-            <img class="fotoperfil" src="assets/icon/perfil.png" alt="Mi Imagen">
+            <img class="fotoperfil" src="{{infoUsuario.foto}}"  alt="Mi Imagen">
           </ion-col>
       <ion-col size="8" >
-        <ion-row>
+        <br><ion-row>
           <ion-col >
             <div class="datos">
-{{nombreRecibido}}
+{{infoUsuario.nombre}}
             </div>
              
           </ion-col>
@@ -85,20 +85,11 @@
         <ion-row>
           <ion-col >
             <div  class="datos">
- {{correorecibido}}
+ {{infoUsuario.correo}}
             </div>
            
           </ion-col>
         </ion-row>
-        <ion-row>
-          <ion-col >
-            <div  class="datos">
-{{edadRecibida}}
-            </div>
-            
-          </ion-col>
-        </ion-row>
-       
         
 
       </ion-col>
@@ -109,7 +100,7 @@
               DESCRIPCION
             </div>
             <div style="border: 1px solid rgb(255, 255, 255); width: 570px;height: 100px;margin: 15px;color: beige;" >
-               {{descripcion}}
+               {{infoUsuario.descripcion}}
             </div>
             
          

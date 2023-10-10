@@ -28,7 +28,6 @@ export class ModificarContraPage implements OnInit {
   RespuestaG:any;
   
   constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,private bd:DbservicioService,private activatedRouter:ActivatedRoute) {
-
     this.activatedRouter.queryParams.subscribe(param =>{
       if (this.router.getCurrentNavigation()?.extras.state){
         this.RespuestaG = this.router.getCurrentNavigation()?.extras?.state?.["RespuestaG"];

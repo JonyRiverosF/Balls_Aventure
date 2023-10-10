@@ -26,8 +26,11 @@ export class RegistrarsePage implements OnInit {
     nombreU: '' ,
     correo:'',
     idPregunta:0,
-    idRol:0
+    idRol:0,
+    foto:''
   }]
+
+  imagenNueva: any ="";
 
   pedirUsuario="";
   pedirCorreo="";
@@ -35,9 +38,9 @@ export class RegistrarsePage implements OnInit {
   pedirRespuesta="";
   pedirContrasena="";
   pedirRol=1;
-  des="";
+  descripcion="";
   monedas=0;
-  foto="";
+  
   
 
   contra1:string="";
@@ -75,7 +78,7 @@ export class RegistrarsePage implements OnInit {
     if (this.contra1==this.contra2){
       //this.presentAlert("tipoID--"+String(typeof this.pedirPregunta));
       //this.presentAlert("idPregunta-- "+String(this.pedirPregunta));  
-      this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.des,this.foto, this.monedas,this.pedirRol, this.pedirPregunta);
+      this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.descripcion,this.imagenNueva, this.monedas,this.pedirRol, this.pedirPregunta);
       this.bd.presentAlert("Usuario Agregado");
       this.router.navigate(['/iniciar-sesion'])
     }else{
@@ -124,7 +127,7 @@ export class RegistrarsePage implements OnInit {
 
   }
 
-  imagenNueva: any ="";
+  
 
   takePicture = async () => {
     const image2 = await Camera.getPhoto({
