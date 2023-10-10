@@ -16,6 +16,7 @@ export class PerfilUsuarioPage implements OnInit {
   descripcion:string ="";
   infoUsuario:any;
   imagenNueva: any ="";
+  correousuario:any;
 
   arreglousuario:any =[{
     idU: 0,
@@ -38,13 +39,15 @@ export class PerfilUsuarioPage implements OnInit {
    }
 
    irModificar() {
-    const navigationExtras: NavigationExtras = {
+    for(var i = 0; i<this.arreglousuario.length; i++){
+      if(this.correousuario==this.arreglousuario[i].correo){
+    let navigationExtras: NavigationExtras = {
       state: {
-        idUsuario: this.arreglousuario[0].idU, // Pasar el idUsuario a la página de modificación de perfil
+        idUsuario: this.arreglousuario[i].idU,
       }
     };
     this.router.navigate(['/modificar-perfil'], navigationExtras);
-  }
+  }}}
    
   ngOnInit() {
     this.bd.bdstate().subscribe(res=>{

@@ -34,6 +34,14 @@ export class ModificarPerfilPage implements OnInit {
   
 
   constructor(public fb:FormBuilder,private router:Router, private activatedRouter:ActivatedRoute, public alertController:AlertController,private bd:DbservicioService) {
+    this.activatedRouter.queryParams.subscribe(param =>{
+      if (this.router.getCurrentNavigation()?.extras.state){
+        this.idUsuario = this.router.getCurrentNavigation()?.extras?.state?.["idUsuario"];
+        
+       
+      }
+    })
+
     this.formularioModificar=this.fb.group({
       'NombreUsuario': new FormControl("",[Validators.required,Validators.minLength(3)]),
       'Descripcion': new FormControl("",[Validators.maxLength(300)]),
@@ -49,9 +57,7 @@ export class ModificarPerfilPage implements OnInit {
         })
       }
     })
-    this.activatedRouter.queryParams.subscribe((params) => {
-      this.idUsuario = params['idUsuario'];
-    });
+    
   
   }
   
@@ -73,9 +79,9 @@ export class ModificarPerfilPage implements OnInit {
    modificarP() {
     if (this.Validar) {
       this.bd.actualizaPerfilUsuario(this.pedirCorreo, this.pedirUsuario, this.pedirDesc, this.imagenNueva, this.idUsuario);
-      //this.presentAlert("idUsuario es: " + this.idUsuario);
-      this.presentAlert("Usuario Modificado");
-      this.router.navigate(['/perfil-usuario'])
+      this.presentAlert("idUsuario es: " + this.idUsuario);
+      //this.presentAlert("Usuario Modificado");
+      //this.router.navigate(['/perfil-usuario'])
     } else {
       this.presentAlert("Datos insuficientes");
     }
