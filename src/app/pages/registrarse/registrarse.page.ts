@@ -74,13 +74,13 @@ export class RegistrarsePage implements OnInit {
   }
 
    registrar(){
-    if (this.arreglousuario.correo != this.pedirCorreo){
+    /*if (this.arreglousuario.correo != this.pedirCorreo){
       for(let i=0;i<this.arreglousuario.length;i++){
         if(this.pedirCorreo == this.arreglousuario[i].correo){
           this.presentAlert("Correo ya existente");
         }
       }
-    }
+    }*/
     if (this.contra1==this.contra2){
       //this.presentAlert("tipoID--"+String(typeof this.pedirPregunta));
       //this.presentAlert("idPregunta-- "+String(this.pedirPregunta));
