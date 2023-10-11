@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import { AlertController } from '@ionic/angular';
-import { NavigationExtras,Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras,Router } from '@angular/router';
 import { ModificarContraPage } from '../modificar-contra/modificar-contra.page';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 import { Pregunta } from 'src/app/services/pregunta';
@@ -41,6 +41,7 @@ export class RegistrarsePage implements OnInit {
   descripcion="";
   monedas=0;
   
+  infoUsuario:any;
   
 
   contra1:string="";
@@ -50,7 +51,13 @@ export class RegistrarsePage implements OnInit {
   formularioRegistro:FormGroup;
   
   //private faio: FingerprintAIO
-  constructor(public fb:FormBuilder,public alertController:AlertController,private router:Router, private bd:DbservicioService) {
+  constructor(public fb:FormBuilder,public alertController:AlertController,private router:Router, private activatedRouter:ActivatedRoute, private bd:DbservicioService) {
+    this.activatedRouter.queryParams.subscribe(param =>{
+      if (this.router.getCurrentNavigation()?.extras.state){
+        this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
+
+      }
+    })
     this.formularioRegistro=this.fb.group({
       'nombre': new FormControl("",[Validators.required,Validators.minLength(3)]),
       'contraseña': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(new RegExp("(?=.*[0-9])")),Validators.pattern(new RegExp("(?=.*[A-Z])")),Validators.pattern(new RegExp("(?=.*[a-z])")),Validators.pattern(new RegExp("(?=.*[$@^!%*?&])"))]),
@@ -59,11 +66,7 @@ export class RegistrarsePage implements OnInit {
     })
    }
   
-   /*eliminar(x:any){
-    this
-   }*/
 
-   
    async presentAlert( msj:string) {
     const alert = await this.alertController.create({
       header: 'Alert',
@@ -75,9 +78,16 @@ export class RegistrarsePage implements OnInit {
   }
 
    registrar(){
+    if (this.infoUsuario.correo != this.pedirCorreo){
+      for(let i=0;i<this.arreglousuario.length;i++){
+        if(this.pedirCorreo == this.arreglousuario[i].correo){
+          this.presentAlert("Correo ya existente");
+        }
+      }
+    }
     if (this.contra1==this.contra2){
       //this.presentAlert("tipoID--"+String(typeof this.pedirPregunta));
-      //this.presentAlert("idPregunta-- "+String(this.pedirPregunta));  
+      //this.presentAlert("idPregunta-- "+String(this.pedirPregunta));
       this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.descripcion,this.imagenNueva, this.monedas,this.pedirRol, this.pedirPregunta);
       this.bd.presentAlert("Usuario Agregado");
       this.router.navigate(['/iniciar-sesion'])
