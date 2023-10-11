@@ -75,7 +75,7 @@ export class ModificarPerfilPage implements OnInit {
 
   
    modificarP() {
-    this.bd.actualizaPerfilUsuario(this.pedirCorreo, this.pedirUsuario, this.pedirDesc, this.imagenNueva, this.idUsuario);
+    this.bd.actualizaPerfilUsuario(this.idUsuario, this.pedirCorreo, this.pedirUsuario, this.pedirDesc, this.imagenNueva );
     //this.presentAlert("idUsuario es: " + this.idUsuario);
     this.presentAlert("Usuario Modificado");
     this.router.navigate(['/perfil-usuario']) 

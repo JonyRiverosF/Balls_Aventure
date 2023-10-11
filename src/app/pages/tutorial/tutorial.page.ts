@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras,Router, ActivatedRoute } from '@angular/router';
-import { AlertController, ToastController } from '@ionic/angular';
+
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 
@@ -48,14 +48,15 @@ export class TutorialPage implements OnInit {
  public mostrarAlerta: boolean = false;
 
  infoUsuario:any;
+ id:number=0;
 
  @ViewChild('pj', { static: false }) personaje!: ElementRef;
-constructor(private activatedRouter:ActivatedRoute,private router: Router, public alertController: AlertController,private bd:DbservicioService) {
+constructor(private activatedRouter:ActivatedRoute,private router: Router,private bd:DbservicioService) {
  
   this.activatedRouter.queryParams.subscribe(param =>{
     if (this.router.getCurrentNavigation()?.extras.state){
       this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
-      
+      this.id=this.infoUsuario.idU;
      
     }
   })
@@ -98,8 +99,8 @@ volverAlInicio(){
 }
 
 volverAIntentarlo(){
-  //window.location.href = '/tutorial';
-  this.router.navigate(['/tutorial'])
+  window.location.href = '/tutorial';
+  //this.router.navigate(['/tutorial'])
 }
 
 
@@ -119,10 +120,10 @@ calcularMaxX() {
 
 menu(){
   this.menus=true;
+  this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.id);
+  this.bd.presentAlert('intento  agregado'+this.id);
   
-  
-  
-  
+
 }
 reanudar(){
   this.menus=false;
@@ -205,12 +206,7 @@ moverPersonaje() {
 
     }
   }
-  if (personaje && puerta) {
-    if (this.colisiona(personaje, puerta)) {
-     
-
-    }
-  }
+ 
 
   if (personaje && estrella && !this.haTocadoEstrella1) {
     if (this.colisiona(personaje, estrella)) {

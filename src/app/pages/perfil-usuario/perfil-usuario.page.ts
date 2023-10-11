@@ -22,6 +22,17 @@ export class PerfilUsuarioPage implements OnInit {
     contrasena:'',
     idPregunta:0,
     respuesta:'',
+    descripcion:'',
+    foto:''
+  }]
+  arreglousuarios:any =[{
+    idU: 0,
+    nombreU: '' ,
+    correo:'',
+    contrasena:'',
+    idPregunta:0,
+    respuesta:'',
+    descripcion:'',
     foto:''
   }]
 
@@ -52,6 +63,13 @@ export class PerfilUsuarioPage implements OnInit {
 }
    
   ngOnInit() {
+    this.bd.bdstate().subscribe(res=>{
+      if(res){
+        this.bd.fetchUsuario().subscribe(datos=>{
+          this.arreglousuarios=datos.filter(item=>item.idU == this.infoUsuario.idU);
+        })
+      }
+    })
     this.bd.bdstate().subscribe(res=>{
       if(res){
         this.bd.fetchUsuario().subscribe(datos=>{

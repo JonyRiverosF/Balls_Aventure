@@ -66,18 +66,18 @@
             <ion-button [routerLink]="['/home']" class="boton" expand="block" >cerrar sesion</ion-button>
           </ion-col>
         </ion-row>
-        
+        <div *ngFor="let x of arreglousuarios">
         <ion-row>
           
           <!--columna fotoperfil-->
           <ion-col size="4" > 
-            <img class="fotoperfil" src="{{infoUsuario.foto}}"  alt="Mi Imagen">
+            <img class="fotoperfil" src="{{x.foto}}"  alt="Mi Imagen">
           </ion-col>
       <ion-col size="8" >
         <br><ion-row>
           <ion-col >
             <div class="datos">
-{{infoUsuario.nombre}}
+{{x.nombreU}}
             </div>
              
           </ion-col>
@@ -85,7 +85,7 @@
         <ion-row>
           <ion-col >
             <div  class="datos">
- {{infoUsuario.correo}}
+ {{x.correo}}
             </div>
            
           </ion-col>
@@ -100,13 +100,13 @@
               DESCRIPCION
             </div>
             <div style="border: 1px solid rgb(255, 255, 255); width: 570px;height: 100px;margin: 15px;color: beige;" >
-               {{infoUsuario.descripcion}}
+               {{x.descripcion}}
             </div>
             
          
           </ion-col> 
         </ion-row>
-      
+      </div>
       </ion-col>
     </ion-row>
   </ion-grid>
