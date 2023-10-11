@@ -369,7 +369,7 @@ buscarUsuario(){
     })
   }
 
-  actualizaPerfilUsuario(idU:any,correo:any,nombreU:any, descripcion:any, foto:any){
+  actualizaPerfilUsuario(idU:any, correo:any, nombreU:any, descripcion:any, foto:any){
     return this.database.executeSql('UPDATE usuario SET correo=?, nombreU= ?, descripcion= ?, foto= ? WHERE idU= ?',[correo, nombreU, descripcion, foto, idU])
     .then(res=>{
       this.buscarUsuario();
@@ -383,7 +383,7 @@ buscarUsuario(){
     .then(res=>{
         this.buscarUsuario();
       }).catch(e=>{
-        this.presentAlert("Error ModificarClave: "+e)
+        this.presentAlert("Error Modificar Clave: "+e)
       })
   }
 

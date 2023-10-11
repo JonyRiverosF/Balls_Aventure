@@ -13,7 +13,6 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
 export class ModificarPerfilPage implements OnInit {
 
   formularioModificar:FormGroup;
-
   imagenNueva:any;
 
   arreglousuario:any =[{
@@ -29,7 +28,6 @@ export class ModificarPerfilPage implements OnInit {
   pedirCorreo="";
   pedirUsuario="";
   pedirDesc="";
-  Validar=true;
   idUsuario:any;
   
 
@@ -77,14 +75,10 @@ export class ModificarPerfilPage implements OnInit {
 
   
    modificarP() {
-    if (this.Validar) {
-      this.bd.actualizaPerfilUsuario(this.pedirCorreo, this.pedirUsuario, this.pedirDesc, this.imagenNueva, this.idUsuario);
-      this.presentAlert("idUsuario es: " + this.idUsuario);
-      //this.presentAlert("Usuario Modificado");
-      //this.router.navigate(['/perfil-usuario'])
-    } else {
-      this.presentAlert("Datos insuficientes");
-    }
+    this.bd.actualizaPerfilUsuario(this.pedirCorreo, this.pedirUsuario, this.pedirDesc, this.imagenNueva, this.idUsuario);
+    //this.presentAlert("idUsuario es: " + this.idUsuario);
+    this.presentAlert("Usuario Modificado");
+    this.router.navigate(['/perfil-usuario']) 
   }
 
  

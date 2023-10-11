@@ -38,10 +38,8 @@ export class PerfilUsuarioPage implements OnInit {
 
    irModificar() {
     for(var i = 0; i<this.arreglousuario.length; i++){
-      this.presentAlert("correo "+this.correousuario);
       if(this.correousuario==this.arreglousuario[i].correo){
         let idUsuario = this.arreglousuario[i].idU
-        
         let navigationextra:NavigationExtras={
           state:{
             idUsuario:idUsuario
