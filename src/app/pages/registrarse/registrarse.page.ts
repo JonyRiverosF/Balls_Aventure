@@ -6,6 +6,7 @@ import { ModificarContraPage } from '../modificar-contra/modificar-contra.page';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 import { Pregunta } from 'src/app/services/pregunta';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Usuario } from 'src/app/services/usuario';
 //import { FingerprintAIO } from '@awesome-cordova-plugins/fingerprint-aio/ngx';
 
 
@@ -41,7 +42,7 @@ export class RegistrarsePage implements OnInit {
   descripcion="";
   monedas=0;
   
-  infoUsuario:any;
+  
   
 
   contra1:string="";
@@ -52,12 +53,7 @@ export class RegistrarsePage implements OnInit {
   
   //private faio: FingerprintAIO
   constructor(public fb:FormBuilder,public alertController:AlertController,private router:Router, private activatedRouter:ActivatedRoute, private bd:DbservicioService) {
-    this.activatedRouter.queryParams.subscribe(param =>{
-      if (this.router.getCurrentNavigation()?.extras.state){
-        this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
-
-      }
-    })
+    
     this.formularioRegistro=this.fb.group({
       'nombre': new FormControl("",[Validators.required,Validators.minLength(3)]),
       'contraseña': new FormControl("",[Validators.required,Validators.minLength(5),Validators.maxLength(15),Validators.pattern(new RegExp("(?=.*[0-9])")),Validators.pattern(new RegExp("(?=.*[A-Z])")),Validators.pattern(new RegExp("(?=.*[a-z])")),Validators.pattern(new RegExp("(?=.*[$@^!%*?&])"))]),
@@ -78,7 +74,7 @@ export class RegistrarsePage implements OnInit {
   }
 
    registrar(){
-    if (this.infoUsuario.correo != this.pedirCorreo){
+    if (this.arreglousuario.correo != this.pedirCorreo){
       for(let i=0;i<this.arreglousuario.length;i++){
         if(this.pedirCorreo == this.arreglousuario[i].correo){
           this.presentAlert("Correo ya existente");
@@ -95,8 +91,10 @@ export class RegistrarsePage implements OnInit {
       this.presentAlert("No hay coincidencias en las claves");
     }
    }
-   
 
+   
+   
+   
    
    
 
