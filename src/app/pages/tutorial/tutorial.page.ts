@@ -56,7 +56,7 @@ constructor(private activatedRouter:ActivatedRoute,private router: Router,privat
   this.activatedRouter.queryParams.subscribe(param =>{
     if (this.router.getCurrentNavigation()?.extras.state){
       this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
-      this.id=this.infoUsuario.idU;
+      //this.id=this.infoUsuario.idU;
      
     }
   })
@@ -71,8 +71,8 @@ ngOnInit() {
     this.tiempoExpirado = true;
     this.mostrarAlerta = true; 
     if (this.tiempoExpirado) {
-     // this.bd.insertarIntento(this.estrellasrecojidas, 0, false, 1, this.infoUsuario.idU);
-      //this.bd.presentAlert('intento fallido agregado');
+      this.bd.insertarIntento(this.estrellasrecojidas, 0, false, 1, this.infoUsuario.idU);
+      this.bd.presentAlert('intento fallido agregado');
       const personaje = document.getElementById('tu-personaje'); 
       if (personaje) {
         personaje.classList.add('death-animation');
@@ -120,8 +120,9 @@ calcularMaxX() {
 
 menu(){
   this.menus=true;
-  this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.id);
-  this.bd.presentAlert('intento  agregado'+this.id);
+  
+  
+  //this.bd.presentAlert('intento  infousuario'+this.infoUsuario.idU);
   
 
 }

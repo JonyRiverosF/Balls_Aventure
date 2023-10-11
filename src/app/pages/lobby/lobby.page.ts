@@ -75,6 +75,7 @@ export class LobbyPage implements OnInit {
       }
       
     }
+    
     this.router.navigate(['/niveles'],navigationextra)
   }
   historial(){
@@ -86,8 +87,7 @@ export class LobbyPage implements OnInit {
       }
       
     }
-    //this.bd.insertarIntento(2,50, false,3, this.infoUsuario.idU);
-    //this.bd.presentAlert('insertar intento prueba');
+   
     this.router.navigate(['/historial'],navigationextra)
 
   }

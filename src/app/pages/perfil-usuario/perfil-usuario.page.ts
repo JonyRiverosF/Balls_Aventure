@@ -36,7 +36,7 @@ export class PerfilUsuarioPage implements OnInit {
     foto:''
   }]
 
-  constructor(private router:Router, private activatedRouter:ActivatedRoute, public alertController:AlertController,private bd:DbservicioService,) {
+  constructor(private router:Router, private activatedRouter:ActivatedRoute, public alertController:AlertController,private bd:DbservicioService) {
     this.activatedRouter.queryParams.subscribe(param =>{
       if (this.router.getCurrentNavigation()?.extras.state){
         this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
