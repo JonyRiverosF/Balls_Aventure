@@ -17,7 +17,7 @@
         <img  class="nube1" src="assets/icon/nublada (1).png" alt="Mi Imagen"><br><br>
         <div class="contador"><p>{{ tiempoRestante }}</p></div>
         
-        <div style="margin-left:100px;margin-top: -160px;">
+        <div style="margin-left:100px;margin-top: -140px;">
           <img class="estrella1" style="width:4% ;
           height: 4%;" src="assets/icon/estrella.png" alt="Mi Imagen">
           <img class="pinchos" style="width: 60px ;
@@ -118,21 +118,21 @@
           <img class="llave" src="assets/icon/LLave.png" alt="Mi Imagen">
           <img class="plataforma"  src="assets/icon/Plataforma.png" alt="Mi Imagen">
         </div>
-        <div style="margin-top: -25px;margin-right: 35px;">
+        <div style="margin-top: -25px;margin-right: 60px;">
         <img class="puerta" *ngIf="!puertaAbierta" src="assets/icon/pnivel2_c.png" alt="Puerta Cerrada">
         <img class="puerta1" *ngIf="puertaAbierta" src="assets/icon/pnivel2_a.png" alt="Puerta Abierta">
         </div>
       </ion-col>
     </ion-row>
     <ion-row >
-      <ion-col  style="padding: 0 0 0 0;">
-        <div style="margin-top: -45px;">
+      <ion-col  style="padding: 0 0 0 0;margin-top: -45px;">
+        
         <img class="flechas " src="assets/icon/izquierda.png"  (touchstart)="startMoving('izquierda')" (touchend)="stopMoving('izquierda')"  alt="Mi Imagen">
         <img class="flechas" src="assets/icon/derecha.png"  (touchstart)="startMoving('derecha')" (touchend)="stopMoving('derecha')"  alt="Mi Imagen">
-      </div>
+      
     </ion-col>
-      <ion-col style="text-align: right; justify-content: right;align-items: right;padding: 0 0 0 0;margin-top: -45px;" >
- 
+      <ion-col style="text-align: right; justify-content: right;align-items: right;padding: 0 0 0 0;margin-top: -45px;position:absolute" >
+        
         <img class="salto" (touchstart)="saltarPersonaje()" src="assets/icon/saltar.png" alt="Mi Imagen">
         
       </ion-col>
