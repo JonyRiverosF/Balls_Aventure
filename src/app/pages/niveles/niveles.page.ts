@@ -58,7 +58,7 @@ export class NivelesPage implements OnInit {
     this.router.navigate(['/nivel-medio'],navigationextra)
   }
   nivel_dificil(){
-    this.bd.presentAlert('id usuario'+this.infoUsuario.idU);
+    this.router.navigate(['/nivel-dificil']);
   }
    
 
