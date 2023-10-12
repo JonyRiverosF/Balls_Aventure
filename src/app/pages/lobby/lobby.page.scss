@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gluten:wght@400;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Acme&family=Gluten:wght@400;900&display=swap');
 
-@media screen and (max-width: 1440px) {
+
   @keyframes rubberBand {
     0%{
         transform: scaleX(1);
@@ -24,6 +24,11 @@
     100%{
         transform: scaleX(1) scaleY(1);
     }
+  }
+
+  ion-grid {
+    max-width: 100%;
+    margin: 0 auto; 
   }
   
   .rubberBand {
@@ -152,4 +157,4 @@ font-family: 'Gluten', cursive;
 .container {
   max-width: 100%;
   margin: 0 auto;
-}}
+}
