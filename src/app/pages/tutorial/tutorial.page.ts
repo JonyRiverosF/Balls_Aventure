@@ -94,13 +94,14 @@ ngOnInit() {
 
 //Redireccion
 volverAlInicio(){
-  //window.location.href = '/lobby';
-  this.router.navigate(['/lobby'])
+  // window.location.href = '/lobby';
+ this.router.navigate(['/lobby'])
 }
 
 volverAIntentarlo(){
-  window.location.href = '/tutorial';
-  //this.router.navigate(['/tutorial'])
+  //window.location.href = '/tutorial';
+ // this.router.navigate(['/tutorial'])
+  this.router.navigateByUrl('/tutorial');
 }
 
 
@@ -120,6 +121,8 @@ calcularMaxX() {
 
 menu(){
   this.menus=true;
+  this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.infoUsuario.idU);
+  this.bd.presentAlert('intento  agregado');
   
   
   //this.bd.presentAlert('intento  infousuario'+this.infoUsuario.idU);
@@ -274,7 +277,7 @@ saltarPersonaje() {
     const jumpHeight = -100;
     const jumpDuration = 500; 
     this.verticalVelocity = -15;
-    const initialPosY = this.personajePosY-20;
+    const initialPosY = this.personajePosY+2;
     const startTime = Date.now();
     const jumpInterval = setInterval(() => {
     const currentTime = Date.now();

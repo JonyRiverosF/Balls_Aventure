@@ -582,6 +582,7 @@ async crearTablaNiveles(){
 async crearTablaIntento(){
   try{
     //ejecutar la creación de tablas
+     //this.database.executeSql("DROP TABLE intento",[]);
     await this.database.executeSql(this.tblIntento,[]);
 
 
@@ -631,9 +632,9 @@ async crearTablaInter(){
 
 
     //ejecuto los insert
-    await this.database.executeSql(this.registrointer,[]);
-    await this.database.executeSql(this.registrointer1,[]);
-    await this.database.executeSql(this.registrointer2,[]);
+    //await this.database.executeSql(this.registrointer,[]);
+    //await this.database.executeSql(this.registrointer1,[]);
+    //await this.database.executeSql(this.registrointer2,[]);
    
     //cambio mi observable de BD
     this.isBDReady.next(true);

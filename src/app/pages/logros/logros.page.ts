@@ -19,6 +19,15 @@ export class LogrosPage implements OnInit {
     idUsuario: 0,
     idLogro: 0
   }];
+  arregloIntentos:any =[{
+    idI: 0,
+    estrellas: 0 ,
+    tiempo:0,
+    completado:false,
+    idNiveles:0,
+    idUsuario:0
+
+  }]
   infoUsuario: any;
 
   constructor(
@@ -35,11 +44,14 @@ export class LogrosPage implements OnInit {
   }
 
   ngOnInit() {
-    this.loadLogros();
-    this.loadInteracciones();
+    this.cargarLogros();
+    this.cargarInteracciones();
+    this.cargarintentos();
+    
+
   }
 
-  private loadLogros() {
+  private cargarLogros() {
     this.bd.bdstate().subscribe(res => {
       if (res) {
         this.bd.fetchLogro().subscribe(datos => {
@@ -48,8 +60,17 @@ export class LogrosPage implements OnInit {
       }
     });
   }
+  private cargarintentos() {
+    this.bd.bdstate().subscribe(res=>{
+      if(res){
+        this.bd.fetchIntento().subscribe(datos=>{
+          this.arregloIntentos=datos.filter(item=> item.idUsuario == this.infoUsuario.idU);
+        })
+      }
+    })
+  }
 
-  private loadInteracciones() {
+  private cargarInteracciones() {
     if (this.infoUsuario) {
       this.bd.bdstate().subscribe(res => {
         if (res) {
@@ -60,5 +81,16 @@ export class LogrosPage implements OnInit {
       });
     }
   }
+  private agregarinter(){
+    for(var i = 0; i<this.arregloIntentos.length; i++){
+      if(this.arregloIntentos[i].idNiveles==1){
+        if(this.arregloIntentos[i].completado==true){
+          this.bd.insertarInter(this.infoUsuario.idU, 1);
+          this.bd.presentAlert('inter tutorial agregado');
+        }
+      }
+    }
+  }
+  
  
 }

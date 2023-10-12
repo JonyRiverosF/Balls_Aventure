@@ -17,6 +17,15 @@ export class LobbyPage implements OnInit {
     idUsuario: 0,
     idLogro: 0
   }];
+  arregloIntentos:any =[{
+    idI: 0,
+    estrellas: 0 ,
+    tiempo:0,
+    completado:false,
+    idNiveles:0,
+    idUsuario:0
+
+  }]
 
   constructor(private router:Router, private activatedRouter:ActivatedRoute, private bd:DbservicioService) {
     this.activatedRouter.queryParams.subscribe(param =>{
@@ -39,6 +48,13 @@ export class LobbyPage implements OnInit {
         }
       });
     }
+    this.bd.bdstate().subscribe(res=>{
+      if(res){
+        this.bd.fetchIntento().subscribe(datos=>{
+          this.arregloIntentos=datos.filter(item=> item.idUsuario == this.infoUsuario.idU);
+        })
+      }
+    })
   }
      
   
@@ -79,6 +95,7 @@ export class LobbyPage implements OnInit {
     this.router.navigate(['/niveles'],navigationextra)
   }
   historial(){
+    
     let navigationextra:NavigationExtras={
       state:{
         infoUsuario:this.infoUsuario,
@@ -87,9 +104,19 @@ export class LobbyPage implements OnInit {
       }
       
     }
-   
+    
+   for(var i = 0; i<this.arregloIntentos.length; i++){
+      if(this.arregloIntentos[i].idNiveles==1){
+        if(this.arregloIntentos[i].completado==true){
+          this.bd.insertarInter(this.infoUsuario.idU, 1);
+          this.bd.presentAlert('inter tutorial agregado');
+        }
+      }
+    }
     this.router.navigate(['/historial'],navigationextra)
-
+    
   }
+
+  
 
 }

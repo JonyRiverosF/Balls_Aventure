@@ -55,11 +55,11 @@
           <img *ngIf="estrellasrecojidas>1" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
           <img *ngIf="estrellasrecojidas>2" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
 
-          
+          <!--
           <div class="alerta-botones">
             <button class="alerta-boton" (click)="volverAlInicio()">Volver al lobby</button>
             
-          </div>
+          </div>-->
           <div class="alerta-botones"><button class="alerta-boton" (click)="volverAIntentarlo()">reintentar</button></div>
         </div>
         <!--tiempo agotado-->
@@ -67,10 +67,10 @@
           <h2 class="alerta-titulo">¡Tiempo agotado!</h2>
           
           <div class="alerta-botones">
-            <button class="alerta-boton" (click)="volverAIntentarlo()">reintentar</button>
+            <button class="alerta-boton" (click)="volverAlInicio()">Volver al lobby</button>
             
           </div>
-          <div class="alerta-botones"><button class="alerta-boton" (click)="volverAlInicio()">Volver al lobby</button></div>
+          <div class="alerta-botones"><button class="alerta-boton"  (click)="volverAIntentarlo()">reintentar</button></div>
         </div>
         <div style="margin-top: -25px;margin-right: 125px;">
           <img class="estrella1" src="assets/icon/estrella.png" alt="Mi Imagen" >
