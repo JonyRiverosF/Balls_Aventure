@@ -4,13 +4,13 @@
 
 <ion-content [fullscreen]="true" > 
   
-  <div class="container">
-  <ion-grid style="background-image: url(assets/icon/FondoInicio.png); height: 100vh; background-size: cover; background-attachment: fixed;">
+  <div style="position: relative;">
+    <ion-grid style="background-image: url(assets/icon/FondoInicio.png); height: 100vh; background-size: cover; background-attachment: fixed">
     <ion-row>
       <ion-col size="2" >
         <!--perfil-->
         <ion-row >
-          <ion-col class="icono">
+          <ion-col class="icono" style="margin-top: -15px;">
             <img (click)="irperfil()"  src="assets/icon/perfil.png" alt="Mi Imagen">
             </ion-col>
           
@@ -18,14 +18,14 @@
         </ion-row >
         <!--logros-->
         <ion-row >
-          <ion-col class="icono">
+          <ion-col class="icono" >
             <img (click)="Logros()"  src="assets/icon/trofeo.png" alt="Mi Imagen">
             </ion-col>
           
         </ion-row>
         <!--tienda-->
         <ion-row >
-          <ion-col class="icono">
+          <ion-col class="icono" >
             <img (click)="historial()"  src="assets/icon/carrito.png" alt="Mi Imagen">
             </ion-col>
           
@@ -68,7 +68,7 @@
           <ion-col size="8">
             <img style="width: 180px; height: 180px; text-align: right;" src="assets/icon/pj.png" class="pj" alt="Mi Imagen">
           </ion-col>
-          <ion-col size="4">
+          <ion-col size="4" style="margin-top: -60px;">
             
             
             <div (click)="jugar()"  class="botonjugar">
