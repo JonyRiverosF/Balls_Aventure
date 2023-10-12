@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gluten:wght@400;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Acme&family=Gluten:wght@400;900&display=swap');
 
+@media screen and (max-width: 1440px) {
   @keyframes rubberBand {
     0%{
         transform: scaleX(1);
@@ -147,3 +148,8 @@ font-family: 'Gluten', cursive;
   75% { transform:  rotate(-60deg); translate: -80px;}
   100% { transform:  rotate(0deg); translate: 0px;}
 }
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+}}
