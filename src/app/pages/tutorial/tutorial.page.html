@@ -3,8 +3,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <ion-grid style="background-image: url(assets/icon/fondoCartel.png) ;  background-size: 920px 420px; background-repeat: no-repeat;">
+  <div style="position: relative;">
+  <ion-grid style="background-image: url(assets/icon/fondoCartel.png) ;  background-size: 920px 420px; background-repeat: no-repeat;height: 100vh;">
     <ion-row >
       <ion-col>
        <img class="menu" id="present-alert" (click)="menu()" src="assets/icon/menu.png" alt="Mi Imagen">
@@ -102,12 +102,12 @@
       </ion-col>
     </ion-row>
     <ion-row >
-      <ion-col  style="padding: 0 0 0 0;">
+      <ion-col  style="padding: 0 0 0 0;margin-top: -40px;" >
  
         <img class="flechas " src="assets/icon/izquierda.png" (touchstart)="startMoving('izquierda')" (touchend)="stopMoving('izquierda')"  alt="Mi Imagen">
         <img class="flechas" src="assets/icon/derecha.png" (touchstart)="startMoving('derecha')" (touchend)="stopMoving('derecha')"  alt="Mi Imagen">
       </ion-col>
-      <ion-col style="text-align: right; justify-content: right;align-items: right;padding: 0 0 0 0;" >
+      <ion-col style="text-align: right; justify-content: right;align-items: right;padding: 0 0 0 0;margin-top: -20px;" >
  
         <img class="salto" (touchstart)="saltarPersonaje()" src="assets/icon/saltar.png" alt="Mi Imagen">
         
@@ -115,5 +115,5 @@
       
     </ion-row>
   </ion-grid>
- 
+</div>
 </ion-content>
