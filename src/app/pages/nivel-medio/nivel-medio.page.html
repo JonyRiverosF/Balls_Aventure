@@ -32,7 +32,7 @@
     </ion-row >
 
     <ion-row >
-      <ion-col size="4" style="margin-top:-25px">
+      <ion-col size="4" style="margin-top:0px">
         
         <div  [style.transform]="'translatey(' + personajePosY + 'px)'">
           <img class="pj" id="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '"  alt="Mi Imagen">
@@ -118,20 +118,20 @@
           <img class="llave" src="assets/icon/LLave.png" alt="Mi Imagen">
           <img class="plataforma"  src="assets/icon/Plataforma.png" alt="Mi Imagen">
         </div>
-        <div style="margin-top: -25px;margin-right: 60px;">
+        <div style="margin-top:0px;margin-right: 60px;">
         <img class="puerta" *ngIf="!puertaAbierta" src="assets/icon/pnivel2_c.png" alt="Puerta Cerrada">
         <img class="puerta1" *ngIf="puertaAbierta" src="assets/icon/pnivel2_a.png" alt="Puerta Abierta">
         </div>
       </ion-col>
     </ion-row>
     <ion-row >
-      <ion-col  style="padding: 0 0 0 0;margin-top: -45px;">
+      <ion-col  style="padding: 0 0 0 0;">
         
         <img class="flechas " src="assets/icon/izquierda.png"  (touchstart)="startMoving('izquierda')" (touchend)="stopMoving('izquierda')"  alt="Mi Imagen">
         <img class="flechas" src="assets/icon/derecha.png"  (touchstart)="startMoving('derecha')" (touchend)="stopMoving('derecha')"  alt="Mi Imagen">
       
     </ion-col>
-      <ion-col style="text-align: right; justify-content: right;align-items: right;padding: 0 0 0 0;margin-top: -45px;position:absolute" >
+      <ion-col style="text-align: right; justify-content: right;align-items: right;padding: 0 0 0 0;" >
         
         <img class="salto" (touchstart)="saltarPersonaje()" src="assets/icon/saltar.png" alt="Mi Imagen">
         
