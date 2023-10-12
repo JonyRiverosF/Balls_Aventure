@@ -126,10 +126,11 @@
     </ion-row>
     <ion-row >
       <ion-col  style="padding: 0 0 0 0;">
- 
+        <div style="margin-top: -50px;">
         <img class="flechas " src="assets/icon/izquierda.png"  (touchstart)="startMoving('izquierda')" (touchend)="stopMoving('izquierda')"  alt="Mi Imagen">
         <img class="flechas" src="assets/icon/derecha.png"  (touchstart)="startMoving('derecha')" (touchend)="stopMoving('derecha')"  alt="Mi Imagen">
-      </ion-col>
+      </div>
+    </ion-col>
       <ion-col style="text-align: right; justify-content: right;align-items: right;padding: 0 0 0 0;" >
  
         <img class="salto" (touchstart)="saltarPersonaje()" src="assets/icon/saltar.png" alt="Mi Imagen">

@@ -4,7 +4,7 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-grid style="background-image: url(assets/icon/fondo_nivel3.png) ;  background-size: 920px 420px; background-repeat: no-repeat;">
+  <ion-grid style="background-image: url(assets/icon/fondo_nivel3.png) ;   background-size: 920px 420px; background-repeat: no-repeat;height: 100vh;">
     <ion-row style="margin-bottom: 90px;">
       <ion-col>
        <img class="menu" id="present-alert" (click)="menu()" src="assets/icon/menu.png" alt="Mi Imagen">
@@ -42,9 +42,7 @@
        </div>
        
        
-       <div style="margin-top: -70px;margin-left:120px">
-        <img  class="caja" src="assets/icon/caja.png" alt="Mi Imagen" [style.transform]="'translateX(' + cajaPosX + 'px)'">
-        </div>
+       
       </ion-col>
 
 
@@ -116,10 +114,7 @@
         <img  class="caja" src="assets/icon/caja.png" alt="Mi Imagen" [style.transform]="'translateX(' + cajaPosX + 'px)'">
         </div>
 
-        <div class="contenedor" style="margin-top: -20px;margin-left: 120px;">
-          <img style="width: 75px ;height: 30px;position: absolute;margin-top: 35px;" class="pinchos" src="assets/icon/pinchos.png" alt="Mi Imagen">
-          <img  class="hoyo" src="assets/icon/tierra.png" alt="Mi Imagen">
-          </div>
+        
         
           
       </ion-col>
@@ -130,9 +125,7 @@
           <img class="puerta1" *ngIf="puertaAbierta"  src="assets/icon/pnivel3_a.png" alt="Mi Imagen">
           </div>
           
-          <div style="margin-right:150px;">
-            <img style="height: 70px;width: 70px;" class="tumba" src="assets/icon/Tumba.png" alt="Mi Imagen">
-            </div>
+         
             
 
         <div style="margin-top: -245px;margin-right: 200px;">
