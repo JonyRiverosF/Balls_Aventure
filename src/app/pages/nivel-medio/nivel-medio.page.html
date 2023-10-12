@@ -17,7 +17,7 @@
         <img  class="nube1" src="assets/icon/nublada (1).png" alt="Mi Imagen"><br><br>
         <div class="contador"><p>{{ tiempoRestante }}</p></div>
         
-        <div style="margin-left:100px;margin-top: -100px;">
+        <div style="margin-left:100px;margin-top: -160px;">
           <img class="estrella1" style="width:4% ;
           height: 4%;" src="assets/icon/estrella.png" alt="Mi Imagen">
           <img class="pinchos" style="width: 60px ;
@@ -32,7 +32,7 @@
     </ion-row >
 
     <ion-row >
-      <ion-col size="4" style="margin-top:-15px">
+      <ion-col size="4" style="margin-top:-25px">
         
         <div  [style.transform]="'translatey(' + personajePosY + 'px)'">
           <img class="pj" id="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '"  alt="Mi Imagen">
@@ -118,7 +118,7 @@
           <img class="llave" src="assets/icon/LLave.png" alt="Mi Imagen">
           <img class="plataforma"  src="assets/icon/Plataforma.png" alt="Mi Imagen">
         </div>
-        <div style="margin-top: -15px;">
+        <div style="margin-top: -25px;margin-right: 35px;">
         <img class="puerta" *ngIf="!puertaAbierta" src="assets/icon/pnivel2_c.png" alt="Puerta Cerrada">
         <img class="puerta1" *ngIf="puertaAbierta" src="assets/icon/pnivel2_a.png" alt="Puerta Abierta">
         </div>
