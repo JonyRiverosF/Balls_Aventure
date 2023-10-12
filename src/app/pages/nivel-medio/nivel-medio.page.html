@@ -4,7 +4,7 @@
 
 <ion-content [fullscreen]="true">
 
-  <ion-grid style="background-image: url(assets/icon/fondo_nivel2.png) ;  background-size: 920px 420px; background-repeat: no-repeat;">
+  <ion-grid style="background-image: url(assets/icon/fondo_nivel2.png) ;  background-size: 920px 420px; background-repeat: no-repeat;height: 100vh;">
     
     <ion-row style="margin-bottom: 90px;">
       <ion-col>
@@ -131,7 +131,7 @@
         <img class="flechas" src="assets/icon/derecha.png"  (touchstart)="startMoving('derecha')" (touchend)="stopMoving('derecha')"  alt="Mi Imagen">
       </div>
     </ion-col>
-      <ion-col style="text-align: right; justify-content: right;align-items: right;padding: 0 0 0 0;" >
+      <ion-col style="text-align: right; justify-content: right;align-items: right;padding: 0 0 0 0;margin-top: -35px;" >
  
         <img class="salto" (touchstart)="saltarPersonaje()" src="assets/icon/saltar.png" alt="Mi Imagen">
         
