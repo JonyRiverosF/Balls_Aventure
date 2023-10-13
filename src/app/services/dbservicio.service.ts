@@ -45,7 +45,7 @@ export class DbservicioService {
   registroPregunta3:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(3, '¿nombre de tu primera mascota?');";
 
   registroLogro1:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Novato', 'completa el tutorial', 15);";
-  registroLogro2:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(2, 'Aprendiz', 'completa dos niveles bien', 30);";
+  registroLogro2:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(2, 'Aprendiz', 'completa dos niveles', 30);";
   registroLogro3:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(3, 'Brillante', 'recolecta todas las estrellas', 45);";
   registroLogro4:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(4, 'Premio Mayor', 'completa el juego', 60);";
 
@@ -548,6 +548,7 @@ async crearTablaPregunta(){
 async crearTablaLogro(){
   try{
     //ejecutar la creación de tablas
+     //this.database.executeSql("DROP TABLE logro",[]);
     await this.database.executeSql(this.tblLogro,[]);
 
 
