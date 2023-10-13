@@ -91,6 +91,9 @@ export class RegistrarsePage implements OnInit {
       this.presentAlert("No hay coincidencias en las claves");
     }
    }
+   home(){
+    this.router.navigate(['/home'])
+   }
 
    
    

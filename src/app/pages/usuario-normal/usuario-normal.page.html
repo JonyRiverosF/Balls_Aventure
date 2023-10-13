@@ -22,7 +22,7 @@
             <div style="color: black;font-size: 15px;">
               {{ usuario.nombreU }}
             </div>
-            <img src="assets/icon/dani.jpeg" style="width: 120px;height: 120px;"/>
+            <img src="{{usuario.foto}}" style="width: 120px;height: 120px;"/>
 
           </ion-col>
           <ion-col style="background-color: rgb(255, 255, 255);color: black;" size="5">
@@ -32,14 +32,14 @@
           </div>
           <div style="color: black;font-size: 18px;">
             Rol: {{ usuario.idRol }}
-            <ion-select aria-label="Fruit" interface="popover" placeholder="Seleccione">
-              <ion-select-option value="apples">Administrador</ion-select-option>
-              <ion-select-option value="oranges">Usuario</ion-select-option>
+            <ion-select [(ngModel)]="pedirRol" interface="popover" placeholder="Seleccione">
+              <ion-select-option *ngFor="let x of arreglouRol" [value]="x.idR">{{x.idR}}- {{x.nombreR}}</ion-select-option>
+              
             </ion-select>
             
           </div>
           <div>
-            <ion-button>Cambiar tipo de usuario</ion-button>
+            <ion-button (click)="modificarRol()">Cambiar rol de usuario</ion-button>
           </div>
             
           </ion-col>

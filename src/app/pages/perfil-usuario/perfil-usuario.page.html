@@ -29,7 +29,7 @@
           </ion-row>
           <ion-row>
           <ion-col >
-            <div style="text-align: center; margin-top: 35px;">
+            <div style="text-align: center;color: rgb(255, 255, 255); ">
               BLUEBALL
             </div>
             <div style="margin-bottom: 0px; height: 221px;">
@@ -43,8 +43,8 @@
           </ion-row>
         
         <ion-row>
-          <ion-col>
-            <div style="margin-bottom: 20px;">
+          <ion-col style="margin-top: -35px;">
+            <div style="margin-bottom: 5px;color: rgb(255, 255, 255);">
                mi skin favorita
         <ion-button [routerLink]="['/skins']" class="boton" expand="block" >Cambiar</ion-button>
             </div>
@@ -63,7 +63,7 @@
           </ion-col>
           <ion-col> 
             <ion-button (click)="irModificar()" class="boton" expand="block" >editar perfil</ion-button>
-            <ion-button [routerLink]="['/home']" class="boton" expand="block" >cerrar sesion</ion-button>
+            <ion-button (click)="home()" class="boton" expand="block" >cerrar sesion</ion-button>
           </ion-col>
         </ion-row>
         <div *ngFor="let x of arreglousuarios">
@@ -94,12 +94,12 @@
 
       </ion-col>
         </ion-row>
-        <ion-row >
-          <ion-col style="text-align: left;background-color: rgba(16, 16, 87, 0.623); border-radius: 5%;margin: 10px 10px 0 10px ;">
-            <div style="margin-top: 50px; text-align: center;color: white;">
+        <br><ion-row >
+          <ion-col style="text-align: left;background-color: rgba(16, 16, 87, 0.623); border-radius: 2%;margin: 0px 10px 0 10px ;">
+            <div style=" text-align: center;color: white;">
               DESCRIPCION
             </div>
-            <div style="border: 1px solid rgb(255, 255, 255); width: 570px;height: 100px;margin: 15px;color: beige;" >
+            <div style="border: 1px solid rgb(255, 255, 255); width: 570px;height: 60px;margin: 5px;color: rgb(245, 245, 220);" >
                {{x.descripcion}}
             </div>
             

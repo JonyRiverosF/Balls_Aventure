@@ -61,6 +61,10 @@ export class PerfilUsuarioPage implements OnInit {
     }
   }
 }
+
+home(){
+  this.router.navigate(['/home']);
+}
    
   ngOnInit() {
     this.bd.bdstate().subscribe(res=>{

@@ -387,6 +387,15 @@ buscarUsuario(){
       })
   }
 
+  actualizarRolUsuario(idU:any, idRol:any){
+    return this.database.executeSql('UPDATE usuario SET idRol= ? WHERE idU= ?',[idRol, idU])
+    .then(res=>{
+        this.buscarUsuario();
+      }).catch(e=>{
+        this.presentAlert("Error Modificar Rol: "+e)
+      })
+  }
+
   eliminarUsuario(idU:any){
     return this.database.executeSql('DELETE FROM usuario WHERE idU = ?',[idU]).then(res=>{
       this.buscarUsuario();

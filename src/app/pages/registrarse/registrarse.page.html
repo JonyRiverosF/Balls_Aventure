@@ -2,8 +2,8 @@
   
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-grid style="background-color: rgba(153, 79, 147, 0.836)">
+<ion-content [fullscreen]="true" style="max-height: 100vh; " > 
+  <ion-grid style="background-color: rgba(153, 79, 147, 0.836);">
      <ion-row >
        
        
@@ -22,7 +22,8 @@
      
       <ion-col size="4" style="background-image: url(assets/icon/registrop.png);background-size: cover;">
         <div>
-          <img src="assets/icon/patra.png" [routerLink]="['/home']" style="width: 50px;height: 50px;"/>
+          
+          <img src="assets/icon/patra.png" (click)="home()" style="width: 50px;height: 50px;"/>
         </div>
         <div>
           <img class="bienvenido" src="assets/icon/bienvenido.png" alt="Mi Imagen">
