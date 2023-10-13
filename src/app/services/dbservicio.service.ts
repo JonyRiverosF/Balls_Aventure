@@ -548,7 +548,7 @@ async crearTablaPregunta(){
 async crearTablaLogro(){
   try{
     //ejecutar la creación de tablas
-     //this.database.executeSql("DROP TABLE logro",[]);
+     this.database.executeSql("DROP TABLE logro",[]);
     await this.database.executeSql(this.tblLogro,[]);
 
 

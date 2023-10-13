@@ -76,7 +76,7 @@
 .plataforma{
   
   width: 150px ;
-  height: 30px;
+  height: 20px;
   margin-top: 40px;
   margin-left: 25%;
   rotate: 90deg;
@@ -85,7 +85,7 @@
 .plataforma1{
   
   width: 150px ;
-  height: 30px;
+  height: 20px;
   
 }
 
@@ -109,7 +109,7 @@
 
 .flechas{
     padding-left: 10px;
-    width:130px ;
+    width:120px ;
     height:55px ;
     margin-top: -15px;
     transition: 0.3s;
@@ -185,7 +185,7 @@
     height: 100px;
     text-align: right;
     margin-top: -70px;
-    margin-left: 180px;
+    margin-left: 50px;
 }
 
 .puerta1{
@@ -193,15 +193,15 @@
   height: 100px;
   text-align: right;
   margin-top: -70px;
-  margin-left: 150px;
+  margin-left: 50px;
 }
 
 .salto{
-    width: 100px;
-    height: 75px;
+    width: 95px;
+    height: 70px;
     transition: 0.3s;
-    margin-right: 50px;
-    margin-top:-30px;
+    margin-right: 20px;
+    margin-top:-40px;
 }
 
 .salto:hover{
