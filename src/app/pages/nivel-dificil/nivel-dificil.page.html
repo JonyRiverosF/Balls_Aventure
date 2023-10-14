@@ -24,20 +24,23 @@
 
         
 
-        <div style="margin-top:-195px;margin-left: 70px;">
+        <div style="margin-top:-130px;margin-left: 70px;">
           <img class="llave" src="assets/icon/LLave.png" alt="Mi Imagen">
           <img style="margin-left: 10px;" class="estrella" src="assets/icon/estrella.png" alt="Mi Imagen">
-        <img  class="plataforma1"src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        <img  class="plataforma"src="assets/icon/Plataforma.png" alt="Mi Imagen">
         </div>
 
         
 
         <div [style.transform]="'translatey(' + personajePosY + 'px)'">
-          <img style="margin-top: 83px;" class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '" alt="Mi Imagen">
+          <img style="margin-top: 30px;" class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '" alt="Mi Imagen">
+          
         </div>
+        
 
         
-        <div style="margin-left: 70px;margin-top:-15px;">
+        <div style="margin-left: 70px;margin-top: -65px;">
+          <img style="margin-left: 60px;" class="caja" src="assets/icon/caja.png" alt="Mi Imagen" [style.transform]="'translateX(' + cajaPosX + 'px)'">
        <img class="tumba" src="assets/icon/Tumba.png" alt="Mi Imagen">
        </div>
        
@@ -46,25 +49,23 @@
       </ion-col>
 
 
-      <ion-col size="4" style="margin-top: -150px;">
+      <ion-col size="4" style="margin-top: -89px;">
 
-        <div style="margin-top:25px;margin-right: 200px;">
-          <img  class="plataforma1"src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        <div style="margin-top:-90px;margin-left: 50px;">
+          <img  class="plataforma"src="assets/icon/Plataforma.png" alt="Mi Imagen">
           </div>
         
-        <div style="margin-top: -30px;">
-          <img class="arbol" src="assets/icon/arbol.png" alt="Mi Imagen">
-        </div>
+        
 
-        <div style="margin-top: -260px">
+        <div style="margin-top: -60px">
+          <img class="pinchos" style="width: 60px ;height: 32px;margin-left:46px;" src="assets/icon/pinchos.png" alt="Mi Imagen">
           <img  class="estrella1" src="assets/icon/estrella.png" alt="Mi Imagen" >
-          <img  class="plataforma" src="assets/icon/Plataforma.png" alt="Mi Imagen">
+          
         </div>
 
         
         
-        <div style="margin-top: -28px;"><img class="arbol1" src="assets/icon/arbol.png" alt="Mi Imagen">
-        </div>
+        
           
         
         <div  *ngIf="!mostrarAlerta">
@@ -110,9 +111,7 @@
 
         
 
-        <div style="margin-top: -84px;">
-        <img  class="caja" src="assets/icon/caja.png" alt="Mi Imagen" [style.transform]="'translateX(' + cajaPosX + 'px)'">
-        </div>
+        
 
         
         
@@ -128,14 +127,15 @@
          
             
 
-        <div style="margin-top: -245px;margin-right: 200px;">
-          <img style="width: 55px ;height: 35px;" class="pinchos" src="assets/icon/pinchos.png" alt="Mi Imagen">
-          <img style="width:15%;height: 15%;" class="estrella2" src="assets/icon/estrella.png" alt="Mi Imagen" >
+        <div style="margin-top: -190px;">
+          <img class="pinchos" style="width: 60px ;height: 32px;margin-right:12px;" src="assets/icon/pinchos.png" alt="Mi Imagen">
+          <img style="width:20px;height: 20px;margin-right:130px;" class="estrella2" src="assets/icon/estrella.png" alt="Mi Imagen" >
         </div>
-        <img style="margin-left:-220px;margin-top: -10px;" class="plataforma1"src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        
+        <img style="margin-left:-180px;margin-top: -5px;" class="plataforma"src="assets/icon/Plataforma.png" alt="Mi Imagen">
         
         <div>
-        <img style="margin-top:50px;margin-right: 250px;" class="plataforma1"src="assets/icon/Plataforma.png" alt="Mi Imagen">
+        <img style="margin-top:40px;margin-right: 250px;" class="plataforma"src="assets/icon/Plataforma.png" alt="Mi Imagen">
         </div>
       </ion-col>
     </ion-row>

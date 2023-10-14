@@ -4,6 +4,8 @@ import { NavigationExtras,Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
+//import { FingerprintAIO } from '@awesome-cordova-plugins/fingerprint-aio/ngx';
+
 @Component({
   selector: 'app-iniciar-sesion',
   templateUrl: './iniciar-sesion.page.html',
@@ -40,6 +42,7 @@ export class IniciarSesionPage implements OnInit {
   usuarioconectado:boolean=false;
   formularioLogin:FormGroup;
 
+  //private faio: FingerprintAIO
   constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,private bd:DbservicioService) { 
     this.formularioLogin=this.fb.group({
       'Correo1': new FormControl('',[Validators.required]),
@@ -120,6 +123,32 @@ export class IniciarSesionPage implements OnInit {
     });
     await alert.present();
   }
+
+  /*huella(){
+  this.faio.isAvailable().then((result: any) => {
+    this.faio.show({
+      cancelButtonTitle: 'Cancelar',
+      description: "Ingrese su huella para continuar",
+      disableBackup: true,
+      title: 'Balls aventure biometrics security',
+      fallbackButtonTitle: 'FB Back Button',
+      subtitle: ''
+    })
+      .then((result: any) => {
+        //Esto ocurrirá cuando hayan coincidencias de las huellas digitales
+        //this.bd.modificarUsuaro(this.id,this.nombre,this.correoIngresado,this.imagenNueva,this.telefono);
+        //this.volverPerfil.emit(["false",this.nombre,this.correoIngresado,this.imagenNueva])
+        //this.presentToast("bottom","Datos modificados !!",2500);
+        //alert("Successfully Authenticated!")
+      })
+      .catch((error: any) => {
+      });
+    
+  })
+    .catch((error: any) => {
+    
+    });
+  }*/
 
   
 }
