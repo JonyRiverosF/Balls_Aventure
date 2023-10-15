@@ -38,26 +38,28 @@ export class UsuarioNormalPage implements OnInit {
   constructor(private router:Router, private activatedRouter:ActivatedRoute, private bd:DbservicioService,public alertController:AlertController) { }
 
   ngOnInit() {
+    const datosUsuario = localStorage.getItem('usuarioLocal');
+    if (datosUsuario) {
+      this.arreglousuario = JSON.parse(datosUsuario);
+    }
     this.activatedRouter.paramMap.subscribe((params) => {
       const datosUsuario = params.get('datosUsuario');
       if (datosUsuario) {
         this.usuario = JSON.parse(datosUsuario);
-        this.idUsuario=this.usuario.idU;
-        //this.idUsuario1=this.usuario.idUsuario;
-        
+        this.idUsuario = this.usuario.idU;
       }
     });
-    this.bd.bdstate().subscribe(res=>{
-      if(res){
-        this.bd.fetchUsuario().subscribe(datos=>{
-          this.arreglousuario=datos;
+    this.bd.bdstate().subscribe(res => {
+      if (res) {
+        this.bd.fetchUsuario().subscribe(datos => {
+          this.arreglousuario = datos;
         })
       }
     })
-    this.bd.bdstate().subscribe(res=>{
-      if(res){
-        this.bd.fetchrol().subscribe(datos=>{
-          this.arreglouRol=datos;
+    this.bd.bdstate().subscribe(res => {
+      if (res) {
+        this.bd.fetchrol().subscribe(datos => {
+          this.arreglouRol = datos;
         })
       }
     })
@@ -79,7 +81,6 @@ export class UsuarioNormalPage implements OnInit {
     //this.presentAlert("idUsuario1 es: " + this.idUsuario1);
     this.presentAlert("Rol Modificado");
     this.router.navigate(['/admin-usuarios'])
-
   }
 
 }

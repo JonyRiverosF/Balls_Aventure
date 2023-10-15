@@ -27,15 +27,19 @@ export class AdminUsuariosPage implements OnInit {
   }
 
   ngOnInit() {
-    
-
-    this.bd.bdstate().subscribe(res=>{
-      if(res){
-        this.bd.fetchUsuario().subscribe(datos=>{
-          this.lista=datos;
-        })
-      }
-    })
+    const storedData = localStorage.getItem('usuarioLocal');
+    if (storedData) {
+      this.lista = JSON.parse(storedData);
+    } else {
+      this.bd.bdstate().subscribe(res => {
+        if (res) {
+          this.bd.fetchUsuario().subscribe(datos => {
+            this.lista = datos;
+            localStorage.setItem('usuarioLocal', JSON.stringify(datos));
+          });
+        }
+      });
+    }
   }
   
   verDetallesUsuario(usuario: any) {
