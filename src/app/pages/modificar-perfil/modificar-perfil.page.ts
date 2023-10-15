@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertController } from '@ionic/angular';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
+
 
 @Component({
   selector: 'app-modificar-perfil',
@@ -29,14 +30,17 @@ export class ModificarPerfilPage implements OnInit {
   pedirUsuario="";
   pedirDesc="";
   idUsuario:any;
-  
+  infoUsuario:any;
+  correoU="";
+  prueba=true;
+  perfilUsuario=new EventEmitter<any>();
 
   constructor(public fb:FormBuilder,private router:Router, private activatedRouter:ActivatedRoute, public alertController:AlertController,private bd:DbservicioService) {
     this.activatedRouter.queryParams.subscribe(param =>{
       if (this.router.getCurrentNavigation()?.extras.state){
         this.idUsuario = this.router.getCurrentNavigation()?.extras?.state?.["idUsuario"];
-        
-       
+        this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
+        this.correoU= this.infoUsuario.correo;
       }
     })
 
@@ -59,6 +63,9 @@ export class ModificarPerfilPage implements OnInit {
   
   }
   
+  perfil(){
+    this.perfilUsuario.emit(["false"]);
+  }
 
   get correo(){
     return this.formularioModificar.get('Correo') as FormControl;
@@ -75,10 +82,22 @@ export class ModificarPerfilPage implements OnInit {
 
   
    modificarP() {
-    this.bd.actualizaPerfilUsuario(this.idUsuario, this.pedirCorreo, this.pedirUsuario, this.pedirDesc, this.imagenNueva );
-    //this.presentAlert("idUsuario es: " + this.idUsuario);
-    this.presentAlert("Usuario Modificado");
-    this.router.navigate(['/perfil-usuario']) 
+    this.prueba=true;
+    if (this.correoU != this.pedirCorreo){
+      for(let i=0;i<this.arreglousuario.length;i++){
+        if(this.pedirCorreo == this.arreglousuario[i].correo){
+          this.prueba=false;
+          this.presentAlert("Correo ya existente");
+        }
+      }
+    }
+    if(this.prueba){
+      this.bd.actualizaPerfilUsuario(this.idUsuario, this.pedirCorreo, this.pedirUsuario, this.pedirDesc, this.imagenNueva );
+      this.perfilUsuario.emit(["false",this.pedirCorreo,this.pedirUsuario,this.pedirDesc,this.imagenNueva]);
+      this.presentAlert("Usuario Modificado");
+      this.router.navigate(['/perfil-usuario'])
+    }
+     
   }
 
  

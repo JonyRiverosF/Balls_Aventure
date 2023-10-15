@@ -41,9 +41,9 @@ export class RegistrarsePage implements OnInit {
   pedirRol=1;
   descripcion="";
   monedas=0;
-  
-  
-  
+  infoUsuario:any;
+  correoU="";
+  prueba=true;
 
   contra1:string="";
   contra2:string="";
@@ -53,6 +53,14 @@ export class RegistrarsePage implements OnInit {
   
   //private faio: FingerprintAIO
   constructor(public fb:FormBuilder,public alertController:AlertController,private router:Router, private activatedRouter:ActivatedRoute, private bd:DbservicioService) {
+    this.activatedRouter.queryParams.subscribe(param =>{
+      if (this.router.getCurrentNavigation()?.extras.state){
+        this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
+        this.correoU = this.infoUsuario.correo;
+        
+       
+      }
+    })
     
     this.formularioRegistro=this.fb.group({
       'nombre': new FormControl("",[Validators.required,Validators.minLength(3)]),
@@ -74,23 +82,28 @@ export class RegistrarsePage implements OnInit {
   }
 
    registrar(){
-    /*if (this.arreglousuario.correo != this.pedirCorreo){
+    this.prueba=true;
+    if (this.correoU != this.pedirCorreo){
       for(let i=0;i<this.arreglousuario.length;i++){
         if(this.pedirCorreo == this.arreglousuario[i].correo){
+          this.prueba=false;
           this.presentAlert("Correo ya existente");
         }
       }
-    }*/
-    if (this.contra1==this.contra2){
-      //this.presentAlert("tipoID--"+String(typeof this.pedirPregunta));
-      //this.presentAlert("idPregunta-- "+String(this.pedirPregunta));
-      this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.descripcion,this.imagenNueva, this.monedas,this.pedirRol, this.pedirPregunta);
-      this.bd.presentAlert("Usuario Agregado");
-      this.router.navigate(['/iniciar-sesion'])
-    }else{
-      this.presentAlert("No hay coincidencias en las claves");
     }
+
+  if(this.prueba){
+      if (this.contra1==this.contra2){
+        this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.descripcion,this.imagenNueva, this.monedas,this.pedirRol, this.pedirPregunta);
+        this.bd.presentAlert("Usuario Agregado");
+        this.router.navigate(['/iniciar-sesion'])
+    } else{
+      this.presentAlert("No hay coincidencias en las claves");
+    } 
+  }
+   
    }
+
    home(){
     this.router.navigate(['/home'])
    }
