@@ -91,18 +91,16 @@ export class RegistrarsePage implements OnInit {
         }
       }
     }
-
-  if(this.prueba){
+    if(this.prueba){
       if (this.contra1==this.contra2){
         this.bd.insertarUsuario(this.pedirRespuesta, this.pedirUsuario, this.pedirContrasena, this.pedirCorreo, this.descripcion,this.imagenNueva, this.monedas,this.pedirRol, this.pedirPregunta);
         this.bd.presentAlert("Usuario Agregado");
         this.router.navigate(['/iniciar-sesion'])
-    } else{
-      this.presentAlert("No hay coincidencias en las claves");
+      } else{
+        this.presentAlert("No hay coincidencias en las claves");
     } 
   }
-   
-   }
+}
 
    home(){
     this.router.navigate(['/home'])

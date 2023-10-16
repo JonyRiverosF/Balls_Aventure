@@ -23,7 +23,8 @@ export class ModificarPerfilPage implements OnInit {
     contrasena:'',
     idPregunta:0,
     respuesta:'',
-    foto:''
+    foto:'',
+    desc:''
   }]
 
   pedirCorreo="";
@@ -31,9 +32,10 @@ export class ModificarPerfilPage implements OnInit {
   pedirDesc="";
   idUsuario:any;
   infoUsuario:any;
-  correoU="";
   prueba=true;
-  perfilUsuario=new EventEmitter<any>();
+
+  correoU="";
+  //perfilUsuario=new EventEmitter<any>();
 
   constructor(public fb:FormBuilder,private router:Router, private activatedRouter:ActivatedRoute, public alertController:AlertController,private bd:DbservicioService) {
     this.activatedRouter.queryParams.subscribe(param =>{
@@ -41,6 +43,7 @@ export class ModificarPerfilPage implements OnInit {
         this.idUsuario = this.router.getCurrentNavigation()?.extras?.state?.["idUsuario"];
         this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
         this.correoU= this.infoUsuario.correo;
+        
       }
     })
 
@@ -52,20 +55,18 @@ export class ModificarPerfilPage implements OnInit {
 
   }
   ngOnInit() {
-    this.bd.bdstate().subscribe(res=>{
-      if(res){
-        this.bd.fetchUsuario().subscribe(datos=>{
-          this.arreglousuario=datos;
-        })
+    this.bd.bdstate().subscribe(res => {
+      if (res) {
+        this.bd.fetchUsuario().subscribe(datos => {
+          this.arreglousuario = datos;
+        });
       }
-    })
-    
-  
+    });
   }
   
-  perfil(){
+  /*perfil(){
     this.perfilUsuario.emit(["false"]);
-  }
+  }*/
 
   get correo(){
     return this.formularioModificar.get('Correo') as FormControl;
@@ -82,22 +83,25 @@ export class ModificarPerfilPage implements OnInit {
 
   
    modificarP() {
-    this.prueba=true;
-    if (this.correoU != this.pedirCorreo){
-      for(let i=0;i<this.arreglousuario.length;i++){
-        if(this.pedirCorreo == this.arreglousuario[i].correo){
-          this.prueba=false;
+    this.prueba = true;
+    if (this.correoU !== this.pedirCorreo) {
+      for (let i = 0; i < this.arreglousuario.length; i++) {
+        if (this.pedirCorreo === this.arreglousuario[i].correo) {
+          this.prueba = false;
           this.presentAlert("Correo ya existente");
         }
       }
     }
-    if(this.prueba){
-      this.bd.actualizaPerfilUsuario(this.idUsuario, this.pedirCorreo, this.pedirUsuario, this.pedirDesc, this.imagenNueva );
-      this.perfilUsuario.emit(["false",this.pedirCorreo,this.pedirUsuario,this.pedirDesc,this.imagenNueva]);
-      this.presentAlert("Usuario Modificado");
-      this.router.navigate(['/perfil-usuario'])
+    if (this.prueba) {
+      if (this.pedirCorreo || this.pedirUsuario || this.pedirDesc || this.imagenNueva) {
+        this.bd.actualizaPerfilUsuario(this.idUsuario,this.pedirCorreo,this.pedirUsuario,this.pedirDesc ,this.imagenNueva);
+        this.presentAlert("Usuario Modificado");
+        this.router.navigate(['/perfil-usuario']);
+      } else {
+        this.presentAlert("No se han realizado cambios");
+        this.router.navigate(['/perfil-usuario']);
+      }
     }
-     
   }
 
  

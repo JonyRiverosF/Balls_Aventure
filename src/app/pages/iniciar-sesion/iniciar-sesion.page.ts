@@ -35,7 +35,8 @@ export class IniciarSesionPage implements OnInit {
     foto:'',
     idPregunta:0,
     idRol:0,
-    monedas:0
+    monedas:0,
+    desc:''
   }]
 
   
@@ -91,6 +92,7 @@ export class IniciarSesionPage implements OnInit {
             rol:this.arreglousuario[i].idRol,
             foto:this.arreglousuario[i].foto,
             monedas:this.arreglousuario[i].monedas,
+            desc:this.arreglousuario[i].desc,
           }
           let navigationextra:NavigationExtras={
             state:{
