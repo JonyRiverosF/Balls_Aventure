@@ -657,13 +657,6 @@ async crearTablaInter(){
 }
 //Fin Tablas
   
-
-
-
-
-
-
-
   async presentAlert( msj:string) {
     const alert = await this.alertController.create({
       header: 'Alert',
