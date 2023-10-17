@@ -12,58 +12,45 @@
     <ion-card-content>
 
       <form [formGroup]="formularioModificar">
-
+          <ion-label  label-placement="stacked">Correo:</ion-label>
         <ion-item>
-          <ion-label position="floating">Correo</ion-label>
-          <ion-input [(ngModel)]="pedirCorreo"  formControlName="Correo" type="text"></ion-input>
+          <ion-input [(ngModel)]="pedirCorreo" formControlName="Correo" type="text"></ion-input>
         </ion-item>
         <div [hidden]="correo?.valid || correo?.pristine ">
-          <span style="color: rgb(255, 0, 0);" *ngIf="correo?.errors?.['required']">
+          <span *ngIf="correo?.errors?.['required']">
             El correo es requerido.
-          </span>
-          <span style="color: rgb(255, 0, 0);" *ngIf="correo?.errors?.['email']">
-            El correo debe ser valido.
-          </span>
-          <span style="color: rgb(255, 0, 0);" *ngIf="correo?.errors?.['minlength']">
-            <br>El correo solo permite un minimo de 5 caracteres.
           </span>
           </div>
         <br>
       
-
+          <ion-label  label-placement="stacked">Nombre Usuario:</ion-label>
         <ion-item>
-          <ion-label position="floating">Nombre Usuario</ion-label>
-          <ion-input [(ngModel)]="pedirUsuario" formControlName="NombreUsuario" type="text"></ion-input>
+          <ion-input [(ngModel)]="nombre" formControlName="NombreUsuario" type="text"></ion-input>
         </ion-item>
         <div [hidden]="nombreU?.valid || nombreU?.pristine ">
-          <span style="color: rgb(255, 0, 0);" *ngIf="nombreU?.errors?.['required']">
+          <span *ngIf="nombreU?.errors?.['required']">
             El nombre de usuario es requerido.
           </span>
-          <span style="color: rgb(255, 0, 0);" *ngIf="nombreU?.errors?.['minlength']">
-            El nombre de usuario solo permite un minimo de 3 caracteres.
-          </span>
-          </div>
+        </div>
         <br>
 
+          <ion-label  label-placement="stacked">Descripción:</ion-label>
         <ion-item>
-          <ion-label position="floating">Descripción</ion-label>
-          <ion-input [(ngModel)]="pedirDesc"  formControlName="Descripcion" type="text"></ion-input>
+          <ion-input [(ngModel)]="descripcion" formControlName="Descripcion" type="text" [value]="descripcion"></ion-input>
         </ion-item>
         <div [hidden]="Descri?.valid || Descri?.pristine ">
-          
-          <span style="color: rgb(255, 0, 0);" *ngIf="Descri?.errors?.['maxlength']">
-            La descripción solo permite un maximo de 300 caracteres.
+          <span *ngIf="Descri?.errors?.['required']">
+            La descripción es requerida.
           </span>
           </div>
-
         <br>
       </form>
       <ion-item>
         <ion-button (click)="takePicture()" >Seleccione una foto</ion-button>  
       </ion-item>
-      <div *ngIf="imagenNueva != '' ">
+      <div *ngIf="fotoN != '' ">
         <ion-item color="dark">
-          <img [src]="imagenNueva" alt="image" style="width: 60%;height: 60%;">
+          <img [src]="fotoN" alt="image" style="width: 60%;height: 60%;">
         </ion-item>
       </div>
       <br>

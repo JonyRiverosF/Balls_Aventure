@@ -41,39 +41,33 @@ export class PerfilUsuarioPage implements OnInit {
       if (this.router.getCurrentNavigation()?.extras.state){
         this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
         this.correousuario=this.infoUsuario.correo;
-        
-       
+        this.descripcion=this.infoUsuario.descripcion;
       }
     })
    }
 
    irModificar() {
-    for(var i = 0; i<this.arreglousuario.length; i++){
-      if(this.correousuario==this.arreglousuario[i].correo){
-        let idUsuario = this.arreglousuario[i].idU
         let navigationextra:NavigationExtras={
           state:{
-            idUsuario:idUsuario
-          }
-        
-    };
+            infoUsuario:this.infoUsuario}
+        };
     this.router.navigate(['/modificar-perfil'], navigationextra);
     }
-  }
-}
+  
+
 
 home(){
   this.router.navigate(['/home']);
 }
    
   ngOnInit() {
-    this.bd.bdstate().subscribe(res=>{
+    /*this.bd.bdstate().subscribe(res=>{
       if(res){
         this.bd.fetchUsuario().subscribe(datos=>{
           this.arreglousuarios=datos.filter(item=>item.idU == this.infoUsuario.idU);
         })
       }
-    })
+    })*/
     this.bd.bdstate().subscribe(res=>{
       if(res){
         this.bd.fetchUsuario().subscribe(datos=>{

@@ -66,18 +66,18 @@
             <ion-button (click)="home()" class="boton" expand="block" >cerrar sesion</ion-button>
           </ion-col>
         </ion-row>
-        <div *ngFor="let x of arreglousuarios">
+        <div>
         <ion-row>
           
           <!--columna fotoperfil-->
           <ion-col size="4" > 
-            <img class="fotoperfil" src="{{x.foto}}"  alt="Mi Imagen">
+            <img class="fotoperfil" [src]="infoUsuario.foto"  alt="Mi Imagen">
           </ion-col>
       <ion-col size="8" >
         <br><ion-row>
           <ion-col >
             <div class="datos">
-{{x.nombreU}}
+{{infoUsuario.nombre}}
             </div>
              
           </ion-col>
@@ -85,7 +85,7 @@
         <ion-row>
           <ion-col >
             <div  class="datos">
- {{x.correo}}
+ {{infoUsuario.correo}}
             </div>
            
           </ion-col>
@@ -100,7 +100,7 @@
               DESCRIPCION
             </div>
             <div style="border: 1px solid rgb(255, 255, 255); width: 570px;height: 60px;margin: 5px;color: rgb(245, 245, 220);" >
-               {{x.descripcion}}
+               {{descripcion}}
             </div>
             
          

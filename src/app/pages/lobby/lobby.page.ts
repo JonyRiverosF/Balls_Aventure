@@ -61,16 +61,12 @@ export class LobbyPage implements OnInit {
   irperfil(){
     let navigationextra:NavigationExtras={
       state:{
-        infoUsuario:this.infoUsuario,
-        edadenviado:this.edad,
-        nombreenviado:this.nombreusuario,
-        descripcion:this.descripcionusuario
-       
+        infoUsuario:this.infoUsuario
       }
-      
     }
     this.router.navigate(['/perfil-usuario'],navigationextra)
   }
+  
   Logros(){
     let navigationextra:NavigationExtras={
       state:{

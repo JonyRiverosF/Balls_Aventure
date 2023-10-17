@@ -1,6 +1,6 @@
 import { Component,EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertController } from '@ionic/angular';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
@@ -24,33 +24,47 @@ export class ModificarPerfilPage implements OnInit {
     idPregunta:0,
     respuesta:'',
     foto:'',
-    desc:''
+    descripcion:''
   }]
 
   pedirCorreo="";
   pedirUsuario="";
   pedirDesc="";
+
   idUsuario:any;
+
   infoUsuario:any;
+
   prueba=true;
 
   correoU="";
+  nombre="";
+  descripcion="";
+  fotoN:any;
+  
   //perfilUsuario=new EventEmitter<any>();
 
   constructor(public fb:FormBuilder,private router:Router, private activatedRouter:ActivatedRoute, public alertController:AlertController,private bd:DbservicioService) {
     this.activatedRouter.queryParams.subscribe(param =>{
       if (this.router.getCurrentNavigation()?.extras.state){
-        this.idUsuario = this.router.getCurrentNavigation()?.extras?.state?.["idUsuario"];
         this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
         this.correoU= this.infoUsuario.correo;
+        this.nombre= this.infoUsuario.nombre;
+        this.descripcion= this.infoUsuario.descripcion;
+        this.fotoN=this.infoUsuario.foto;
+        this.idUsuario=this.infoUsuario.idU; 
+
+        this.pedirCorreo=this.correoU;
+        this.pedirUsuario=this.nombre;
+        
         
       }
     })
 
     this.formularioModificar=this.fb.group({
-      'NombreUsuario': new FormControl("",[Validators.required,Validators.minLength(3)]),
-      'Descripcion': new FormControl("",[Validators.maxLength(300)]),
-      'Correo': new FormControl("",[Validators.required,Validators.minLength(5),Validators.email]),
+      'NombreUsuario': new FormControl("",[Validators.required]),
+      'Descripcion': new FormControl("",[Validators.required]),
+      'Correo': new FormControl("",[Validators.required]),
     })
 
   }
@@ -84,22 +98,46 @@ export class ModificarPerfilPage implements OnInit {
   
    modificarP() {
     this.prueba = true;
-    if (this.correoU !== this.pedirCorreo) {
+
+    if(this.correoU == this.pedirCorreo){
+      this.bd.actualizaPerfilUsuario(this.idUsuario,this.pedirCorreo,this.nombre,this.descripcion,this.fotoN);
+      this.presentAlert("Usuario Modificado");
+      let infoUsuario={
+            idU:this.idUsuario,
+            correo:this.pedirCorreo,
+            nombre:this.nombre,
+            foto:this.fotoN,
+            descripcion:this.descripcion
+        }
+        let navigationextra:NavigationExtras={
+          state:{
+            infoUsuario:infoUsuario }
+        }
+      this.router.navigate(['/perfil-usuario'],navigationextra)
+    }
+
+    if (this.correoU != this.pedirCorreo) {
       for (let i = 0; i < this.arreglousuario.length; i++) {
         if (this.pedirCorreo === this.arreglousuario[i].correo) {
           this.prueba = false;
           this.presentAlert("Correo ya existente");
         }
       }
-    }
-    if (this.prueba) {
-      if (this.pedirCorreo || this.pedirUsuario || this.pedirDesc || this.imagenNueva) {
-        this.bd.actualizaPerfilUsuario(this.idUsuario,this.pedirCorreo,this.pedirUsuario,this.pedirDesc ,this.imagenNueva);
+      if(this.prueba){
+        this.bd.actualizaPerfilUsuario(this.idUsuario,this.pedirCorreo,this.nombre,this.descripcion ,this.fotoN);
         this.presentAlert("Usuario Modificado");
-        this.router.navigate(['/perfil-usuario']);
-      } else {
-        this.presentAlert("No se han realizado cambios");
-        this.router.navigate(['/perfil-usuario']);
+        let infoUsuario={
+          idU:this.idUsuario,
+          correo:this.pedirCorreo,
+          nombre:this.nombre,
+          foto:this.fotoN,
+          descripcion:this.descripcion
+          }
+      let navigationextra:NavigationExtras={
+        state:{
+          infoUsuario:infoUsuario }
+          }
+        this.router.navigate(['/perfil-usuario'],navigationextra)
       }
     }
   }
@@ -123,7 +161,7 @@ export class ModificarPerfilPage implements OnInit {
       resultType: CameraResultType.DataUrl,
       source:CameraSource.Photos
     });
-    this.imagenNueva= image2.dataUrl;
+    this.fotoN= image2.dataUrl;
   };
 
 }
