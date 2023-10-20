@@ -59,9 +59,10 @@
           <ion-col> 
             <div style="background-color: black; color: white; text-align: left; font-weight: 700; margin-right: 230px;">
               PERFIL
-            </div> 
+            </div>
+ 
           </ion-col>
-          <ion-col> 
+          <ion-col>
             <ion-button (click)="irModificar()" class="boton" expand="block" >editar perfil</ion-button>
             <ion-button (click)="home()" class="boton" expand="block" >cerrar sesion</ion-button>
           </ion-col>
@@ -70,16 +71,22 @@
         <ion-row>
           
           <!--columna fotoperfil-->
+          
           <ion-col size="4" > 
+            <div style="margin-top: -40px;">
+              <h1><ion-icon name="share-social-sharp" (click)="share()"></ion-icon></h1>
+            </div>
             <img class="fotoperfil" [src]="infoUsuario.foto"  alt="Mi Imagen">
+            
           </ion-col>
       <ion-col size="8" >
         <br><ion-row>
           <ion-col >
+            
             <div class="datos">
 {{infoUsuario.nombre}}
             </div>
-             
+            
           </ion-col>
         </ion-row>
         <ion-row>
