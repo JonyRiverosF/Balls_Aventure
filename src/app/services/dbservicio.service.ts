@@ -443,7 +443,7 @@ crearBD(){
     }).then((db: SQLiteObject) => {
       //capturar la coneccion a la BD
       this.database = db;
-      this.presentAlert("BD creada");
+      
       //llamo a crear la(s) tabla(s)
       this.crearTablaRol();
       this.crearTablaPregunta();

@@ -43,7 +43,7 @@ export class TutorialPage implements OnInit {
  
  //Timeout Con alerta
  tiempoExpirado: boolean = false;
- tiempoLimite: number = 30000;
+ tiempoLimite: number = 300000;
  tiempoRestante!: number;
  public mostrarAlerta: boolean = false;
 
@@ -99,9 +99,9 @@ volverAlInicio(){
 }
 
 volverAIntentarlo(){
-  //window.location.href = '/tutorial';
+  window.location.href = '/tutorial';
  // this.router.navigate(['/tutorial'])
-  this.router.navigateByUrl('/tutorial');
+  //this.router.navigateByUrl('/tutorial');
 }
 
 
