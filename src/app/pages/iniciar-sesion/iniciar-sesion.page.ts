@@ -100,7 +100,7 @@ export class IniciarSesionPage implements OnInit {
             }
           }
           
-          this.router.navigate(['/lobby'],navigationextra)
+          this.router.navigate(['/tutorial'],navigationextra)
           this.usuarioconectado=true;
         }
         if(this.arreglousuario[i].idRol==2){

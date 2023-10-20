@@ -72,7 +72,7 @@ ngOnInit() {
     this.mostrarAlerta = true; 
     if (this.tiempoExpirado) {
       this.bd.insertarIntento(this.estrellasrecojidas, 0, false, 1, this.infoUsuario.idU);
-      this.bd.presentAlert('intento fallido agregado');
+      //this.bd.presentAlert('intento fallido agregado');
       const personaje = document.getElementById('tu-personaje'); 
       if (personaje) {
         personaje.classList.add('death-animation');
@@ -95,12 +95,48 @@ ngOnInit() {
 //Redireccion
 volverAlInicio(){
   // window.location.href = '/lobby';
- this.router.navigate(['/lobby'])
+  let navigationextra:NavigationExtras={
+  state:{
+    infoUsuario:this.infoUsuario,
+    
+   
+  }
+  
+}
+this.router.navigate(['/lobby'],navigationextra)
+this.isJumping = false;
+this.enSuperficieDePlataforma = false;
+this.personajePosX = 0;
+this.personajePosY = 0;
+this.verticalVelocity = 0;
+this.isMovingLeft = false;
+this.isMovingRight = false;
+
+this.rotationDegrees = 0;
+
+ 
+
+ //Puerta y estrellas
+ this.estrellasrecojidas = 0;
+ this.haTocadoEstrella1 = false;
+ this.haTocadoEstrella2 = false;
+ this.haTocadoEstrella3 = false;
+ this.haTocadoPuerta = false;
+ this.menus= false;
+ this.nivelcompletado = false;
+ this.puertaAbierta = false;
+  
+ 
+ //Timeout Con alerta
+ this.tiempoExpirado= false;
+ 
+ this.mostrarAlerta = false;
 }
 
+
 volverAIntentarlo(){
-  window.location.href = '/tutorial';
- // this.router.navigate(['/tutorial'])
+  //window.location.href = '/tutorial';
+  this.router.navigate(['/tutorial'])
   //this.router.navigateByUrl('/tutorial');
 }
 
@@ -121,8 +157,8 @@ calcularMaxX() {
 
 menu(){
   this.menus=true;
-  this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.infoUsuario.idU);
-  this.bd.presentAlert('intento  agregado');
+ // this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.infoUsuario.idU);
+  //this.bd.presentAlert('intento  agregado');
   
   
   //this.bd.presentAlert('intento  infousuario'+this.infoUsuario.idU);
@@ -202,6 +238,8 @@ moverPersonaje() {
   if (personaje && puerta1 && !this.haTocadoPuerta) {
     if (this.colisiona(personaje, puerta1)) {
         this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.infoUsuario.idU);
+        this.bd.insertarInter(this.infoUsuario.idU, 1);
+        this.bd.presentAlert('inter tutorial agregado');
        this.bd.presentAlert('intento  agregado');
       
       this.nivelcompletado = true;
