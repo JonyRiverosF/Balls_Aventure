@@ -95,10 +95,10 @@ async share() {
         files: imagePaths,
       });
     } else {
-      console.error("No se seleccionaron imágenes de la galería.");
+      this.presentAlert("No se seleccionaron imágenes de la galería.");
     }
   } catch (error) {
-    console.error("Error al compartir imágenes de la galería:", error);
+    this.presentAlert("No se seleccionaron imágenes de la galería.");
   }
 }
 
