@@ -18,12 +18,17 @@ export class OlvidasteCPage implements OnInit {
     idP: 0,
     nombreP: '' 
   }]
+
   arreglousuario:any =[{
     idU: 0,
     nombreU: '' ,
     correo:'',
     contrasena:'',
+    foto:'',
     idPregunta:0,
+    idRol:0,
+    monedas:0,
+    descripcion:'',
     respuesta:''
   }]
 
@@ -66,7 +71,7 @@ export class OlvidasteCPage implements OnInit {
 
   correoU(){
     for(var i=0;i<this.arreglousuario.length;i++){
-      if(this.pedirCorreo == this.arreglousuario[i].correo){
+      if(this.pedirCorreo.toLowerCase() == this.arreglousuario[i].correo.toLowerCase()){
         this.RespuestaG.push({
           idPregunta:this.arreglousuario[i].idPregunta,
           respuesta:this.arreglousuario[i].respuesta,

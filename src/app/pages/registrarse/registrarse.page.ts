@@ -26,9 +26,13 @@ export class RegistrarsePage implements OnInit {
     idU: 0,
     nombreU: '' ,
     correo:'',
+    contrasena:'',
+    foto:'',
     idPregunta:0,
     idRol:0,
-    foto:''
+    monedas:0,
+    descripcion:'',
+    respuesta:''
   }]
 
   imagenNueva: any ="";
