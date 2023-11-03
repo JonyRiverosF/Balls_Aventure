@@ -5,11 +5,11 @@ describe('IniciarSesionPage', () => {
   let component: IniciarSesionPage;
   let fixture: ComponentFixture<IniciarSesionPage>;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(IniciarSesionPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

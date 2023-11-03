@@ -5,11 +5,11 @@ describe('LobbyPage', () => {
   let component: LobbyPage;
   let fixture: ComponentFixture<LobbyPage>;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     fixture = TestBed.createComponent(LobbyPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
