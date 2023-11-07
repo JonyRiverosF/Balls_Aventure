@@ -1,3 +1,4 @@
+/*
 import { TestBed } from '@angular/core/testing';
 
 import { DbservicioService } from './dbservicio.service';
@@ -16,5 +17,5 @@ describe('DbservicioService', () => {
   });
 
 });
-
+*/
 

@@ -6,6 +6,7 @@ describe('NotFoundPage', () => {
   let fixture: ComponentFixture<NotFoundPage>;
 
   beforeEach(async() => {
+    
     fixture = TestBed.createComponent(NotFoundPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
