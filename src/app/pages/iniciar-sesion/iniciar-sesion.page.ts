@@ -103,7 +103,10 @@ export class IniciarSesionPage implements OnInit {
             }
           }
           
-          this.router.navigate(['/tutorial'],navigationextra)
+          //this.router.navigate(['/tutorial'],navigationextra)
+          //const currentUrl = this.router.navigate(['/lobby']);
+          this.router.navigateByUrl('/tutorial', { skipLocationChange: true }).then(() => {
+            this.router.navigateByUrl('/lobby', navigationextra);});
           this.usuarioconectado=true;
         }
         if(this.arreglousuario[i].idRol==2){

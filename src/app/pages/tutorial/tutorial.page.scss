@@ -8,11 +8,47 @@
 
 
 }
+//enemigo vertical
+.enemy1{
+  width: 70%;
+  height:90% ;
+  animation: movernube 50s linear infinite;
+  
+}
+.enemy2{
+  width: 70%;
+  height:90% ;
+  animation: movernube 40s linear infinite ;
+  
+}
+.enemy3{
+  width: 70%;
+  height:90% ;
+  animation: movernube 45s linear infinite;
+  
+}
+.enemy4{
+  width: 70%;
+  height:90% ;
+  animation: movernube 60s linear infinite ;
+  
+}
+.enemy{
+  width: 70%;
+  height:90% ;
+ 
+  
+}
 
+//fin enemigo vertical
 ion-grid {
   max-width: 100%;
   height: 100%;
   margin: 0 auto; 
+}
+.col{
+  border: 1px solid black;
+  height: 60px;
 }
 .estrellaz{
   width:20% ;
@@ -29,14 +65,14 @@ ion-grid {
 .estrella1{
   width:15% ;
   height: 15%;
-  margin-left: 25%;
+  
   animation: estrella 3s linear infinite ;
 }
 .estrella2{
-  width:15% ;
-  height: 15%;
+  width:55% ;
+  height: 55%;
   margin-left: 25%;
-  animation: estrella 3s linear infinite ;
+  animation: estrella 20s linear infinite ;
 }
 
 .nube1{
@@ -91,7 +127,7 @@ ion-grid {
     padding-left: 10px;
     width:125px ;
     height:50px ;
-    margin-top: 35px;
+    margin-top: 15px;
     transition: 0.3s;
 
 }
@@ -190,9 +226,9 @@ ion-grid {
 }
 
 .pj{
-    width: 70px;
-    height: 70px;
-    margin-top:35px;
+    width: 60px;
+    height: 60px;
+    margin: 0 0 5px 0;
     animation: girarsol 1s ;
 
 }
@@ -241,13 +277,32 @@ ion-grid {
 }
 
 @keyframes movernube {
-    0%{ transform: translateX(-400px);}
+    0%{ transform: translateX(700px);}
     
     
-    100%{transform: translateX(1000px);}
+    100%{transform: translateX(-3000px);}
+}
+@keyframes caerestrella {
+  0%{ transform: translateY(-500px);}
+  
+  
+  100%{transform: translateY(400px);}
+}
+@keyframes moverpjd {
+  0% { transform:  rotate(0deg); translate: 0px; }
+  
+  100% { transform:  rotate(360deg); translate: 72px;}
+}
+@keyframes moverpj1 {
+  0% { transform:  rotate(0deg); translate: 0px; }
+  
+  100% { transform:  rotate(-360deg); translate: -72px;}
 }
 
-
+.aladerecha{
+}
+.alaizquierda{
+}
 
 .reanudar{
   background-color: aqua;

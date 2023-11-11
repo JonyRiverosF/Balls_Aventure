@@ -27,7 +27,9 @@ export class TutorialPage implements OnInit {
  private rotationInterval: any;
  public rotationDegrees = 0;
  maxX: number = 800; 
- maxY: number = 0; 
+ maxy: number = 800; 
+ private empezo = false;
+ 
  
 
  //Puerta y estrellas
@@ -46,11 +48,14 @@ export class TutorialPage implements OnInit {
  tiempoLimite: number = 300000;
  tiempoRestante!: number;
  public mostrarAlerta: boolean = false;
+ movimientoPixelesx = 72;
+ movimientoPixelesy = 60;
 
  infoUsuario:any;
  id:number=0;
 
  @ViewChild('pj', { static: false }) personaje!: ElementRef;
+ 
 constructor(private activatedRouter:ActivatedRoute,private router: Router,private bd:DbservicioService) {
  
   this.activatedRouter.queryParams.subscribe(param =>{
@@ -66,7 +71,12 @@ constructor(private activatedRouter:ActivatedRoute,private router: Router,privat
 
 //Timeout Alerta
 ngOnInit() {
+  setInterval(() => {
+    this.enemys();
+    this.estrella();
+  }, 100);
   setTimeout(() => {
+    
     
     this.tiempoExpirado = true;
     this.mostrarAlerta = true; 
@@ -90,7 +100,11 @@ ngOnInit() {
       }
     }
   }, 1000);
+  
+
 }
+
+
 
 //Redireccion
 volverAlInicio(){
@@ -131,6 +145,7 @@ this.rotationDegrees = 0;
  this.tiempoExpirado= false;
  
  this.mostrarAlerta = false;
+ 
 }
 
 
@@ -151,7 +166,8 @@ calcularMaxX() {
   const contenedor = document.getElementById('tu-contenedor'); 
   if (contenedor) {
     this.maxX = contenedor.clientWidth;
-    this.maxY = contenedor.clientHeight;
+    this.maxy = contenedor.clientHeight;
+    //this.maxY = contenedor.clientHeight;
   }
 }
 
@@ -171,6 +187,7 @@ reanudar(){
 
 moverPersonaje() {
   const llave = document.querySelector('.llave') as HTMLElement | null;
+  const enemy1 = document.querySelector('.enemy1') as HTMLElement | null;
   const puerta1 = document.querySelector('.puerta1') as HTMLElement | null;
   const puerta = document.querySelector('.puerta') as HTMLElement | null;
   const estrella = document.querySelector('.estrella') as HTMLElement | null;
@@ -218,23 +235,11 @@ moverPersonaje() {
       this.enSuperficieDePlataforma = true;
     }
   }
-  this.personajePosY += this.verticalVelocity;
+  
  //que la gravedad no haga que traspase el suelo
-  if (this.personajePosY > this.maxY) {
-    this.personajePosY = this.maxY; // Ajusta la posición para que no supere el límite inferior
-    this.verticalVelocity = 0; // Detén la velocidad vertical (puede cambiar según tus necesidades)
-    this.isJumping = false; 
-  }
+ 
 
-  if (personaje && llave) {
-    if (this.colisiona(personaje, llave)) {
-      this.puertaAbierta = true;
-      llave.classList.add('disintegration-animation');
-      
-       
-    }
-    
-  }
+  
   if (personaje && puerta1 && !this.haTocadoPuerta) {
     if (this.colisiona(personaje, puerta1)) {
         this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.infoUsuario.idU);
@@ -274,63 +279,123 @@ moverPersonaje() {
     }
   }
 
-  if (this.isMovingLeft) {
-    this.personajePosX -= 2.5; 
-    this.personajePosX = Math.max(this.personajePosX, 0); 
+ 
+}
+estrella(){
+  const e1 = document.getElementById('estrella1');
+const e2 = document.getElementById('estrella2');
+const e3 = document.getElementById('estrella3');
+const e4 = document.getElementById('estrella4');
+const personaje = document.querySelector('.pj') as HTMLElement | null;
+if (personaje && e1) {
+  if (this.colisiona(personaje, e1)) {
+    console.log('colision');
+    e1.classList.add('disintegration-animation');
+    
   }
-
-  if (this.isMovingRight) {
-    this.personajePosX += 2.5; 
-    this.personajePosX = Math.min(this.personajePosX, this.maxX); 
-  }
-
 }
 
-startMoving(direction: string) {
-  if (direction === 'izquierda') {
-    this.isMovingLeft = true;
-  } else if (direction === 'derecha') {
-    this.isMovingRight = true;
-  } this.rotationInterval = setInterval(() => {
-    this.rotationDegrees += 8;
-    this.moverPersonaje();
-  }, 15); 
+}
+enemys(){
+  const enemy1 = document.getElementById('enemy1');
+const enemy2 = document.getElementById('enemy2');
+const enemy3 = document.getElementById('enemy3');
+const enemy4 = document.getElementById('enemy4');
+const personaje = document.querySelector('.pj') as HTMLElement | null;
+
+if(enemy1 && enemy2 && enemy3 && enemy4){
+if(this.empezo==true){
+  
+ if (personaje && enemy1) {
+    if (this.colisiona(personaje, enemy1)) {
+      console.log('colision');
+      personaje.classList.add('disintegration-animation');
+      this.mostrarAlerta = true; 
+    }
+  }
+  if (personaje && enemy2) {
+    if (this.colisiona(personaje, enemy2)) {
+      console.log('colision');
+      personaje.classList.add('disintegration-animation');
+      this.mostrarAlerta = true;
+    }
+  }
+  if (personaje && enemy3) {
+    if (this.colisiona(personaje, enemy3)) {
+      console.log('colision');
+      personaje.classList.add('disintegration-animation');
+      this.mostrarAlerta = true;
+    }
+  }
+  if (personaje && enemy4) {
+    if (this.colisiona(personaje, enemy4)) {
+      console.log('colision');
+      personaje.classList.add('disintegration-animation');
+      this.mostrarAlerta = true;
+    }
+  }
+
+}}
+
+
+}
+moverPersonajeIzquierda() {
+  const personaje = document.querySelector('.pj') as HTMLElement | null;
+  if(personaje){
+    personaje.classList.add('alaizquierda');
+  if (this.personajePosX - this.movimientoPixelesx >= 0) {
+    this.personajePosX -= this.movimientoPixelesx;
+  }}
+ 
+  
+  this.empezo=true;
+  
+}
+moverPersonajeAbajo() {
+ 
+    this.personajePosY += this.movimientoPixelesy;
+    
+    this.empezo=true;
+    
+  
+}
+moverPersonajeArriba() {
+  if (this.personajePosY - this.movimientoPixelesy <= this.maxy) {
+    this.personajePosY -= this.movimientoPixelesy;
+  
+  }
+  
+
+  this.empezo=true;
+  
 }
 
-stopMoving(direction: string) {
-  if (direction === 'izquierda') {
-    this.isMovingLeft = false;
-  } else if (direction === 'derecha') {
-    this.isMovingRight = false;
+movio=false;
+moverPersonajeDerecha() {
+  const personaje = document.querySelector('.pj') as HTMLElement | null;
+  if(personaje && this.movio==false){
+    
+    personaje.classList.add('aladerecha');
+    this.movio=true;
+    
   }
-  clearInterval(this.rotationInterval);
+    
+  if (this.personajePosX + this.movimientoPixelesx <= this.maxX) {
+    this.personajePosX += this.movimientoPixelesx;
+    
+  }
+
+  this.empezo=true;
+ 
+  
 }
+
+
 
 
 
 //Saltar Pj
-saltarPersonaje() {
-  if (!this.isJumping) {
-    this.isJumping = true;
-    const jumpHeight = -100;
-    const jumpDuration = 500; 
-    this.verticalVelocity = -15;
-    const initialPosY = this.personajePosY+2;
-    const startTime = Date.now();
-    const jumpInterval = setInterval(() => {
-    const currentTime = Date.now();
-    
-    const elapsedTime = currentTime - startTime;
-      if (elapsedTime >= jumpDuration) {
-        clearInterval(jumpInterval);
-        this.isJumping = false;
-      } else {
-        const progress = elapsedTime / jumpDuration;
-        this.personajePosY = initialPosY + jumpHeight * Math.sin(progress * Math.PI);
-      }
-    }, 16); 
-  }
-}
+
 
 colisiona(element1: HTMLElement, element2: HTMLElement): boolean {
   const rect1 = element1.getBoundingClientRect();
@@ -343,19 +408,7 @@ colisiona(element1: HTMLElement, element2: HTMLElement): boolean {
     
   );
 }
-colisionaarriba(element1: HTMLElement, element2: HTMLElement): boolean {
-  const rect1 = element1.getBoundingClientRect();
-  const rect2 = element2.getBoundingClientRect();
-  return (
-    
-    rect1.bottom > rect2.top &&
-    rect1.left > rect2.top &&
-    rect1.right > rect2.top &&
-    rect1.top > rect2.top 
 
-    
-  );
-}
 
 }
 

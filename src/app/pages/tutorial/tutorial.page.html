@@ -5,110 +5,111 @@
 <ion-content [fullscreen]="true">
   
   <ion-grid style="background-image: url(assets/icon/fondoCartel.png) ;  background-size: 920px 420px; background-repeat: no-repeat;height: 100vh;">
-    <ion-row >
+   <!--fila 1-->
+    <ion-row>
+    <ion-col class="col">
+      <img class="menu" id="present-alert" (click)="menu()" src="assets/icon/menu.png" alt="Mi Imagen">
+    </ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"><img class="estrella2" id="estrella1" src="assets/icon/estrella.png" alt="Mi Imagen" ></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col">
+      <div class="contador">
+        <p>{{ tiempoRestante }}</p>
+      </div>
+      <img class="enemy1" id="enemy1" src="assets/icon/sol.png" alt="Mi Imagen">
+    </ion-col>
+   </ion-row>
+
+   <!--fila 2-->
+   <ion-row>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"><img class="estrella2" id="estrella2" src="assets/icon/estrella.png" alt="Mi Imagen" ></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col">
+      <div  *ngIf="!menus">
+      </div>
+      <div  *ngIf="!mostrarAlerta">
+      </div>
+      <div  [style.visibility]="menus ? 'visible' : 'hidden'" *ngIf="menus" class="container-completado">
+        <h2 class="alerta-titulo">¿Volver al lobby?</h2><div class="alerta-botones">
+          <button class="alerta-boton" (click)="volverAlInicio()">salir</button>
+          <button class="alerta-boton" (click)="reanudar()">reanudar</button>
+          
+        </div>
+      </div>
+      <div  [style.visibility]="mostrarAlerta ? 'visible' : 'hidden'" *ngIf="mostrarAlerta" class="alerta-container">
+        <h2 class="alerta-titulo">¡Fin del juego!</h2>
+        
+        <div class="alerta-botones">
+          <button class="alerta-boton" (click)="volverAlInicio()">Volver al lobby</button>
+          
+        </div>
+        <div class="alerta-botones"><button class="alerta-boton"  (click)="volverAIntentarlo()">reintentar</button></div>
+      </div>
+    </ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col">
+      <img class="enemy2" id="enemy2" src="assets/icon/sol.png" alt="Mi Imagen">
+    </ion-col>
+   </ion-row>
+
+   <!--fila 3-->
+   <ion-row>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col"><img class="estrella2" id="estrella3" src="assets/icon/estrella.png" alt="Mi Imagen" ></ion-col>
+    <ion-col class="col"></ion-col>
+    <ion-col class="col">
+      <img class="enemy3" id="enemy3" src="assets/icon/sol.png" alt="Mi Imagen">
+    </ion-col>
+   </ion-row>
+
+    <!--fila 4-->
+    <ion-row>
+      <ion-col class="col">
+        <img class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) translateY(' + personajePosY + 'px)'" alt="Mi Imagen" >
+      </ion-col>
+      <ion-col class="col"></ion-col>
+      <ion-col class="col"></ion-col>
+      <ion-col class="col"><img class="estrella2" id="estrella4" src="assets/icon/estrella.png" alt="Mi Imagen" ></ion-col>
+      <ion-col class="col"></ion-col>
+      <ion-col class="col"></ion-col>
+      <ion-col class="col"></ion-col>
+      <ion-col class="col"></ion-col>
+      <ion-col class="col"></ion-col>
+      <ion-col class="col">
+        <img class="enemy4" id="enemy4" src="assets/icon/sol.png" alt="Mi Imagen">
+      </ion-col>
+     </ion-row>
+    
+     <ion-row>
       <ion-col>
-       <img class="menu" id="present-alert" (click)="menu()" src="assets/icon/menu.png" alt="Mi Imagen">
-        <img class="sol" src="assets/icon/sol.png" alt="Mi Imagen">
-        <img class="nube" src="assets/icon/nube.png" alt="Mi Imagen"><br>
-        <img class="nube1" src="assets/icon/nube.png" alt="Mi Imagen"><br><br>
-        <div class="contador">
-          <p>{{ tiempoRestante }}</p>
-        </div>
-        
+        <img class="flechas " src="assets/icon/izquierda.png" (touchstart)="moverPersonajeIzquierda()"  alt="Mi Imagen">
+        <img class="flechas" src="assets/icon/derecha.png" (touchstart)="moverPersonajeDerecha()"  alt="Mi Imagen">
       </ion-col>
-    </ion-row>
+      <ion-col style="text-align: center;">
+        <img class="flechas " src="assets/icon/arriba.png" (touchstart)="moverPersonajeArriba()"  alt="Mi Imagen">
+        <img class="flechas" src="assets/icon/abajo.png" (touchstart)="moverPersonajeAbajo()"  alt="Mi Imagen">
+      </ion-col>
+     </ion-row>
 
-    <ion-row >
-      <ion-col size="4">
-        <div style="margin-top: -100px;margin-right: 125px;">
-          
-          <img class="llave"  src="assets/icon/LLave.png" alt="Mi Imagen">
-          <img  class="estrella" src="assets/icon/estrella.png" alt="Mi Imagen" >
-          <img style="width: 200px;height: 20px;" class="plataforma" id="plataforma1" src="assets/icon/Plataforma.png" alt="Mi Imagen">
-        </div>
-       
-        <div [style.transform]="'translatey(' + personajePosY + 'px)'" class="pjup">
-          <img class="pj" src="assets/icon/pj.png" [ngClass]="{'disintegration-animation': tiempoExpirado}" [style.transform]="'translateX(' + personajePosX + 'px) rotate(' + rotationDegrees + 'deg) '" alt="Mi Imagen" >
-        </div>
-        
   
-      </ion-col>
-      <ion-col size="4" style="margin-top: -150px;">
-        <div  *ngIf="!mostrarAlerta">
-        </div>
-        <div  *ngIf="!nivelcompletado">
-        </div>
-        <div  *ngIf="!menus">
-        </div>
-        <div  [style.visibility]="menus ? 'visible' : 'hidden'" *ngIf="menus" class="container-completado">
-          <h2 class="alerta-titulo">¿Volver al lobby?</h2><div class="alerta-botones">
-            <button class="alerta-boton" (click)="volverAlInicio()">Volver al lobby</button>
-            
-          </div>
-          <div class="alerta-botones"><button (click)="reanudar()" class="alerta-boton" >Reanudar</button></div>
-        </div>
-        <!--nivel completado-->
-        <div  [style.visibility]="nivelcompletado ? 'visible' : 'hidden'" *ngIf="nivelcompletado" class="container-completado">
-          <h2 class="alerta-titulo">¡Nivel completado!</h2>
-          
-          <img *ngIf="estrellasrecojidas>0" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
-          <img *ngIf="estrellasrecojidas>1" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
-          <img *ngIf="estrellasrecojidas>2" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
-
-          <!--
-          <div class="alerta-botones">
-            <button class="alerta-boton" (click)="volverAlInicio()">Volver al lobby</button>
-            
-          </div
-          <div class="alerta-botones"><button class="alerta-boton" (click)="volverAIntentarlo()">reintentar</button></div>>-->
-          <div class="alerta-botones"><button class="alerta-boton" (click)="volverAlInicio()">lobby</button></div>
-        </div>
-        <!--tiempo agotado-->
-        <div  [style.visibility]="mostrarAlerta ? 'visible' : 'hidden'" *ngIf="mostrarAlerta" class="alerta-container">
-          <h2 class="alerta-titulo">¡Tiempo agotado!</h2>
-          
-          <div class="alerta-botones">
-            <button class="alerta-boton" (click)="volverAlInicio()">Volver al lobby</button>
-            
-          </div>
-          <div class="alerta-botones"><button class="alerta-boton"  (click)="volverAIntentarlo()">reintentar</button></div>
-        </div>
-        <div style="margin-top: -10px;margin-right: 100px;">
-          <img class="estrella1" src="assets/icon/estrella.png" alt="Mi Imagen" >
-          <img style="width: 200px;height: 20px;" class="plataforma" id="plataforma2" src="assets/icon/Plataforma.png" alt="Mi Imagen">
-        </div>
-        <div style="margin-top: 100px;margin-right: -50px;">
-          
-          <img style="margin-left: 50px; width: 200px;height: 20px;" class="plataforma" id="plataforma4"  src="assets/icon/Plataforma.png" alt="Mi Imagen">
-        </div>
-      </ion-col>
-
-
-      
-      <ion-col size="4" >
-        <div style="margin-top: -100px;margin-right: 125px;">
-          <img class="estrella2" src="assets/icon/estrella.png" alt="Mi Imagen" >
-          <img style="width: 200px;height: 20px;" class="plataforma" id="plataforma3" src="assets/icon/Plataforma.png" alt="Mi Imagen">
-        </div>
-        
-        <img class="puerta" *ngIf="!puertaAbierta" src="assets/icon/ptuto_c.png" alt="Puerta Cerrada">
-<img class="puerta1" *ngIf="puertaAbierta" src="assets/icon/ptuto_a.png" alt="Puerta Abierta">
-        
-      </ion-col>
-    </ion-row>
-    <ion-row >
-      <ion-col  style="padding: 0 0 0 0;margin-top: -65px;" >
- 
-        <img class="flechas " src="assets/icon/izquierda.png" (touchstart)="startMoving('izquierda')" (touchend)="stopMoving('izquierda')"  alt="Mi Imagen">
-        <img class="flechas" src="assets/icon/derecha.png" (touchstart)="startMoving('derecha')" (touchend)="stopMoving('derecha')"  alt="Mi Imagen">
-      </ion-col>
-      <ion-col style="text-align: right; justify-content: right;align-items: right;padding: 0 0 0 0;margin-top: -55px;" >
- 
-        <img class="salto" (touchstart)="saltarPersonaje()" src="assets/icon/saltar.png" alt="Mi Imagen">
-        
-      </ion-col>
-      
-    </ion-row>
+  
   </ion-grid>
 
 </ion-content>
