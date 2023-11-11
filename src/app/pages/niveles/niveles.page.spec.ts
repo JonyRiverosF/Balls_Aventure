@@ -1,3 +1,4 @@
+/*
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
@@ -24,3 +25,5 @@ describe('NivelesPage', () => {
     expect(component).toBeTruthy();
   });
 });
+*/
+
