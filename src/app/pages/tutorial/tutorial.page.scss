@@ -36,6 +36,7 @@
 .enemy{
   width: 70%;
   height:90% ;
+  margin-left: 100px;
  
   
 }
@@ -47,7 +48,7 @@ ion-grid {
   margin: 0 auto; 
 }
 .col{
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.24);
   height: 60px;
 }
 .estrellaz{
@@ -156,6 +157,7 @@ ion-grid {
   text-align: center;
   position: absolute;
   visibility: hidden; 
+  z-index: 9999;
 }
 
 .alerta-container {
@@ -167,6 +169,7 @@ ion-grid {
   text-align: center;
   position: absolute; 
   visibility: hidden; 
+  z-index: 9999;
 }
 
 .alerta-titulo {

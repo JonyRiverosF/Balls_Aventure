@@ -20,9 +20,9 @@
     <ion-col class="col"></ion-col>
     <ion-col class="col">
       <div class="contador">
-        <p>{{ tiempoRestante }}</p>
+        <p>{{ tiempoRestante }}{{estrellasrecojidas}}</p>
       </div>
-      <img class="enemy1" id="enemy1" src="assets/icon/sol.png" alt="Mi Imagen">
+      <img class="enemy" id="enemy1" src="assets/icon/sol.png" alt="Mi Imagen">
     </ion-col>
    </ion-row>
 
@@ -33,19 +33,25 @@
     <ion-col class="col"></ion-col>
     <ion-col class="col"></ion-col>
     <ion-col class="col">
-      <div  *ngIf="!menus">
-      </div>
       <div  *ngIf="!mostrarAlerta">
+      </div>
+      <div  *ngIf="!moverEmpezar">
+      </div>
+      <div  *ngIf="!menus">
       </div>
       <div  [style.visibility]="menus ? 'visible' : 'hidden'" *ngIf="menus" class="container-completado">
         <h2 class="alerta-titulo">¿Volver al lobby?</h2><div class="alerta-botones">
-          <button class="alerta-boton" (click)="volverAlInicio()">salir</button>
+          <button class="alerta-boton" (click)="volverAlInicio()">salir</button><br><br>
           <button class="alerta-boton" (click)="reanudar()">reanudar</button>
           
         </div>
       </div>
+        <div  [style.visibility]="moverEmpezar ? 'visible' : 'hidden'"  *ngIf="moverEmpezar" class="container-completado">
+          <h2 class="alerta-titulo">muevete para empezar</h2>
+      </div>
       <div  [style.visibility]="mostrarAlerta ? 'visible' : 'hidden'" *ngIf="mostrarAlerta" class="alerta-container">
         <h2 class="alerta-titulo">¡Fin del juego!</h2>
+      <div>estrellas recojidas: {{estrellasrecojidas}}</div>
         
         <div class="alerta-botones">
           <button class="alerta-boton" (click)="volverAlInicio()">Volver al lobby</button>
@@ -59,7 +65,7 @@
     <ion-col class="col"></ion-col>
     <ion-col class="col"></ion-col>
     <ion-col class="col">
-      <img class="enemy2" id="enemy2" src="assets/icon/sol.png" alt="Mi Imagen">
+      <img class="enemy" id="enemy2" src="assets/icon/sol.png" alt="Mi Imagen">
     </ion-col>
    </ion-row>
 
@@ -75,7 +81,7 @@
     <ion-col class="col"><img class="estrella2" id="estrella3" src="assets/icon/estrella.png" alt="Mi Imagen" ></ion-col>
     <ion-col class="col"></ion-col>
     <ion-col class="col">
-      <img class="enemy3" id="enemy3" src="assets/icon/sol.png" alt="Mi Imagen">
+      <img class="enemy" id="enemy3" src="assets/icon/sol.png" alt="Mi Imagen">
     </ion-col>
    </ion-row>
 
@@ -93,7 +99,7 @@
       <ion-col class="col"></ion-col>
       <ion-col class="col"></ion-col>
       <ion-col class="col">
-        <img class="enemy4" id="enemy4" src="assets/icon/sol.png" alt="Mi Imagen">
+        <img class="enemy" id="enemy4" src="assets/icon/sol.png" alt="Mi Imagen">
       </ion-col>
      </ion-row>
     
