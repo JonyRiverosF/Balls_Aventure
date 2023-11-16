@@ -33,7 +33,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/skins/skins.module').then( m => m.SkinsPageModule)
   },
   {
-    path: 'tiempo-carga',
+    path: 'tiempo-carga/:slug',
     loadChildren: () => import('./pages/tiempo-carga/tiempo-carga.module').then( m => m.TiempoCargaPageModule)
   },
   {
