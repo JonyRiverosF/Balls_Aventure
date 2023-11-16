@@ -12,13 +12,13 @@
 .enemy1{
   width: 70%;
   height:90% ;
-  animation: movernube 50s linear infinite;
+  animation: movernube 20s linear infinite;
   
 }
 .enemy2{
   width: 70%;
   height:90% ;
-  animation: movernube 40s linear infinite ;
+  animation: movernube 10s linear infinite ;
   
 }
 .enemy3{
@@ -36,7 +36,7 @@
 .enemy{
   width: 70%;
   height:90% ;
-  margin-left: 100px;
+  
  
   
 }
@@ -157,7 +157,7 @@ ion-grid {
   text-align: center;
   position: absolute;
   visibility: hidden; 
-  z-index: 9999;
+  z-index: 9998;
 }
 
 .alerta-container {
@@ -280,10 +280,10 @@ ion-grid {
 }
 
 @keyframes movernube {
-    0%{ transform: translateX(700px);}
+    0%{ transform: translateX(200px);}
     
     
-    100%{transform: translateX(-3000px);}
+    100%{transform: translateX(-700px);}
 }
 @keyframes caerestrella {
   0%{ transform: translateY(-500px);}
@@ -292,9 +292,9 @@ ion-grid {
   100%{transform: translateY(400px);}
 }
 @keyframes moverpjd {
-  0% { transform:  rotate(0deg); translate: 0px; }
+  0% {transform:  rotate(0deg) }
   
-  100% { transform:  rotate(360deg); translate: 72px;}
+  100% {  transform:  rotate(360deg)}
 }
 @keyframes moverpj1 {
   0% { transform:  rotate(0deg); translate: 0px; }
@@ -303,6 +303,9 @@ ion-grid {
 }
 
 .aladerecha{
+  animation-name: moverpjd ;
+  animation-duration: 0.5s; 
+
 }
 .alaizquierda{
 }

@@ -20,7 +20,7 @@
     <ion-col class="col"></ion-col>
     <ion-col class="col">
       <div class="contador">
-        <p>{{ tiempoRestante }}{{estrellasrecojidas}}</p>
+        <p>{{ tiempo }}</p>
       </div>
       <img class="enemy" id="enemy1" src="assets/icon/sol.png" alt="Mi Imagen">
     </ion-col>
@@ -39,7 +39,7 @@
       </div>
       <div  *ngIf="!menus">
       </div>
-      <div  [style.visibility]="menus ? 'visible' : 'hidden'" *ngIf="menus" class="container-completado">
+      <div  style="z-index: 9999;" [style.visibility]="menus ? 'visible' : 'hidden'" *ngIf="menus" class="container-completado">
         <h2 class="alerta-titulo">¿Volver al lobby?</h2><div class="alerta-botones">
           <button class="alerta-boton" (click)="volverAlInicio()">salir</button><br><br>
           <button class="alerta-boton" (click)="reanudar()">reanudar</button>
@@ -57,7 +57,7 @@
           <button class="alerta-boton" (click)="volverAlInicio()">Volver al lobby</button>
           
         </div>
-        <div class="alerta-botones"><button class="alerta-boton"  (click)="volverAIntentarlo()">reintentar</button></div>
+        
       </div>
     </ion-col>
     <ion-col class="col"></ion-col>

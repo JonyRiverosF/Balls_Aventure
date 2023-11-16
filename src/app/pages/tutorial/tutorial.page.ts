@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
@@ -44,6 +45,10 @@ export class TutorialPage implements OnInit {
   nivelcompletado: boolean = false;
   puertaAbierta = false;
 
+  tiempo: number = 0;
+  intervalId: any = null;
+  primerMovimiento = false;
+
 
   //Timeout Con alerta
   tiempoExpirado: boolean = false;
@@ -58,7 +63,7 @@ export class TutorialPage implements OnInit {
 
   @ViewChild('pj', { static: false }) personaje!: ElementRef;
 
-  constructor(private activatedRouter: ActivatedRoute, private router: Router, private bd: DbservicioService) {
+  constructor(private activatedRouter: ActivatedRoute, private router: Router, private bd: DbservicioService, public alertController:AlertController) {
 
     this.activatedRouter.queryParams.subscribe(param => {
       if (this.router.getCurrentNavigation()?.extras.state) {
@@ -73,6 +78,9 @@ export class TutorialPage implements OnInit {
 
   //Timeout Alerta
   ngOnInit() {
+
+
+
     this.moverempezar();
     console.log(this.empezo);
     setInterval(() => {
@@ -80,33 +88,22 @@ export class TutorialPage implements OnInit {
       this.enemys();
       this.estrella();
     }, 100);
-    setTimeout(() => {
 
 
-      this.tiempoExpirado = true;
-      this.mostrarAlerta = true;
-      if (this.tiempoExpirado) {
-        this.bd.insertarIntento(this.estrellasrecojidas, 0, false, 1, this.infoUsuario.idU);
-        //this.bd.presentAlert('intento fallido agregado');
-        const personaje = document.getElementById('tu-personaje');
-        if (personaje) {
-          personaje.classList.add('death-animation');
-        }
-      }
-    }, this.tiempoLimite);
-    let tiempoInicial = this.tiempoLimite / 1000;
-    this.tiempoRestante = tiempoInicial;
-    const interval = setInterval(() => {
-      if (!this.tiempoExpirado) {
-        this.tiempoRestante -= 1;
-        if (this.tiempoRestante < 0) {
-          this.tiempoExpirado = true;
-          clearInterval(interval);
-        }
-      }
-    }, 1000);
 
 
+  }
+  iniciar() {
+    this.intervalId = setInterval(() => {
+      this.tiempo++;
+
+    }, 1000); // 1000 milisegundos = 1 segundo
+  }
+  iniciarCronometro() {
+    if (!this.primerMovimiento) {
+      this.primerMovimiento = true;
+      this.iniciar();
+    }
   }
 
 
@@ -184,62 +181,34 @@ export class TutorialPage implements OnInit {
 
   menu() {
     this.menus = true;
-    // this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.infoUsuario.idU);
-    //this.bd.presentAlert('intento  agregado');
-
-
-    //this.bd.presentAlert('intento  infousuario'+this.infoUsuario.idU);
-
-
+    clearInterval(this.intervalId);
+    
   }
   reanudar() {
+    this.primerMovimiento=false;
     console.log("Botón reanudar presionado");
     this.menus = false;
   }
   moverempezar() {
     this.moverEmpezar = true;
-
   }
 
   moverPersonaje() {
-    const llave = document.querySelector('.llave') as HTMLElement | null;
-    const enemy1 = document.querySelector('.enemy1') as HTMLElement | null;
     const puerta1 = document.querySelector('.puerta1') as HTMLElement | null;
-    const puerta = document.querySelector('.puerta') as HTMLElement | null;
     const estrella = document.querySelector('.estrella') as HTMLElement | null;
-    const estrella1 = document.querySelector('.estrella1') as HTMLElement | null;
-    const estrella2 = document.querySelector('.estrella2') as HTMLElement | null;
-    const caja = document.querySelector('.caja') as HTMLElement | null;
     const personaje = document.querySelector('.pj') as HTMLElement | null;
-    const personajeup = document.querySelector('.pjup') as HTMLElement | null;
-    const pinchos = document.querySelector('.pinchos') as HTMLElement | null;
-    const plataforma1 = document.getElementById('plataforma1');
-    const plataforma2 = document.getElementById('plataforma2');
-    const plataforma3 = document.getElementById('plataforma3');
-    const plataforma4 = document.getElementById('plataforma4');
     const gravedad = 1.2; // Ajusta la fuerza de la gravedad según tus necesidades
     this.verticalVelocity += gravedad;
-
-    // Mover el personaje verticalmente
-
-    //arriba de plataformas
-
-
     if (personaje && puerta1 && !this.haTocadoPuerta) {
       if (this.colisiona(personaje, puerta1)) {
         this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.infoUsuario.idU);
         this.bd.insertarInter(this.infoUsuario.idU, 1);
         this.bd.presentAlert('inter tutorial agregado');
         this.bd.presentAlert('intento  agregado');
-
         this.nivelcompletado = true;
-
         this.haTocadoPuerta = true;
-
       }
     }
-
-
     if (personaje && estrella && !this.haTocadoEstrella1) {
       if (this.colisiona(personaje, estrella)) {
         estrella.classList.add('disintegration-animation');
@@ -247,10 +216,6 @@ export class TutorialPage implements OnInit {
         this.haTocadoEstrella1 = true;
       }
     }
-
-
-
-
   }
   estrella() {
     const e1 = document.getElementById('estrella1');
@@ -295,6 +260,7 @@ export class TutorialPage implements OnInit {
     }
 
   }
+
   enemys() {
     const enemy1 = document.getElementById('enemy1');
     const enemy2 = document.getElementById('enemy2');
@@ -311,96 +277,95 @@ export class TutorialPage implements OnInit {
         if (personaje && enemy1) {
           if (this.colisiona(personaje, enemy1)) {
             console.log('colision');
+            this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
+            this.bd.actualizarMonedasUsuario(this.infoUsuario.idU,this.estrellasrecojidas*10);
+            this.bd.insertarInter(this.infoUsuario.idU, 1);
             personaje.classList.add('disintegration-animation');
             this.mostrarAlerta = true;
+            clearInterval(this.intervalId);
           }
         }
         if (personaje && enemy2) {
           if (this.colisiona(personaje, enemy2)) {
             console.log('colision');
+            this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
+            this.bd.actualizarMonedasUsuario(this.infoUsuario.idU,this.estrellasrecojidas*10);
+            this.bd.insertarInter(this.infoUsuario.idU, 1);
+            this.presentAlert("monedas");
             personaje.classList.add('disintegration-animation');
             this.mostrarAlerta = true;
+            clearInterval(this.intervalId);
           }
         }
         if (personaje && enemy3) {
           if (this.colisiona(personaje, enemy3)) {
             console.log('colision');
+            this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
+            this.bd.actualizarMonedasUsuario(this.infoUsuario.idU,this.estrellasrecojidas*10);
+            this.bd.insertarInter(this.infoUsuario.idU, 1);
             personaje.classList.add('disintegration-animation');
             this.mostrarAlerta = true;
+            clearInterval(this.intervalId);
           }
         }
         if (personaje && enemy4) {
           if (this.colisiona(personaje, enemy4)) {
             console.log('colision');
+            this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
+            this.bd.actualizarMonedasUsuario(this.infoUsuario.idU,this.infoUsuario.monedas+this.estrellasrecojidas*10);
+            this.bd.insertarInter(this.infoUsuario.idU, 1);
             personaje.classList.add('disintegration-animation');
             this.mostrarAlerta = true;
+            clearInterval(this.intervalId);
           }
         }
 
       }
     }
-
-
   }
+  presentAlert(arg0: string) {
+    throw new Error('Method not implemented.');
+  }
+
   moverPersonajeIzquierda() {
     const personaje = document.querySelector('.pj') as HTMLElement | null;
     if (personaje) {
       personaje.classList.add('alaizquierda');
       if (this.personajePosX - this.movimientoPixelesx >= 0) {
         this.personajePosX -= this.movimientoPixelesx;
+        this.iniciarCronometro();
       }
     }
-
-
     this.empezo = true;
     this.moverEmpezar = false;
   }
+
   moverPersonajeAbajo() {
-
     this.personajePosY += this.movimientoPixelesy;
-
+    this.iniciarCronometro();
     this.empezo = true;
     this.moverEmpezar = false;
-
   }
+
   moverPersonajeArriba() {
     if (this.personajePosY - this.movimientoPixelesy <= this.maxy) {
       this.personajePosY -= this.movimientoPixelesy;
-
+      this.iniciarCronometro();
     }
-
-
     this.empezo = true;
     this.moverEmpezar = false;
   }
 
-  movio = false;
   moverPersonajeDerecha() {
     const personaje = document.querySelector('.pj') as HTMLElement | null;
-    if (personaje && this.movio == false) {
-
-      personaje.classList.add('aladerecha');
-      this.movio = true;
-
-    }
-
     if (this.personajePosX + this.movimientoPixelesx <= this.maxX) {
       this.personajePosX += this.movimientoPixelesx;
+      this.iniciarCronometro();
 
     }
-
     this.empezo = true;
     this.moverEmpezar = false;
-
-
   }
-
-
-
-
-
-  //Saltar Pj
-
 
   colisiona(element1: HTMLElement, element2: HTMLElement): boolean {
     const rect1 = element1.getBoundingClientRect();
@@ -410,11 +375,8 @@ export class TutorialPage implements OnInit {
       rect1.right > rect2.left &&
       rect1.top < rect2.bottom &&
       rect1.bottom > rect2.top
-
     );
   }
-
-
 }
 
 

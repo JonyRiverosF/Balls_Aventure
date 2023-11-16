@@ -44,8 +44,8 @@ export class DbservicioService {
   registroPregunta2:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(2, '¿caricatura favorita?');";
   registroPregunta3:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(3, '¿nombre de tu primera mascota?');";
 
-  registroLogro1:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Novato', 'completa el tutorial', 15);";
-  registroLogro2:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(2, 'Aprendiz', 'completa dos niveles', 30);";
+  registroLogro1:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Novato', 'juega por primera vez', 15);";
+  registroLogro2:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(2, '', 'completa dos niveles', 30);";
   registroLogro3:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(3, 'Brillante', 'recolecta todas las estrellas', 45);";
   registroLogro4:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(4, 'Premio Mayor', 'completa el juego', 60);";
 
@@ -393,6 +393,14 @@ buscarUsuario(){
         this.buscarUsuario();
       }).catch(e=>{
         this.presentAlert("Error Modificar Rol: "+e)
+      })
+  }
+  actualizarMonedasUsuario(idU:any, monedas:any){
+    return this.database.executeSql('UPDATE usuario SET monedas= ? WHERE idU= ?',[monedas, idU])
+    .then(res=>{
+        this.buscarUsuario();
+      }).catch(e=>{
+        this.presentAlert("Error Modificar monedas: "+e)
       })
   }
 
