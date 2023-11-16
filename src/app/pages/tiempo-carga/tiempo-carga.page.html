@@ -1,32 +1,34 @@
+<!-- tiempo-carga.page.html -->
 <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/usocamara"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ juego.name }}</ion-title>
+  </ion-toolbar>
 </ion-header>
-<ion-content [fullscreen]="true">
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" style="margin-top: 50px;">
-        <ion-button (click)="mostrarDatos()">Mostrar Datos</ion-button>
 
-        <ion-card *ngIf="dias">
-          <ion-card-header>
-            Datos de la API
-          </ion-card-header>
-          <ion-card-content>
-            <div>
-              <p>ID: {{ dias.id }}</p>
-              <p>Title: {{ dias.title }}</p>
-              <p>Content: {{ dias.content }}</p>
-            </div>
-          </ion-card-content>
-        </ion-card>
+<ion-content [fullscreen]="true" style="background-color: rgb(68, 4, 102)">
+  <ion-grid >
+  <ion-card class="game-card">
+    <ion-card-header>
+      <ion-card-title class="game-title">{{ juego.name }}</ion-card-title>
+    </ion-card-header>
 
-        <div *ngIf="!dias">Cargando datos...</div>
+    <ion-card-content>
+      <ion-img [src]="juego.background_image" alt="Imagen del juego"></ion-img>
 
+      <div class="details-section">
+        <h3 class="section-title">Detalles del Juego</h3>
+        <ul>
+          <li><strong>Género:</strong> {{ obtenerGeneros(juego.genres) }}</li>
+          <li><strong>Plataformas:</strong> {{ obtenerPlataformas(juego.platforms) }}</li>
+          <li><strong>Fecha de Lanzamiento:</strong> {{ juego.released }}</li>
+        </ul>
+      </div>
 
-        
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      <!-- Agrega más secciones según la información que desees mostrar -->
 
-  <ion-header collapse="condense">
-  </ion-header>
+    </ion-card-content>
+  </ion-card></ion-grid>
 </ion-content>

@@ -1,37 +1,41 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
-
 
 @Component({
   selector: 'app-tiempo-carga',
   templateUrl: './tiempo-carga.page.html',
   styleUrls: ['./tiempo-carga.page.scss'],
 })
-
 export class TiempoCargaPage implements OnInit {
 
-  dias :any;
+  juego: any;
 
-  constructor(public api:ApiService) { }
+  constructor(public api: ApiService, private router: Router, private route: ActivatedRoute) { }
 
-  obtenerInfo() {
-    this.api.getUsers().subscribe((data) => {
-      //console.log(data);
-      console.log(this.dias);
-      this.dias = data;
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      const slug = params['slug'];
+      this.getRawgData(slug);
     });
   }
- 
-  ngOnInit() {
-    
+
+  getRawgData(slug: string): void {
+    this.api.getGameDetails(slug)
+      .subscribe(data => {
+        this.juego = data;
+      });
   }
 
-  ionViewWillEnter(){
-    this.obtenerInfo();
+  verDetalles(slug: string): void {
+    this.router.navigate(['/tiempo-carga', slug]);
   }
 
-  mostrarDatos() {
-    this.obtenerInfo();
+  obtenerGeneros(genres: any[]): string {
+    return genres.map(genre => genre.name).join(', ');
   }
 
+  obtenerPlataformas(platforms: any[]): string {
+    return platforms.map(platform => platform.platform.name).join(', ');
+  }
 }

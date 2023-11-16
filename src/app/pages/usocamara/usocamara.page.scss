@@ -1,0 +1,28 @@
+ion-content {
+    --ion-background-color: transparent; 
+    color: rgba(236, 240, 241, 0); 
+  }
+  
+  .content {
+    background-image: url('/assets/icon/holaD.jpg'); 
+    background-size: cover;
+  }
+  
+  .game-grid {
+    padding: 10px;
+  }
+  
+  .game-title {
+    background-color: rgb(52, 73, 94); 
+    border-radius: 15px;
+    color: #ffffff;
+    text-align: center;
+    height: 355px;
+    width: 355px;
+    margin: 5px; /* Ajusta este valor según tus preferencias para reducir el espacio entre juegos */
+  }
+  
+  .game-item ion-label {
+    font-weight: bold;
+    font-size: 1.5em;
+  }

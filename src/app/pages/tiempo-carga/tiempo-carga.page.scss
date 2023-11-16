@@ -1,0 +1,50 @@
+ion-content {
+  --ion-background-color: #f8f8f8; 
+}
+
+.game-card {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 20px;
+  background-color: rgb(110, 108, 108);
+}
+.content {
+  //background-image: url('/assets/icon/'); 
+  background-size: cover;
+}
+
+.game-img {
+  width: 100%;
+}
+
+.game-title {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: rgb(20, 55, 162) ;
+  text-align: center;
+}
+
+.details-section {
+  margin-top: 20px;
+  color: rgb(235, 224, 224);
+  font-size: 1.3em;
+}
+
+.section-title {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #532ecc;
+  text-align: center; 
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+

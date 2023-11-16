@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-usocamara',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./usocamara.page.scss'],
 })
 export class UsocamaraPage implements OnInit {
-  image :any;
+  juegos: any[] = [];
 
-  constructor() { }
+  constructor(public api: ApiService, private router: Router) { }
 
   ngOnInit() {
+    this.obtenerListaDeJuegos();
+  }
+
+  obtenerListaDeJuegos(): void {
+    this.api.getListaDeJuegos().subscribe((data) => {
+      this.juegos = data.results;
+    });
+  }
+
+  verDetalles(slug: string): void {
+    this.router.navigate(['/tiempo-carga', slug]);
   }
 }
