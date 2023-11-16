@@ -13,7 +13,6 @@ export class UsocamaraPage implements OnInit {
   constructor(public api: ApiService, private router: Router) { }
 
   ngOnInit() {
-    this.obtenerListaDeJuegos();
   }
 
   obtenerListaDeJuegos(): void {
