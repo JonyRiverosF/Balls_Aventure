@@ -10,32 +10,32 @@
 }
 //enemigo vertical
 .enemy1{
-  width: 70%;
-  height:90% ;
-  animation: movernube 20s linear infinite;
+  width: 90%;
+  height:70% ;
+  animation: movernube 17s linear infinite;
   
 }
 .enemy2{
-  width: 70%;
-  height:90% ;
+  width: 90%;
+  height:70% ;
   animation: movernube 10s linear infinite ;
   
 }
 .enemy3{
-  width: 70%;
-  height:90% ;
-  animation: movernube 45s linear infinite;
+  width: 90%;
+  height:70% ;
+  animation: movernube 13s linear infinite;
   
 }
 .enemy4{
-  width: 70%;
-  height:90% ;
-  animation: movernube 60s linear infinite ;
+  width: 90%;
+  height:70% ;
+  animation: movernube 15s linear infinite ;
   
 }
 .enemy{
-  width: 70%;
-  height:90% ;
+  width: 90%;
+  height:70% ;
   
  
   
@@ -48,7 +48,7 @@ ion-grid {
   margin: 0 auto; 
 }
 .col{
-  border: 1px solid rgba(0, 0, 0, 0.24);
+  //border: 1px solid rgba(0, 0, 0, 0.24);
   height: 60px;
 }
 .estrellaz{

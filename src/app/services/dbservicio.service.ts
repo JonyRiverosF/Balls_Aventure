@@ -45,7 +45,7 @@ export class DbservicioService {
   registroPregunta3:string="INSERT or IGNORE INTO pregunta(idP, nombreP) VALUES(3, '¿nombre de tu primera mascota?');";
 
   registroLogro1:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(1, 'Novato', 'juega por primera vez', 15);";
-  registroLogro2:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(2, '', 'completa dos niveles', 30);";
+  registroLogro2:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(2, 'maquina', 'sobrevive 30 segundos', 30);";
   registroLogro3:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(3, 'Brillante', 'recolecta todas las estrellas', 45);";
   registroLogro4:string="INSERT or IGNORE INTO logro(idL, nombreL, descripcion, recompensa) VALUES(4, 'Premio Mayor', 'completa el juego', 60);";
 
@@ -431,6 +431,18 @@ buscarInter(){
     }
     this.listaInter.next(items as any);
     })
+  }
+  verificarExistenciaInter(idUsuario: any, idLogro: any): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.database.executeSql('SELECT COUNT(*) AS count FROM inter WHERE idUsuario = ? AND idLogro = ?', [idUsuario, idLogro])
+        .then((result) => {
+          const count = result.rows.item(0).count;
+          resolve(count > 0); // Si count es mayor a 0, significa que ya existe el registro
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
 
   insertarInter(idUsuario:any, idLogro:any){

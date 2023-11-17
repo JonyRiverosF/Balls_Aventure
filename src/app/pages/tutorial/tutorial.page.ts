@@ -16,22 +16,15 @@ export class TutorialPage implements OnInit {
   cajaPosX = 0;
   maxcaja: number = 75;
 
-
   //PJ y movimientos
-  private isJumping = false;
-  private enSuperficieDePlataforma = false;
+
   personajePosX = 0;
   personajePosY = 0;
-  private verticalVelocity = 0;
-  private isMovingLeft = false;
-  private isMovingRight = false;
-  private rotationInterval: any;
+  intento=false;
   public rotationDegrees = 0;
   maxX: number = 800;
   maxy: number = 800;
   empezo: boolean = false;
-
-
 
   //Puerta y estrellas
   estrellasrecojidas: number = 0;
@@ -48,7 +41,6 @@ export class TutorialPage implements OnInit {
   tiempo: number = 0;
   intervalId: any = null;
   primerMovimiento = false;
-
 
   //Timeout Con alerta
   tiempoExpirado: boolean = false;
@@ -78,27 +70,28 @@ export class TutorialPage implements OnInit {
 
   //Timeout Alerta
   ngOnInit() {
-
-
-
     this.moverempezar();
     console.log(this.empezo);
     setInterval(() => {
+      if (this.tiempo == 30) {
+        this.bd.verificarExistenciaInter(this.infoUsuario.idU, 2)
+          .then(existe => {
+            if (!existe) {
+              this.bd.insertarInter(this.infoUsuario.idU, 2)        
+      }}) 
+      }
 
       this.enemys();
       this.estrella();
     }, 100);
 
-
-
-
   }
   iniciar() {
     this.intervalId = setInterval(() => {
       this.tiempo++;
-
     }, 1000); // 1000 milisegundos = 1 segundo
   }
+
   iniciarCronometro() {
     if (!this.primerMovimiento) {
       this.primerMovimiento = true;
@@ -106,31 +99,17 @@ export class TutorialPage implements OnInit {
     }
   }
 
-
-
-  //Redireccion
   volverAlInicio() {
     // window.location.href = '/lobby';
     let navigationextra: NavigationExtras = {
       state: {
         infoUsuario: this.infoUsuario,
-
-
       }
-
     }
     this.router.navigate(['/lobby'], navigationextra)
-    this.isJumping = false;
-    this.enSuperficieDePlataforma = false;
     this.personajePosX = 0;
     this.personajePosY = 0;
-    this.verticalVelocity = 0;
-    this.isMovingLeft = false;
-    this.isMovingRight = false;
-
     this.rotationDegrees = 0;
-
-
 
     //Puerta y estrellas
     this.estrellasrecojidas = 0;
@@ -141,27 +120,20 @@ export class TutorialPage implements OnInit {
     this.menus = false;
     this.nivelcompletado = false;
     this.puertaAbierta = false;
-
-
     //Timeout Con alerta
     this.tiempoExpirado = false;
-
     this.mostrarAlerta = false;
-
   }
-
 
   volverAIntentarlo() {
     //window.location.href = '/tutorial';
     // this.router.navigate(['/tutorial'])
     //this.router.navigateByUrl('/tutorial');
-
     const currentUrl = this.router.url;
     this.router.navigateByUrl('/lobby', { skipLocationChange: true }).then(() => {
       this.router.navigate([currentUrl]);
     });
   }
-
 
   //Movimiento Pj
   ventana() {// 
@@ -182,41 +154,18 @@ export class TutorialPage implements OnInit {
   menu() {
     this.menus = true;
     clearInterval(this.intervalId);
-    
   }
+
   reanudar() {
     this.primerMovimiento=false;
     console.log("Botón reanudar presionado");
     this.menus = false;
   }
+
   moverempezar() {
     this.moverEmpezar = true;
   }
 
-  moverPersonaje() {
-    const puerta1 = document.querySelector('.puerta1') as HTMLElement | null;
-    const estrella = document.querySelector('.estrella') as HTMLElement | null;
-    const personaje = document.querySelector('.pj') as HTMLElement | null;
-    const gravedad = 1.2; // Ajusta la fuerza de la gravedad según tus necesidades
-    this.verticalVelocity += gravedad;
-    if (personaje && puerta1 && !this.haTocadoPuerta) {
-      if (this.colisiona(personaje, puerta1)) {
-        this.bd.insertarIntento(this.estrellasrecojidas, 0, true, 1, this.infoUsuario.idU);
-        this.bd.insertarInter(this.infoUsuario.idU, 1);
-        this.bd.presentAlert('inter tutorial agregado');
-        this.bd.presentAlert('intento  agregado');
-        this.nivelcompletado = true;
-        this.haTocadoPuerta = true;
-      }
-    }
-    if (personaje && estrella && !this.haTocadoEstrella1) {
-      if (this.colisiona(personaje, estrella)) {
-        estrella.classList.add('disintegration-animation');
-        this.estrellasrecojidas++;
-        this.haTocadoEstrella1 = true;
-      }
-    }
-  }
   estrella() {
     const e1 = document.getElementById('estrella1');
     const e2 = document.getElementById('estrella2');
@@ -228,9 +177,13 @@ export class TutorialPage implements OnInit {
         if (this.colisiona(personaje, e1)) {
           console.log('colision');
           this.estrellasrecojidas += 1;
-          e1.classList.add('disintegration-animation');
+          e1.classList.add('disintegration-animation');  
           this.haTocadoEstrella1 = true;
-
+          setTimeout(() => {
+            e1.classList.remove('disintegration-animation');
+            this.haTocadoEstrella1 = false;
+          }, 5000);
+          
         }
       }
       if (!this.haTocadoEstrella2) {
@@ -239,6 +192,11 @@ export class TutorialPage implements OnInit {
           this.estrellasrecojidas += 1;
           e2.classList.add('disintegration-animation');
           this.haTocadoEstrella2 = true;
+          setTimeout(() => {
+            e2.classList.remove('disintegration-animation');
+            this.haTocadoEstrella2 = false;
+          }, 5000);
+          
         }
       }
       if (!this.haTocadoEstrella3) {
@@ -247,6 +205,11 @@ export class TutorialPage implements OnInit {
           this.estrellasrecojidas += 1;
           e3.classList.add('disintegration-animation');
           this.haTocadoEstrella3 = true;
+          setTimeout(() => {
+            e3.classList.remove('disintegration-animation');
+            this.haTocadoEstrella3 = false;
+          }, 5000);
+          
         }
       }
       if (!this.haTocadoEstrella4) {
@@ -255,10 +218,14 @@ export class TutorialPage implements OnInit {
           this.estrellasrecojidas += 1;
           e4.classList.add('disintegration-animation');
           this.haTocadoEstrella4 = true;
+          setTimeout(() => {
+            e4.classList.remove('disintegration-animation');
+            this.haTocadoEstrella4 = false;
+          }, 5000);
+          
         }
       }
     }
-
   }
 
   enemys() {
@@ -274,24 +241,40 @@ export class TutorialPage implements OnInit {
         enemy2.classList.add('enemy2');
         enemy3.classList.add('enemy3');
         enemy4.classList.add('enemy4');
-        if (personaje && enemy1) {
-          if (this.colisiona(personaje, enemy1)) {
+        if (personaje && enemy2) {
+          if (this.colisiona(personaje, enemy2)) {
             console.log('colision');
-            this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
-            this.bd.actualizarMonedasUsuario(this.infoUsuario.idU,this.estrellasrecojidas*10);
-            this.bd.insertarInter(this.infoUsuario.idU, 1);
+            if(!this.intento){
+               this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
+               this.intento=true
+            }
+           
+            this.bd.actualizarMonedasUsuario(this.infoUsuario.idU,this.infoUsuario.monedas+this.estrellasrecojidas+this.tiempo);
+            this.bd.verificarExistenciaInter(this.infoUsuario.idU, 1)
+            .then(existe => {
+              if (!existe) {
+                this.bd.insertarInter(this.infoUsuario.idU, 1)
+                 
+        }})
             personaje.classList.add('disintegration-animation');
             this.mostrarAlerta = true;
             clearInterval(this.intervalId);
           }
         }
-        if (personaje && enemy2) {
-          if (this.colisiona(personaje, enemy2)) {
-            console.log('colision');
-            this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
-            this.bd.actualizarMonedasUsuario(this.infoUsuario.idU,this.estrellasrecojidas*10);
-            this.bd.insertarInter(this.infoUsuario.idU, 1);
-            this.presentAlert("monedas");
+        if (personaje && enemy1) {
+          if (this.colisiona(personaje, enemy1)) {
+            this.presentAlert('colision bomba 2');
+            if(!this.intento){
+              this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
+              this.intento=true
+           }
+            this.bd.actualizarMonedasUsuario(this.infoUsuario.idU,this.infoUsuario.monedas+this.estrellasrecojidas+this.tiempo);
+            this.bd.verificarExistenciaInter(this.infoUsuario.idU, 1)
+            .then(existe => {
+              if (!existe) {
+                this.bd.insertarInter(this.infoUsuario.idU, 1)
+                 
+        }})
             personaje.classList.add('disintegration-animation');
             this.mostrarAlerta = true;
             clearInterval(this.intervalId);
@@ -300,9 +283,17 @@ export class TutorialPage implements OnInit {
         if (personaje && enemy3) {
           if (this.colisiona(personaje, enemy3)) {
             console.log('colision');
-            this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
-            this.bd.actualizarMonedasUsuario(this.infoUsuario.idU,this.estrellasrecojidas*10);
-            this.bd.insertarInter(this.infoUsuario.idU, 1);
+            if(!this.intento){
+              this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
+              this.intento=true
+           }
+            this.bd.actualizarMonedasUsuario(this.infoUsuario.idU,this.infoUsuario.monedas+this.estrellasrecojidas+this.tiempo);
+            this.bd.verificarExistenciaInter(this.infoUsuario.idU, 1)
+            .then(existe => {
+              if (!existe) {
+                this.bd.insertarInter(this.infoUsuario.idU, 1)
+                 
+        }})
             personaje.classList.add('disintegration-animation');
             this.mostrarAlerta = true;
             clearInterval(this.intervalId);
@@ -311,15 +302,22 @@ export class TutorialPage implements OnInit {
         if (personaje && enemy4) {
           if (this.colisiona(personaje, enemy4)) {
             console.log('colision');
-            this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
-            this.bd.actualizarMonedasUsuario(this.infoUsuario.idU,this.infoUsuario.monedas+this.estrellasrecojidas*10);
-            this.bd.insertarInter(this.infoUsuario.idU, 1);
+            if(!this.intento){
+              this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
+              this.intento=true
+           }
+            this.bd.actualizarMonedasUsuario(this.infoUsuario.idU,this.infoUsuario.monedas+this.estrellasrecojidas+this.tiempo);
+            this.bd.verificarExistenciaInter(this.infoUsuario.idU,1)
+            .then(existe => {
+              if (!existe) {
+                this.bd.insertarInter(this.infoUsuario.idU, 1)
+                 
+        }})
             personaje.classList.add('disintegration-animation');
             this.mostrarAlerta = true;
             clearInterval(this.intervalId);
           }
         }
-
       }
     }
   }
