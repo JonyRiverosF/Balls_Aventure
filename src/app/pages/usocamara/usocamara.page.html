@@ -1,26 +1,23 @@
 <ion-header [translucent]="true" class="header">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/lobby"></ion-back-button>
-    </ion-buttons>
     <ion-title>Lista de Juegos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="content">
+  <br>
+  <h1 style="color: rgb(255, 255, 255);text-align: center;font-weight: bold;
+  font-size: 2em;">Selecciona un videojuego para ver su informacion</h1>
+  <p style="color: rgb(255, 255, 255);text-align:center"><ion-button (click)="obtenerListaDeJuegos()">Presiona para cargar los videojuegos</ion-button></p>
   <ion-grid class="game-grid">
     <ion-row >
-      <ion-col size="4" *ngFor="let juego of juegos">
+      <ion-col size="6" class="ion-text-center ion-align-items-center" *ngFor="let juego of juegos">
           <ion-card (click)="verDetalles(juego.slug)" class="game-item">
           <ion-card-header class="game-title">
             <ion-img *ngIf="juego && juego.background_image" [src]="juego.background_image" alt="Imagen del Videojuego"></ion-img><br>
           <ion-label>{{ juego.name }}</ion-label>
         </ion-card-header></ion-card>
       </ion-col>
-
-    
-
-
     </ion-row>
   </ion-grid>
 </ion-content>

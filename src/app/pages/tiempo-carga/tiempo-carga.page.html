@@ -1,9 +1,6 @@
 <!-- tiempo-carga.page.html -->
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/usocamara"></ion-back-button>
-    </ion-buttons>
     <ion-title>{{ juego.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -26,8 +23,8 @@
           <li><strong>Fecha de Lanzamiento:</strong> {{ juego.released }}</li>
         </ul>
       </div>
+      <p style="color: rgb(255, 255, 255);text-align:center"><ion-button [routerLink]="['/home']">Presiona volver al home</ion-button></p>
 
-      <!-- Agrega más secciones según la información que desees mostrar -->
 
     </ion-card-content>
   </ion-card></ion-grid>
