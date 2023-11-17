@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
@@ -55,7 +55,7 @@ export class TutorialPage implements OnInit {
 
   @ViewChild('pj', { static: false }) personaje!: ElementRef;
 
-  constructor(private activatedRouter: ActivatedRoute, private router: Router, private bd: DbservicioService, public alertController:AlertController) {
+  constructor(private toastController: ToastController, private activatedRouter: ActivatedRoute, private router: Router, private bd: DbservicioService, public alertController:AlertController) {
 
     this.activatedRouter.queryParams.subscribe(param => {
       if (this.router.getCurrentNavigation()?.extras.state) {
@@ -77,7 +77,9 @@ export class TutorialPage implements OnInit {
         this.bd.verificarExistenciaInter(this.infoUsuario.idU, 2)
           .then(existe => {
             if (!existe) {
-              this.bd.insertarInter(this.infoUsuario.idU, 2)        
+              this.bd.insertarInter(this.infoUsuario.idU, 2)  
+              this.mostrarToast('logro "Maquina" completado');
+                  
       }}) 
       }
 
@@ -85,6 +87,14 @@ export class TutorialPage implements OnInit {
       this.estrella();
     }, 100);
 
+  }
+  async mostrarToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 1000, // Duración en milisegundos (en este caso, 2000 ms o 2 segundos)
+      position: 'top' // Puedes cambiar a 'bottom' si prefieres que aparezca en la parte inferior
+    });
+    await toast.present();
   }
   iniciar() {
     this.intervalId = setInterval(() => {
@@ -106,13 +116,37 @@ export class TutorialPage implements OnInit {
         infoUsuario: this.infoUsuario,
       }
     }
+    const e1 = document.getElementById('estrella1');
+    const e2 = document.getElementById('estrella2');
+    const e3 = document.getElementById('estrella3');
+    const e4 = document.getElementById('estrella4');
+    const enemy1 = document.getElementById('enemy1');
+    const enemy2 = document.getElementById('enemy2');
+    const enemy3 = document.getElementById('enemy3');
+    const enemy4 = document.getElementById('enemy4');
+    const personaje = document.querySelector('.pj') as HTMLElement | null;
+    if(e1&&e2&&e3&&e4&&personaje&&enemy1&&enemy2&&enemy3&&enemy4){
+    e1.classList.remove('disintegration-animation');
+    e2.classList.remove('disintegration-animation');
+    e3.classList.remove('disintegration-animation');
+    e4.classList.remove('disintegration-animation');
+    personaje.classList.remove('disintegration-animation');
+    enemy1.classList.remove('enemy1');
+    enemy2.classList.remove('enemy2');
+    enemy3.classList.remove('enemy3');
+    enemy4.classList.remove('enemy4');
+  }
     this.router.navigate(['/lobby'], navigationextra)
     this.personajePosX = 0;
     this.personajePosY = 0;
     this.rotationDegrees = 0;
-
+    this.empezo=false;
     //Puerta y estrellas
     this.estrellasrecojidas = 0;
+    this.tiempo=0;
+    this.moverEmpezar=true;
+    clearInterval(this.intervalId);
+
     this.haTocadoEstrella1 = false;
     this.haTocadoEstrella2 = false;
     this.haTocadoEstrella3 = false;
@@ -153,6 +187,15 @@ export class TutorialPage implements OnInit {
 
   menu() {
     this.menus = true;
+    const enemy1 = document.getElementById('enemy1');
+    const enemy2 = document.getElementById('enemy2');
+    const enemy3 = document.getElementById('enemy3');
+    const enemy4 = document.getElementById('enemy4');
+    if(enemy1&&enemy2&&enemy3&&enemy4){
+    enemy1.classList.remove('enemy1');
+    enemy2.classList.remove('enemy2');
+    enemy3.classList.remove('enemy3');
+    enemy4.classList.remove('enemy4');}
     clearInterval(this.intervalId);
   }
 
@@ -160,6 +203,15 @@ export class TutorialPage implements OnInit {
     this.primerMovimiento=false;
     console.log("Botón reanudar presionado");
     this.menus = false;
+    const enemy1 = document.getElementById('enemy1');
+    const enemy2 = document.getElementById('enemy2');
+    const enemy3 = document.getElementById('enemy3');
+    const enemy4 = document.getElementById('enemy4');
+    if(enemy1&&enemy2&&enemy3&&enemy4){
+    enemy1.classList.add('enemy1');
+    enemy2.classList.add('enemy2');
+    enemy3.classList.add('enemy3');
+    enemy4.classList.add('enemy4');}
   }
 
   moverempezar() {
@@ -254,6 +306,7 @@ export class TutorialPage implements OnInit {
             .then(existe => {
               if (!existe) {
                 this.bd.insertarInter(this.infoUsuario.idU, 1)
+                this.mostrarToast('logro "Novato" completado');
                  
         }})
             personaje.classList.add('disintegration-animation');
@@ -263,7 +316,7 @@ export class TutorialPage implements OnInit {
         }
         if (personaje && enemy1) {
           if (this.colisiona(personaje, enemy1)) {
-            this.presentAlert('colision bomba 2');
+            console.log('colision');
             if(!this.intento){
               this.bd.insertarIntento(this.estrellasrecojidas, this.tiempo, false, 1, this.infoUsuario.idU);
               this.intento=true
@@ -273,6 +326,7 @@ export class TutorialPage implements OnInit {
             .then(existe => {
               if (!existe) {
                 this.bd.insertarInter(this.infoUsuario.idU, 1)
+                this.mostrarToast('logro "Novato" completado');
                  
         }})
             personaje.classList.add('disintegration-animation');
@@ -292,6 +346,7 @@ export class TutorialPage implements OnInit {
             .then(existe => {
               if (!existe) {
                 this.bd.insertarInter(this.infoUsuario.idU, 1)
+                this.mostrarToast('logro "Novato" completado');
                  
         }})
             personaje.classList.add('disintegration-animation');
@@ -311,6 +366,7 @@ export class TutorialPage implements OnInit {
             .then(existe => {
               if (!existe) {
                 this.bd.insertarInter(this.infoUsuario.idU, 1)
+                this.mostrarToast('logro "Novato" completado');
                  
         }})
             personaje.classList.add('disintegration-animation');
@@ -343,6 +399,7 @@ export class TutorialPage implements OnInit {
     this.iniciarCronometro();
     this.empezo = true;
     this.moverEmpezar = false;
+    
   }
 
   moverPersonajeArriba() {
