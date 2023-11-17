@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
-import { NavigationExtras,Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
@@ -40,5 +40,7 @@ export class HistorialPage implements OnInit {
       }
     })
   }
+
+  
 
 }
