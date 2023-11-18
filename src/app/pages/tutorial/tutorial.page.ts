@@ -32,11 +32,11 @@ export class TutorialPage implements OnInit {
   haTocadoEstrella2 = false;
   haTocadoEstrella3 = false;
   haTocadoEstrella4 = false;
-  haTocadoPuerta = false;
+  cambioRapidez = false;
   menus: boolean = false;
   moverEmpezar: boolean = false;
   nivelcompletado: boolean = false;
-  puertaAbierta = false;
+  
 
   tiempo: number = 0;
   intervalId: any = null;
@@ -78,10 +78,48 @@ export class TutorialPage implements OnInit {
           .then(existe => {
             if (!existe) {
               this.bd.insertarInter(this.infoUsuario.idU, 2)  
-              this.mostrarToast('logro "Maquina" completado');
-                  
+              this.mostrarToast('logro "Maquina" completado');       
       }}) 
       }
+        const enemy1 = document.getElementById('enemy1');
+    const enemy2 = document.getElementById('enemy2');
+    const enemy3 = document.getElementById('enemy3');
+    const enemy4 = document.getElementById('enemy4');
+      if(this.tiempo==40){
+        this.mostrarToast('velocidad de enemigos aumentada x2'); 
+       
+    if(enemy1&&enemy2&&enemy3&&enemy4){
+      enemy1.classList.remove('enemy1');
+    enemy2.classList.remove('enemy2');
+    enemy3.classList.remove('enemy3');
+    enemy4.classList.remove('enemy4');
+
+    enemy1.classList.add('enemy11');
+    enemy2.classList.add('enemy22');
+    enemy3.classList.add('enemy33');
+    enemy4.classList.add('enemy44');
+    }
+    
+
+      }
+      if(this.tiempo==60){
+        this.mostrarToast('velocidad de enemigos aumentada x3'); 
+       
+    if(enemy1&&enemy2&&enemy3&&enemy4){
+      enemy1.classList.remove('enemy1');
+    enemy2.classList.remove('enemy2');
+    enemy3.classList.remove('enemy3');
+    enemy4.classList.remove('enemy4');
+
+    enemy1.classList.add('enemy111');
+    enemy2.classList.add('enemy222');
+    enemy3.classList.add('enemy333');
+    enemy4.classList.add('enemy444');
+    }
+    
+
+      }
+
 
       this.enemys();
       this.estrella();
@@ -91,8 +129,8 @@ export class TutorialPage implements OnInit {
   async mostrarToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
-      duration: 1000, // Duración en milisegundos (en este caso, 2000 ms o 2 segundos)
-      position: 'top' // Puedes cambiar a 'bottom' si prefieres que aparezca en la parte inferior
+      duration: 1000, 
+      position: 'top' 
     });
     await toast.present();
   }
@@ -135,6 +173,14 @@ export class TutorialPage implements OnInit {
     enemy2.classList.remove('enemy2');
     enemy3.classList.remove('enemy3');
     enemy4.classList.remove('enemy4');
+    enemy1.classList.remove('enemy11');
+    enemy2.classList.remove('enemy22');
+    enemy3.classList.remove('enemy33');
+    enemy4.classList.remove('enemy44');
+    enemy1.classList.remove('enemy111');
+    enemy2.classList.remove('enemy222');
+    enemy3.classList.remove('enemy333');
+    enemy4.classList.remove('enemy444');
   }
     this.router.navigate(['/lobby'], navigationextra)
     this.personajePosX = 0;
@@ -145,15 +191,17 @@ export class TutorialPage implements OnInit {
     this.estrellasrecojidas = 0;
     this.tiempo=0;
     this.moverEmpezar=true;
+    this.primerMovimiento=false;
+    
     clearInterval(this.intervalId);
 
     this.haTocadoEstrella1 = false;
     this.haTocadoEstrella2 = false;
     this.haTocadoEstrella3 = false;
-    this.haTocadoPuerta = false;
+    
     this.menus = false;
     this.nivelcompletado = false;
-    this.puertaAbierta = false;
+   
     //Timeout Con alerta
     this.tiempoExpirado = false;
     this.mostrarAlerta = false;

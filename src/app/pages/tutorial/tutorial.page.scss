@@ -1,13 +1,4 @@
-.nube{
-    width: 140px ;
-    height: 65px;
-    animation: movernube 20s linear infinite;
-    //animation-name: movernube;
-    //animation-duration: 20s;
-    //transition: 1s;
 
-
-}
 //enemigo vertical
 .enemy1{
   width: 90%;
@@ -33,12 +24,58 @@
   animation: movernube 15s linear infinite ;
   
 }
+.enemy11{
+  width: 90%;
+  height:70% ;
+  animation: movernube 14s linear infinite;
+  
+}
+.enemy22{
+  width: 90%;
+  height:70% ;
+  animation: movernube 7s linear infinite ;
+  
+}
+.enemy33{
+  width: 90%;
+  height:70% ;
+  animation: movernube 10s linear infinite;
+  
+}
+.enemy44{
+  width: 90%;
+  height:70% ;
+  animation: movernube 12s linear infinite ;
+  
+}
+.enemy111{
+  width: 90%;
+  height:70% ;
+  animation: movernube 11s linear infinite;
+  
+}
+.enemy222{
+  width: 90%;
+  height:70% ;
+  animation: movernube 4s linear infinite ;
+  
+}
+.enemy333{
+  width: 90%;
+  height:70% ;
+  animation: movernube 7s linear infinite;
+  
+}
+.enemy444{
+  width: 90%;
+  height:70% ;
+  animation: movernube 9s linear infinite ;
+  
+}
 .enemy{
   width: 90%;
   height:70% ;
-  
  
-  
 }
 
 //fin enemigo vertical
@@ -51,12 +88,7 @@ ion-grid {
   //border: 1px solid rgba(0, 0, 0, 0.24);
   height: 60px;
 }
-.estrellaz{
-  width:20% ;
-  height: 20%;
-  padding:  0 2% 0 0;
-  
-}
+
 .estrella{
   width:15% ;
   height: 15%;
@@ -249,14 +281,7 @@ ion-grid {
   }
 }
 
-.sol{
-    width: 100px;
-    height: 100px;
-    animation: girarsol 20s linear infinite;
-    justify-content: right;
-    align-items: right;
-    text-align: right;
-}
+
 
 @keyframes girarsol {
     0% {
@@ -268,7 +293,6 @@ ion-grid {
 }
 
 .menu{
-  
     width: 50px;
     height: 45px;
     margin-bottom: 60px;
@@ -284,30 +308,6 @@ ion-grid {
     
     
     100%{transform: translateX(-700px);}
-}
-@keyframes caerestrella {
-  0%{ transform: translateY(-500px);}
-  
-  
-  100%{transform: translateY(400px);}
-}
-@keyframes moverpjd {
-  0% {transform:  rotate(0deg) }
-  
-  100% {  transform:  rotate(360deg)}
-}
-@keyframes moverpj1 {
-  0% { transform:  rotate(0deg); translate: 0px; }
-  
-  100% { transform:  rotate(-360deg); translate: -72px;}
-}
-
-.aladerecha{
-  animation-name: moverpjd ;
-  animation-duration: 0.5s; 
-
-}
-.alaizquierda{
 }
 
 .reanudar{
