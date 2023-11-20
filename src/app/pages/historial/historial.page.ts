@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
-import { IonicSlides } from '@ionic/angular';  // Asegúrate de importar IonSlides
+import { IonSlides } from '@ionic/angular'; 
 
 @Component({
   selector: 'app-historial',
