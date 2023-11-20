@@ -9,6 +9,7 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['./historial.page.scss'],
 })
 export class HistorialPage implements OnInit {
+
   arregloIntentos:any =[{
     idI: 0,
     estrellas: 0 ,
@@ -18,6 +19,20 @@ export class HistorialPage implements OnInit {
     idUsuario:0
 
   }]
+
+  arreglousuario:any =[{
+    idU: 0,
+    nombreU: '' ,
+    correo:'',
+    contrasena:'',
+    foto:'',
+    idPregunta:0,
+    idRol:0,
+    monedas:0,
+    descripcion:'',
+    respuesta:''
+  }]
+
   infoUsuario:any;
 
 
@@ -36,6 +51,13 @@ export class HistorialPage implements OnInit {
       if(res){
         this.bd.fetchIntento().subscribe(datos=>{
           this.arregloIntentos=datos.filter(item=> item.idUsuario == this.infoUsuario.idU);
+        })
+      }
+    })
+    this.bd.bdstate().subscribe(res=>{
+      if(res){
+        this.bd.fetchUsuario().subscribe(datos=>{
+          this.arreglousuario=datos.filter(item=> item.idU == this.infoUsuario.idU);
         })
       }
     })
