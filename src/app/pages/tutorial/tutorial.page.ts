@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
 import { AlertController, ToastController } from '@ionic/angular';
-
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 

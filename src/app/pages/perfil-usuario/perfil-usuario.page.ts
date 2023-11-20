@@ -3,7 +3,7 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 import { Share } from '@capacitor/share';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Camera } from '@capacitor/camera';
 
 @Component({
   selector: 'app-perfil-usuario',

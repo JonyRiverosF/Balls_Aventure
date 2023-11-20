@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AlertController,  } from '@ionic/angular';
-import { ActivatedRoute, NavigationExtras,Router } from '@angular/router';
+import { AlertController  } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
@@ -9,7 +9,9 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
   templateUrl: './modificar-contra.page.html',
   styleUrls: ['./modificar-contra.page.scss'],
 })
+
 export class ModificarContraPage implements OnInit {
+  
   formularioModiContra:FormGroup;
 
   arreglousuario:any =[{

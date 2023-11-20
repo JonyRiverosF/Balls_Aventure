@@ -11,24 +11,13 @@
       <ion-card-title ><img src="assets/icon/patra.png" [routerLink]="['/iniciar-sesion']" style="width: 50px;height: 50px;margin-right: 80px;"/>Recuperar contraseña</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="formularioOlvidaste">
+      
         <ion-item>
           <ion-label position="floating">Correo</ion-label>
-          <ion-input [(ngModel)]="pedirCorreo"  formControlName="Correo" type="text"></ion-input>
+          <ion-input [(ngModel)]="pedirCorreo"   type="text"></ion-input>
         </ion-item>
-        <div [hidden]="correo?.valid || correo?.pristine ">
-          <span style="color: rgb(255, 0, 0);" *ngIf="correo?.errors?.['required']">
-            El correo es requerido.
-          </span>
-          <span style="color: rgb(255, 0, 0);" *ngIf="correo?.errors?.['email']">
-            El correo debe ser valido.
-          </span>
-          <span style="color: rgb(255, 0, 0);" *ngIf="correo?.errors?.['minlength']">
-            <br>El correo solo permite un minimo de 5 caracteres.
-          </span>
-          </div>
         <br>
-      </form>
+      
       <ion-item>
         <ion-label position="floating">Pregunta de seguridad</ion-label>
         <ion-select [(ngModel)]="pedirPregunta" interface="popover" placeholder="Seleccione">
@@ -38,9 +27,9 @@
       <br>
       <ion-item>
         <ion-label position="floating">Respuesta</ion-label>
-        <ion-input type="text" [(ngModel)]="pedirRespuesta" ></ion-input>
+        <ion-input type="text" [(ngModel)]="respuesta" ></ion-input>
       </ion-item>
-      <p style="text-align: center;"><ion-button  (click)="CambiarContra()" [disabled]="formularioOlvidaste.invalid">Cambiar Contraseña</ion-button></p>
+      <p style="text-align: center;"><ion-button  (click)="CambiarContra()">Cambiar Contraseña</ion-button></p>
       
 
     </ion-card-content>

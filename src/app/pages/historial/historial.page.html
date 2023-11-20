@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  
+
 </ion-header>
 
 <ion-content [fullscreen]="true" >
@@ -35,12 +35,6 @@
  <div *ngIf="x.idNiveles==1" style="width: 100%; height: 100%;background-color: rgb(207, 136, 221);">
                 tutorial {{x.completado}}
       </div>
-      <div *ngIf="x.idNiveles==2" style="width: 100%; height: 100%;background-color: rgb(207, 136, 221);">
-        Nivel medio{{x.completado}}
-</div>
-<div *ngIf="x.idNiveles==3" style="width: 100%; height: 100%;background-color: rgb(207, 136, 221);">
-  Nivel dificil{{x.completado}}
-</div>
         </ion-col>
         <!--tiempo-->
         <ion-col size="5" style="padding: 0;">
@@ -62,24 +56,13 @@ tiempo: {{x.tiempo}} segundos
         <!--estrellas-->
         <ion-col size="6" style="padding: 0;">
  <div style="width: 100%; height: 100%;background-color: rgb(180, 118, 192);text-align: center;">
-Estrellas Obtenidas<br>
+Monedas Recolectadas<br>
 <img  *ngIf="x.estrellas>0" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
 <img *ngIf="x.estrellas>1" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
 <img *ngIf="x.estrellas>2" class="estrellaz" src="assets/icon/estrella.png" alt="Mi Imagen" >
       </div>
         </ion-col>
-        <!--logrado?-->
-        <ion-col size="3" style="padding: 0;">
-          <div *ngIf="!x.completado" style="color: red;" class="nologrado">
-            <br>
-            no logrado
-                </div>
-          <div *ngIf="x.completado" class="logrado">
-            <br>
-         logrado 
-               </div>
-          
-          </ion-col>
+        
 
       </ion-row>
          </div>

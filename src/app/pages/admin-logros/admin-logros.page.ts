@@ -9,6 +9,7 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
   templateUrl: './admin-logros.page.html',
   styleUrls: ['./admin-logros.page.scss'],
 })
+
 export class AdminLogrosPage implements OnInit {
 
   formularioLogros:FormGroup;

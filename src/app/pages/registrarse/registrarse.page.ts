@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, NavigationExtras,Router } from '@angular/router';
-import { ModificarContraPage } from '../modificar-contra/modificar-contra.page';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
-import { Pregunta } from 'src/app/services/pregunta';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { Usuario } from 'src/app/services/usuario';
-//import { FingerprintAIO } from '@awesome-cordova-plugins/fingerprint-aio/ngx';
 
 
 @Component({
@@ -55,7 +51,6 @@ export class RegistrarsePage implements OnInit {
 
   formularioRegistro:FormGroup;
   
-  //private faio: FingerprintAIO
   constructor(public fb:FormBuilder,public alertController:AlertController,private router:Router, private activatedRouter:ActivatedRoute, private bd:DbservicioService) {
     this.activatedRouter.queryParams.subscribe(param =>{
       if (this.router.getCurrentNavigation()?.extras.state){
@@ -153,8 +148,6 @@ export class RegistrarsePage implements OnInit {
 
   }
 
-  
-
   takePicture = async () => {
     const image2 = await Camera.getPhoto({
       quality: 90,
@@ -164,35 +157,7 @@ export class RegistrarsePage implements OnInit {
     });
     this.imagenNueva= image2.dataUrl;
   };
-
-  /*huella(){
-  this.faio.isAvailable().then((result: any) => {
-    this.faio.show({
-      cancelButtonTitle: 'Cancelar',
-      description: "Ingrese su huella para continuar",
-      disableBackup: true,
-      title: 'Balls aventure biometrics security',
-      fallbackButtonTitle: 'FB Back Button',
-      subtitle: ''
-    })
-      .then((result: any) => {
-        //Esto ocurrirá cuando hayan coincidencias de las huellas digitales
-        //this.bd.modificarUsuaro(this.id,this.nombre,this.correoIngresado,this.imagenNueva,this.telefono);
-        //this.volverPerfil.emit(["false",this.nombre,this.correoIngresado,this.imagenNueva])
-        //this.presentToast("bottom","Datos modificados !!",2500);
-        //alert("Successfully Authenticated!")
-      })
-      .catch((error: any) => {
-      });
-    
-  })
-    .catch((error: any) => {
-    
-    });
-  }*/
-
-
-
+  
 }
  
 

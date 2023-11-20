@@ -4,29 +4,18 @@ import { NavigationExtras,Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
-//import { FingerprintAIO } from '@awesome-cordova-plugins/fingerprint-aio/ngx';
-
 @Component({
   selector: 'app-iniciar-sesion',
   templateUrl: './iniciar-sesion.page.html',
   styleUrls: ['./iniciar-sesion.page.scss'],
 })
+
 export class IniciarSesionPage implements OnInit {
 
-
-  //usuarioadmin:string="joni@gmail.com";
-  //usuarionormal:string="dani@gmail.com";
-
-
-  
-  //edad:number=20;
-  //nombreusuario:string ="TigerShadoWX8";
-  //descripcionusuario:string ="juego mucho valo jiji";
-
   correousuario:string = "";
+
   claveusuario:string = "";
   
-
   arreglousuario:any =[{
     idU: 0,
     nombreU: '' ,
@@ -40,11 +29,10 @@ export class IniciarSesionPage implements OnInit {
     respuesta:''
   }]
 
-  
   usuarioconectado:boolean=false;
+
   formularioLogin:FormGroup;
 
-  //private faio: FingerprintAIO
   constructor(public fb:FormBuilder, public alertController:AlertController,private router:Router,private bd:DbservicioService) { 
     this.formularioLogin=this.fb.group({
       'Correo1': new FormControl('',[Validators.required]),
@@ -132,33 +120,6 @@ export class IniciarSesionPage implements OnInit {
     await alert.present();
   }
 
-  /*huella(){
-  this.faio.isAvailable().then((result: any) => {
-    this.faio.show({
-      cancelButtonTitle: 'Cancelar',
-      description: "Ingrese su huella para continuar",
-      disableBackup: true,
-      title: 'Balls aventure biometrics security',
-      fallbackButtonTitle: 'FB Back Button',
-      subtitle: ''
-    })
-      .then((result: any) => {
-        //Esto ocurrirá cuando hayan coincidencias de las huellas digitales
-        //this.bd.modificarUsuaro(this.id,this.nombre,this.correoIngresado,this.imagenNueva,this.telefono);
-        //this.volverPerfil.emit(["false",this.nombre,this.correoIngresado,this.imagenNueva])
-        //this.presentToast("bottom","Datos modificados !!",2500);
-        //alert("Successfully Authenticated!")
-      })
-      .catch((error: any) => {
-      });
-    
-  })
-    .catch((error: any) => {
-    
-    });
-  }*/
-
-  
 }
 
 

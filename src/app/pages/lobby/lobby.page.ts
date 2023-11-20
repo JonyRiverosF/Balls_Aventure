@@ -7,16 +7,22 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
   templateUrl: './lobby.page.html',
   styleUrls: ['./lobby.page.scss'],
 })
+
 export class LobbyPage implements OnInit {
   
   infoUsuario:any;
+
   edad:number=20;
+
   nombreusuario:string ="TigerShadoWX8";
+
   descripcionusuario:string ="juego mucho valo jiji";
+  
   arregloInter: any[] = [{
     idUsuario: 0,
     idLogro: 0
   }];
+  
   arregloIntentos:any =[{
     idI: 0,
     estrellas: 0 ,
@@ -70,26 +76,21 @@ export class LobbyPage implements OnInit {
   Logros(){
     let navigationextra:NavigationExtras={
       state:{
-        infoUsuario:this.infoUsuario,
-        
-       
+        infoUsuario:this.infoUsuario, 
       }
-      
     }
     this.router.navigate(['/logros'],navigationextra)
   }
+
   jugar(){
     let navigationextra:NavigationExtras={
       state:{
         infoUsuario:this.infoUsuario,
-        
-       
       }
-      
     }
-    
-    this.router.navigate(['/niveles'],navigationextra)
+    this.router.navigate(['/tutorial'],navigationextra)
   }
+
   historial(){
     
     let navigationextra:NavigationExtras={

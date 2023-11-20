@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
 @Component({
@@ -7,9 +7,8 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
   templateUrl: './admin-usuarios.page.html',
   styleUrls: ['./admin-usuarios.page.scss'],
 })
-export class AdminUsuariosPage implements OnInit {
 
-  
+export class AdminUsuariosPage implements OnInit {
 
   lista:any = [
     {
@@ -21,10 +20,7 @@ export class AdminUsuariosPage implements OnInit {
     } 
   ];
 
-  
-  constructor(private activatedRoute: ActivatedRoute,private router:Router, private activatedRouter:ActivatedRoute,private bd:DbservicioService) { 
-  
-  }
+  constructor(private router:Router, private bd:DbservicioService) { }
 
   ngOnInit() {
     const storedData = localStorage.getItem('usuarioLocal');

@@ -1,16 +1,16 @@
-import { Component,EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { AlertController } from '@ionic/angular';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
-
 @Component({
   selector: 'app-modificar-perfil',
   templateUrl: './modificar-perfil.page.html',
   styleUrls: ['./modificar-perfil.page.scss'],
 })
+
 export class ModificarPerfilPage implements OnInit {
 
   formularioModificar:FormGroup;

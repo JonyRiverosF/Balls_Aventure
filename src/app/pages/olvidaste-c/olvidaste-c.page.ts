@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
@@ -10,9 +9,6 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
   styleUrls: ['./olvidaste-c.page.scss'],
 })
 export class OlvidasteCPage implements OnInit {
-
-  formularioOlvidaste:FormGroup;
-
 
   arregloPreguntas:any =[{
     idP: 0,
@@ -37,19 +33,10 @@ export class OlvidasteCPage implements OnInit {
   RespuestaG:any=[]
   pedirCorreo="";
   pedirPregunta:any={idP:0};
-  pedirRespuesta:string="";
+  respuesta:string="";
 
-  constructor(public fb:FormBuilder, public alertController:AlertController,private bd:DbservicioService,private router:Router,private activatedRouter:ActivatedRoute) {
-
-    this.formularioOlvidaste=this.fb.group({
-      'Correo': new FormControl("",[Validators.required,Validators.minLength(5),Validators.email]),
-    })
+  constructor(public alertController:AlertController,private bd:DbservicioService,private router:Router) {
    }
-
-   get correo(){
-    return this.formularioOlvidaste.get('Correo') as FormControl;
-   }
-
 
 
   ngOnInit() {
@@ -71,7 +58,10 @@ export class OlvidasteCPage implements OnInit {
 
   correoU(){
     for(var i=0;i<this.arreglousuario.length;i++){
-      if(this.pedirCorreo.toLowerCase() == this.arreglousuario[i].correo.toLowerCase()){
+      //this.presentAlert("respuesta del usuario: "+String(this.pedirCorreo));
+      //this.presentAlert("respuesta del usuario: "+String(this.arreglousuario[i].correo));
+      if(this.pedirCorreo.toLowerCase() == this.arreglousuario[i].correo){
+        //this.presentAlert("respuesta del usuario: "+String(this.arreglousuario[i].respuesta));
         this.RespuestaG.push({
           idPregunta:this.arreglousuario[i].idPregunta,
           respuesta:this.arreglousuario[i].respuesta,
@@ -81,15 +71,18 @@ export class OlvidasteCPage implements OnInit {
   }
   if(this.RespuestaG.length == 0){
     this.presentAlert("Usuario no registrado");
-  }}
+  }
+}
 
   CambiarContra(){
     var x = true;
     if(x){
       this.correoU();
-      //this.presentAlert("pregunta" +String(this.pedirPregunta.idP)+"fore"+String(this.RespuestaG[0].idPregunta));
+      //this.presentAlert("respuesta del usuario: "+String(this.respuesta));
+      //this.presentAlert("respuesta del usuario: "+String(this.RespuestaG[0].idUsuario));
+      //this.presentAlert("respuesta del push: "+String(this.RespuestaG[0].respuesta))
       if (this.pedirPregunta.idP == this.RespuestaG[0].idPregunta){
-        if(this.pedirRespuesta.toLocaleLowerCase() == this.RespuestaG[0].respuesta.toLocaleLowerCase()){
+        if(this.respuesta.toLocaleLowerCase() == this.RespuestaG[0].respuesta.toLocaleLowerCase()){
           this.idUsuario = this.RespuestaG[0].idUsuario;
           this.x = 'true';
           let navigationextra:NavigationExtras={

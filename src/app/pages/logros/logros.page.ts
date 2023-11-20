@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router,NavigationExtras } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
@@ -8,7 +8,9 @@ import { DbservicioService } from 'src/app/services/dbservicio.service';
   templateUrl: './logros.page.html',
   styleUrls: ['./logros.page.scss'],
 })
+
 export class LogrosPage implements OnInit {
+  
   arregloLogros: any[] = [{
     idL: 0,
     nombreL: '',

@@ -25,24 +25,17 @@ export class NivelesPage implements OnInit {
     this.activatedRouter.queryParams.subscribe(param =>{
       if (this.router.getCurrentNavigation()?.extras.state){
         this.infoUsuario = this.router.getCurrentNavigation()?.extras?.state?.["infoUsuario"];
-        
-        
-       
       }
     })
    }
+
    tutorial(){
     let navigationextra:NavigationExtras={
       state:{
         infoUsuario:this.infoUsuario,
-        
-       
       }
-      
     }
     this.router.navigate(['/tutorial'],navigationextra)
-   
-
     } 
   
   
@@ -50,13 +43,11 @@ export class NivelesPage implements OnInit {
     let navigationextra:NavigationExtras={
       state:{
         infoUsuario:this.infoUsuario,
-        
-       
       }
-      
     }
     this.router.navigate(['/nivel-medio'],navigationextra)
   }
+  
   nivel_dificil(){
     this.router.navigate(['/nivel-dificil']);
   }

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DbservicioService } from 'src/app/services/dbservicio.service';
 
@@ -22,10 +20,8 @@ export class AdminSkinsPage implements OnInit {
     } 
   ];
 
-  constructor(public fb:FormBuilder, public alertController:AlertController,private activatedRoute: ActivatedRoute,private router:Router, private activatedRouter:ActivatedRoute,private bd:DbservicioService) { 
+  constructor(public alertController:AlertController, private bd:DbservicioService) { 
    }
-
-
    EliminarLogro(id:number){
     this.idLo=id;
 }
