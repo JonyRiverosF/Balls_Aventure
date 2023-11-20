@@ -44,103 +44,41 @@
             
           </ion-col>
           <ion-col size="4">
-            <div class="datos">total de intentos: </div>
-            <div class="datos">muertes totales: </div>
-            <div class="datos">intentos exitosos:</div>
+            <div class="datos">total monedas:{{usuario.monedas}} </div>
           </ion-col>
           
         </ion-row>
         <ion-row style="background-color: black;height: 1px;"></ion-row>
-        <div style="color: black;font-size: 20px;text-align: center;margin: 2% 0 0 0;">
+        <div style="color: black;font-weight: bold; font-size: 1.5em;text-align: center;margin: 2% 0 0 0;">
           Logros obtenidos
         </div>
-        <ion-row>
+
+        <ion-row style="margin-top: -20px;">
+      <!--logro-->
+      <ion-col size="3" *ngFor="let x of arregloLogros" >
+        <div *ngFor="let i of arregloInter">
           
-          <ion-col size="3"  >
-            <div class="flip-card"  >
-           <div class="flip-card-inner">
-             <div class="flip-card-front">
-               <img alt="Sin foto" src="assets/icon/trofeo.png" />
-               <div class="nombrelogro">  "novato" </div> 
-             </div>
-               <div class="flip-card-back">
-                 
-                 
-                 "completa<br>
-                  el <br>
-                  tutorial"<br>
-                  +<img alt="Sin foto" src="assets/icon/coin.png" style="width: 20px; height: 20px;"/>55 coins
- 
- 
-                  
-               </div>
-           </div>
-       </div>
-     
-       </ion-col>
-       
-       <ion-col size="3"  >
-         <div class="flip-card"  >
-        <div class="flip-card-inner">
-          <div class="flip-card-front" style="background-color: rgba(72, 29, 189, 0.936);">
-            <img alt="Sin foto" src="assets/icon/trofeo.png" />
-            <div class="nombrelogro">  "aprendiz" </div> 
+          <div  *ngIf="i.idLogro===x.idL">
+            <h1 style="color: rgb(18, 175, 18);font-weight: bold; font-size: 1.2em; position: absolute; top: 0; left: 50%; transform: translateX(-50%);">Completado</h1>
           </div>
-            <div class="flip-card-back"  style="background-color: rgba(72, 29, 189, 0.936);">
-              
-              
-              "completa<br>
-               dos <br>
-               niveles"<br>
-               +<img alt="Sin foto" src="assets/icon/coin.png" style="width: 20px; height: 20px;"/>100 coins
-               
+        
+        </div>
+           <div class="flip-card"  >
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img alt="Sin foto" src="assets/icon/trofeo.png" />
+              <div class="nombrelogro">"{{x.nombreL}}"</div> 
             </div>
-        </div>
-    </div>
-  
-    </ion-col>
-     
-    <ion-col size="3"  >
-     <div class="flip-card"  >
-    <div class="flip-card-inner">
-      <div class="flip-card-front"  style="background-color: rgba(27, 182, 53, 0.936);">
-        <img alt="Sin foto" src="assets/icon/trofeo.png" />
-        <div class="nombrelogro">  "Brillante" </div> 
+              <div class="flip-card-back"><br>
+              {{x.descripcion | uppercase}}<br>
+                 +<img alt="Sin foto" src="assets/icon/coin.png" style="width: 20px; height: 20px;"/>{{x.recompensa}} coins
+              </div>
+          </div>
       </div>
-        <div class="flip-card-back" style="background-color: rgba(27, 182, 53, 0.936);">
-          
-          
-          "recolecta<br>
-           todas las <br>
-           estrellas"<br>
-           +<img alt="Sin foto" src="assets/icon/coin.png" style="width: 20px; height: 20px;"/>250 coins
-           
-        </div>
-    </div>
- </div>
- 
- </ion-col>
- <ion-col size="3"  >
-   <div class="flip-card"  >
-  <div class="flip-card-inner">
-    <div class="flip-card-front"  style="background-color: rgb(200, 59, 228);">
-      <img alt="Sin foto" src="assets/icon/trofeo.png" />
-      <div class="nombrelogro">  "Premio mayor" </div> 
-    </div>
-      <div class="flip-card-back" style="background-color: rgba(200, 59, 228);">
-        
-        
-        "completa<br>
-         el <br>
-         juego"<br>
-         +<img alt="Sin foto" src="assets/icon/coin.png" style="width: 20px; height: 20px;"/>500 coins
-         
-      </div>
-  </div>
- </div>
- 
- </ion-col>
-        </ion-row>
+      </ion-col>
+      <!-- fin logro-->
+    </ion-row>
+    
       </ion-grid>
      
       
