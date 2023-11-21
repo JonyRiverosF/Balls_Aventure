@@ -14,7 +14,7 @@
       <ion-col size="6" class="ion-text-center ion-align-items-center" *ngFor="let juego of juegos">
           <ion-card (click)="verDetalles(juego.slug)" class="game-item">
           <ion-card-header class="game-title">
-            <ion-img *ngIf="juego && juego.background_image" [src]="juego.background_image" alt="Imagen del Videojuego"></ion-img><br>
+            <img *ngIf="juego && juego.background_image" [src]="juego.background_image" alt="Imagen del Videojuego"><br>
           <ion-label>{{ juego.name }}</ion-label>
         </ion-card-header></ion-card>
       </ion-col>

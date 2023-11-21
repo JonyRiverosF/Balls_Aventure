@@ -5,7 +5,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" style="background-color: rgb(68, 4, 102)">
+<ion-content [fullscreen]="true">
   <ion-grid >
   <ion-card class="game-card">
     <ion-card-header>
@@ -13,19 +13,17 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-img [src]="juego.background_image" alt="Imagen del juego"></ion-img>
+      <img [src]="juego.background_image" alt="Imagen del juego">
 
       <div class="details-section">
         <h3 class="section-title">Detalles del Juego</h3>
-        <ul>
-          <li><strong>Género:</strong> {{ obtenerGeneros(juego.genres) }}</li>
-          <li><strong>Plataformas:</strong> {{ obtenerPlataformas(juego.platforms) }}</li>
-          <li><strong>Fecha de Lanzamiento:</strong> {{ juego.released }}</li>
-        </ul>
+        <h4>Género: {{ obtenerGeneros(juego.genres) }}</h4>
+        <h4>Plataformas: {{ obtenerPlataformas(juego.platforms) }}</h4>
+        <h4>Fecha de Lanzamiento: {{ juego.released }}</h4>
       </div>
       <p style="color: rgb(255, 255, 255);text-align:center"><ion-button [routerLink]="['/home']">Presiona volver al home</ion-button></p>
-
-
     </ion-card-content>
-  </ion-card></ion-grid>
+  </ion-card>
+  
+</ion-grid>
 </ion-content>
